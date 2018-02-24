@@ -10,18 +10,32 @@ public enum Weapons
 
 public class GunScript : MonoBehaviour
 {
+    // Total ammo a gun can have in general
+    const int MAX_AMMO = 500;
+
     // Variables
     private Weapons weaponType;
 
     // Bullet prefab that will be shotout
     public GameObject bulletPrefab;
 
+    // current gun Tracking variables
+    int bulletsInClip;
+
     // Specific balencing shooting variables
     float fireRate;
-    float rightTriggerFloat;
+    int clipSize;
+    float reloadTime;
 
-    // Variables to keep shooting from breaking
+    // Variables to keep shooting from breaking and balanced
     bool justShot;
+    bool reloadingBool;
+
+
+    // Variables that handle input
+    float rightTriggerFloat;
+    float reloadButton;
+
 
 
 	// Use this for initialization
@@ -34,6 +48,8 @@ public class GunScript : MonoBehaviour
 		if(weaponType == Weapons.AssaultRifle)
         {
             fireRate = .5f;
+            clipSize = 30;
+            reloadTime = 5.0f;
         }
 	}
 	
@@ -45,12 +61,14 @@ public class GunScript : MonoBehaviour
             // Update the infor for game Input
             GunInput();
 
-
-            if (Input.GetMouseButton(0)||rightTriggerFloat !=0)
+            if (Input.GetMouseButton(0) || rightTriggerFloat !=0)
             {
-                Shoot();
+            // Check if the player is reloading or if there are less than 1 bullet in the clip
+                if (reloadingBool || bulletsInClip < 1)
+                {
+                    Shoot();
+                }
             }
-        //}
 	}
 
     /// <summary>
@@ -60,6 +78,9 @@ public class GunScript : MonoBehaviour
     {
         // Set the float variable of the right trigger
         rightTriggerFloat = Input.GetAxis("CONTROLLER_RIGHT_TRIGGER");
+
+        // Set the float variable of the right trigger
+        //reloadButton = Input.GetAxis("X_BUTTON");
     }
 
 
@@ -68,10 +89,31 @@ public class GunScript : MonoBehaviour
         // Instantiate the bullet and shoot it
         Instantiate(bulletPrefab, transform.position + transform.forward, transform.rotation);
 
+        bulletsInClip--;
+
         justShot = true;
         StartCoroutine("ShootingBoolReset", fireRate);
     }
 
+
+    private void Reload()
+    {
+        // Check the player manager and see how much ammo they have before reloading
+        //if(PlayerManager.ammo>clipSize)
+        //{
+            bulletsInClip += clipSize;
+        //PlayerManager.ammo -= clipSize;
+        //}
+        /*
+        else
+        {
+            bulletsInClip += PlayerManager.ammo;
+            PlayerManager.ammo = 0;
+        }
+        */
+        reloadingBool = true;
+        StartCoroutine("ReloadingBoolReset", reloadTime);
+    }
 
     /// <summary>
     /// Used to reset the shooting variable.
@@ -79,7 +121,16 @@ public class GunScript : MonoBehaviour
     /// </summary>
     public void ShootingBoolReset()
     {
-      
+        justShot = false;
+    }
+
+    /// <summary>
+    /// Used to reset the reloading variable variable.
+    /// Used with Couritines to prevent players from shooting during reloading
+    /// </summary>
+    public void ReloadingBoolReset()
+    {
+        reloadingBool = false;
     }
 
 }
