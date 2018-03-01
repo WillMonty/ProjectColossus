@@ -9,7 +9,8 @@ using UnityEngine;
 public class SteamVR_IK : MonoBehaviour
 {
 	public Transform target;
-	public Transform start, joint, end;
+    public bool right;
+    public Transform start, joint, end;
 	public Transform poleVector, upVector;
 
 	public float blendPct = 1.0f;
@@ -27,8 +28,9 @@ public class SteamVR_IK : MonoBehaviour
 
 		var targetPosition = target.position;
 		var targetRotation = target.rotation;
+        
 
-		Vector3 forward, up, result = joint.position;
+        Vector3 forward, up, result = joint.position;
 		Solve(start.position, targetPosition, poleVector.position,
 			(joint.position - start.position).magnitude,
 			(end.position - joint.position).magnitude,
@@ -82,7 +84,11 @@ public class SteamVR_IK : MonoBehaviour
 		endXform.position = endPosition;
 		end.parent = endXform;
 
-		startXform.LookAt(result, up);
+        
+
+       
+
+        startXform.LookAt(result, up);
 		jointXform.LookAt(targetPosition, up);
 		endXform.rotation = targetRotation;
 
@@ -154,13 +160,13 @@ public class SteamVR_IK : MonoBehaviour
 				else
 				{
 					// move jointDist toward jointTarget
-					result += poleVectorDir * jointDist;
+					result += (poleVectorDir * jointDist) ;
 				}
 			}
 			else
 			{
 				// move elboDist toward target
-				result += forward * jointDist;
+				result += (forward * jointDist);
 			}
 		}
 

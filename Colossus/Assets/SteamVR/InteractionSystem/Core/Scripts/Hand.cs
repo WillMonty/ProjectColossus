@@ -401,7 +401,7 @@ namespace Valve.VR.InteractionSystem
 				if ( controller != null )
 					break;
 
-				Debug.Log( "Hand - checking controllers..." );
+				//Debug.Log( "Hand - checking controllers..." );
 
 				// Initialize both hands simultaneously
 				if ( startingHandType == HandType.Left || startingHandType == HandType.Right )
