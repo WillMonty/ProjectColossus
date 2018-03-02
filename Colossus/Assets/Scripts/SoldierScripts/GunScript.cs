@@ -33,8 +33,11 @@ public class GunScript : MonoBehaviour
 
 
     // Variables that handle input
+    string shootTriggerString;
     float rightTriggerFloat;
     float reloadButton;
+
+    public int playerNum;
 
 
 
@@ -44,8 +47,10 @@ public class GunScript : MonoBehaviour
         // Set bool variables initially
         justShot = false;
 
+        // Set the input variable for the trigger to shoot
+        shootTriggerString = "J" + playerNum + "TriggerRight";
 
-		if(weaponType == Weapons.AssaultRifle)
+        if (weaponType == Weapons.AssaultRifle)
         {
             fireRate = .5f;
             clipSize = 30;
@@ -77,7 +82,8 @@ public class GunScript : MonoBehaviour
     private void GunInput()
     {
         // Set the float variable of the right trigger
-        rightTriggerFloat = Input.GetAxis("CONTROLLER_RIGHT_TRIGGER");
+        rightTriggerFloat = Input.GetAxis(shootTriggerString);
+        Debug.Log(shootTriggerString);
 
         // Set the float variable of the right trigger
         //reloadButton = Input.GetAxis("X_BUTTON");
