@@ -32,3 +32,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+/Colossus/.vs/Colossus/v15/Server/sqlite3
+/Colossus/.vs/Colossus/v15/sqlite3/db.lock
+/Colossus/.vs/Colossus/v15/sqlite3/storage.ide-shm
+/Colossus/.vs/Colossus/v15/sqlite3/storage.ide-wal
