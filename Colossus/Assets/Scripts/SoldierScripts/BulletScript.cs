@@ -45,7 +45,7 @@ public class BulletScript : MonoBehaviour
     void bulletMove()
     {
         rb.velocity = transform.forward * bulletSpeed;
-        Debug.Log("Move " + bulletSpeed);
+        //Debug.Log("Move " + bulletSpeed);
     }
 
     /// <summary>

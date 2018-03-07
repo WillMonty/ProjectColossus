@@ -556,14 +556,14 @@ InputManager:
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
-    altPositiveButton: joystick button 4
+    altPositiveButton: joystick button 9
     gravity: 3
     dead: 0.02
     sensitivity: 100
     snap: 1
     invert: 0
-    type: 0
-    axis: 0
+    type: 2
+    axis: 8
     joyNum: 1
   - serializedVersion: 3
     m_Name: J2TriggerLeft
@@ -572,14 +572,14 @@ InputManager:
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
-    altPositiveButton: joystick button 4
+    altPositiveButton: joystick button 9
     gravity: 3
     dead: 0.02
     sensitivity: 100
     snap: 1
     invert: 0
-    type: 0
-    axis: 0
+    type: 2
+    axis: 8
     joyNum: 2
   - serializedVersion: 3
     m_Name: J1TriggerRight
@@ -588,14 +588,14 @@ InputManager:
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
-    altPositiveButton: joystick button 5
+    altPositiveButton: 
     gravity: 3
     dead: 0.02
     sensitivity: 100
     snap: 1
     invert: 0
-    type: 0
-    axis: 0
+    type: 2
+    axis: 9
     joyNum: 1
   - serializedVersion: 3
     m_Name: J2TriggerRight
@@ -604,12 +604,12 @@ InputManager:
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
-    altPositiveButton: joystick button 5
+    altPositiveButton: joystick button 10
     gravity: 3
     dead: 0.02
     sensitivity: 100
     snap: 1
     invert: 0
-    type: 0
-    axis: 0
+    type: 2
+    axis: 9
     joyNum: 2
