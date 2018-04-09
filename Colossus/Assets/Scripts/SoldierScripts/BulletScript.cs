@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    #region attributes
     // Attributes
-    const float bulletSpeed = 100f;
+    const float BULLETSPEED = 100f;
 
     // Properties
     public Weapons gunOwnerType;
-    Vector3 startPos;
-    float damage;
+    private Vector3 startPos;
+    private float damage;
 
     Rigidbody rb;
+    #endregion
 
-	// Use this for initialization
-	void Start()
+    #region Properties
+    // Properties
+    public float Damage
+    {
+        get { return damage; }
+    }
+    #endregion
+
+    // Use this for initialization
+    void Start()
     {
         // Set the start position of the bullet. This is to delete it if the bullet gets too far from the player.
         startPos = transform.position;
@@ -34,7 +44,10 @@ public class BulletScript : MonoBehaviour
 	void Update ()
     {
         bulletMove();
-        deleteBullet();
+        if ((transform.position - startPos).magnitude > 300)
+        {
+            deleteBullet();
+        }
 	}
 
 
@@ -44,20 +57,18 @@ public class BulletScript : MonoBehaviour
     /// </summary>
     void bulletMove()
     {
-        rb.velocity = transform.forward * bulletSpeed;
+        rb.velocity = transform.forward * BULLETSPEED;
         //Debug.Log("Move " + bulletSpeed);
     }
 
     /// <summary>
     /// Deletes the bullet if it moves too far from it's start point to prevent too many bullets being on screen
     /// </summary>
-    void deleteBullet()
+    public void deleteBullet()
     {
-        if((transform.position - startPos).magnitude>300)
-        {
-            // Destroy this bullet if it gets too far
-            Destroy(gameObject);
-        }
+        // Destroy this bullet if it gets too far
+        Destroy(gameObject);
+
     }
 
 }
