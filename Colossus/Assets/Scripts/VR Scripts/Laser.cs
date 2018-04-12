@@ -2,57 +2,148 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour {
+public class Laser : MonoBehaviour
+{
 
-    //With beam variable arrays, 0 index is left and 1 index is right
+    //With these arrays, 0 index is left and 1 index is right
     public GameObject[] origins = new GameObject[2]; //Starting object beams come from
     public GameObject[] beams = new GameObject[2]; //Beam cylinders
+    public SteamVR_TrackedController[] controllers = new SteamVR_TrackedController[2]; //Player's Controllers
 
+    //Raycast vars
     RaycastHit[] hits = new RaycastHit[2];
     float lastDistance = 0.0f; //Last distance recorded by raycast
     float maxDistance = 10.0f;
 
-    bool firing = true;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    //Laser state vars
+    public float cooldownTime;
+    public float laserTime;
+
+    float currLaserTime; //Time the laser has currently been firing
+    float chargeTime = 0.4f; //Time before the laser actually starts firing to let the charge sound play
+
+    bool firing = false;
+    bool isCharging = false;
+    bool laserReady = true; //Checks if the laser has a shot ready
+
+    //Audio vars
+    public AudioSource source;
+    public AudioClip fireSound;
+
+    // Use this for initialization
+    void Start()
     {
-        //Update the raycasts if firing
-	    if(firing)
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //If both controllers pads are pressed
+        if (controllers[0].padPressed && controllers[1].padPressed)
         {
-            for(int i = 0; i < 2; i++)
-            {
-                Physics.Raycast(origins[i].transform.position, origins[i].transform.forward, out hits[i], maxDistance);
-                //Vector3 hitDistanceLocal = beams[i].transform.InverseTransformPoint(hits[i].distance, hits[i].distance, hits[i].distance);
-                //Vector3 maxDistanceLocal = beams[i].transform.InverseTransformPoint(maxDistance, maxDistance, maxDistance);
-
-                //Move and scale the beam to the appropriate position
-                Vector3 currBeamLocalPosition = beams[i].transform.localPosition;
-                Vector3 currBeamScale = beams[i].transform.localScale;
-
-                //If the raycast is actually hitting something and changing each frame
-                if (lastDistance != hits[i].distance)
-                {
-                    beams[i].transform.localPosition = new Vector3(currBeamLocalPosition.x, currBeamLocalPosition.y, hits[i].distance/2); //origins[i].transform.forward * hits[i].distance / 2;
-                    beams[i].transform.localScale = new Vector3(currBeamScale.x, hits[i].distance/2, currBeamScale.z);
-                }
-                else
-                {
-                    beams[i].transform.localPosition = new Vector3(currBeamLocalPosition.x, currBeamLocalPosition.y, maxDistance/2); //origins[i].transform.forward * maxDistance / 2;
-                    beams[i].transform.localScale = new Vector3(currBeamScale.x, maxDistance/2, currBeamScale.z);
-                }
-
-
-                lastDistance = hits[i].distance;
-
-                Debug.Log(hits[i].distance);
-                // Need to convert the beam's local scale to the Raycast's globally scaled distance
-            }
+            TryShoot();
         }
-	}
+
+        //If the player releases the pads while firing
+        if (firing && (!(controllers[0].padPressed && controllers[1].padPressed)))
+        {
+            StopLaser();
+        }
+
+        //Update the raycasts if firing
+        if (firing)
+        {
+            FireLaser();
+        }
+    }
+
+    //Called when the player tries to fire the laser. Checks to make sure the laser ability is available
+    void TryShoot()
+    {
+        if (!isCharging && !firing && laserReady)
+        {
+            isCharging = true;
+            source.clip = fireSound;
+            source.Play();
+            Debug.Log(source.isPlaying);
+            StartCoroutine(ChargeUp());
+        }
+
+        if (firing)
+        {
+            beams[0].SetActive(true);
+            beams[1].SetActive(true);
+            laserReady = false;
+        }
+    }
+
+    //Raycasts the laser out and updates the time it has been firing
+    void FireLaser()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            Physics.Raycast(origins[i].transform.position, origins[i].transform.forward, out hits[i], maxDistance);
+            //Vector3 hitDistanceLocal = beams[i].transform.InverseTransformPoint(hits[i].distance, hits[i].distance, hits[i].distance);
+            //Vector3 maxDistanceLocal = beams[i].transform.InverseTransformPoint(maxDistance, maxDistance, maxDistance);
+
+            //Move and scale the beam to the appropriate position
+            Vector3 currBeamLocalPosition = beams[i].transform.localPosition;
+            Vector3 currBeamScale = beams[i].transform.localScale;
+
+            //If the raycast is actually hitting something and changing each frame
+            if (lastDistance != hits[i].distance)
+            {
+                beams[i].transform.localPosition = new Vector3(currBeamLocalPosition.x, currBeamLocalPosition.y, hits[i].distance / 2);
+                beams[i].transform.localScale = new Vector3(currBeamScale.x, hits[i].distance / 2, currBeamScale.z);
+            }
+            else
+            {
+                beams[i].transform.localPosition = new Vector3(currBeamLocalPosition.x, currBeamLocalPosition.y, maxDistance / 2);
+                beams[i].transform.localScale = new Vector3(currBeamScale.x, maxDistance / 2, currBeamScale.z);
+            }
+
+
+            lastDistance = hits[i].distance;
+        }
+
+        currLaserTime += Time.deltaTime;
+
+        //Stop laser if the time has gone over the ability time
+        if(currLaserTime >= laserTime)
+        {
+            StopLaser();
+        }
+    }
+
+    //Helper method to turn off the laser
+    void StopLaser()
+    {
+        firing = false;
+        StopCoroutine(ChargeUp());
+        currLaserTime = 0;
+
+        beams[0].SetActive(false);
+        beams[1].SetActive(false);
+
+        source.Stop();
+
+        StartCoroutine(LaserCoolDown());
+    }
+
+    //Coroutine to charge the laser
+    IEnumerator ChargeUp()
+    {
+        yield return new WaitForSeconds(chargeTime);
+        firing = true;
+        isCharging = false;
+    }
+
+    //Coroutine to cool down the laser
+    IEnumerator LaserCoolDown()
+    {
+        yield return new WaitForSeconds(cooldownTime);
+        laserReady = true;
+    }
 }

@@ -1,0 +1,788 @@
+fileFormatVersion: 2
+guid: be7b206852732a24eb9de0d5839008ee
+timeCreated: 1523474275
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: left_arm_robot_left_bicep
+    100004: left_arm_robot_left_hand1_pinky_pinky_middle
+    100006: left_arm_robot_left_hand1_pinky_pinky_top
+    100008: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube12
+    100010: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube20
+    100012: left_arm_robot_left_hand1_right_hand_palm_pCube1_palm
+    100014: left_arm_robot_left_hand1_right_hand_pinky_pCube18_pinky
+    100016: left_arm_robot_left_hand1_right_hand_pointer_finger_pCube23_pointer_finger
+    100018: left_arm_robot_left_hand1_right_hand_ring_finger_pCube11_ring_finger
+    100020: left_arm_robot_left_hand1_right_hand_thumb_pCube21_thumb
+    100022: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube10
+    100024: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube6
+    100026: left_arm_robot_left_hand1_thumb_right_hand_thumb_pCube22
+    100028: left_arm_robot_left_shoulder
+    100030: left_arm_robot_left_shoulder_pad_right_shoulder_pad_right_arm
+    100032: left_arm_robot_left_wrist
+    100034: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube27
+    100036: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube29
+    100038: left_arm_robot_right_forearm1
+    100040: left_arm_robot_right_hand_middle_finger_pCube28_middle_finger_left_hand1
+    100042: left_elbow_left_arm_robot
+    100044: robot_Colossus_head:pSphere1
+    100046: robot_hip_joint_1
+    100048: robot_hip_joint_2
+    100050: robot_lower_body
+    100052: robot_neck
+    100054: robot_right_arm_left_bicep
+    100056: robot_right_arm_left_elbow
+    100058: robot_right_arm_left_shoulder
+    100060: robot_right_arm_middle_finger_right_hand_pCube2
+    100062: robot_right_arm_middle_finger_right_hand_pCube27
+    100064: robot_right_arm_middle_finger_right_hand_pCube28
+    100066: robot_right_arm_middle_finger_right_hand_pCube3
+    100068: robot_right_arm_middle_finger_right_hand_pCube4
+    100070: robot_right_arm_pCube29_middle_finger_right_hand
+    100072: robot_right_arm_right_forearm2
+    100074: robot_right_arm_right_hand_palm_pCube1
+    100076: robot_right_arm_right_hand_pCube15_thumb
+    100078: robot_right_arm_right_hand_pCube24_pointer_finger
+    100080: robot_right_arm_right_hand_pCube25_ring_finger
+    100082: robot_right_arm_right_hand_pCube30_palm
+    100084: robot_right_arm_right_hand_pCube9_pinky
+    100086: robot_right_arm_right_hand_pinky_pCube16
+    100088: robot_right_arm_right_hand_pinky_pCube17
+    100090: robot_right_arm_right_hand_pinky_pCube18
+    100092: robot_right_arm_right_hand_pinky_pCube7
+    100094: robot_right_arm_right_hand_pinky_pCube8
+    100096: robot_right_arm_right_hand_pointer_finger_pCube12
+    100098: robot_right_arm_right_hand_pointer_finger_pCube13
+    100100: robot_right_arm_right_hand_pointer_finger_pCube20
+    100102: robot_right_arm_right_hand_pointer_finger_pCube23
+    100104: robot_right_arm_right_hand_pointer_finger_pCube5
+    100106: robot_right_arm_right_hand_ring_finger_pCube10
+    100108: robot_right_arm_right_hand_ring_finger_pCube11
+    100110: robot_right_arm_right_hand_ring_finger_pCube19
+    100112: robot_right_arm_right_hand_ring_finger_pCube26
+    100114: robot_right_arm_right_hand_ring_finger_pCube6
+    100116: robot_right_arm_right_hand_thumb_pCube14
+    100118: robot_right_arm_right_hand_thumb_pCube21
+    100120: robot_right_arm_right_hand_thumb_pCube22
+    100122: robot_right_arm_right_wrist
+    100124: robot_torso
+    100126: robot_upper_torso
+    400000: //RootNode
+    400002: left_arm_robot_left_bicep
+    400004: left_arm_robot_left_hand1_pinky_pinky_middle
+    400006: left_arm_robot_left_hand1_pinky_pinky_top
+    400008: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube12
+    400010: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube20
+    400012: left_arm_robot_left_hand1_right_hand_palm_pCube1_palm
+    400014: left_arm_robot_left_hand1_right_hand_pinky_pCube18_pinky
+    400016: left_arm_robot_left_hand1_right_hand_pointer_finger_pCube23_pointer_finger
+    400018: left_arm_robot_left_hand1_right_hand_ring_finger_pCube11_ring_finger
+    400020: left_arm_robot_left_hand1_right_hand_thumb_pCube21_thumb
+    400022: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube10
+    400024: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube6
+    400026: left_arm_robot_left_hand1_thumb_right_hand_thumb_pCube22
+    400028: left_arm_robot_left_shoulder
+    400030: left_arm_robot_left_shoulder_pad_right_shoulder_pad_right_arm
+    400032: left_arm_robot_left_wrist
+    400034: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube27
+    400036: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube29
+    400038: left_arm_robot_right_forearm1
+    400040: left_arm_robot_right_hand_middle_finger_pCube28_middle_finger_left_hand1
+    400042: left_elbow_left_arm_robot
+    400044: robot_Colossus_head:pSphere1
+    400046: robot_hip_joint_1
+    400048: robot_hip_joint_2
+    400050: robot_lower_body
+    400052: robot_neck
+    400054: robot_right_arm_left_bicep
+    400056: robot_right_arm_left_elbow
+    400058: robot_right_arm_left_shoulder
+    400060: robot_right_arm_middle_finger_right_hand_pCube2
+    400062: robot_right_arm_middle_finger_right_hand_pCube27
+    400064: robot_right_arm_middle_finger_right_hand_pCube28
+    400066: robot_right_arm_middle_finger_right_hand_pCube3
+    400068: robot_right_arm_middle_finger_right_hand_pCube4
+    400070: robot_right_arm_pCube29_middle_finger_right_hand
+    400072: robot_right_arm_right_forearm2
+    400074: robot_right_arm_right_hand_palm_pCube1
+    400076: robot_right_arm_right_hand_pCube15_thumb
+    400078: robot_right_arm_right_hand_pCube24_pointer_finger
+    400080: robot_right_arm_right_hand_pCube25_ring_finger
+    400082: robot_right_arm_right_hand_pCube30_palm
+    400084: robot_right_arm_right_hand_pCube9_pinky
+    400086: robot_right_arm_right_hand_pinky_pCube16
+    400088: robot_right_arm_right_hand_pinky_pCube17
+    400090: robot_right_arm_right_hand_pinky_pCube18
+    400092: robot_right_arm_right_hand_pinky_pCube7
+    400094: robot_right_arm_right_hand_pinky_pCube8
+    400096: robot_right_arm_right_hand_pointer_finger_pCube12
+    400098: robot_right_arm_right_hand_pointer_finger_pCube13
+    400100: robot_right_arm_right_hand_pointer_finger_pCube20
+    400102: robot_right_arm_right_hand_pointer_finger_pCube23
+    400104: robot_right_arm_right_hand_pointer_finger_pCube5
+    400106: robot_right_arm_right_hand_ring_finger_pCube10
+    400108: robot_right_arm_right_hand_ring_finger_pCube11
+    400110: robot_right_arm_right_hand_ring_finger_pCube19
+    400112: robot_right_arm_right_hand_ring_finger_pCube26
+    400114: robot_right_arm_right_hand_ring_finger_pCube6
+    400116: robot_right_arm_right_hand_thumb_pCube14
+    400118: robot_right_arm_right_hand_thumb_pCube21
+    400120: robot_right_arm_right_hand_thumb_pCube22
+    400122: robot_right_arm_right_wrist
+    400124: robot_torso
+    400126: robot_upper_torso
+    2100000: left_arm_robot_left_bicepMat
+    2100002: left_arm_robot_left_hand1_pinky_pinky_middleMat
+    2100004: left_arm_robot_left_hand1_pinky_pinky_topMat
+    2100006: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube12Mat
+    2100008: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube20Mat
+    2100010: left_arm_robot_left_hand1_right_hand_palm_pCube1_palmMat
+    2100012: left_arm_robot_left_hand1_right_hand_pinky_pCube18_pinkyMat
+    2100014: left_arm_robot_left_hand1_right_hand_pointer_finger_pCube23_pointer_fingerMat
+    2100016: left_arm_robot_left_hand1_right_hand_ring_finger_pCube11_ring_fingerMat
+    2100018: left_arm_robot_left_hand1_right_hand_thumb_pCube21_thumbMat
+    2100020: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube10Mat
+    2100022: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube6Mat
+    2100024: left_arm_robot_left_hand1_thumb_right_hand_thumb_pCube22Mat
+    2100026: left_arm_robot_left_shoulderMat
+    2100028: left_arm_robot_left_shoulder_pad_right_shoulder_pad_right_armMat
+    2100030: left_arm_robot_left_wristMat
+    2100032: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube27Mat
+    2100034: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube29Mat
+    2100036: left_arm_robot_right_forearm1Mat
+    2100038: left_arm_robot_right_hand_middle_finger_pCube28_middle_finger_left_hand1Mat
+    2100040: left_elbow_left_arm_robotMat
+    2100042: robot_Colossus_head_pSphere1Mat
+    2100044: robot_hip_joint_1Mat
+    2100046: robot_hip_joint_2Mat
+    2100048: robot_lower_bodyMat
+    2100050: robot_neckMat
+    2100052: robot_right_arm_left_bicepMat
+    2100054: robot_right_arm_left_elbowMat
+    2100056: robot_right_arm_left_shoulderMat
+    2100058: robot_right_arm_middle_finger_right_hand_pCube2Mat
+    2100060: robot_right_arm_middle_finger_right_hand_pCube27Mat
+    2100062: robot_right_arm_middle_finger_right_hand_pCube28Mat
+    2100064: robot_right_arm_middle_finger_right_hand_pCube3Mat
+    2100066: robot_right_arm_middle_finger_right_hand_pCube4Mat
+    2100068: robot_right_arm_pCube29_middle_finger_right_handMat
+    2100070: robot_right_arm_right_forearm2Mat
+    2100072: robot_right_arm_right_hand_palm_pCube1Mat
+    2100074: robot_right_arm_right_hand_pCube15_thumbMat
+    2100076: robot_right_arm_right_hand_pCube24_pointer_fingerMat
+    2100078: robot_right_arm_right_hand_pCube25_ring_fingerMat
+    2100080: robot_right_arm_right_hand_pCube30_palmMat
+    2100082: robot_right_arm_right_hand_pCube9_pinkyMat
+    2100084: robot_right_arm_right_hand_pinky_pCube16Mat
+    2100086: robot_right_arm_right_hand_pinky_pCube17Mat
+    2100088: robot_right_arm_right_hand_pinky_pCube18Mat
+    2100090: robot_right_arm_right_hand_pinky_pCube7Mat
+    2100092: robot_right_arm_right_hand_pinky_pCube8Mat
+    2100094: robot_right_arm_right_hand_pointer_finger_pCube12Mat
+    2100096: robot_right_arm_right_hand_pointer_finger_pCube13Mat
+    2100098: robot_right_arm_right_hand_pointer_finger_pCube20Mat
+    2100100: robot_right_arm_right_hand_pointer_finger_pCube23Mat
+    2100102: robot_right_arm_right_hand_pointer_finger_pCube5Mat
+    2100104: robot_right_arm_right_hand_ring_finger_pCube10Mat
+    2100106: robot_right_arm_right_hand_ring_finger_pCube11Mat
+    2100108: robot_right_arm_right_hand_ring_finger_pCube19Mat
+    2100110: robot_right_arm_right_hand_ring_finger_pCube26Mat
+    2100112: robot_right_arm_right_hand_ring_finger_pCube6Mat
+    2100114: robot_right_arm_right_hand_thumb_pCube14Mat
+    2100116: robot_right_arm_right_hand_thumb_pCube21Mat
+    2100118: robot_right_arm_right_hand_thumb_pCube22Mat
+    2100120: robot_right_arm_right_wristMat
+    2100122: robot_torsoMat
+    2100124: robot_upper_torsoMat
+    2300000: left_arm_robot_left_bicep
+    2300002: left_arm_robot_left_hand1_pinky_pinky_middle
+    2300004: left_arm_robot_left_hand1_pinky_pinky_top
+    2300006: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube12
+    2300008: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube20
+    2300010: left_arm_robot_left_hand1_right_hand_palm_pCube1_palm
+    2300012: left_arm_robot_left_hand1_right_hand_pinky_pCube18_pinky
+    2300014: left_arm_robot_left_hand1_right_hand_pointer_finger_pCube23_pointer_finger
+    2300016: left_arm_robot_left_hand1_right_hand_ring_finger_pCube11_ring_finger
+    2300018: left_arm_robot_left_hand1_right_hand_thumb_pCube21_thumb
+    2300020: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube10
+    2300022: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube6
+    2300024: left_arm_robot_left_hand1_thumb_right_hand_thumb_pCube22
+    2300026: left_arm_robot_left_shoulder
+    2300028: left_arm_robot_left_shoulder_pad_right_shoulder_pad_right_arm
+    2300030: left_arm_robot_left_wrist
+    2300032: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube27
+    2300034: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube29
+    2300036: left_arm_robot_right_forearm1
+    2300038: left_arm_robot_right_hand_middle_finger_pCube28_middle_finger_left_hand1
+    2300040: left_elbow_left_arm_robot
+    2300042: robot_Colossus_head:pSphere1
+    2300044: robot_hip_joint_1
+    2300046: robot_hip_joint_2
+    2300048: robot_lower_body
+    2300050: robot_neck
+    2300052: robot_right_arm_left_bicep
+    2300054: robot_right_arm_left_elbow
+    2300056: robot_right_arm_left_shoulder
+    2300058: robot_right_arm_middle_finger_right_hand_pCube2
+    2300060: robot_right_arm_middle_finger_right_hand_pCube27
+    2300062: robot_right_arm_middle_finger_right_hand_pCube28
+    2300064: robot_right_arm_middle_finger_right_hand_pCube3
+    2300066: robot_right_arm_middle_finger_right_hand_pCube4
+    2300068: robot_right_arm_pCube29_middle_finger_right_hand
+    2300070: robot_right_arm_right_forearm2
+    2300072: robot_right_arm_right_hand_palm_pCube1
+    2300074: robot_right_arm_right_hand_pCube15_thumb
+    2300076: robot_right_arm_right_hand_pCube24_pointer_finger
+    2300078: robot_right_arm_right_hand_pCube25_ring_finger
+    2300080: robot_right_arm_right_hand_pCube30_palm
+    2300082: robot_right_arm_right_hand_pCube9_pinky
+    2300084: robot_right_arm_right_hand_pinky_pCube16
+    2300086: robot_right_arm_right_hand_pinky_pCube17
+    2300088: robot_right_arm_right_hand_pinky_pCube18
+    2300090: robot_right_arm_right_hand_pinky_pCube7
+    2300092: robot_right_arm_right_hand_pinky_pCube8
+    2300094: robot_right_arm_right_hand_pointer_finger_pCube12
+    2300096: robot_right_arm_right_hand_pointer_finger_pCube13
+    2300098: robot_right_arm_right_hand_pointer_finger_pCube20
+    2300100: robot_right_arm_right_hand_pointer_finger_pCube23
+    2300102: robot_right_arm_right_hand_pointer_finger_pCube5
+    2300104: robot_right_arm_right_hand_ring_finger_pCube10
+    2300106: robot_right_arm_right_hand_ring_finger_pCube11
+    2300108: robot_right_arm_right_hand_ring_finger_pCube19
+    2300110: robot_right_arm_right_hand_ring_finger_pCube26
+    2300112: robot_right_arm_right_hand_ring_finger_pCube6
+    2300114: robot_right_arm_right_hand_thumb_pCube14
+    2300116: robot_right_arm_right_hand_thumb_pCube21
+    2300118: robot_right_arm_right_hand_thumb_pCube22
+    2300120: robot_right_arm_right_wrist
+    2300122: robot_torso
+    2300124: robot_upper_torso
+    3300000: left_arm_robot_left_bicep
+    3300002: left_arm_robot_left_hand1_pinky_pinky_middle
+    3300004: left_arm_robot_left_hand1_pinky_pinky_top
+    3300006: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube12
+    3300008: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube20
+    3300010: left_arm_robot_left_hand1_right_hand_palm_pCube1_palm
+    3300012: left_arm_robot_left_hand1_right_hand_pinky_pCube18_pinky
+    3300014: left_arm_robot_left_hand1_right_hand_pointer_finger_pCube23_pointer_finger
+    3300016: left_arm_robot_left_hand1_right_hand_ring_finger_pCube11_ring_finger
+    3300018: left_arm_robot_left_hand1_right_hand_thumb_pCube21_thumb
+    3300020: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube10
+    3300022: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube6
+    3300024: left_arm_robot_left_hand1_thumb_right_hand_thumb_pCube22
+    3300026: left_arm_robot_left_shoulder
+    3300028: left_arm_robot_left_shoulder_pad_right_shoulder_pad_right_arm
+    3300030: left_arm_robot_left_wrist
+    3300032: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube27
+    3300034: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube29
+    3300036: left_arm_robot_right_forearm1
+    3300038: left_arm_robot_right_hand_middle_finger_pCube28_middle_finger_left_hand1
+    3300040: left_elbow_left_arm_robot
+    3300042: robot_Colossus_head:pSphere1
+    3300044: robot_hip_joint_1
+    3300046: robot_hip_joint_2
+    3300048: robot_lower_body
+    3300050: robot_neck
+    3300052: robot_right_arm_left_bicep
+    3300054: robot_right_arm_left_elbow
+    3300056: robot_right_arm_left_shoulder
+    3300058: robot_right_arm_middle_finger_right_hand_pCube2
+    3300060: robot_right_arm_middle_finger_right_hand_pCube27
+    3300062: robot_right_arm_middle_finger_right_hand_pCube28
+    3300064: robot_right_arm_middle_finger_right_hand_pCube3
+    3300066: robot_right_arm_middle_finger_right_hand_pCube4
+    3300068: robot_right_arm_pCube29_middle_finger_right_hand
+    3300070: robot_right_arm_right_forearm2
+    3300072: robot_right_arm_right_hand_palm_pCube1
+    3300074: robot_right_arm_right_hand_pCube15_thumb
+    3300076: robot_right_arm_right_hand_pCube24_pointer_finger
+    3300078: robot_right_arm_right_hand_pCube25_ring_finger
+    3300080: robot_right_arm_right_hand_pCube30_palm
+    3300082: robot_right_arm_right_hand_pCube9_pinky
+    3300084: robot_right_arm_right_hand_pinky_pCube16
+    3300086: robot_right_arm_right_hand_pinky_pCube17
+    3300088: robot_right_arm_right_hand_pinky_pCube18
+    3300090: robot_right_arm_right_hand_pinky_pCube7
+    3300092: robot_right_arm_right_hand_pinky_pCube8
+    3300094: robot_right_arm_right_hand_pointer_finger_pCube12
+    3300096: robot_right_arm_right_hand_pointer_finger_pCube13
+    3300098: robot_right_arm_right_hand_pointer_finger_pCube20
+    3300100: robot_right_arm_right_hand_pointer_finger_pCube23
+    3300102: robot_right_arm_right_hand_pointer_finger_pCube5
+    3300104: robot_right_arm_right_hand_ring_finger_pCube10
+    3300106: robot_right_arm_right_hand_ring_finger_pCube11
+    3300108: robot_right_arm_right_hand_ring_finger_pCube19
+    3300110: robot_right_arm_right_hand_ring_finger_pCube26
+    3300112: robot_right_arm_right_hand_ring_finger_pCube6
+    3300114: robot_right_arm_right_hand_thumb_pCube14
+    3300116: robot_right_arm_right_hand_thumb_pCube21
+    3300118: robot_right_arm_right_hand_thumb_pCube22
+    3300120: robot_right_arm_right_wrist
+    3300122: robot_torso
+    3300124: robot_upper_torso
+    4300000: left_arm_robot_left_bicep
+    4300002: left_arm_robot_left_hand1_pinky_pinky_middle
+    4300004: left_arm_robot_left_hand1_pinky_pinky_top
+    4300006: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube12
+    4300008: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube20
+    4300010: left_arm_robot_left_hand1_right_hand_palm_pCube1_palm
+    4300012: left_arm_robot_left_hand1_right_hand_pinky_pCube18_pinky
+    4300014: left_arm_robot_left_hand1_right_hand_pointer_finger_pCube23_pointer_finger
+    4300016: left_arm_robot_left_hand1_right_hand_ring_finger_pCube11_ring_finger
+    4300018: left_arm_robot_left_hand1_right_hand_thumb_pCube21_thumb
+    4300020: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube10
+    4300022: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube6
+    4300024: left_arm_robot_left_hand1_thumb_right_hand_thumb_pCube22
+    4300026: left_arm_robot_left_shoulder
+    4300028: left_arm_robot_left_shoulder_pad_right_shoulder_pad_right_arm
+    4300030: left_arm_robot_left_wrist
+    4300032: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube27
+    4300034: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube29
+    4300036: left_arm_robot_right_forearm1
+    4300038: left_arm_robot_right_hand_middle_finger_pCube28_middle_finger_left_hand1
+    4300040: left_elbow_left_arm_robot
+    4300042: robot_Colossus_head:pSphere1
+    4300044: robot_hip_joint_1
+    4300046: robot_hip_joint_2
+    4300048: robot_lower_body
+    4300050: robot_neck
+    4300052: robot_right_arm_left_bicep
+    4300054: robot_right_arm_left_elbow
+    4300056: robot_right_arm_left_shoulder
+    4300058: robot_right_arm_middle_finger_right_hand_pCube2
+    4300060: robot_right_arm_middle_finger_right_hand_pCube27
+    4300062: robot_right_arm_middle_finger_right_hand_pCube28
+    4300064: robot_right_arm_middle_finger_right_hand_pCube3
+    4300066: robot_right_arm_middle_finger_right_hand_pCube4
+    4300068: robot_right_arm_pCube29_middle_finger_right_hand
+    4300070: robot_right_arm_right_forearm2
+    4300072: robot_right_arm_right_hand_palm_pCube1
+    4300074: robot_right_arm_right_hand_pCube15_thumb
+    4300076: robot_right_arm_right_hand_pCube24_pointer_finger
+    4300078: robot_right_arm_right_hand_pCube25_ring_finger
+    4300080: robot_right_arm_right_hand_pCube30_palm
+    4300082: robot_right_arm_right_hand_pCube9_pinky
+    4300084: robot_right_arm_right_hand_pinky_pCube16
+    4300086: robot_right_arm_right_hand_pinky_pCube17
+    4300088: robot_right_arm_right_hand_pinky_pCube18
+    4300090: robot_right_arm_right_hand_pinky_pCube7
+    4300092: robot_right_arm_right_hand_pinky_pCube8
+    4300094: robot_right_arm_right_hand_pointer_finger_pCube12
+    4300096: robot_right_arm_right_hand_pointer_finger_pCube13
+    4300098: robot_right_arm_right_hand_pointer_finger_pCube20
+    4300100: robot_right_arm_right_hand_pointer_finger_pCube23
+    4300102: robot_right_arm_right_hand_pointer_finger_pCube5
+    4300104: robot_right_arm_right_hand_ring_finger_pCube10
+    4300106: robot_right_arm_right_hand_ring_finger_pCube11
+    4300108: robot_right_arm_right_hand_ring_finger_pCube19
+    4300110: robot_right_arm_right_hand_ring_finger_pCube26
+    4300112: robot_right_arm_right_hand_ring_finger_pCube6
+    4300114: robot_right_arm_right_hand_thumb_pCube14
+    4300116: robot_right_arm_right_hand_thumb_pCube21
+    4300118: robot_right_arm_right_hand_thumb_pCube22
+    4300120: robot_right_arm_right_wrist
+    4300122: robot_torso
+    4300124: robot_upper_torso
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton:
+    - name: COLOSSUS(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_bicep
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_hand1_pinky_pinky_middle
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_hand1_pinky_pinky_top
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube12
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_hand1_pointer_finger_right_hand_pointer_finger_pCube20
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_hand1_right_hand_palm_pCube1_palm
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_hand1_right_hand_pinky_pCube18_pinky
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_hand1_right_hand_pointer_finger_pCube23_pointer_finger
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_hand1_right_hand_ring_finger_pCube11_ring_finger
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_hand1_right_hand_thumb_pCube21_thumb
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube6
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_hand1_ring_finger_right_hand_ring_finger_pCube10
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_hand1_thumb_right_hand_thumb_pCube22
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_shoulder
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_shoulder_pad_right_shoulder_pad_right_arm
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_left_wrist
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube27
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_middle_finger_left_hand1_right_hand_middle_finger_pCube29
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_right_forearm1
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm_robot_right_hand_middle_finger_pCube28_middle_finger_left_hand1
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_elbow_left_arm_robot
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_Colossus_head:pSphere1
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_hip_joint_1
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_hip_joint_2
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_lower_body
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_neck
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_left_bicep
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_left_elbow
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_left_shoulder
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_middle_finger_right_hand_pCube2
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_middle_finger_right_hand_pCube3
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_middle_finger_right_hand_pCube4
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_middle_finger_right_hand_pCube27
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_middle_finger_right_hand_pCube28
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_pCube29_middle_finger_right_hand
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_forearm2
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_palm_pCube1
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pCube9_pinky
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pCube15_thumb
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pCube24_pointer_finger
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pCube25_ring_finger
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pCube30_palm
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pinky_pCube7
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pinky_pCube8
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pinky_pCube16
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pinky_pCube17
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pinky_pCube18
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pointer_finger_pCube5
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pointer_finger_pCube12
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pointer_finger_pCube13
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pointer_finger_pCube20
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_pointer_finger_pCube23
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_ring_finger_pCube6
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_ring_finger_pCube10
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_ring_finger_pCube11
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_ring_finger_pCube19
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_ring_finger_pCube26
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_thumb_pCube14
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_thumb_pCube21
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_hand_thumb_pCube22
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_right_arm_right_wrist
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_torso
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: robot_upper_torso
+      parentName: COLOSSUS(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
