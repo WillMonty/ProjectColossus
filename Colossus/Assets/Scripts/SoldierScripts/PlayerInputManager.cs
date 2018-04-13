@@ -7,10 +7,14 @@ public class PlayerInputManager : MonoBehaviour {
     // Attributes
     public int playerNum;
 
+    const float WALK_SPEED = 5.0f;
+    const float RUN_SPEED = 10.0f;
+
 
     // Player variables
     public float speed = 2f;
-    public float sensitivity = 2f;
+    public float lookSensitivityX = 2f;
+    public float lookSensitivityY = 2f;
     CharacterController player;
 
 
@@ -33,6 +37,7 @@ public class PlayerInputManager : MonoBehaviour {
     private string yButton;
     private string triggerRight;
     private string triggerLeft;
+    private string runButton;
 
 
 
@@ -62,6 +67,7 @@ public class PlayerInputManager : MonoBehaviour {
         bButton = "J" + playerNum + "B";
         yButton = "J" + playerNum + "Y";
         triggerLeft = "J" + playerNum + "TriggerLeft";
+        runButton = "J" + playerNum + "LeftStickClick";
     }
 
     private bool ButtonIsDown()
@@ -78,24 +84,44 @@ public class PlayerInputManager : MonoBehaviour {
     /// </summary>
     private void Move()
     {
-        // Movement variables/axis
-        moveFB = Input.GetAxis(verticalAxis) * speed;
-        moveLR = Input.GetAxis(horizontalAxis) * speed;
-
+        /*
+        // Rotate the player
         // Look axis
-        rotX = Input.GetAxis(moveXAxis) * sensitivity;
-        rotY = Input.GetAxis(moveYAxis) * sensitivity;
+        rotX = Input.GetAxis(horizontalAxis) * lookSensitivityX;
+        rotY = Input.GetAxis(verticalAxis) * lookSensitivityY;
 
+        Vector3 targetRotCam = transform.rotation.eulerAngles;
+
+        rotX = Mathf.Clamp(rotX, -90, 90);
+
+        transform.rotation = Quaternion.Euler(rotX, rotY, 0);
+        */
+
+        // Handles Running
+        if (Input.GetButtonDown(runButton))
+        {
+            speed = RUN_SPEED;
+        }
+        if (Input.GetButtonUp(runButton))
+        {
+            speed = WALK_SPEED;
+        }
+
+        
+        // Movement variables/axis
+        moveFB = Input.GetAxis(moveYAxis) * speed;
+        //Debug.Log("Move FB: " + moveFB);
+        moveLR = -Input.GetAxis(moveXAxis) * speed;
+        //Debug.Log("Move LR: " + moveLR);
+        
         // Create a vector movement
         Vector3 movement = new Vector3(moveLR, 0, moveFB);
 
-        // Rotate the player
-        //transform.Rotate(0, rotX, 0);
-
         // apply the rotation to the player movement
-        //movement = transform.rotation * movement;
+        movement = transform.rotation * movement;
 
         // Apply the final movement to the player
         player.Move(movement * Time.deltaTime);
+        
     }
 }

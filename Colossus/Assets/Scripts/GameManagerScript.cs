@@ -12,6 +12,8 @@ public class GameManagerScript : MonoBehaviour
     #region Attributes
     // Static instance of the GameManager which allows it to be accessed from any script
     public static GameManagerScript instance = null;
+
+    List<GameObject> escapeScreens;
     public GameState currentGameState;
 
     #endregion
@@ -42,4 +44,32 @@ public class GameManagerScript : MonoBehaviour
     {
 		//Debug.Log(UnityEngine.Input.GetJoystickNames());
 	}
+
+    
+    // Game Management Pausing and Resuming Methods
+    public void PauseGame()
+    {
+        if (instance.currentGameState == GameState.InGame)
+        {
+            for (int i = 0; i < escapeScreens.Count; i++)
+            {
+                escapeScreens[i].SetActive(true);
+            }
+            instance.currentGameState = GameState.Paused;
+            Time.timeScale = 0;
+        }
+    }
+
+    public void ResumeGame()
+    {
+        if (instance.currentGameState == GameState.Paused)
+        {
+            for (int i = 0; i < escapeScreens.Count; i++)
+            {
+                escapeScreens[i].SetActive(false);
+            }
+            instance.currentGameState = GameState.InGame;
+            Time.timeScale = 0;
+        }
+    }
 }
