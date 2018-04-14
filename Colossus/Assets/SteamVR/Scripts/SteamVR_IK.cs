@@ -18,6 +18,13 @@ public class SteamVR_IK : MonoBehaviour
 	[HideInInspector]
 	public Transform startXform, jointXform, endXform;
 
+    void Update()
+    {
+        start.localRotation = Quaternion.Euler(start.localRotation.eulerAngles.x, start.localRotation.eulerAngles.y, 0);
+        joint.localRotation = Quaternion.Euler(joint.localRotation.eulerAngles.x, joint.localRotation.eulerAngles.y, 0);
+        end.localRotation = Quaternion.Euler(end.localRotation.eulerAngles.x, end.localRotation.eulerAngles.y, 0);
+    }
+
 	void LateUpdate()
 	{
 		const float epsilon = 0.001f;

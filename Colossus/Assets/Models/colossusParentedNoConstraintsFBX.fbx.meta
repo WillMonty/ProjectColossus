@@ -1,0 +1,923 @@
+fileFormatVersion: 2
+guid: b754aaea041082448a30b8c4fa99e580
+timeCreated: 1523650461
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Colossus_head1
+    100002: //RootNode
+    100004: hip_joint_1
+    100006: hip_joint_2
+    100008: left_arm
+    100010: left_bicep
+    100012: left_elbow
+    100014: left_forearm
+    100016: left_hand1
+    100018: left_shoulder
+    100020: left_shoulder_pad
+    100022: left_wrist
+    100024: lower_body
+    100026: lower_thumb
+    100028: middle_finger
+    100030: middle_finger 1
+    100032: neck
+    100034: palm
+    100036: palm 1
+    100038: pCube10
+    100040: pCube11
+    100042: pCube12
+    100044: pCube13
+    100046: pCube16
+    100048: pCube17
+    100050: pCube18
+    100052: pCube19
+    100054: pCube2
+    100056: pCube20
+    100058: pCube23
+    100060: pCube24
+    100062: pCube25
+    100064: pCube26
+    100066: pCube27
+    100068: pCube28
+    100070: pCube29
+    100072: pCube3
+    100074: pCube31
+    100076: pCube32
+    100078: pCube4
+    100080: pCube5
+    100082: pCube6
+    100084: pCube7
+    100086: pCube8
+    100088: pCube9
+    100090: pinky
+    100092: pinky 1
+    100094: pinky_middle
+    100096: pinky_top
+    100098: pointer_finger
+    100100: pointer_finger 1
+    100102: right_arm
+    100104: right_bicep
+    100106: right_elbow
+    100108: right_forearm2
+    100110: right_hand
+    100112: right_hand_middle_finger_pCube27
+    100114: right_hand_middle_finger_pCube28
+    100116: right_hand_middle_finger_pCube29
+    100118: right_hand_palm_pCube1
+    100120: right_hand_pinky_pCube18
+    100122: right_hand_pointer_finger_pCube12
+    100124: right_hand_pointer_finger_pCube20
+    100126: right_hand_pointer_finger_pCube23
+    100128: right_hand_ring_finger_pCube10
+    100130: right_hand_ring_finger_pCube11
+    100132: right_hand_ring_finger_pCube6
+    100134: right_shoulder
+    100136: right_shoulder_pad
+    100138: right_wrist
+    100140: ring_finger
+    100142: ring_finger 1
+    100144: thumb
+    100146: thumb 1
+    100148: torso
+    100150: upper_thumb
+    100152: upper_torso
+    400000: Colossus_head1
+    400002: //RootNode
+    400004: hip_joint_1
+    400006: hip_joint_2
+    400008: left_arm
+    400010: left_bicep
+    400012: left_elbow
+    400014: left_forearm
+    400016: left_hand1
+    400018: left_shoulder
+    400020: left_shoulder_pad
+    400022: left_wrist
+    400024: lower_body
+    400026: lower_thumb
+    400028: middle_finger
+    400030: middle_finger 1
+    400032: neck
+    400034: palm
+    400036: palm 1
+    400038: pCube10
+    400040: pCube11
+    400042: pCube12
+    400044: pCube13
+    400046: pCube16
+    400048: pCube17
+    400050: pCube18
+    400052: pCube19
+    400054: pCube2
+    400056: pCube20
+    400058: pCube23
+    400060: pCube24
+    400062: pCube25
+    400064: pCube26
+    400066: pCube27
+    400068: pCube28
+    400070: pCube29
+    400072: pCube3
+    400074: pCube31
+    400076: pCube32
+    400078: pCube4
+    400080: pCube5
+    400082: pCube6
+    400084: pCube7
+    400086: pCube8
+    400088: pCube9
+    400090: pinky
+    400092: pinky 1
+    400094: pinky_middle
+    400096: pinky_top
+    400098: pointer_finger
+    400100: pointer_finger 1
+    400102: right_arm
+    400104: right_bicep
+    400106: right_elbow
+    400108: right_forearm2
+    400110: right_hand
+    400112: right_hand_middle_finger_pCube27
+    400114: right_hand_middle_finger_pCube28
+    400116: right_hand_middle_finger_pCube29
+    400118: right_hand_palm_pCube1
+    400120: right_hand_pinky_pCube18
+    400122: right_hand_pointer_finger_pCube12
+    400124: right_hand_pointer_finger_pCube20
+    400126: right_hand_pointer_finger_pCube23
+    400128: right_hand_ring_finger_pCube10
+    400130: right_hand_ring_finger_pCube11
+    400132: right_hand_ring_finger_pCube6
+    400134: right_shoulder
+    400136: right_shoulder_pad
+    400138: right_wrist
+    400140: ring_finger
+    400142: ring_finger 1
+    400144: thumb
+    400146: thumb 1
+    400148: torso
+    400150: upper_thumb
+    400152: upper_torso
+    2100000: aiStandardSurface2
+    2100002: lambert1
+    2100004: aiStandardSurface1
+    2300000: Colossus_head1
+    2300002: hip_joint_1
+    2300004: hip_joint_2
+    2300006: left_bicep
+    2300008: left_elbow
+    2300010: left_forearm
+    2300012: left_shoulder
+    2300014: left_shoulder_pad
+    2300016: left_wrist
+    2300018: lower_body
+    2300020: lower_thumb
+    2300022: neck
+    2300024: palm 1
+    2300026: pCube10
+    2300028: pCube11
+    2300030: pCube12
+    2300032: pCube13
+    2300034: pCube16
+    2300036: pCube17
+    2300038: pCube18
+    2300040: pCube19
+    2300042: pCube2
+    2300044: pCube20
+    2300046: pCube23
+    2300048: pCube24
+    2300050: pCube25
+    2300052: pCube26
+    2300054: pCube27
+    2300056: pCube28
+    2300058: pCube29
+    2300060: pCube3
+    2300062: pCube31
+    2300064: pCube32
+    2300066: pCube4
+    2300068: pCube5
+    2300070: pCube6
+    2300072: pCube7
+    2300074: pCube8
+    2300076: pCube9
+    2300078: pinky_middle
+    2300080: pinky_top
+    2300082: right_bicep
+    2300084: right_elbow
+    2300086: right_forearm2
+    2300088: right_hand_middle_finger_pCube27
+    2300090: right_hand_middle_finger_pCube28
+    2300092: right_hand_middle_finger_pCube29
+    2300094: right_hand_palm_pCube1
+    2300096: right_hand_pinky_pCube18
+    2300098: right_hand_pointer_finger_pCube12
+    2300100: right_hand_pointer_finger_pCube20
+    2300102: right_hand_pointer_finger_pCube23
+    2300104: right_hand_ring_finger_pCube10
+    2300106: right_hand_ring_finger_pCube11
+    2300108: right_hand_ring_finger_pCube6
+    2300110: right_shoulder
+    2300112: right_shoulder_pad
+    2300114: right_wrist
+    2300116: torso
+    2300118: upper_thumb
+    2300120: upper_torso
+    3300000: Colossus_head1
+    3300002: hip_joint_1
+    3300004: hip_joint_2
+    3300006: left_bicep
+    3300008: left_elbow
+    3300010: left_forearm
+    3300012: left_shoulder
+    3300014: left_shoulder_pad
+    3300016: left_wrist
+    3300018: lower_body
+    3300020: lower_thumb
+    3300022: neck
+    3300024: palm 1
+    3300026: pCube10
+    3300028: pCube11
+    3300030: pCube12
+    3300032: pCube13
+    3300034: pCube16
+    3300036: pCube17
+    3300038: pCube18
+    3300040: pCube19
+    3300042: pCube2
+    3300044: pCube20
+    3300046: pCube23
+    3300048: pCube24
+    3300050: pCube25
+    3300052: pCube26
+    3300054: pCube27
+    3300056: pCube28
+    3300058: pCube29
+    3300060: pCube3
+    3300062: pCube31
+    3300064: pCube32
+    3300066: pCube4
+    3300068: pCube5
+    3300070: pCube6
+    3300072: pCube7
+    3300074: pCube8
+    3300076: pCube9
+    3300078: pinky_middle
+    3300080: pinky_top
+    3300082: right_bicep
+    3300084: right_elbow
+    3300086: right_forearm2
+    3300088: right_hand_middle_finger_pCube27
+    3300090: right_hand_middle_finger_pCube28
+    3300092: right_hand_middle_finger_pCube29
+    3300094: right_hand_palm_pCube1
+    3300096: right_hand_pinky_pCube18
+    3300098: right_hand_pointer_finger_pCube12
+    3300100: right_hand_pointer_finger_pCube20
+    3300102: right_hand_pointer_finger_pCube23
+    3300104: right_hand_ring_finger_pCube10
+    3300106: right_hand_ring_finger_pCube11
+    3300108: right_hand_ring_finger_pCube6
+    3300110: right_shoulder
+    3300112: right_shoulder_pad
+    3300114: right_wrist
+    3300116: torso
+    3300118: upper_thumb
+    3300120: upper_torso
+    4300000: upper_torso
+    4300002: left_shoulder
+    4300004: left_bicep
+    4300006: left_elbow
+    4300008: left_forearm
+    4300010: left_wrist
+    4300012: right_hand_palm_pCube1
+    4300014: lower_thumb
+    4300016: upper_thumb
+    4300018: right_hand_pointer_finger_pCube20
+    4300020: right_hand_pointer_finger_pCube12
+    4300022: right_hand_pointer_finger_pCube23
+    4300024: right_hand_middle_finger_pCube27
+    4300026: right_hand_middle_finger_pCube29
+    4300028: right_hand_middle_finger_pCube28
+    4300030: right_hand_ring_finger_pCube6
+    4300032: right_hand_ring_finger_pCube10
+    4300034: right_hand_ring_finger_pCube11
+    4300036: right_hand_pinky_pCube18
+    4300038: pinky_middle
+    4300040: pinky_top
+    4300042: left_shoulder_pad
+    4300044: neck
+    4300046: Colossus_head1
+    4300048: torso
+    4300050: lower_body
+    4300052: hip_joint_1
+    4300054: hip_joint_2
+    4300056: right_shoulder
+    4300058: right_bicep
+    4300060: right_elbow
+    4300062: right_forearm2
+    4300064: right_wrist
+    4300066: palm
+    4300068: pCube31
+    4300070: pCube32
+    4300072: pCube5
+    4300074: pCube12
+    4300076: pCube13
+    4300078: pCube2
+    4300080: pCube3
+    4300082: pCube4
+    4300084: pCube6
+    4300086: pCube10
+    4300088: pCube11
+    4300090: pCube7
+    4300092: pCube8
+    4300094: pCube9
+    4300096: right_shoulder_pad
+    4300098: pCube29
+    4300100: pCube28
+    4300102: pCube27
+    4300104: pCube24
+    4300106: pCube23
+    4300108: pCube20
+    4300110: pCube25
+    4300112: pCube26
+    4300114: pCube19
+    4300116: pCube18
+    4300118: pCube17
+    4300120: pCube16
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftUpperLeg' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human:
+    - boneName: lower_body
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Colossus_head1
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_shoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: torso
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: upper_torso
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_bicep
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_forearm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_hand_palm_pCube1
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_shoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_bicep
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_forearm2
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: palm 1
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: colossusParentedNoConstraintsFBX(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: lower_body
+      parentName: colossusParentedNoConstraintsFBX(Clone)
+      position: {x: 0, y: 0.07302969, z: 0.007769892}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hip_joint_1
+      parentName: lower_body
+      position: {x: -0.06713435, y: -0.03621848, z: -0.011433275}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hip_joint_2
+      parentName: lower_body
+      position: {x: 0.068742804, y: -0.03617754, z: -0.0077698925}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: spine
+      parentName: lower_body
+      position: {x: -0, y: 0.18271546, z: -0.007}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: torso
+      parentName: spine
+      position: {x: 0, y: -0.13237669, z: 0.0017243074}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: upper_torso
+      parentName: torso
+      position: {x: 0, y: 0.21568048, z: -0.0024941992}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_shoulder
+      parentName: upper_torso
+      position: {x: -0.096292414, y: 0.012762749, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_bicep
+      parentName: left_shoulder
+      position: {x: -0.056545906, y: 0.00005894339, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_elbow
+      parentName: left_bicep
+      position: {x: -0.13548023, y: -0.00005894339, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_forearm
+      parentName: left_elbow
+      position: {x: -0.034506805, y: 0.000058927944, z: -9.6544e-10}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_wrist
+      parentName: left_forearm
+      position: {x: -0.15730813, y: -0.001989738, z: -0.003208978}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_hand_palm_pCube1
+      parentName: left_wrist
+      position: {x: -0.010295919, y: 0.002931261, z: 0.0054445104}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: lower_thumb
+      parentName: right_hand_palm_pCube1
+      position: {x: -0.0354501, y: 0.021082886, z: -0.002235531}
+      rotation: {x: -0.008236554, y: 0, z: -0, w: 0.9999661}
+      scale: {x: 1, y: 1, z: 1}
+    - name: upper_thumb
+      parentName: lower_thumb
+      position: {x: -0.01068492, y: 0.016917227, z: -0.00019610852}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_hand_middle_finger_pCube27
+      parentName: right_hand_palm_pCube1
+      position: {x: -0.048207033, y: 0.0042412197, z: -0.0034579572}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_hand_middle_finger_pCube29
+      parentName: right_hand_middle_finger_pCube27
+      position: {x: -0.017288107, y: 0, z: 0.0005459664}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_hand_middle_finger_pCube28
+      parentName: right_hand_middle_finger_pCube29
+      position: {x: -0.01774844, y: 0, z: -0.00034651186}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_hand_pinky_pCube18
+      parentName: right_hand_palm_pCube1
+      position: {x: -0.048416987, y: -0.015543388, z: -0.002999064}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pinky_middle
+      parentName: right_hand_pinky_pCube18
+      position: {x: -0.014473036, y: -0.000000010081158, z: -0.0005564488}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pinky_top
+      parentName: pinky_middle
+      position: {x: -0.012748607, y: 7.105427e-17, z: -0.00019800663}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_hand_pointer_finger_pCube20
+      parentName: right_hand_palm_pCube1
+      position: {x: -0.04690342, y: 0.014793401, z: -0.0034579572}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_hand_pointer_finger_pCube12
+      parentName: right_hand_pointer_finger_pCube20
+      position: {x: -0.017667424, y: 0, z: 0.00006698789}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_hand_pointer_finger_pCube23
+      parentName: right_hand_pointer_finger_pCube12
+      position: {x: -0.01580548, y: 0, z: -0.00014850506}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_hand_ring_finger_pCube6
+      parentName: right_hand_palm_pCube1
+      position: {x: -0.04836786, y: -0.0071329605, z: -0.0028505584}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_hand_ring_finger_pCube10
+      parentName: right_hand_ring_finger_pCube6
+      position: {x: -0.016082108, y: 0, z: -0.00025943914}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_hand_ring_finger_pCube11
+      parentName: right_hand_ring_finger_pCube10
+      position: {x: -0.015923932, y: 0, z: -0.00030608178}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_shoulder_pad
+      parentName: left_bicep
+      position: {x: 0.05302533, y: 0.03626522, z: -1.7763568e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: neck
+      parentName: upper_torso
+      position: {x: -0, y: 0.072167784, z: 0.002494199}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Colossus_head1
+      parentName: neck
+      position: {x: -0, y: 0.09064995, z: -0.002494199}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_shoulder
+      parentName: upper_torso
+      position: {x: 0.1346828, y: 0.012762749, z: 1.6493887e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_bicep
+      parentName: right_shoulder
+      position: {x: 0.08562953, y: 0.00005894339, z: 1.0486593e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_elbow
+      parentName: right_bicep
+      position: {x: 0.09522848, y: -0.00005894339, z: 1.1662125e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_forearm2
+      parentName: right_elbow
+      position: {x: 0.08265302, y: 0.000058927944, z: -9.6544e-10}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_wrist
+      parentName: right_forearm2
+      position: {x: 0.08044168, y: -0.001989738, z: -0.003208978}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: palm 1
+      parentName: right_wrist
+      position: {x: 0.034801397, y: 0.004652054, z: 0.00097344787}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube2
+      parentName: palm 1
+      position: {x: 0.032762952, y: 0.0033318598, z: -0.0022355318}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube3
+      parentName: pCube2
+      position: {x: 0.017216744, y: -7.105427e-17, z: -1.6653345e-18}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube4
+      parentName: pCube3
+      position: {x: 0.016390083, y: 0, z: -2.220446e-18}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube5
+      parentName: palm 1
+      position: {x: 0.032364577, y: 0.013881668, z: -0.0022355318}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube12
+      parentName: pCube5
+      position: {x: 0.015889326, y: 0, z: -2.220446e-18}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube13
+      parentName: pCube12
+      position: {x: 0.013159149, y: 0, z: -1.6653345e-18}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube6
+      parentName: palm 1
+      position: {x: 0.032127958, y: -0.006041408, z: -0.0022355318}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube10
+      parentName: pCube6
+      position: {x: 0.016082108, y: 0, z: -2.220446e-18}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube11
+      parentName: pCube10
+      position: {x: 0.014701411, y: 0, z: -1.6653345e-18}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube7
+      parentName: palm 1
+      position: {x: 0.031497903, y: -0.015042179, z: -0.0022355318}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube8
+      parentName: pCube7
+      position: {x: 0.01550376, y: 0, z: -1.6653345e-18}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube9
+      parentName: pCube8
+      position: {x: 0.012195235, y: -7.105427e-17, z: -1.6653345e-18}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube31
+      parentName: palm 1
+      position: {x: 0.015793499, y: 0.030801807, z: -0.0009961107}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube32
+      parentName: pCube31
+      position: {x: 0.008770433, y: 0.014916372, z: 0.00007162213}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_shoulder_pad
+      parentName: right_bicep
+      position: {x: -0.06389675, y: 0.049195632, z: -2.6980481e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_arm
+      parentName: colossusParentedNoConstraintsFBX(Clone)
+      position: {x: -0, y: -0.00094265136, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_hand1
+      parentName: left_arm
+      position: {x: -0.53890884, y: 0.36883125, z: 0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: middle_finger
+      parentName: left_hand1
+      position: {x: 0.080555126, y: -0.011393552, z: -0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: palm
+      parentName: left_hand1
+      position: {x: 0.080555126, y: -0.011393552, z: -0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pinky
+      parentName: left_hand1
+      position: {x: 0.080555126, y: -0.011393552, z: -0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pointer_finger
+      parentName: left_hand1
+      position: {x: 0.080555126, y: -0.011393552, z: -0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ring_finger
+      parentName: left_hand1
+      position: {x: 0.080555126, y: -0.011393552, z: -0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: thumb
+      parentName: left_hand1
+      position: {x: 0.080555126, y: -0.011393552, z: -0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_arm
+      parentName: colossusParentedNoConstraintsFBX(Clone)
+      position: {x: -0, y: -0.00094265136, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_hand
+      parentName: right_arm
+      position: {x: 0.5381149, y: 0.34017932, z: -0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: middle_finger 1
+      parentName: right_hand
+      position: {x: -0.080555126, y: 0.019186461, z: -0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube27
+      parentName: middle_finger 1
+      position: {x: 0.08864008, y: -0.0005583188, z: -0.0054549477}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube28
+      parentName: middle_finger 1
+      position: {x: 0.12224691, y: -0.0005583188, z: -0.0041988376}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube29
+      parentName: middle_finger 1
+      position: {x: 0.10585683, y: -0.0005583188, z: -0.0050013554}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pinky 1
+      parentName: right_hand
+      position: {x: -0.080555126, y: -0.018972185, z: -0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube16
+      parentName: pinky 1
+      position: {x: 0.11507403, y: 0.019226288, z: -0.0037219268}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube17
+      parentName: pinky 1
+      position: {x: 0.10287879, y: 0.019226288, z: -0.0037679314}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube18
+      parentName: pinky 1
+      position: {x: 0.08737503, y: 0.019226288, z: -0.0047756806}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pointer_finger 1
+      parentName: right_hand
+      position: {x: -0.080555126, y: 0.040288452, z: -0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube20
+      parentName: pointer_finger 1
+      position: {x: 0.08824171, y: -0.0111104995, z: -0.005478617}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube23
+      parentName: pointer_finger 1
+      position: {x: 0.11729018, y: -0.0111104995, z: -0.004082607}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube24
+      parentName: pointer_finger 1
+      position: {x: 0.10413103, y: -0.0111104995, z: -0.003975044}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ring_finger 1
+      parentName: right_hand
+      position: {x: -0.080555126, y: -0.0015609871, z: -0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube19
+      parentName: ring_finger 1
+      position: {x: 0.08800508, y: 0.010815861, z: -0.005019919}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube25
+      parentName: ring_finger 1
+      position: {x: 0.1187886, y: 0.010815861, z: -0.004145083}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCube26
+      parentName: ring_finger 1
+      position: {x: 0.1040872, y: 0.010815861, z: -0.004145083}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: thumb 1
+      parentName: right_hand
+      position: {x: -0.080555126, y: 0.018986095, z: -0.0022355316}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
