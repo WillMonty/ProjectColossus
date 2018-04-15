@@ -9,13 +9,20 @@ public class PlayerInputManager : MonoBehaviour {
 
     const float WALK_SPEED = 5.0f;
     const float RUN_SPEED = 10.0f;
+    const float JUMP_FORCE = 3.0f;
 
 
     // Player variables
     public float speed = 2f;
     public float lookSensitivityX = 2f;
     public float lookSensitivityY = 2f;
+
+
+    // Component Variables
     CharacterController player;
+    public GameObject eyes;
+    private Rigidbody rb;
+
 
 
     // Movement Variables
@@ -24,6 +31,10 @@ public class PlayerInputManager : MonoBehaviour {
 
     float rotX; // rotation by the X axis
     float rotY; // rotation by the Y axis
+
+    // Movement Behavior Variables
+    bool grounded;
+    float jumpVelocity;
 
 
 
@@ -43,17 +54,23 @@ public class PlayerInputManager : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-        player = GetComponent<CharacterController>();
         SetControllerVariables();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        player = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         Move();
-	}
+
+        if (Input.GetButtonDown(aButton))
+        {
+            Jump();
+        }
+    }
 
 
     // Helper method to help set up the player controller
@@ -70,33 +87,12 @@ public class PlayerInputManager : MonoBehaviour {
         runButton = "J" + playerNum + "LeftStickClick";
     }
 
-    private bool ButtonIsDown()
-    {
-        //switch()
-
-
-        return false;    
-    }
-
-
     /// <summary>
     /// Handles all movement calls
     /// </summary>
     private void Move()
     {
-        /*
-        // Rotate the player
-        // Look axis
-        rotX = Input.GetAxis(horizontalAxis) * lookSensitivityX;
-        rotY = Input.GetAxis(verticalAxis) * lookSensitivityY;
-
-        Vector3 targetRotCam = transform.rotation.eulerAngles;
-
-        rotX = Mathf.Clamp(rotX, -90, 90);
-
-        transform.rotation = Quaternion.Euler(rotX, rotY, 0);
-        */
-
+        #region Handles Running
         // Handles Running
         if (Input.GetButtonDown(runButton))
         {
@@ -106,22 +102,49 @@ public class PlayerInputManager : MonoBehaviour {
         {
             speed = WALK_SPEED;
         }
+        #endregion
 
-        
+        #region Getting Input
         // Movement variables/axis
         moveFB = Input.GetAxis(moveYAxis) * speed;
         //Debug.Log("Move FB: " + moveFB);
         moveLR = -Input.GetAxis(moveXAxis) * speed;
-        //Debug.Log("Move LR: " + moveLR);
-        
+
+        // Rotate the player
+        // Look axis
+        rotX = Input.GetAxis(horizontalAxis) * lookSensitivityX;
+        rotY = -Input.GetAxis(verticalAxis) * lookSensitivityY;
+
+        // Clamp the rotation
+        rotY = Mathf.Clamp(rotY, -60f, 60f);
+        rotX = Mathf.Clamp(rotX, -360f, 360f);
+        #endregion
+
+        #region Applying movement
         // Create a vector movement
-        Vector3 movement = new Vector3(moveLR, 0, moveFB);
+        Vector3 movement = new Vector3(moveLR, rb.velocity.y, moveFB);
+
+        // Handling the FPS rotation
+        //transform.Rotate(0, rotX, 0);
+        //eyes.transform.Rotate(-rotY, 0, 0);
 
         // apply the rotation to the player movement
         movement = transform.rotation * movement;
 
+        //Debug.Log("Player " + playerNum + " Movement: " + movement);
+
         // Apply the final movement to the player
         player.Move(movement * Time.deltaTime);
-        
+        #endregion
     }
+
+    /// <summary>
+    /// Method to handle jumping and jetpack
+    /// </summary>
+    private void Jump()
+    {
+        Debug.Log("Jump!");
+        rb.velocity += JUMP_FORCE * Vector3.up;
+    }
+
 }
