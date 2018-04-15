@@ -5,21 +5,33 @@ using UnityEngine;
 public class ColossusManager : MonoBehaviour {
 
     #region Robot Attributes
+    //Debug variable to allow the game to start with the colossus on
+    public bool debugColossus;
+
     // Robot Manager
     const int STARTING_HEALTH = 1000;
-    const int LASEREYEABILITYDELAY = 1000;
     const float RESPAWN_TIME = 5.0f;
-
-    // Basic Player Management variables
+    private bool playerInBot; //Is the player currently in the colossus and ready to play?
     private float health;
 
-    // Robot Ability variables
-    private float laserEyeAbilityCounter;
-    private bool canUserLaserEyes;
+    // Public components needed for the toggling of the colossus
+    [Header("Colossus Components")]
+    public GameObject leftController;
+    public GameObject rightController;
+    public GameObject headset;
+    public GameObject disabledColossus; //The starting stationary colossus that is turned off when playing
+    Laser laser;
+        //Will add variables for the rigged colossus model
+
+    //Audio
+    [Header("Audio")]
+    public AudioSource source;
+    public AudioClip hopInSound;
+ 
 
     // Ammo Variables
     // Change this variable to private at some point
-    public int assaultRifleAmmo;
+    //public int assaultRifleAmmo;
     #endregion
 
     #region Properties
@@ -42,6 +54,10 @@ public class ColossusManager : MonoBehaviour {
         // Start initializes 3 lives at start, can be changed later
         health = STARTING_HEALTH;
 
+        laser = gameObject.GetComponent<Laser>();
+
+        if (debugColossus) ToggleColossus(); //If in debug mode let the VR player start immediately in the colossus
+
 
     }
 
@@ -51,14 +67,12 @@ public class ColossusManager : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-	    // Managment of ability Variables
-        
-
+        if (!playerInBot) CheckHopIn(); //Check if the player is jumping in the bot
 
 	}
     #endregion
 
-    #region Combat Helper Methods
+    #region Helper Methods
     // Damage helper method
     public void Damage(float damageFloat)
     {
@@ -68,17 +82,53 @@ public class ColossusManager : MonoBehaviour {
     /// <summary>
     /// Method to handle all Colossus abilities
     /// </summary>
-    private void abilityManagement()
+    private void AbilityManagement()
     {
 
     }
 
-
-    // Script for the laser eye ability
-    private void LaserEye()
+    /// <summary>
+    /// Helper method to check if the player is "hopping into" the colossus
+    /// </summary>
+    private void CheckHopIn()
     {
+        //Check if the headset is in the collider
+        bool headsetIn = disabledColossus.GetComponent<DisabledColossusTrigger>().HeadsetInTrigger;
+        if(headsetIn)
+        {
+            //Check if either trigger is pressed to hop in
+            bool leftTriggerPressed = leftController.GetComponent<SteamVR_TrackedController>().triggerPressed;
+            bool rightTriggerPressed = rightController.GetComponent<SteamVR_TrackedController>().triggerPressed;
 
+            if (leftTriggerPressed || rightTriggerPressed) ToggleColossus();
+        }
     }
+
+    /// <summary>
+    /// Method to toggle the player into the colossus and remove the disabled version
+    /// </summary>
+    private void ToggleColossus()
+    {
+        //Enable hands
+        GameObject leftHand = leftController.transform.GetChild(0).gameObject;
+        GameObject rightHand = rightController.transform.GetChild(0).gameObject;
+        leftHand.SetActive(true);
+        rightHand.SetActive(true);
+        //Remove controller models TODO (Hand 
+
+        laser.enabled = true;
+
+        disabledColossus.SetActive(false);
+
+        playerInBot = true;
+
+        //Play hop in sound if not in debug
+        if (debugColossus) return;
+        source.clip = hopInSound;
+        source.Play();
+    }
+
+
     #endregion
 
     private void OnCollisionEnter(Collider collider)
