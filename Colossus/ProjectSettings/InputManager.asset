@@ -301,9 +301,9 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 3
-    dead: 0.02
-    sensitivity: 1
+    gravity: 0
+    dead: 0
+    sensitivity: 0.5
     snap: 1
     invert: 0
     type: 2
@@ -317,13 +317,13 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 3
-    dead: 0.02
-    sensitivity: 100
+    gravity: 0
+    dead: 0
+    sensitivity: 0.5
     snap: 1
     invert: 0
     type: 2
-    axis: 4
+    axis: 3
     joyNum: 2
   - serializedVersion: 3
     m_Name: J1Vertical
@@ -333,13 +333,13 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 3
-    dead: 0.02
-    sensitivity: 1
+    gravity: 0
+    dead: 0
+    sensitivity: 0.5
     snap: 1
     invert: 0
     type: 2
-    axis: 3
+    axis: 4
     joyNum: 1
   - serializedVersion: 3
     m_Name: J2Vertical
@@ -349,9 +349,9 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 3
-    dead: 0.02
-    sensitivity: 100
+    gravity: 0
+    dead: 0
+    sensitivity: 0.5
     snap: 1
     invert: 0
     type: 2
@@ -382,8 +382,8 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
-    dead: 0.02
-    sensitivity: 100
+    dead: 0
+    sensitivity: 1
     snap: 1
     invert: 0
     type: 2
@@ -414,8 +414,8 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
-    dead: 0.02
-    sensitivity: 100
+    dead: 0
+    sensitivity: 1
     snap: 1
     invert: 0
     type: 2
@@ -430,8 +430,8 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: joystick button 0
     gravity: 3
-    dead: 0.02
-    sensitivity: 100
+    dead: 0
+    sensitivity: 1
     snap: 1
     invert: 0
     type: 0
@@ -446,8 +446,8 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: joystick button 0
     gravity: 3
-    dead: 0.02
-    sensitivity: 100
+    dead: 0
+    sensitivity: 1
     snap: 1
     invert: 0
     type: 0
