@@ -6,6 +6,7 @@ public class Laser : MonoBehaviour
 {
 
     //With these arrays, 0 index is left and 1 index is right
+    [Header("Laser Components")]
     public GameObject[] origins = new GameObject[2]; //Starting object beams come from
     public GameObject[] beams = new GameObject[2]; //Beam cylinders
     public SteamVR_TrackedController[] controllers = new SteamVR_TrackedController[2]; //Player's Controllers
@@ -17,6 +18,7 @@ public class Laser : MonoBehaviour
 
 
     //Laser state vars
+    [Header("Colossus Components")]
     public float cooldownTime;
     public float laserTime;
 
@@ -28,8 +30,10 @@ public class Laser : MonoBehaviour
     bool laserReady = true; //Checks if the laser has a shot ready
 
     //Audio vars
+    [Header("Audio")]
     public AudioSource source;
     public AudioClip fireSound;
+    public AudioClip misfireSound;
 
     // Use this for initialization
     void Start()
@@ -62,19 +66,22 @@ public class Laser : MonoBehaviour
     //Called when the player tries to fire the laser. Checks to make sure the laser ability is available
     void TryShoot()
     {
-        if (!isCharging && !firing && laserReady)
+        //Misfire
+        if(!laserReady && !firing)
+        {
+            source.Stop();
+            source.clip = misfireSound;
+            source.Play();
+            return;
+        }
+
+        //Starting a new laser
+        if (!isCharging && !firing)
         {
             isCharging = true;
             source.clip = fireSound;
             source.Play();
             StartCoroutine(ChargeUp());
-        }
-
-        if (firing)
-        {
-            beams[0].SetActive(true);
-            beams[1].SetActive(true);
-            laserReady = false;
         }
     }
 
@@ -84,8 +91,6 @@ public class Laser : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             Physics.Raycast(origins[i].transform.position, origins[i].transform.forward, out hits[i], maxDistance);
-            //Vector3 hitDistanceLocal = beams[i].transform.InverseTransformPoint(hits[i].distance, hits[i].distance, hits[i].distance);
-            //Vector3 maxDistanceLocal = beams[i].transform.InverseTransformPoint(maxDistance, maxDistance, maxDistance);
 
             //Move and scale the beam to the appropriate position
             Vector3 currBeamLocalPosition = beams[i].transform.localPosition;
@@ -135,6 +140,9 @@ public class Laser : MonoBehaviour
     IEnumerator ChargeUp()
     {
         yield return new WaitForSeconds(chargeTime);
+        beams[0].SetActive(true);
+        beams[1].SetActive(true);
+        laserReady = false;
         firing = true;
         isCharging = false;
     }

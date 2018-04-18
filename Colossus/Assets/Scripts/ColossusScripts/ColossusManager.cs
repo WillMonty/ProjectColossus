@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ColossusManager : MonoBehaviour {
 
@@ -27,6 +28,9 @@ public class ColossusManager : MonoBehaviour {
     [Header("Audio")]
     public AudioSource source;
     public AudioClip hopInSound;
+
+    [Header("UI")]
+    public Slider heathBar;
  
 
     // Ammo Variables
@@ -77,6 +81,8 @@ public class ColossusManager : MonoBehaviour {
     public void Damage(float damageFloat)
     {
         health -= damageFloat;
+        heathBar.value = 100 - health;
+        
     }
 
     /// <summary>
@@ -121,6 +127,9 @@ public class ColossusManager : MonoBehaviour {
         disabledColossus.SetActive(false);
 
         playerInBot = true;
+
+        leftController.transform.GetChild(3).gameObject.SetActive(false);
+        rightController.transform.GetChild(3).gameObject.SetActive(false);
 
         //Play hop in sound if not in debug
         if (debugColossus) return;
