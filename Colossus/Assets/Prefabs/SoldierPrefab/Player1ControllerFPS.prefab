@@ -220,19 +220,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNum: 1
   speed: 2
-  lookSensitivityX: 20
-  lookSensitivityY: 20
+  lookSensitivityX: 2
+  lookSensitivityY: 2
   eyes: {fileID: 1605082517507248}
-  moveXAxis: 
-  moveYAxis: 
-  horizontalAxis: 
-  verticalAxis: 
-  aButton: 
-  bButton: 
-  yButton: 
-  triggerRight: 
-  triggerLeft: 
-  runButton: 
 --- !u!114 &114801345918026294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -244,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d91e8de4fbf20af46a4e22df3a96cc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1725202666461666, guid: 9a292f2654cd8bb4dadc05209c37d7db,
+  bulletPrefab: {fileID: 1572466318819412, guid: d9c940578f2c2c54cb88f7ee0e633b5a,
     type: 2}
   playerNum: 1
 --- !u!124 &124406664748010198

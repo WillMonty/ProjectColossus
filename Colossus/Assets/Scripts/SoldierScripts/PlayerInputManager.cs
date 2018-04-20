@@ -16,6 +16,7 @@ public class PlayerInputManager : MonoBehaviour {
     public float speed = 2f;
     public float lookSensitivityX = .001f;
     public float lookSensitivityY = .001f;
+    float xAxisClamp;
 
 
     // Component Variables
@@ -36,22 +37,17 @@ public class PlayerInputManager : MonoBehaviour {
     bool grounded;
     float jumpVelocity;
 
-
-
     // Controller Variables
-    public string moveXAxis;
-    public string moveYAxis;
-    public string horizontalAxis;
-    public string verticalAxis;
-    public string aButton;
-    public string bButton;
-    public string yButton;
-    public string triggerRight;
-    public string triggerLeft;
-    public string runButton;
-
-
-
+    private string moveXAxis;
+    private string moveYAxis;
+    private string horizontalAxis;
+    private string verticalAxis;
+    private string aButton;
+    private string bButton;
+    private string yButton;
+    private string triggerRight;
+    private string triggerLeft;
+    private string runButton;
 
     // Use this for initialization
     void Start()
@@ -113,23 +109,41 @@ public class PlayerInputManager : MonoBehaviour {
         rotX = Input.GetAxis(horizontalAxis) * lookSensitivityX;
         rotY = Input.GetAxis(verticalAxis) * lookSensitivityY;
 
-        // Clamp the rotation
-        rotX = Mathf.Clamp(rotX, -360f, 360f);
-        rotY = Mathf.Clamp(rotY, -60f, 60f);
+        // Adding an xAxis
+        xAxisClamp += rotY;
+
+        // Set a temporary vector3 for rotation
+        Vector3 targetCamRot = eyes.transform.rotation.eulerAngles;
+        Vector3 targetBodyRot = transform.rotation.eulerAngles;
+
+        // Up/Down Rotation
+        targetCamRot.x += rotY;
+        targetCamRot.z = 0;
+        targetBodyRot.y += rotX;
+
+        // Clamping the look rotation
+        if (xAxisClamp > 90)
+        {
+            xAxisClamp = 90;
+            targetCamRot.x = 90;
+        }
+        else if(xAxisClamp<-90)
+        {
+            xAxisClamp = -90;
+            targetCamRot.x = 270;
+        }
+
+        // Applying the rotations to the player
+        eyes.transform.rotation = Quaternion.Euler(targetCamRot);
+        transform.rotation = Quaternion.Euler(targetBodyRot);
         #endregion
 
         #region Applying movement
         // Create a vector movement
         Vector3 movement = new Vector3(moveLR, rb.velocity.y, moveFB);
 
-        // Handling the FPS rotation
-        transform.Rotate(0, rotX, 0);
-        eyes.transform.Rotate(rotY, 0, 0);
-
-        // apply the rotation to the player movement
-        movement = transform.rotation * movement;
-
         //Debug.Log("Player " + playerNum + " Movement: " + movement);
+        movement = transform.rotation * movement;
 
         // Apply the final movement to the player
         player.Move(movement * Time.deltaTime);
