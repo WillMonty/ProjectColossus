@@ -17,9 +17,14 @@ public class SteamVR_IK : MonoBehaviour
 
 	[HideInInspector]
 	public Transform startXform, jointXform, endXform;
+    float prevRotZ_start;
+    float prevRotZ_joint;
+    float prevRotZ_end;
+
 
     void Update()
     {
+
         start.localRotation = Quaternion.Euler(start.localRotation.eulerAngles.x, start.localRotation.eulerAngles.y, 0);
         joint.localRotation = Quaternion.Euler(joint.localRotation.eulerAngles.x, joint.localRotation.eulerAngles.y, 0);
         end.localRotation = Quaternion.Euler(end.localRotation.eulerAngles.x, end.localRotation.eulerAngles.y, 0);
@@ -27,7 +32,11 @@ public class SteamVR_IK : MonoBehaviour
 
 	void LateUpdate()
 	{
-		const float epsilon = 0.001f;
+        /*
+        
+        */
+
+        const float epsilon = 0.001f;
 		if (blendPct < epsilon)
 			return;
 
@@ -50,7 +59,8 @@ public class SteamVR_IK : MonoBehaviour
 		var jointPosition = joint.position;
 		var endPosition = end.position;
 
-		var startRotationLocal = start.localRotation;
+        
+        var startRotationLocal = start.localRotation;
 		var jointRotationLocal = joint.localRotation;
 		var endRotationLocal = end.localRotation;
 
@@ -89,11 +99,7 @@ public class SteamVR_IK : MonoBehaviour
 		}
 
 		endXform.position = endPosition;
-		end.parent = endXform;
-
-        
-
-       
+		end.parent = endXform;           
 
         startXform.LookAt(result, up);
 		jointXform.LookAt(targetPosition, up);
@@ -117,7 +123,9 @@ public class SteamVR_IK : MonoBehaviour
 		start.localScale = startScale;
 		joint.localScale = jointScale;
 		end.localScale = endScale;
-	}
+
+        
+    }
 
 	public static bool Solve(
 		Vector3 start, // shoulder / hip
