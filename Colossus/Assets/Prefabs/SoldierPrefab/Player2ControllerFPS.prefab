@@ -73,15 +73,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1470562562501796}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 8.93, y: 2.49, z: 6.21}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.24, z: -8.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4997250240128106}
   - {fileID: 4896496357768628}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4896496357768628
 Transform:
   m_ObjectHideFlags: 1
@@ -135,8 +135,8 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetDisplay: 1
+  m_TargetEye: 0
   m_HDR: 0
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
@@ -233,9 +233,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNum: 2
   speed: 2
-  lookSensitivityX: 0.001
-  lookSensitivityY: 0.001
-  eyes: {fileID: 0}
+  lookSensitivityX: 20
+  lookSensitivityY: 20
+  eyes: {fileID: 1384608207220884}
   moveXAxis: 
   moveYAxis: 
   horizontalAxis: 

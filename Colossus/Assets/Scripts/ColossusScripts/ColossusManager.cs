@@ -81,7 +81,7 @@ public class ColossusManager : MonoBehaviour {
     public void Damage(float damageFloat)
     {
         health -= damageFloat;
-        heathBar.value = 100 - health;
+        heathBar.value = STARTING_HEALTH - health;
         
     }
 
@@ -132,9 +132,11 @@ public class ColossusManager : MonoBehaviour {
         rightController.transform.GetChild(3).gameObject.SetActive(false);
 
         //Play hop in sound if not in debug
-        if (debugColossus) return;
-        source.clip = hopInSound;
-        source.Play();
+        if (!debugColossus)
+        {
+            source.clip = hopInSound;
+            source.Play();
+        }
     }
 
 

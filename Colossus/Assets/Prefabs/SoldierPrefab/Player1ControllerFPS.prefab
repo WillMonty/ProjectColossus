@@ -73,8 +73,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1071774053901822}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 0, y: 3.53, z: 10.06}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.99, y: 1.24, z: -8.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4452591563304722}
@@ -135,8 +135,8 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetDisplay: 1
+  m_TargetEye: 0
   m_HDR: 0
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
@@ -218,11 +218,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569f7316d9a4a034bb6d448ec407bf05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 0
+  playerNum: 1
   speed: 2
-  lookSensitivityX: 0.001
-  lookSensitivityY: 0.001
-  eyes: {fileID: 0}
+  lookSensitivityX: 20
+  lookSensitivityY: 20
+  eyes: {fileID: 1605082517507248}
   moveXAxis: 
   moveYAxis: 
   horizontalAxis: 
@@ -244,8 +244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d91e8de4fbf20af46a4e22df3a96cc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 0}
-  playerNum: 0
+  bulletPrefab: {fileID: 1725202666461666, guid: 9a292f2654cd8bb4dadc05209c37d7db,
+    type: 2}
+  playerNum: 1
 --- !u!124 &124406664748010198
 Behaviour:
   m_ObjectHideFlags: 1
