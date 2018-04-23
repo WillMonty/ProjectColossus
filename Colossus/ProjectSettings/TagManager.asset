@@ -7,6 +7,10 @@ TagManager:
   - FxTemporaire
   - projectile
   - healthorb
+  - fuelorb
+  - resistancebullet
+  - resistanceplayer
+  - colossusplayer
   layers:
   - Default
   - TransparentFX

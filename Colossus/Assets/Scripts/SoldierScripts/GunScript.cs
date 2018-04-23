@@ -81,7 +81,7 @@ public class GunScript : MonoBehaviour
             // Check for shooting
             if (rightTriggerFloat > 0 && justShot == false)
             {
-            Debug.Log("Player " + playerNum + " has " + bulletsInClip + " in their clip.");
+            //Debug.Log("Player " + playerNum + " has " + bulletsInClip + " in their clip.");
             
             // If not reloading you can shoot or if you have greater than zero bullets
                 if((reloadingBool==false) && bulletsInClip > 0)
@@ -98,7 +98,7 @@ public class GunScript : MonoBehaviour
             // Check for reloading
         if(reloadingBool == false && reloadButton>0)
         {
-            Debug.Log("Manually Reloaded");
+            //Debug.Log("Manually Reloaded");
             Reload();
         }
 	}
@@ -119,7 +119,7 @@ public class GunScript : MonoBehaviour
 
     private void Shoot()
     {
-        Debug.Log("Shooting bullets");
+        //Debug.Log("Shooting bullets");
 
         // Instantiate the bullet and shoot it
         Instantiate(bulletPrefab, transform.position + transform.forward, gameObject.GetComponent<PlayerInputManager>().eyes.transform.rotation);
@@ -134,7 +134,7 @@ public class GunScript : MonoBehaviour
     private void Reload()
     {
         reloadingBool = true;
-        Debug.Log("Reload Called: " + reloadTime);
+        //Debug.Log("Reload Called: " + reloadTime);
         // Check the player manager and see how much ammo they have before reloading
         //if(PlayerManager.ammo>clipSize)
         //{

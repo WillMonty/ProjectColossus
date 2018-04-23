@@ -142,14 +142,15 @@ public class ColossusManager : MonoBehaviour {
 
     #endregion
 
-    private void OnCollisionEnter(Collider collider)
+    void OnCollisionEnter(Collision col)
     {
+        GameObject collisionObject = col.gameObject;
 
         // IF the robot is hit with the bullet, it damages the robot and deletes the bullet
-        if(collider.tag == "playerbullet")
+        if (collisionObject.tag == "playerbullet")
         {
-            Damage(collider.GetComponent<BulletScript>().Damage);
-            collider.GetComponent<BulletScript>().deleteBullet();
+            Damage(collisionObject.GetComponent<BulletScript>().Damage);
+            collisionObject.GetComponent<BulletScript>().deleteBullet();
         }
     }
 }

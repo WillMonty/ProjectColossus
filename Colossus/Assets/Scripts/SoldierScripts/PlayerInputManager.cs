@@ -9,7 +9,8 @@ public class PlayerInputManager : MonoBehaviour {
 
     const float WALK_SPEED = 5.0f;
     const float RUN_SPEED = 10.0f;
-    const float JUMP_FORCE = 7.0f;
+    const float JUMP_FORCE = 5.0f;
+    const float JETPACK_FORCE = .1f;
 
 
     // Player variables
@@ -35,7 +36,6 @@ public class PlayerInputManager : MonoBehaviour {
 
     // Movement Behavior Variables
     bool grounded;
-    float jumpVelocity;
 
     // Controller Variables
     private string moveXAxis;
@@ -61,9 +61,7 @@ public class PlayerInputManager : MonoBehaviour {
     void Update()
     {
         Move();
-
         Jump();
-        
     }
 
 
@@ -100,14 +98,43 @@ public class PlayerInputManager : MonoBehaviour {
 
         #region Getting Input
         // Movement variables/axis
-        moveFB = -Input.GetAxis(moveYAxis) * speed;
+        if (Input.GetAxis(moveYAxis) > .2  || Input.GetAxis(moveYAxis) < -.2 )
+        {
+            moveFB = -Input.GetAxis(moveYAxis) * speed;
+        }
+        else
+        {
+            moveFB = 0;
+        }
         //Debug.Log("Move FB: " + moveFB);
-        moveLR = Input.GetAxis(moveXAxis) * speed;
+        if (Input.GetAxis(moveXAxis) > .2 || Input.GetAxis(moveXAxis) < -.2)
+        {
+            moveLR = Input.GetAxis(moveXAxis) * speed;
+        }
+        else
+        {
+            moveLR = 0;
+        }
 
         // Rotate the player
         // Look axis
-        rotX = Input.GetAxis(horizontalAxis) * lookSensitivityX;
-        rotY = Input.GetAxis(verticalAxis) * lookSensitivityY;
+        if (Input.GetAxis(horizontalAxis) > .2 || Input.GetAxis(horizontalAxis)<-.2)
+        {
+            rotX = Input.GetAxis(horizontalAxis) * lookSensitivityX;
+        }
+        else
+        {
+            rotX = 0;
+        }
+        if (Input.GetAxis(verticalAxis) > .2 || Input.GetAxis(verticalAxis) < -.2)
+        {
+            rotY = Input.GetAxis(verticalAxis) * lookSensitivityY;
+        }
+        else
+        {
+            rotY = 0;
+        }
+        //Debug.Log("Rot X: " + rotX + " Rot Y: " + rotY + " Move FB: " + moveFB + " Move LR: " + moveLR);
 
         // Adding an xAxis
         xAxisClamp += rotY;
@@ -145,21 +172,38 @@ public class PlayerInputManager : MonoBehaviour {
         //Debug.Log("Player " + playerNum + " Movement: " + movement);
         movement = transform.rotation * movement;
 
+        //Debug.Log(rb.velocity);
+
         // Apply the final movement to the player
         player.Move(movement * Time.deltaTime);
         #endregion
     }
 
+    #region Jumping helper method
     /// <summary>
     /// Method to handle jumping and jetpack
     /// </summary>
     private void Jump()
     {
-        if (Input.GetButtonDown(aButton))
+        //Debug.Log("Player Grounded: " + player.isGrounded);
+        if (player.isGrounded)
         {
-            Debug.Log("Jump!" + playerNum);
-            rb.velocity += JUMP_FORCE * Vector3.up;
+            if (Input.GetButtonDown(aButton))
+            {
+                //Debug.Log("Jump!" + playerNum);
+                rb.velocity = rb.velocity + new Vector3(0, JUMP_FORCE, 0);
+            }
+            else
+            {
+                rb.velocity = Vector3.zero;
+            }
+        }
+        else if (Input.GetButton(aButton) && GetComponent<PlayerManager>().JetPackFuel>0)
+        {
+            rb.velocity = rb.velocity + new Vector3(0, JETPACK_FORCE, 0);
+            GetComponent<PlayerManager>().FuelDown();
         }
     }
+    #endregion
 
 }

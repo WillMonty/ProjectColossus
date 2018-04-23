@@ -8,15 +8,32 @@ public class PlayerManager : MonoBehaviour
     const int STARTING_LIVES = 3;
     const float RESPAWN_TIME = 5.0f;
     const float DAMAGING_OBJECT_MAGNITUDE = 5.0f;
+    const float MAX_HEALTH = 100;
 
     // Basic Player Management variables
     private int lives;
     private float health;
+    private float jetPackFuel;
     private Weapons currentWeapon;
 
     // Ammo Variables
     // Change this variable to private at some point
     public int assaultRifleAmmo;
+
+    public int Lives
+    {
+        get { return lives; }
+    }
+    public float Health
+    {
+        get { return health; }
+    }
+    public float JetPackFuel
+    {
+        get { return jetPackFuel; }
+    }
+
+
 
 
     // Use this for initialization
@@ -54,8 +71,6 @@ public class PlayerManager : MonoBehaviour
             // Lower the life count
             lives--;
 
-
-
             // Choose one of the spawn locations at random
             int spawnLocation = Random.Range(0, 10);
 
@@ -67,11 +82,32 @@ public class PlayerManager : MonoBehaviour
     /// <summary>
     /// Damage method to damage the player
     /// </summary>
-    /// <param name="spawnlocation"></param>
-    /// <returns></returns>
-    void Damage(float damageFloat)
+    /// <param name="damageFloat"></param>
+    public void Damage(float damageFloat)
     {
         health -= damageFloat;
+    }
+    
+    /// <summary>
+    /// Heal the player
+    /// </summary>
+    /// <param name="damageFloat"></param>
+    public void Heal(float healFloat)
+    {
+        health += healFloat;
+
+        if (health > MAX_HEALTH)
+        {
+            health = MAX_HEALTH;
+        }
+    }
+
+    /// <summary>
+    /// Add fuel back to the player's jetpack
+    /// </summary>
+    public void FuelDown()
+    {
+        jetPackFuel -= Time.deltaTime;
     }
 
     IEnumerable Respawn(Vector3 spawnlocation)
@@ -81,20 +117,22 @@ public class PlayerManager : MonoBehaviour
         gameObject.transform.position = spawnlocation;
     }
 
-    private void OnCollisionEnter(Collider collider)
+    void OnCollisionEnter(Collision col)
     {
+        //Debug.Log("Collision");
+        GameObject collisionObject = col.gameObject;
 
-        // IF the robot is hit with the bullet, it damages the robot and deletes the bullet
-        if (collider.tag == "object")
+        // If a player is hit with an object the robot throws
+        if (collisionObject.tag == "object")
         {
             // Only damage the player if the object is moveing at a high velocity (number can be determined and changed through the player constant)
-            if (collider.GetComponent<Rigidbody>().velocity.magnitude > DAMAGING_OBJECT_MAGNITUDE)
+            if (collisionObject.GetComponent<Rigidbody>().velocity.magnitude > DAMAGING_OBJECT_MAGNITUDE)
             {
 
-                float movingObjectDamage = collider.GetComponent<Rigidbody>().velocity.magnitude;
+                float movingObjectDamage = collisionObject.GetComponent<Rigidbody>().velocity.magnitude;
 
                 Damage(movingObjectDamage);
-                collider.GetComponent<BulletScript>().deleteBullet();
+                collisionObject.GetComponent<BulletScript>().deleteBullet();
             }
         }
     }
