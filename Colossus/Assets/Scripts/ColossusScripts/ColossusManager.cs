@@ -20,9 +20,14 @@ public class ColossusManager : MonoBehaviour {
     public GameObject leftController;
     public GameObject rightController;
     public GameObject headset;
+    public GameObject neck;
+    public GameObject colossusBody;
     public GameObject disabledColossus; //The starting stationary colossus that is turned off when playing
     Laser laser;
-        //Will add variables for the rigged colossus model
+    //Will add variables for the rigged colossus model
+
+    [Header("Map")]
+    public GameObject Map;
 
     //Audio
     [Header("Audio")]
@@ -62,7 +67,6 @@ public class ColossusManager : MonoBehaviour {
 
         if (debugColossus) ToggleColossus(); //If in debug mode let the VR player start immediately in the colossus
 
-
     }
 
     #endregion
@@ -72,8 +76,7 @@ public class ColossusManager : MonoBehaviour {
     void Update ()
     {
         if (!playerInBot) CheckHopIn(); //Check if the player is jumping in the bot
-
-	}
+    }
     #endregion
 
     #region Helper Methods
@@ -120,7 +123,12 @@ public class ColossusManager : MonoBehaviour {
         GameObject rightHand = rightController.transform.GetChild(0).gameObject;
         leftHand.SetActive(true);
         rightHand.SetActive(true);
-        //Remove controller models TODO (Hand 
+
+        //Enable Colossus Head
+        neck.SetActive(true);
+
+        //Enable Colossus Body
+        colossusBody.SetActive(true);
 
         laser.enabled = true;
 
@@ -128,15 +136,17 @@ public class ColossusManager : MonoBehaviour {
 
         playerInBot = true;
 
-        leftController.transform.GetChild(3).gameObject.SetActive(false);
-        rightController.transform.GetChild(3).gameObject.SetActive(false);
-
         //Play hop in sound if not in debug
         if (!debugColossus)
         {
+            //Turn off base controller prefab
+            leftController.transform.GetChild(3).gameObject.SetActive(false);
+            rightController.transform.GetChild(3).gameObject.SetActive(false);
+
             source.clip = hopInSound;
             source.Play();
         }
+        RaiseMap();
     }
 
 
@@ -152,5 +162,12 @@ public class ColossusManager : MonoBehaviour {
             Damage(collisionObject.GetComponent<BulletScript>().Damage);
             collisionObject.GetComponent<BulletScript>().deleteBullet();
         }
+    }
+
+    void RaiseMap()
+    {
+        float playerY = headset.transform.position.y - 8.0f ;
+        Map.transform.position = new Vector3(Map.transform.position.x, playerY, Map.transform.position.z);
+        Debug.Log(Map.transform.position);
     }
 }

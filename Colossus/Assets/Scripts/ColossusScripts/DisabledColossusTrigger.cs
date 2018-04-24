@@ -9,6 +9,7 @@ public class DisabledColossusTrigger : MonoBehaviour {
     AudioSource source;
     [Header("Audio")]
     public AudioClip inBoundsSound;
+    public AudioClip outBoundsSound;
 
     public bool HeadsetInTrigger
     {
@@ -38,5 +39,12 @@ public class DisabledColossusTrigger : MonoBehaviour {
     private void OnTriggerStay(Collider other)
     {
         if (other.name == "Camera (eye)") headsetInTrigger = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        source.Stop();
+        source.clip = outBoundsSound;
+        source.Play();
     }
 }

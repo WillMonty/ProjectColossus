@@ -1,0 +1,245 @@
+fileFormatVersion: 2
+guid: 391f244aa255a714b8a772212e1826b8
+timeCreated: 1524531896
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: pCube2_Scaffolding
+    100002: Scaffolding_group2_pCube11
+    100004: Scaffolding_group2_pCube12
+    100006: Scaffolding_group2_pCube13
+    100008: Scaffolding_group2_pCube14
+    100010: Scaffolding_group2_pCube15
+    100012: Scaffolding_group3_pCube11
+    100014: Scaffolding_group3_pCube12
+    100016: Scaffolding_group3_pCube13
+    100018: Scaffolding_group3_pCube14
+    100020: Scaffolding_group3_pCube15
+    100022: Scaffolding_pCube1
+    100024: Scaffolding_pCube10_group2
+    100026: Scaffolding_pCube10_group3
+    100028: Scaffolding_pCube16
+    100030: Scaffolding_pCube17
+    100032: Scaffolding_pCube18
+    100034: Scaffolding_pCube19
+    100036: Scaffolding_pCube20
+    100038: Scaffolding_pCube3
+    100040: Scaffolding_pCube4
+    100042: Scaffolding_pCube5
+    100044: Scaffolding_pCube6
+    100046: Scaffolding_pCube7
+    100048: Scaffolding_pCube8
+    100050: Scaffolding_pCube9
+    100052: //RootNode
+    400000: pCube2_Scaffolding
+    400002: Scaffolding_group2_pCube11
+    400004: Scaffolding_group2_pCube12
+    400006: Scaffolding_group2_pCube13
+    400008: Scaffolding_group2_pCube14
+    400010: Scaffolding_group2_pCube15
+    400012: Scaffolding_group3_pCube11
+    400014: Scaffolding_group3_pCube12
+    400016: Scaffolding_group3_pCube13
+    400018: Scaffolding_group3_pCube14
+    400020: Scaffolding_group3_pCube15
+    400022: Scaffolding_pCube1
+    400024: Scaffolding_pCube10_group2
+    400026: Scaffolding_pCube10_group3
+    400028: Scaffolding_pCube16
+    400030: Scaffolding_pCube17
+    400032: Scaffolding_pCube18
+    400034: Scaffolding_pCube19
+    400036: Scaffolding_pCube20
+    400038: Scaffolding_pCube3
+    400040: Scaffolding_pCube4
+    400042: Scaffolding_pCube5
+    400044: Scaffolding_pCube6
+    400046: Scaffolding_pCube7
+    400048: Scaffolding_pCube8
+    400050: Scaffolding_pCube9
+    400052: //RootNode
+    2100000: pCube2_ScaffoldingMat
+    2100002: Scaffolding_group2_pCube11Mat
+    2100004: Scaffolding_group2_pCube12Mat
+    2100006: Scaffolding_group2_pCube13Mat
+    2100008: Scaffolding_group2_pCube14Mat
+    2100010: Scaffolding_group2_pCube15Mat
+    2100012: Scaffolding_group3_pCube11Mat
+    2100014: Scaffolding_group3_pCube12Mat
+    2100016: Scaffolding_group3_pCube13Mat
+    2100018: Scaffolding_group3_pCube14Mat
+    2100020: Scaffolding_group3_pCube15Mat
+    2100022: Scaffolding_pCube1Mat
+    2100024: Scaffolding_pCube10_group2Mat
+    2100026: Scaffolding_pCube10_group3Mat
+    2100028: Scaffolding_pCube16Mat
+    2100030: Scaffolding_pCube17Mat
+    2100032: Scaffolding_pCube18Mat
+    2100034: Scaffolding_pCube19Mat
+    2100036: Scaffolding_pCube20Mat
+    2100038: Scaffolding_pCube3Mat
+    2100040: Scaffolding_pCube4Mat
+    2100042: Scaffolding_pCube5Mat
+    2100044: Scaffolding_pCube6Mat
+    2100046: Scaffolding_pCube7Mat
+    2100048: Scaffolding_pCube8Mat
+    2100050: Scaffolding_pCube9Mat
+    2300000: pCube2_Scaffolding
+    2300002: Scaffolding_group2_pCube11
+    2300004: Scaffolding_group2_pCube12
+    2300006: Scaffolding_group2_pCube13
+    2300008: Scaffolding_group2_pCube14
+    2300010: Scaffolding_group2_pCube15
+    2300012: Scaffolding_group3_pCube11
+    2300014: Scaffolding_group3_pCube12
+    2300016: Scaffolding_group3_pCube13
+    2300018: Scaffolding_group3_pCube14
+    2300020: Scaffolding_group3_pCube15
+    2300022: Scaffolding_pCube1
+    2300024: Scaffolding_pCube10_group2
+    2300026: Scaffolding_pCube10_group3
+    2300028: Scaffolding_pCube16
+    2300030: Scaffolding_pCube17
+    2300032: Scaffolding_pCube18
+    2300034: Scaffolding_pCube19
+    2300036: Scaffolding_pCube20
+    2300038: Scaffolding_pCube3
+    2300040: Scaffolding_pCube4
+    2300042: Scaffolding_pCube5
+    2300044: Scaffolding_pCube6
+    2300046: Scaffolding_pCube7
+    2300048: Scaffolding_pCube8
+    2300050: Scaffolding_pCube9
+    3300000: pCube2_Scaffolding
+    3300002: Scaffolding_group2_pCube11
+    3300004: Scaffolding_group2_pCube12
+    3300006: Scaffolding_group2_pCube13
+    3300008: Scaffolding_group2_pCube14
+    3300010: Scaffolding_group2_pCube15
+    3300012: Scaffolding_group3_pCube11
+    3300014: Scaffolding_group3_pCube12
+    3300016: Scaffolding_group3_pCube13
+    3300018: Scaffolding_group3_pCube14
+    3300020: Scaffolding_group3_pCube15
+    3300022: Scaffolding_pCube1
+    3300024: Scaffolding_pCube10_group2
+    3300026: Scaffolding_pCube10_group3
+    3300028: Scaffolding_pCube16
+    3300030: Scaffolding_pCube17
+    3300032: Scaffolding_pCube18
+    3300034: Scaffolding_pCube19
+    3300036: Scaffolding_pCube20
+    3300038: Scaffolding_pCube3
+    3300040: Scaffolding_pCube4
+    3300042: Scaffolding_pCube5
+    3300044: Scaffolding_pCube6
+    3300046: Scaffolding_pCube7
+    3300048: Scaffolding_pCube8
+    3300050: Scaffolding_pCube9
+    4300000: pCube2_Scaffolding
+    4300002: Scaffolding_group2_pCube11
+    4300004: Scaffolding_group2_pCube12
+    4300006: Scaffolding_group2_pCube13
+    4300008: Scaffolding_group2_pCube14
+    4300010: Scaffolding_group2_pCube15
+    4300012: Scaffolding_group3_pCube11
+    4300014: Scaffolding_group3_pCube12
+    4300016: Scaffolding_group3_pCube13
+    4300018: Scaffolding_group3_pCube14
+    4300020: Scaffolding_group3_pCube15
+    4300022: Scaffolding_pCube1
+    4300024: Scaffolding_pCube10_group2
+    4300026: Scaffolding_pCube10_group3
+    4300028: Scaffolding_pCube16
+    4300030: Scaffolding_pCube17
+    4300032: Scaffolding_pCube18
+    4300034: Scaffolding_pCube19
+    4300036: Scaffolding_pCube20
+    4300038: Scaffolding_pCube3
+    4300040: Scaffolding_pCube4
+    4300042: Scaffolding_pCube5
+    4300044: Scaffolding_pCube6
+    4300046: Scaffolding_pCube7
+    4300048: Scaffolding_pCube8
+    4300050: Scaffolding_pCube9
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
