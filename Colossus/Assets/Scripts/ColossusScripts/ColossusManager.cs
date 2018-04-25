@@ -31,8 +31,10 @@ public class ColossusManager : MonoBehaviour {
 
     //Audio
     [Header("Audio")]
-    public AudioSource source;
+    public AudioSource headSource;
+    public AudioSource audioSource;
     public AudioClip hopInSound;
+    public AudioClip damageSound;
 
     [Header("UI")]
     public Slider heathBar;
@@ -136,22 +138,24 @@ public class ColossusManager : MonoBehaviour {
 
         playerInBot = true;
 
-        //Play hop in sound if not in debug
+        RaiseMap();
+
+        //Non-debug only
         if (!debugColossus)
         {
             //Turn off base controller prefab
             leftController.transform.GetChild(3).gameObject.SetActive(false);
             rightController.transform.GetChild(3).gameObject.SetActive(false);
 
-            source.clip = hopInSound;
-            source.Play();
+            headSource.clip = hopInSound;
+            headSource.Play();
         }
-        RaiseMap();
     }
 
 
     #endregion
 
+    //Will this work with multiple colliders across the bot?
     void OnCollisionEnter(Collision col)
     {
         GameObject collisionObject = col.gameObject;
