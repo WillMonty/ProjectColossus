@@ -12,7 +12,7 @@ public class HealthOrb : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
         Debug.Log("Collision!");
         GameObject collisionObject = col.gameObject;
@@ -20,9 +20,9 @@ public class HealthOrb : MonoBehaviour
         if (collisionObject.gameObject.tag == "resistanceplayer")
         {
             collisionObject.gameObject.GetComponent<PlayerManager>().Heal(healingAmount);
+            // Turn off the health orb
+            gameObject.SetActive(false);
         }
 
-        // Turn off the health orb
-        gameObject.SetActive(false);
     }
 }

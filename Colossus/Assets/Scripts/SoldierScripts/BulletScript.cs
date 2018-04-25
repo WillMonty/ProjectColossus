@@ -6,7 +6,7 @@ public class BulletScript : MonoBehaviour
 {
     #region attributes
     // Attributes
-    const float BULLETSPEED = 100f;
+    const float BULLETSPEED = 50f;
 
     // Properties
     public Weapons gunOwnerType;

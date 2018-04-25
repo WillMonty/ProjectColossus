@@ -122,7 +122,7 @@ public class GunScript : MonoBehaviour
         //Debug.Log("Shooting bullets");
 
         // Instantiate the bullet and shoot it
-        Instantiate(bulletPrefab, transform.position + transform.forward, gameObject.GetComponent<PlayerInputManager>().eyes.transform.rotation);
+        Instantiate(bulletPrefab, transform.position, gameObject.transform.parent.GetComponent<PlayerInputManager>().eyes.transform.rotation);
 
         bulletsInClip--;
 

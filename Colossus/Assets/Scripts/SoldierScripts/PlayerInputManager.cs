@@ -62,6 +62,7 @@ public class PlayerInputManager : MonoBehaviour {
     {
         Move();
         Jump();
+        Debug.Log(player.isGrounded);
     }
 
 
@@ -162,12 +163,14 @@ public class PlayerInputManager : MonoBehaviour {
 
         // Applying the rotations to the player
         eyes.transform.rotation = Quaternion.Euler(targetCamRot);
+        transform.GetChild(0).rotation = Quaternion.Euler(targetCamRot);
+        Debug.Log(transform.GetChild(0));
         transform.rotation = Quaternion.Euler(targetBodyRot);
         #endregion
 
         #region Applying movement
         // Create a vector movement
-        Vector3 movement = new Vector3(moveLR, rb.velocity.y, moveFB);
+        Vector3 movement = new Vector3(moveLR, player.velocity.y, moveFB);
 
         //Debug.Log("Player " + playerNum + " Movement: " + movement);
         movement = transform.rotation * movement;
@@ -191,7 +194,7 @@ public class PlayerInputManager : MonoBehaviour {
             if (Input.GetButtonDown(aButton))
             {
                 //Debug.Log("Jump!" + playerNum);
-                rb.velocity = rb.velocity + new Vector3(0, JUMP_FORCE, 0);
+                player.Move(player.velocity + new Vector3(0, JUMP_FORCE, 0));
             }
             else
             {
@@ -200,8 +203,9 @@ public class PlayerInputManager : MonoBehaviour {
         }
         else if (Input.GetButton(aButton) && GetComponent<PlayerManager>().JetPackFuel>0)
         {
-            rb.velocity = rb.velocity + new Vector3(0, JETPACK_FORCE, 0);
+            player.Move(player.velocity + new Vector3(0, JETPACK_FORCE, 0));
             GetComponent<PlayerManager>().FuelDown();
+            Debug.Log("Jetpack Fuel: " + GetComponent<PlayerManager>().JetPackFuel);
         }
     }
     #endregion
