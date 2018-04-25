@@ -289,8 +289,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1583328576124504}
   m_LocalRotation: {x: -0, y: 0.49453896, z: -0, w: 0.86915547}
-  m_LocalPosition: {x: 3.006, y: 2.985, z: 13.457}
-  m_LocalScale: {x: 0.53287166, y: 0.53287166, z: 0.53287166}
+  m_LocalPosition: {x: 100.2, y: 13.833331, z: 448.56668}
+  m_LocalScale: {x: 17.76239, y: 17.762388, z: 17.762388}
   m_Children:
   - {fileID: 4421257733293640}
   - {fileID: 4326685813348772}
@@ -1090,7 +1090,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300012, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1104,7 +1104,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1118,7 +1118,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300026, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1132,7 +1132,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300020, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1146,7 +1146,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300016, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1160,7 +1160,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300010, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1174,7 +1174,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300024, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1188,7 +1188,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1200,9 +1200,9 @@ MeshCollider:
   m_GameObject: {fileID: 1771373016424724}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1216,7 +1216,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300008, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1230,7 +1230,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300022, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1244,7 +1244,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300014, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1256,9 +1256,9 @@ MeshCollider:
   m_GameObject: {fileID: 1476482071596128}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300006, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}
@@ -1272,7 +1272,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300018, guid: 148b20f29594a3c4681ba1c07d50a434, type: 3}

@@ -9,6 +9,7 @@ public enum GameState { MainMenu, InGame, Paused, Win, Lose };
 
 public class GameManagerScript : MonoBehaviour
 {
+    
     #region Attributes
     // Static instance of the GameManager which allows it to be accessed from any script
     public static GameManagerScript instance = null;

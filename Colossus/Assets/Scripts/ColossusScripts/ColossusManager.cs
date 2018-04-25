@@ -32,12 +32,19 @@ public class ColossusManager : MonoBehaviour {
     //Audio
     [Header("Audio")]
     public AudioSource headSource;
-    public AudioSource audioSource;
+    public AudioSource torsoSource;
     public AudioClip hopInSound;
     public AudioClip damageSound;
 
     [Header("UI")]
     public Slider heathBar;
+
+    [Header("Player Positioning")]
+    public GameObject leftIndicator;
+    public GameObject rightIndicator;
+    public Material inPositionMat;
+    public Material outPositionMat;
+
  
 
     // Ammo Variables
@@ -91,14 +98,6 @@ public class ColossusManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Method to handle all Colossus abilities
-    /// </summary>
-    private void AbilityManagement()
-    {
-
-    }
-
-    /// <summary>
     /// Helper method to check if the player is "hopping into" the colossus
     /// </summary>
     private void CheckHopIn()
@@ -107,11 +106,21 @@ public class ColossusManager : MonoBehaviour {
         bool headsetIn = disabledColossus.GetComponent<DisabledColossusTrigger>().HeadsetInTrigger;
         if(headsetIn)
         {
+            //Make the indicators green
+            leftIndicator.GetComponent<MeshRenderer>().material = inPositionMat;
+            rightIndicator.GetComponent<MeshRenderer>().material = inPositionMat;
+
             //Check if either trigger is pressed to hop in
             bool leftTriggerPressed = leftController.GetComponent<SteamVR_TrackedController>().triggerPressed;
             bool rightTriggerPressed = rightController.GetComponent<SteamVR_TrackedController>().triggerPressed;
 
             if (leftTriggerPressed || rightTriggerPressed) ToggleColossus();
+        }
+        else
+        {
+            //Make the indicators red
+            leftIndicator.GetComponent<MeshRenderer>().material = outPositionMat;
+            rightIndicator.GetComponent<MeshRenderer>().material = outPositionMat;
         }
     }
 
@@ -120,17 +129,19 @@ public class ColossusManager : MonoBehaviour {
     /// </summary>
     private void ToggleColossus()
     {
+        //Turn off indicators
+        leftIndicator.SetActive(false);
+        rightIndicator.SetActive(false);
+
         //Enable hands
         GameObject leftHand = leftController.transform.GetChild(0).gameObject;
         GameObject rightHand = rightController.transform.GetChild(0).gameObject;
         leftHand.SetActive(true);
         rightHand.SetActive(true);
 
-        //Enable Colossus Head
-        neck.SetActive(true);
-
         //Enable Colossus Body
         colossusBody.SetActive(true);
+        neck.SetActive(true);
 
         laser.enabled = true;
 
@@ -144,29 +155,15 @@ public class ColossusManager : MonoBehaviour {
         if (!debugColossus)
         {
             //Turn off base controller prefab
-            leftController.transform.GetChild(3).gameObject.SetActive(false);
-            rightController.transform.GetChild(3).gameObject.SetActive(false);
+            leftController.transform.GetChild(4).gameObject.SetActive(false);
+            rightController.transform.GetChild(4).gameObject.SetActive(false);
 
             headSource.clip = hopInSound;
             headSource.Play();
         }
     }
 
-
     #endregion
-
-    //Will this work with multiple colliders across the bot?
-    void OnCollisionEnter(Collision col)
-    {
-        GameObject collisionObject = col.gameObject;
-
-        // IF the robot is hit with the bullet, it damages the robot and deletes the bullet
-        if (collisionObject.tag == "playerbullet")
-        {
-            Damage(collisionObject.GetComponent<BulletScript>().Damage);
-            collisionObject.GetComponent<BulletScript>().deleteBullet();
-        }
-    }
 
     void RaiseMap()
     {

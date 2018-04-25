@@ -1,0 +1,215 @@
+fileFormatVersion: 2
+guid: d5f730011154e124abc0a9e5b2d9f05f
+timeCreated: 1524684784
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Crucible_MiniScene_01_Conveyor_Belt_Belt_Low_polySurface6
+    100004: Crucible_MiniScene_01_Conveyor_Belt_polySurface5_Belt_Low
+    100006: Crucible_MiniScene_01_Conveyor_Belt_Roller1
+    100008: Crucible_MiniScene_01_Crucible_Brace_01
+    100010: Crucible_MiniScene_01_Crucible_Brace_02
+    100012: Crucible_MiniScene_01_Crucible_Connect_01
+    100014: Crucible_MiniScene_01_Crucible_Connect_02
+    100016: Crucible_MiniScene_01_Crucible_Crucible
+    100018: Crucible_MiniScene_01_Crucible_Pole2
+    100020: Crucible_MiniScene_01_Crucible_Wheel
+    100022: Crucible_MiniScene_01_model2:Gear_Small
+    100024: Crucible_MiniScene_01_model:Conveyor_Belt_model:Belt_Low
+    100026: Crucible_MiniScene_01_model:Conveyor_Belt_model:Roller1
+    100028: Crucible_MiniScene_01_model:Conveyor_Belt_model:Roller2
+    100030: Crucible_MiniScene_01_model:Conveyor_Belt_polySurface1_Stand_polySurface4
+    100032: Crucible_MiniScene_01_model:Conveyor_Belt_polySurface3_polySurface1_Stand
+    100034: Crucible_MiniScene_01_model:Conveyor_Belt_Stand_polySurface2
+    100036: Crucible_MiniScene_01_model:Stand_model:Conveyor_Belt
+    100038: Crucible_MiniScene_01_Pole1_Crucible
+    100040: Crucible_MiniScene_01_Roller2_Conveyor_Belt
+    100042: model1:Gear_Large_Crucible_MiniScene_01
+    400000: //RootNode
+    400002: Crucible_MiniScene_01_Conveyor_Belt_Belt_Low_polySurface6
+    400004: Crucible_MiniScene_01_Conveyor_Belt_polySurface5_Belt_Low
+    400006: Crucible_MiniScene_01_Conveyor_Belt_Roller1
+    400008: Crucible_MiniScene_01_Crucible_Brace_01
+    400010: Crucible_MiniScene_01_Crucible_Brace_02
+    400012: Crucible_MiniScene_01_Crucible_Connect_01
+    400014: Crucible_MiniScene_01_Crucible_Connect_02
+    400016: Crucible_MiniScene_01_Crucible_Crucible
+    400018: Crucible_MiniScene_01_Crucible_Pole2
+    400020: Crucible_MiniScene_01_Crucible_Wheel
+    400022: Crucible_MiniScene_01_model2:Gear_Small
+    400024: Crucible_MiniScene_01_model:Conveyor_Belt_model:Belt_Low
+    400026: Crucible_MiniScene_01_model:Conveyor_Belt_model:Roller1
+    400028: Crucible_MiniScene_01_model:Conveyor_Belt_model:Roller2
+    400030: Crucible_MiniScene_01_model:Conveyor_Belt_polySurface1_Stand_polySurface4
+    400032: Crucible_MiniScene_01_model:Conveyor_Belt_polySurface3_polySurface1_Stand
+    400034: Crucible_MiniScene_01_model:Conveyor_Belt_Stand_polySurface2
+    400036: Crucible_MiniScene_01_model:Stand_model:Conveyor_Belt
+    400038: Crucible_MiniScene_01_Pole1_Crucible
+    400040: Crucible_MiniScene_01_Roller2_Conveyor_Belt
+    400042: model1:Gear_Large_Crucible_MiniScene_01
+    2100000: Crucible_MiniScene_01_Conveyor_Belt_Belt_Low_polySurface6Mat
+    2100002: Crucible_MiniScene_01_Conveyor_Belt_polySurface5_Belt_LowMat
+    2100004: Crucible_MiniScene_01_Conveyor_Belt_Roller1Mat
+    2100006: Crucible_MiniScene_01_Crucible_Brace_01Mat
+    2100008: Crucible_MiniScene_01_Crucible_Brace_02Mat
+    2100010: Crucible_MiniScene_01_Crucible_Connect_01Mat
+    2100012: Crucible_MiniScene_01_Crucible_Connect_02Mat
+    2100014: Crucible_MiniScene_01_Crucible_CrucibleMat
+    2100016: Crucible_MiniScene_01_Crucible_Pole2Mat
+    2100018: Crucible_MiniScene_01_Crucible_WheelMat
+    2100020: Crucible_MiniScene_01_model2_Gear_SmallMat
+    2100022: Crucible_MiniScene_01_model_Conveyor_Belt_model_Belt_LowMat
+    2100024: Crucible_MiniScene_01_model_Conveyor_Belt_model_Roller1Mat
+    2100026: Crucible_MiniScene_01_model_Conveyor_Belt_model_Roller2Mat
+    2100028: Crucible_MiniScene_01_model_Conveyor_Belt_polySurface1_Stand_polySurface4Mat
+    2100030: Crucible_MiniScene_01_model_Conveyor_Belt_polySurface3_polySurface1_StandMat
+    2100032: Crucible_MiniScene_01_model_Conveyor_Belt_Stand_polySurface2Mat
+    2100034: Crucible_MiniScene_01_model_Stand_model_Conveyor_BeltMat
+    2100036: Crucible_MiniScene_01_Pole1_CrucibleMat
+    2100038: Crucible_MiniScene_01_Roller2_Conveyor_BeltMat
+    2100040: model1_Gear_Large_Crucible_MiniScene_01Mat
+    2300000: Crucible_MiniScene_01_Conveyor_Belt_Belt_Low_polySurface6
+    2300002: Crucible_MiniScene_01_Conveyor_Belt_polySurface5_Belt_Low
+    2300004: Crucible_MiniScene_01_Conveyor_Belt_Roller1
+    2300006: Crucible_MiniScene_01_Crucible_Brace_01
+    2300008: Crucible_MiniScene_01_Crucible_Brace_02
+    2300010: Crucible_MiniScene_01_Crucible_Connect_01
+    2300012: Crucible_MiniScene_01_Crucible_Connect_02
+    2300014: Crucible_MiniScene_01_Crucible_Crucible
+    2300016: Crucible_MiniScene_01_Crucible_Pole2
+    2300018: Crucible_MiniScene_01_Crucible_Wheel
+    2300020: Crucible_MiniScene_01_model2:Gear_Small
+    2300022: Crucible_MiniScene_01_model:Conveyor_Belt_model:Belt_Low
+    2300024: Crucible_MiniScene_01_model:Conveyor_Belt_model:Roller1
+    2300026: Crucible_MiniScene_01_model:Conveyor_Belt_model:Roller2
+    2300028: Crucible_MiniScene_01_model:Conveyor_Belt_polySurface1_Stand_polySurface4
+    2300030: Crucible_MiniScene_01_model:Conveyor_Belt_polySurface3_polySurface1_Stand
+    2300032: Crucible_MiniScene_01_model:Conveyor_Belt_Stand_polySurface2
+    2300034: Crucible_MiniScene_01_model:Stand_model:Conveyor_Belt
+    2300036: Crucible_MiniScene_01_Pole1_Crucible
+    2300038: Crucible_MiniScene_01_Roller2_Conveyor_Belt
+    2300040: model1:Gear_Large_Crucible_MiniScene_01
+    3300000: Crucible_MiniScene_01_Conveyor_Belt_Belt_Low_polySurface6
+    3300002: Crucible_MiniScene_01_Conveyor_Belt_polySurface5_Belt_Low
+    3300004: Crucible_MiniScene_01_Conveyor_Belt_Roller1
+    3300006: Crucible_MiniScene_01_Crucible_Brace_01
+    3300008: Crucible_MiniScene_01_Crucible_Brace_02
+    3300010: Crucible_MiniScene_01_Crucible_Connect_01
+    3300012: Crucible_MiniScene_01_Crucible_Connect_02
+    3300014: Crucible_MiniScene_01_Crucible_Crucible
+    3300016: Crucible_MiniScene_01_Crucible_Pole2
+    3300018: Crucible_MiniScene_01_Crucible_Wheel
+    3300020: Crucible_MiniScene_01_model2:Gear_Small
+    3300022: Crucible_MiniScene_01_model:Conveyor_Belt_model:Belt_Low
+    3300024: Crucible_MiniScene_01_model:Conveyor_Belt_model:Roller1
+    3300026: Crucible_MiniScene_01_model:Conveyor_Belt_model:Roller2
+    3300028: Crucible_MiniScene_01_model:Conveyor_Belt_polySurface1_Stand_polySurface4
+    3300030: Crucible_MiniScene_01_model:Conveyor_Belt_polySurface3_polySurface1_Stand
+    3300032: Crucible_MiniScene_01_model:Conveyor_Belt_Stand_polySurface2
+    3300034: Crucible_MiniScene_01_model:Stand_model:Conveyor_Belt
+    3300036: Crucible_MiniScene_01_Pole1_Crucible
+    3300038: Crucible_MiniScene_01_Roller2_Conveyor_Belt
+    3300040: model1:Gear_Large_Crucible_MiniScene_01
+    4300000: Crucible_MiniScene_01_Conveyor_Belt_Belt_Low_polySurface6
+    4300002: Crucible_MiniScene_01_Conveyor_Belt_polySurface5_Belt_Low
+    4300004: Crucible_MiniScene_01_Conveyor_Belt_Roller1
+    4300006: Crucible_MiniScene_01_Crucible_Brace_01
+    4300008: Crucible_MiniScene_01_Crucible_Brace_02
+    4300010: Crucible_MiniScene_01_Crucible_Connect_01
+    4300012: Crucible_MiniScene_01_Crucible_Connect_02
+    4300014: Crucible_MiniScene_01_Crucible_Crucible
+    4300016: Crucible_MiniScene_01_Crucible_Pole2
+    4300018: Crucible_MiniScene_01_Crucible_Wheel
+    4300020: Crucible_MiniScene_01_model2:Gear_Small
+    4300022: Crucible_MiniScene_01_model:Conveyor_Belt_model:Belt_Low
+    4300024: Crucible_MiniScene_01_model:Conveyor_Belt_model:Roller1
+    4300026: Crucible_MiniScene_01_model:Conveyor_Belt_model:Roller2
+    4300028: Crucible_MiniScene_01_model:Conveyor_Belt_polySurface1_Stand_polySurface4
+    4300030: Crucible_MiniScene_01_model:Conveyor_Belt_polySurface3_polySurface1_Stand
+    4300032: Crucible_MiniScene_01_model:Conveyor_Belt_Stand_polySurface2
+    4300034: Crucible_MiniScene_01_model:Stand_model:Conveyor_Belt
+    4300036: Crucible_MiniScene_01_Pole1_Crucible
+    4300038: Crucible_MiniScene_01_Roller2_Conveyor_Belt
+    4300040: model1:Gear_Large_Crucible_MiniScene_01
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

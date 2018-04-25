@@ -43,6 +43,8 @@ public class DisabledColossusTrigger : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.name == "Camera (eye)") headsetInTrigger = false;
+
         source.Stop();
         source.clip = outBoundsSound;
         source.Play();
