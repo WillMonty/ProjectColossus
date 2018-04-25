@@ -24,6 +24,10 @@ public class PlayerManager : MonoBehaviour
     {
         get { return lives; }
     }
+    public float MaxHealth
+    {
+        get { return MAX_HEALTH; }
+    }
     public float Health
     {
         get { return health; }
@@ -32,7 +36,6 @@ public class PlayerManager : MonoBehaviour
     {
         get { return jetPackFuel; }
     }
-
 
 
 

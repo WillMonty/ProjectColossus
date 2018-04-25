@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 54867545984357056}
   m_Layer: 8
   m_Name: bullet1
-  m_TagString: Untagged
+  m_TagString: projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1572466318819412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5753021, y: 0.368, z: -0.208}
-  m_LocalScale: {x: 0.03732932, y: 0.050588217, z: 0.21184891}
+  m_LocalScale: {x: 0.107942045, y: 0.10719874, z: 0.22987528}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
