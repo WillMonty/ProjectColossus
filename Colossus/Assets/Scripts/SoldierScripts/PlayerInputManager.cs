@@ -9,8 +9,9 @@ public class PlayerInputManager : MonoBehaviour {
 
     const float WALK_SPEED = 5.0f;
     const float RUN_SPEED = 10.0f;
-    const float JUMP_FORCE = 5.0f;
-    const float JETPACK_FORCE = .1f;
+    const float JUMP_FORCE = 6.0f;
+    const float JETPACK_FORCE = .5f;
+    const float GRAVITY_FORCE = -1f;
 
 
     // Player variables
@@ -23,7 +24,7 @@ public class PlayerInputManager : MonoBehaviour {
     // Component Variables
     CharacterController player;
     public GameObject eyes;
-    private Rigidbody rb;
+    
 
 
 
@@ -35,7 +36,8 @@ public class PlayerInputManager : MonoBehaviour {
     float rotY; // rotation by the Y axis
 
     // Movement Behavior Variables
-    bool grounded;
+    float verticalVelocity;
+    float timeFalling;
 
     // Controller Variables
     private string moveXAxis;
@@ -54,7 +56,6 @@ public class PlayerInputManager : MonoBehaviour {
     {
         SetControllerVariables();
         player = GetComponent<CharacterController>();
-        rb = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -170,7 +171,7 @@ public class PlayerInputManager : MonoBehaviour {
 
         #region Applying movement
         // Create a vector movement
-        Vector3 movement = new Vector3(moveLR, player.velocity.y, moveFB);
+        Vector3 movement = new Vector3(moveLR, verticalVelocity, moveFB);
 
         //Debug.Log("Player " + playerNum + " Movement: " + movement);
         movement = transform.rotation * movement;
@@ -188,25 +189,37 @@ public class PlayerInputManager : MonoBehaviour {
     /// </summary>
     private void Jump()
     {
-        //Debug.Log("Player Grounded: " + player.isGrounded);
+        Debug.Log("Vert Velocity" + verticalVelocity);
+        Debug.Log("Player Grounded: " + player.isGrounded);
         if (player.isGrounded)
         {
             if (Input.GetButtonDown(aButton))
             {
                 //Debug.Log("Jump!" + playerNum);
-                player.Move(player.velocity + new Vector3(0, JUMP_FORCE, 0));
+                verticalVelocity = JUMP_FORCE;
+                timeFalling = 0;
             }
             else
             {
-                rb.velocity = Vector3.zero;
+                verticalVelocity += GRAVITY_FORCE;
             }
         }
         else if (Input.GetButton(aButton) && GetComponent<PlayerManager>().JetPackFuel>0)
         {
-            player.Move(player.velocity + new Vector3(0, JETPACK_FORCE, 0));
+            verticalVelocity+=JETPACK_FORCE;
             GetComponent<PlayerManager>().FuelDown();
-            Debug.Log("Jetpack Fuel: " + GetComponent<PlayerManager>().JetPackFuel);
+            timeFalling -= Time.deltaTime;
         }
+        else
+        {
+            if(timeFalling<0)
+            {
+                timeFalling = 0;
+            }
+            timeFalling += Time.deltaTime;
+            verticalVelocity += (GRAVITY_FORCE*timeFalling);
+        }
+         verticalVelocity = Mathf.Clamp(verticalVelocity, -30, 5);
     }
     #endregion
 

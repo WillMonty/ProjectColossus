@@ -37,11 +37,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4075262752726084}
   - component: {fileID: 33014472578165002}
-  - component: {fileID: 54786194459897872}
   - component: {fileID: 136108225003561230}
   - component: {fileID: 114448129284797174}
   - component: {fileID: 143931880024207580}
   - component: {fileID: 23587002953421350}
+  - component: {fileID: 114358249367366222}
   m_Layer: 0
   m_Name: Player1ControllerFPS
   m_TagString: resistanceplayer
@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 81227173608399006}
   - component: {fileID: 124406664748010198}
   m_Layer: 0
-  m_Name: MainCamera(Eyes)
+  m_Name: Player1Eyes
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,21 +256,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1003373895408312}
   m_Mesh: {fileID: 4300000, guid: 9ee7df088cefaa24a89a9ad04b32f088, type: 3}
---- !u!54 &54786194459897872
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1071774053901822}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!81 &81227173608399006
 AudioListener:
   m_ObjectHideFlags: 1
@@ -278,6 +263,18 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1605082517507248}
   m_Enabled: 0
+--- !u!114 &114358249367366222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1071774053901822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e0838c4d97dbb4ca9cbb741f77091b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assaultRifleAmmo: 0
 --- !u!114 &114448129284797174
 MonoBehaviour:
   m_ObjectHideFlags: 1

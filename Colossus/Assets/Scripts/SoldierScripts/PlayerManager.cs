@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
     const float RESPAWN_TIME = 5.0f;
     const float DAMAGING_OBJECT_MAGNITUDE = 5.0f;
     const float MAX_HEALTH = 100;
+    const float MAX_FUEL = 10;
 
     // Basic Player Management variables
     private int lives;
@@ -28,6 +29,10 @@ public class PlayerManager : MonoBehaviour
     {
         get { return MAX_HEALTH; }
     }
+    public float MaxFuel
+    {
+        get { return MAX_FUEL; }
+    }
     public float Health
     {
         get { return health; }
@@ -45,6 +50,7 @@ public class PlayerManager : MonoBehaviour
         // Start initializes 3 lives at start, can be changed later
         lives = STARTING_LIVES;
         health = 100.0f;
+        jetPackFuel = MAX_FUEL;
 
 
         // Set ammo at the beginning
@@ -95,18 +101,45 @@ public class PlayerManager : MonoBehaviour
     /// Heal the player
     /// </summary>
     /// <param name="damageFloat"></param>
-    public void Heal(float healFloat)
+    public bool Heal(float healFloat)
     {
-        health += healFloat;
+        bool used = false;
+
+        if (health < MAX_HEALTH)
+        {
+            health += healFloat;
+            used = true;
+        }
 
         if (health > MAX_HEALTH)
         {
             health = MAX_HEALTH;
         }
+        return used;
     }
 
     /// <summary>
     /// Add fuel back to the player's jetpack
+    /// </summary>
+    public bool Fuel(float fuelFloat)
+    {
+        bool used = false;
+
+        if (jetPackFuel < MAX_FUEL)
+        {
+            jetPackFuel += fuelFloat;
+            used = true;
+        }
+
+        if (jetPackFuel > MAX_FUEL)
+        {
+            jetPackFuel = MAX_FUEL;
+        }
+        return used;
+    }
+
+    /// <summary>
+    /// Remove fuel back to the player's jetpack
     /// </summary>
     public void FuelDown()
     {

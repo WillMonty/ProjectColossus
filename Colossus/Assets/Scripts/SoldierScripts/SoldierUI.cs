@@ -4,40 +4,64 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SoldierUI : MonoBehaviour {
-    GameObject player; 
+    public GameObject playerCamera;
+    public GameObject player;
+    public int playerNum;
 
     // Values needed for health bar
     public float maxHealth;
     public float currentHealth;
-    public GameObject healthBarCanvas;
     public Slider healthBar;
 
-
-    public void Start()
-    {
-        maxHealth = player.GetComponent<PlayerManager>().MaxHealth;
-    }
-
+    // Values for Jetpack
+    public float maxFuel;
+    public float currentFuel;
+    public Slider fuelBar;
 
 
     // Use this for initialization
-    public void UIBarInstantiate()
+    public void Start()
     {
-        // Set the healthBar Initial Values
-        maxHealth = gameObject.GetComponent<PlayerManager>().MaxHealth;
-        healthBar.maxValue = maxHealth;
-
-        // Set the healthBar Max value
-        maxHealth = gameObject.GetComponent<PlayerManager>().MaxHealth;
-        healthBar.maxValue = maxHealth;
+        player = GameObject.Find("Player" + playerNum + "ControllerFPS");
+        playerCamera = player.transform.Find("Player" + playerNum + "Eyes").gameObject;
+        GetComponent<Canvas>().worldCamera= playerCamera.GetComponent<Camera>();
+        UIBarInstantiate();
     }
+
+
+
 
     // Update is called once per frame
     void Update()
     {
+        UIUpdate();
+    }
+
+    /// <summary>
+    /// Helper method instantiating the UI bars
+    /// </summary>
+    private void UIBarInstantiate()
+    {
+        // Set the healthBar Initial Values
+        maxHealth = player.GetComponent<PlayerManager>().MaxHealth;
+        healthBar.maxValue = maxHealth;
+
+        // Set the healthBar Max value
+        maxFuel = player.GetComponent<PlayerManager>().MaxFuel;
+        fuelBar.maxValue = maxFuel;
+    }
+
+    /// <summary>
+    /// Updates the current UI bar
+    /// </summary>
+    private void UIUpdate()
+    {
+        // Get current health and update the bar
+        currentHealth = player.GetComponent<PlayerManager>().Health;
+        healthBar.value = currentHealth;
 
         // Get current health and update the bar
-        currentHealth = gameObject.GetComponent<PlayerManager>().Health;
-        healthBar.value = currentHealth;
+        currentFuel = player.GetComponent<PlayerManager>().JetPackFuel;
+        fuelBar.value = currentFuel;
     }
 }

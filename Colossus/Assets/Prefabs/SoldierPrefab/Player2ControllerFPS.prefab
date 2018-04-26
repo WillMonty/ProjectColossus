@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 81422484102620188}
   - component: {fileID: 124378848888353800}
   m_Layer: 0
-  m_Name: MainCamera(Eyes)
+  m_Name: Player2Eyes
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 143583489457880702}
   - component: {fileID: 33822842154710744}
   - component: {fileID: 23367945148305092}
+  - component: {fileID: 114304518120322260}
   m_Layer: 0
   m_Name: Player2ControllerFPS
   m_TagString: resistanceplayer
@@ -293,6 +294,18 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1908763544431680, guid: 17a33ce2f42f8a34d84254109e9fd250,
     type: 2}
   playerNum: 2
+--- !u!114 &114304518120322260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1470562562501796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e0838c4d97dbb4ca9cbb741f77091b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assaultRifleAmmo: 0
 --- !u!114 &114722520695496446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -320,9 +333,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d91e8de4fbf20af46a4e22df3a96cc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1572466318819412, guid: d9c940578f2c2c54cb88f7ee0e633b5a,
+  bulletPrefab: {fileID: 1908763544431680, guid: 17a33ce2f42f8a34d84254109e9fd250,
     type: 2}
-  playerNum: 1
+  playerNum: 2
 --- !u!124 &124378848888353800
 Behaviour:
   m_ObjectHideFlags: 1
