@@ -63,7 +63,7 @@ public class PlayerInputManager : MonoBehaviour {
     {
         Move();
         Jump();
-        Debug.Log(player.isGrounded);
+        //Debug.Log(player.isGrounded);
     }
 
 
@@ -189,8 +189,8 @@ public class PlayerInputManager : MonoBehaviour {
     /// </summary>
     private void Jump()
     {
-        Debug.Log("Vert Velocity" + verticalVelocity);
-        Debug.Log("Player Grounded: " + player.isGrounded);
+        //Debug.Log("Vert Velocity" + verticalVelocity);
+        //Debug.Log("Player Grounded: " + player.isGrounded);
         if (player.isGrounded)
         {
             if (Input.GetButtonDown(aButton))

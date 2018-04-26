@@ -1,24 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Laser : MonoBehaviour
 {
+
+    public bool debugLaser;
 
     //With these arrays, 0 index is left and 1 index is right
     [Header("Laser Components")]
     public GameObject[] origins = new GameObject[2]; //Starting object beams come from
     public GameObject[] beams = new GameObject[2]; //Beam cylinders
     public SteamVR_TrackedController[] controllers = new SteamVR_TrackedController[2]; //Player's Controllers
+    public RawImage indicatorImage;
+    public Texture ready;
+    public Texture notReady;
 
     //Raycast vars
     RaycastHit[] hits = new RaycastHit[2];
     float lastDistance = 0.0f; //Last distance recorded by raycast
     float maxDistance = 10.0f;
 
-
     //Laser state vars
-    [Header("Colossus Components")]
+    [Header("Laser Behavior")]
     public float cooldownTime;
     public float laserTime;
 
@@ -34,6 +39,7 @@ public class Laser : MonoBehaviour
     public AudioSource source;
     public AudioClip fireSound;
     public AudioClip misfireSound;
+    public AudioClip readySound;
 
     // Use this for initialization
     void Start()
@@ -44,6 +50,13 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (debugLaser)
+        {
+            origins[0].SetActive(true);
+            origins[1].SetActive(true);
+            FireLaser();
+            return;
+        }
         //If both controllers pads are pressed
         if (controllers[0].padPressed && controllers[1].padPressed)
         {
@@ -51,10 +64,10 @@ public class Laser : MonoBehaviour
         }
 
         //If the player releases the pads while firing
-        if (firing && (!(controllers[0].padPressed && controllers[1].padPressed)))
+       /* if (firing && (!(controllers[0].padPressed && controllers[1].padPressed)))
         {
             StopLaser();
-        }
+        }*/
 
         //Update the raycasts if firing
         if (firing)
@@ -115,7 +128,7 @@ public class Laser : MonoBehaviour
         currLaserTime += Time.deltaTime;
 
         //Stop laser if the time has gone over the ability time
-        if(currLaserTime >= laserTime)
+        if(!debugLaser && currLaserTime >= laserTime)
         {
             StopLaser();
         }
@@ -128,8 +141,8 @@ public class Laser : MonoBehaviour
         StopCoroutine(ChargeUp());
         currLaserTime = 0;
 
-        beams[0].SetActive(false);
-        beams[1].SetActive(false);
+        origins[0].SetActive(false);
+        origins[1].SetActive(false);
 
         source.Stop();
 
@@ -140,11 +153,12 @@ public class Laser : MonoBehaviour
     IEnumerator ChargeUp()
     {
         yield return new WaitForSeconds(chargeTime);
-        beams[0].SetActive(true);
-        beams[1].SetActive(true);
+        origins[0].SetActive(true);
+        origins[1].SetActive(true);
         laserReady = false;
         firing = true;
         isCharging = false;
+        indicatorImage.texture = notReady;
     }
 
     //Coroutine to cool down the laser
@@ -152,5 +166,9 @@ public class Laser : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldownTime);
         laserReady = true;
+        indicatorImage.texture = ready;
+        source.Stop();
+        source.clip = readySound;
+        source.Play();
     }
 }

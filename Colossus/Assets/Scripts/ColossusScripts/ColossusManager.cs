@@ -28,7 +28,10 @@ public class ColossusManager : MonoBehaviour {
 
     [Header("Map")]
     public GameObject map;
+    public float lowerMapAmount;
     public GameObject lava;
+    public GameObject resistanceContainer;
+
 
     //Audio
     [Header("Audio")]
@@ -78,8 +81,15 @@ public class ColossusManager : MonoBehaviour {
 
         if (debugColossus) ToggleColossus(); //If in debug mode let the VR player start immediately in the colossus
 
-        GameManagerScript.instance.colossus = this;
+        StartCoroutine(LateStart(0.2f));
 
+    }
+
+    IEnumerator LateStart(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        //Sets the instance after the game manager has actually initialized
+        GameManagerScript.instance.colossus = this;
     }
 
     #endregion
@@ -155,7 +165,7 @@ public class ColossusManager : MonoBehaviour {
 
         lava.SetActive(true);
 
-        RaiseMap();
+        LowerMap();
 
         //Non-debug only
         if (!debugColossus)
@@ -171,10 +181,10 @@ public class ColossusManager : MonoBehaviour {
 
     #endregion
 
-    void RaiseMap()
+    void LowerMap()
     {
-        float playerY = headset.transform.position.y - 8.0f ;
+        float playerY = headset.transform.position.y - lowerMapAmount;
         map.transform.position = new Vector3(map.transform.position.x, playerY, map.transform.position.z);
-        Debug.Log(map.transform.position);
+        resistanceContainer.transform.position = new Vector3(resistanceContainer.transform.position.x, playerY + resistanceContainer.transform.position.y, resistanceContainer.transform.position.z);
     }
 }
