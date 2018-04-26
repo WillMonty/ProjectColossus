@@ -13,6 +13,7 @@ public class GameManagerScript : MonoBehaviour
     #region Attributes
     // Static instance of the GameManager which allows it to be accessed from any script
     public static GameManagerScript instance = null;
+    public ColossusManager colossus =null;
 
     List<GameObject> escapeScreens;
     public GameState currentGameState;
