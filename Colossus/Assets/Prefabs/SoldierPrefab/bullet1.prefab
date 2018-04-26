@@ -112,6 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunOwnerType: 0
+  HitAudioObject: {fileID: 1924571714969746, guid: d149130b7347ddc47a02a62b1246d216,
+    type: 2}
 --- !u!135 &135582197342644416
 SphereCollider:
   m_ObjectHideFlags: 1

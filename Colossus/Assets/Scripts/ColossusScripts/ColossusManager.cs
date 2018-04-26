@@ -27,7 +27,8 @@ public class ColossusManager : MonoBehaviour {
     //Will add variables for the rigged colossus model
 
     [Header("Map")]
-    public GameObject Map;
+    public GameObject map;
+    public GameObject lava;
 
     //Audio
     [Header("Audio")]
@@ -46,7 +47,7 @@ public class ColossusManager : MonoBehaviour {
     public Material outPositionMat;
 
  
-
+    
     // Ammo Variables
     // Change this variable to private at some point
     //public int assaultRifleAmmo;
@@ -61,6 +62,7 @@ public class ColossusManager : MonoBehaviour {
     public float Health
     {
         get { return health; }
+        
     }
 
     #endregion
@@ -75,6 +77,8 @@ public class ColossusManager : MonoBehaviour {
         laser = gameObject.GetComponent<Laser>();
 
         if (debugColossus) ToggleColossus(); //If in debug mode let the VR player start immediately in the colossus
+
+        GameManagerScript.instance.colossus = this;
 
     }
 
@@ -93,7 +97,7 @@ public class ColossusManager : MonoBehaviour {
     public void Damage(float damageFloat)
     {
         health -= damageFloat;
-        heathBar.value = STARTING_HEALTH - health;
+        heathBar.value = (STARTING_HEALTH - health)/1000.0f;
         
     }
 
@@ -149,6 +153,8 @@ public class ColossusManager : MonoBehaviour {
 
         playerInBot = true;
 
+        lava.SetActive(true);
+
         RaiseMap();
 
         //Non-debug only
@@ -168,7 +174,7 @@ public class ColossusManager : MonoBehaviour {
     void RaiseMap()
     {
         float playerY = headset.transform.position.y - 8.0f ;
-        Map.transform.position = new Vector3(Map.transform.position.x, playerY, Map.transform.position.z);
-        Debug.Log(Map.transform.position);
+        map.transform.position = new Vector3(map.transform.position.x, playerY, map.transform.position.z);
+        Debug.Log(map.transform.position);
     }
 }

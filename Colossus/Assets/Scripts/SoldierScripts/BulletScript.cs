@@ -7,15 +7,17 @@ public class BulletScript : MonoBehaviour
     #region attributes
     // Attributes
     const float BULLETSPEED = 50f;
-
+    
     // Properties
     public Weapons gunOwnerType;
+    public GameObject HitAudioObject;
+
     private Vector3 startPos;
     private float damage;
 
     Rigidbody rb;
     #endregion
-
+    
     #region Properties
     // Properties
     public float Damage
@@ -23,6 +25,7 @@ public class BulletScript : MonoBehaviour
         get { return damage; }
     }
     #endregion
+
 
     // Use this for initialization
     void Start()
@@ -69,6 +72,16 @@ public class BulletScript : MonoBehaviour
         // Destroy this bullet if it gets too far
         Destroy(gameObject);
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "colossusplayer")
+        {
+            Instantiate(HitAudioObject, transform.position, Quaternion.identity);
+            GameManagerScript.instance.colossus.Damage(damage);
+            Destroy(gameObject);
+        }
     }
 
 }
