@@ -26,6 +26,8 @@ public class Lava : MonoBehaviour
             case "colossusplayer":
                 //Do nothing
                 break;
+            case "MainCamera":
+                //Do nothing
             default:
                 GameObject.Destroy(other.gameObject);
                 break;
