@@ -25,6 +25,9 @@ namespace Valve.VR.InteractionSystem
 
 		SteamVR_Events.Action renderModelLoadedAction;
 
+        //Will's fix
+        bool botherToggling = true;
+
 
 		//-------------------------------------------------
 		void Awake()
@@ -37,11 +40,15 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		void OnEnable()
 		{
-			ShowController();
+            if (botherToggling)
+            {
+                ShowController();
+            }
 
-			renderModelLoadedAction.enabled = true;
+            renderModelLoadedAction.enabled = true;
 
 			spawnRenderModels.Add( this );
+
 		}
 
 
@@ -60,8 +67,11 @@ namespace Valve.VR.InteractionSystem
 		private void OnAttachedToHand( Hand hand )
 		{
 			this.hand = hand;
-			ShowController();
-		}
+            if (botherToggling)
+            {
+                ShowController();
+            }
+        }
 
 
 		//-------------------------------------------------
@@ -124,6 +134,7 @@ namespace Valve.VR.InteractionSystem
 
 				renderModels[i].gameObject.SetActive( true );
 				renderModels[i].SetDeviceIndex( (int)hand.controller.index );
+                botherToggling = false;
 			}
 		}
 

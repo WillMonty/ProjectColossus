@@ -74,7 +74,6 @@ public class ColossusManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        // Start initializes 3 lives at start, can be changed later
         health = STARTING_HEALTH;
 
         laser = gameObject.GetComponent<Laser>();
@@ -166,6 +165,9 @@ public class ColossusManager : MonoBehaviour {
         lava.SetActive(true);
 
         LowerMap();
+
+        //Start the game once the VR player is ready.
+        GameManagerScript.instance.currentGameState = GameState.InGame;
 
         //Non-debug only
         if (!debugColossus)
