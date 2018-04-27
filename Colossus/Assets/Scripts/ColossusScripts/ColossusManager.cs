@@ -98,6 +98,13 @@ public class ColossusManager : MonoBehaviour {
     void Update ()
     {
         if (!playerInBot) CheckHopIn(); //Check if the player is jumping in the bot
+
+		if(debugColossus && leftController.transform.childCount > 4)
+		{
+			//Turn off base dummy hand prefab
+			leftController.transform.GetChild(4).gameObject.SetActive(false);
+			rightController.transform.GetChild(4).gameObject.SetActive(false);
+		}
     }
     #endregion
 
@@ -166,13 +173,13 @@ public class ColossusManager : MonoBehaviour {
 
         LowerMap();
 
-        //Start the game once the VR player is ready.
-        GameManagerScript.instance.currentGameState = GameState.InGame;
-
         //Non-debug only
         if (!debugColossus)
         {
-            //Turn off base controller prefab
+			//Start the game once the VR player is ready.
+			GameManagerScript.instance.currentGameState = GameState.InGame;
+
+            //Turn off base dummy hand prefab
             leftController.transform.GetChild(4).gameObject.SetActive(false);
             rightController.transform.GetChild(4).gameObject.SetActive(false);
 
