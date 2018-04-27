@@ -27,6 +27,9 @@ public class MainMenuGUI : MonoBehaviour {
     #region Update
     void Update()
     {
+		for(int i = 0; i < Input.GetJoystickNames().Length; i++){
+			Debug.Log(Input.GetJoystickNames()[i]);	
+		}
         InstructionsManagement();
     }
     #endregion
