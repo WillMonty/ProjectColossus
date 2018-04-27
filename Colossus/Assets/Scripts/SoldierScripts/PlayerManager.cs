@@ -11,6 +11,8 @@ public class PlayerManager : MonoBehaviour
     const float MAX_HEALTH = 100;
     const float MAX_FUEL = 10;
 
+    Vector3 DEATHBOX = new Vector3(3000, 3000, 3000);
+
     // Basic Player Management variables
     private int lives;
     private float health;
@@ -75,11 +77,12 @@ public class PlayerManager : MonoBehaviour
     void Death()
     {
         // Check how many lives the player has first
-        if (lives > 1)
+        if (lives >= 1)
         {
             // Lower the life count
             lives--;
 
+            transform.position = DEATHBOX;
             // Choose one of the spawn locations at random
             int spawnLocation = Random.Range(0, 10);
 
@@ -164,7 +167,6 @@ public class PlayerManager : MonoBehaviour
             // Only damage the player if the object is moveing at a high velocity (number can be determined and changed through the player constant)
             if (collisionObject.GetComponent<Rigidbody>().velocity.magnitude > DAMAGING_OBJECT_MAGNITUDE)
             {
-
                 float movingObjectDamage = collisionObject.GetComponent<Rigidbody>().velocity.magnitude;
 
                 Damage(movingObjectDamage);
