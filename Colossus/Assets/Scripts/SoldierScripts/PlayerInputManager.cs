@@ -23,6 +23,7 @@ public class PlayerInputManager : MonoBehaviour {
     // Component Variables
     CharacterController player;
     public GameObject eyes;
+    GameObject rifle;
 
     // Movement Variables
     float moveFB; // Movement forward and backwards
@@ -52,7 +53,29 @@ public class PlayerInputManager : MonoBehaviour {
     {
         SetControllerVariables();
         player = GetComponent<CharacterController>();
+        eyes = gameObject.transform.Find("Player" + playerNum + "Eyes").gameObject;
+        rifle = gameObject.transform.Find("Rifle").gameObject;
+
+        // Give an instance to this soldier to the gamemanager
+        StartCoroutine(LateStart(0.2f));
     }
+
+
+    IEnumerator LateStart(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        //Sets the instance after the game manager has actually initializes
+        switch(playerNum)
+        {
+            case 1:
+                GameManagerScript.instance.soldier1 = GetComponent<PlayerManager>();
+                break;
+            case 2:
+                GameManagerScript.instance.soldier2 = GetComponent<PlayerManager>();
+                break;
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -163,8 +186,7 @@ public class PlayerInputManager : MonoBehaviour {
 
         // Applying the rotations to the player
         eyes.transform.rotation = Quaternion.Euler(targetCamRot);
-        transform.GetChild(0).rotation = Quaternion.Euler(targetCamRot);
-        Debug.Log(transform.GetChild(0));
+        rifle.transform.rotation = Quaternion.Euler(targetCamRot);
         transform.rotation = Quaternion.Euler(targetBodyRot);
         #endregion
 

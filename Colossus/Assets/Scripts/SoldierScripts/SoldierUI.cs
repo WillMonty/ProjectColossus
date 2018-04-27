@@ -19,6 +19,8 @@ public class SoldierUI : MonoBehaviour {
     public Slider fuelBar;
 
     public GameObject PreGameMessage;
+    public GameObject LoseMessage;
+    public GameObject WinMessage;
 
 
     // Use this for initialization
