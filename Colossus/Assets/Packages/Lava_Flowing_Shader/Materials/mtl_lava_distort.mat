@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: mtl_lava_distort
-  m_Shader: {fileID: 4800000, guid: 6a151f652f5ba03458e9a7cd03ae88e8, type: 3}
+  m_Shader: {fileID: 4800000, guid: bec21333d7f8cf84cb75cab616acf589, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
@@ -25,7 +25,7 @@ Material:
     - _LavaTex:
         m_Texture: {fileID: 2800000, guid: 93a726948508cc14eab67fb1abe2daa8, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0.2717897, y: 0}
+        m_Offset: {x: 0.22543342, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 348fa4d278c53ad4dacd07df1e63a248, type: 3}
         m_Scale: {x: 1, y: 1}
