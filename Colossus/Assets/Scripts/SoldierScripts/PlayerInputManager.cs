@@ -20,13 +20,9 @@ public class PlayerInputManager : MonoBehaviour {
     public float lookSensitivityY = .001f;
     float xAxisClamp;
 
-
     // Component Variables
     CharacterController player;
     public GameObject eyes;
-    
-
-
 
     // Movement Variables
     float moveFB; // Movement forward and backwards
@@ -61,10 +57,13 @@ public class PlayerInputManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Jump();
-        //Debug.Log(player.isGrounded);
-    }
+        if (GameManagerScript.instance.currentGameState != GameState.InGame)
+        {
+            Move();
+            Jump();
+        }
+            //Debug.Log(player.isGrounded);
+        }
 
 
     // Helper method to help set up the player controller

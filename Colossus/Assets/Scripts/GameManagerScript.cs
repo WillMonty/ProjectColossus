@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 // GameState Enum
-public enum GameState { MainMenu, InGame, Paused, Win, Lose };
+public enum GameState { MainMenu, Instructions, InGame, Paused, Pregame, ResistanceWin, ResistanceLose };
 
 
 public class GameManagerScript : MonoBehaviour
@@ -41,13 +41,15 @@ public class GameManagerScript : MonoBehaviour
     }
     #endregion
 
+    #region Update
     // Update is called once per frame
     void Update ()
     {
 		//Debug.Log(UnityEngine.Input.GetJoystickNames());
 	}
+    #endregion
 
-    
+    #region Pause and Play Game
     // Game Management Pausing and Resuming Methods
     public void PauseGame()
     {
@@ -74,4 +76,5 @@ public class GameManagerScript : MonoBehaviour
             Time.timeScale = 0;
         }
     }
+    #endregion
 }

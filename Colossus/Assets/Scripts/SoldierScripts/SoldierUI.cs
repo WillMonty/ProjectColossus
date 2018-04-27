@@ -18,6 +18,8 @@ public class SoldierUI : MonoBehaviour {
     public float currentFuel;
     public Slider fuelBar;
 
+    public GameObject PreGameMessage;
+
 
     // Use this for initialization
     public void Start()
@@ -27,8 +29,6 @@ public class SoldierUI : MonoBehaviour {
         GetComponent<Canvas>().worldCamera= playerCamera.GetComponent<Camera>();
         UIBarInstantiate();
     }
-
-
 
 
     // Update is called once per frame
