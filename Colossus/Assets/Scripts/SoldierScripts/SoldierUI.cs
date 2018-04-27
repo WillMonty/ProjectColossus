@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SoldierUI : MonoBehaviour {
     public GameObject playerCamera;
-    public GameObject player;
+    public PlayerManager player;
     public int playerNum;
 
     // Values needed for health bar
@@ -21,12 +21,22 @@ public class SoldierUI : MonoBehaviour {
     public GameObject PreGameMessage;
     public GameObject LoseMessage;
     public GameObject WinMessage;
+    public GameObject RespawnMessage;
+    public GameObject LivesText;
 
 
     // Use this for initialization
     public void Start()
     {
-        player = GameObject.Find("Player" + playerNum + "ControllerFPS");
+        // Set the different messages at instantiation
+        PreGameMessage = transform.Find("PreGameMessage").gameObject;
+        LoseMessage = transform.Find("LoseCanvas").gameObject;
+        WinMessage = transform.Find("WinCanvas").gameObject;
+        RespawnMessage = transform.Find("RespawnMessageCanvas").gameObject;
+        LivesText = transform.Find("LivesText").gameObject;
+
+        // Set Player controller stuff
+        player = GameObject.Find("Player" + playerNum + "ControllerFPS").GetComponent<PlayerManager>();
         playerCamera = player.transform.Find("Player" + playerNum + "Eyes").gameObject;
         GetComponent<Canvas>().worldCamera= playerCamera.GetComponent<Camera>();
         UIBarInstantiate();
@@ -46,11 +56,11 @@ public class SoldierUI : MonoBehaviour {
     private void UIBarInstantiate()
     {
         // Set the healthBar Initial Values
-        maxHealth = player.GetComponent<PlayerManager>().MaxHealth;
+        maxHealth = player.MaxHealth;
         healthBar.maxValue = maxHealth;
 
         // Set the healthBar Max value
-        maxFuel = player.GetComponent<PlayerManager>().MaxFuel;
+        maxFuel = player.MaxFuel;
         fuelBar.maxValue = maxFuel;
     }
 
@@ -71,5 +81,20 @@ public class SoldierUI : MonoBehaviour {
         // Get current health and update the bar
         currentFuel = player.GetComponent<PlayerManager>().JetPackFuel;
         fuelBar.value = currentFuel;
+
+        LivesText.GetComponent<Text>().text = "Lives: " + player.Lives;
+    }
+
+
+    public void SwitchActiveStatesRespawnMessage()
+    {
+        if(RespawnMessage.activeSelf == false)
+        {
+            RespawnMessage.SetActive(true);
+        }
+        else
+        {
+            RespawnMessage.SetActive(false);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerManager : MonoBehaviour
     private float health;
     private float jetPackFuel;
     private Weapons currentWeapon;
+
+    SoldierUI PlayerGUIManager;
 
     // Ammo Variables
     // Change this variable to private at some point
@@ -58,6 +61,8 @@ public class PlayerManager : MonoBehaviour
         // Set ammo at the beginning
         currentWeapon = Weapons.AssaultRifle;
         assaultRifleAmmo = 250;
+
+        PlayerGUIManager = transform.Find("Player" + GetComponent<PlayerInputManager>().playerNum + "GUI").GetComponent<SoldierUI>();
     }
 
     // Update is called once per frame
@@ -82,12 +87,48 @@ public class PlayerManager : MonoBehaviour
             // Lower the life count
             lives--;
 
+            // Reset the player's Stats
+            ResetPlayerValues();
+
             transform.position = DEATHBOX;
+
             // Choose one of the spawn locations at random
-            int spawnLocation = Random.Range(0, 10);
+            int spawnPoint = Random.Range(0, 6);
+
+            Vector3 spawnLocation = Vector3.zero;
+
+            // Turn on the respawn message
+            PlayerGUIManager.SwitchActiveStatesRespawnMessage();
+
+            switch(spawnPoint)
+            {
+                case 0:
+                    spawnLocation = new Vector3(0, 0, 0);
+                    break;
+                case 1:
+                    spawnLocation = new Vector3(0, 0, 0);
+                    break;
+                case 2:
+                    spawnLocation = new Vector3(0, 0, 0);
+                    break;
+                case 3:
+                    spawnLocation = new Vector3(0, 0, 0);
+                    break;
+                case 4:
+                    spawnLocation = new Vector3(0, 0, 0);
+                    break;
+                case 5:
+                    spawnLocation = new Vector3(0, 0, 0);
+                    break;
+
+            }
 
             // Call respawn after a player died (currently set to 0,0,0)
             StartCoroutine("Respawn", new Vector3(0, 0, 0));
+        }
+        else
+        {
+            transform.position = DEATHBOX;
         }
     }
 
@@ -149,11 +190,31 @@ public class PlayerManager : MonoBehaviour
         jetPackFuel -= Time.deltaTime;
     }
 
+
+    /// <summary>
+    /// Method to respawn the player
+    /// </summary>
+    /// <param name="spawnlocation"></param>
+    /// <returns></returns>
     IEnumerable Respawn(Vector3 spawnlocation)
     {
         // Check how many lives the player has first
         yield return new WaitForSeconds(RESPAWN_TIME);
+
+        // Turn off the respawn message
+        PlayerGUIManager.SwitchActiveStatesRespawnMessage();
+
+        // Place the player in new spawn position
         gameObject.transform.position = spawnlocation;
+    }
+
+    /// <summary>
+    /// Method to reset player values
+    /// </summary>
+    void ResetPlayerValues()
+    {
+        health = MAX_HEALTH;
+        jetPackFuel = MAX_FUEL;
     }
 
     void OnCollisionEnter(Collision col)

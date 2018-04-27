@@ -104,9 +104,8 @@ public class GameManagerScript : MonoBehaviour
     IEnumerator ReturnToMainMenu(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-
-
         GameManagerScript.instance.currentGameState = GameState.MainMenu;
+
         // Last thing: Load the main menu
         SceneManager.LoadScene(0);
     }
