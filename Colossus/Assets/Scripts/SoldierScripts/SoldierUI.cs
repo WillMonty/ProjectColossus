@@ -37,6 +37,7 @@ public class SoldierUI : MonoBehaviour {
     void Update()
     {
         UIUpdate();
+
     }
 
     /// <summary>
@@ -58,6 +59,11 @@ public class SoldierUI : MonoBehaviour {
     /// </summary>
     private void UIUpdate()
     {
+		if(GameManagerScript.instance.currentGameState == GameState.InGame)
+		{
+			PreGameMessage.SetActive(false);
+		}
+
         // Get current health and update the bar
         currentHealth = player.GetComponent<PlayerManager>().Health;
         healthBar.value = currentHealth;

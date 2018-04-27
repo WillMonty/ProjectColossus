@@ -80,13 +80,13 @@ public class PlayerInputManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (GameManagerScript.instance.currentGameState != GameState.InGame)
+        if (GameManagerScript.instance.currentGameState == GameState.InGame)
         {
             Move();
             Jump();
         }
             //Debug.Log(player.isGrounded);
-        }
+    }
 
 
     // Helper method to help set up the player controller
