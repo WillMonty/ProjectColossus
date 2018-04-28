@@ -26,6 +26,7 @@ public class Laser : MonoBehaviour
     [Header("Laser Behavior")]
     public float cooldownTime;
     public float laserTime;
+	public float damageAmt;
 
     float currLaserTime; //Time the laser has currently been firing
     float chargeTime = 0.4f; //Time before the laser actually starts firing to let the charge sound play
@@ -148,6 +149,21 @@ public class Laser : MonoBehaviour
 
         StartCoroutine(LaserCoolDown());
     }
+
+	void CheckHit(RaycastHit hit)
+	{
+		//If the raycast has hit something
+		if(hit.collider != null)
+		{
+			GameObject hitObj = hit.collider.gameObject;
+			switch(hitObj.tag)
+			{
+				case "resistanceplayer":
+					hitObj.GetComponent<PlayerManager>().Damage(damageAmt);
+					break;
+			}
+		}
+	}
 
     //Coroutine to charge the laser
     IEnumerator ChargeUp()

@@ -21,7 +21,8 @@ public class Lava : MonoBehaviour
         switch (other.tag)
         {
             case "resistanceplayer":
-                //Kill him or something
+				//Kill player
+				other.gameObject.GetComponent<PlayerManager>().Damage(100.0f);
                 break;
             case "colossusplayer":
                 //Do nothing

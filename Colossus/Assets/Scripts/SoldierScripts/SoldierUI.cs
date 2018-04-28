@@ -75,11 +75,11 @@ public class SoldierUI : MonoBehaviour {
 		}
 
         // Get current health and update the bar
-        currentHealth = player.GetComponent<PlayerManager>().Health;
+        currentHealth = player.Health;
         healthBar.value = currentHealth;
 
         // Get current health and update the bar
-        currentFuel = player.GetComponent<PlayerManager>().JetPackFuel;
+        currentFuel = player.JetPackFuel;
         fuelBar.value = currentFuel;
 
         LivesText.GetComponent<Text>().text = "Lives: " + player.Lives;

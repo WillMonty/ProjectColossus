@@ -1,18 +1,24 @@
 fileFormatVersion: 2
-guid: 22b4175003efa114286261a4d8642a13
-timeCreated: 1524802829
+guid: 76ee68f1ae7274f40ba2ec8bf46c7e21
+timeCreated: 1524870701
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Conveyor_02:Conveyor
+    100002: Conveyor_Belt_01:polySurface1
+    100004: polySurface2_Conveyor_02:Conveyor
     400000: //RootNode
-    400002: Conveyor_02:Conveyor
-    2100000: Conveyor_02_ConveyorMat
-    2300000: Conveyor_02:Conveyor
-    3300000: Conveyor_02:Conveyor
-    4300000: Conveyor_02:Conveyor
+    400002: Conveyor_Belt_01:polySurface1
+    400004: polySurface2_Conveyor_02:Conveyor
+    2100000: Conveyor_Belt_01_polySurface1Mat
+    2100002: polySurface2_Conveyor_02_ConveyorMat
+    2300000: Conveyor_Belt_01:polySurface1
+    2300002: polySurface2_Conveyor_02:Conveyor
+    3300000: Conveyor_Belt_01:polySurface1
+    3300002: polySurface2_Conveyor_02:Conveyor
+    4300000: Conveyor_Belt_01:polySurface1
+    4300002: polySurface2_Conveyor_02:Conveyor
   externalObjects: {}
   materials:
     importMaterials: 1

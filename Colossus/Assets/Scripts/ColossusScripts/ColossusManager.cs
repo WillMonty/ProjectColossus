@@ -31,6 +31,7 @@ public class ColossusManager : MonoBehaviour {
     public float lowerMapAmount;
     public GameObject lava;
     public GameObject resistanceContainer;
+	public GameObject conveyors;
 
 
     //Audio
@@ -98,13 +99,13 @@ public class ColossusManager : MonoBehaviour {
     void Update ()
     {
         if (!playerInBot) CheckHopIn(); //Check if the player is jumping in the bot
-
+		/*
 		if(debugColossus && leftController.transform.childCount > 4)
 		{
 			//Turn off base dummy hand prefab
-			leftController.transform.GetChild(4).gameObject.SetActive(false);
-			rightController.transform.GetChild(4).gameObject.SetActive(false);
-		}
+			leftController.transform.GetChild(0).gameObject.SetActive(false);
+			rightController.transform.GetChild(0).gameObject.SetActive(false);
+		}*/
     }
     #endregion
 
@@ -159,17 +160,16 @@ public class ColossusManager : MonoBehaviour {
         leftHand.SetActive(true);
         rightHand.SetActive(true);
 
-        //Enable Colossus Body
+        //Enable Colossus
         colossusBody.SetActive(true);
         neck.SetActive(true);
-
         laser.enabled = true;
+		playerInBot = true;
 
+		//Enable Map Objects
         disabledColossus.SetActive(false);
-
-        playerInBot = true;
-
         lava.SetActive(true);
+		conveyors.SetActive(true);
 
         LowerMap();
 
@@ -180,8 +180,8 @@ public class ColossusManager : MonoBehaviour {
 			GameManagerScript.instance.currentGameState = GameState.InGame;
 
             //Turn off base dummy hand prefab
-            leftController.transform.GetChild(4).gameObject.SetActive(false);
-            rightController.transform.GetChild(4).gameObject.SetActive(false);
+            leftController.transform.GetChild(1).gameObject.SetActive(false);
+            rightController.transform.GetChild(1).gameObject.SetActive(false);
 
             headSource.clip = hopInSound;
             headSource.Play();

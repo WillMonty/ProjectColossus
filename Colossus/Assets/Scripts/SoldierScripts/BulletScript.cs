@@ -83,7 +83,7 @@ public class BulletScript : MonoBehaviour
         }
         Debug.Log("Collision with: " + other.tag);
 
-        // Destroy the 
+        // Destroy the projectile
         if (other.tag != "projectile" && other.tag != "resistancebullet" && other.tag != "resistanceplayer")
         {
             Debug.Log("Destroy Bullet");
