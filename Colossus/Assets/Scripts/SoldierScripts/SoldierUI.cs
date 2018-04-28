@@ -41,7 +41,7 @@ public class SoldierUI : MonoBehaviour {
         if (playerNum == 1)
         {
             pauseButton = "J" + playerNum + "Pause";
-            PreGameMessage = transform.Find("PauseCanvas").gameObject;
+			PauseMenu = transform.Find("PauseCanvas").gameObject;
         }
 
         // Set Player controller stuff
@@ -123,4 +123,13 @@ public class SoldierUI : MonoBehaviour {
             PauseMenu.SetActive(false);
         }
     }
+
+	public void LoseGame()
+	{
+		LoseMessage.SetActive(true);
+	}
+	public void WinGame()
+	{
+		WinMessage.SetActive(true);
+	}
 }

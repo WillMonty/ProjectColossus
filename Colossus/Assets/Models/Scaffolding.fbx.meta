@@ -1,28 +1,17 @@
 fileFormatVersion: 2
-guid: ec4ac680777884f449a436f263654ee4
-timeCreated: 1524767606
+guid: 550da90bdcd148d47bb856c6eda78303
+timeCreated: 1524888646
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: arm_arm
-    100002: arm_arm_pCube1
-    100004: arm_arm_pCube2
-    100006: //RootNode
-    400000: arm_arm
-    400002: arm_arm_pCube1
-    400004: arm_arm_pCube2
-    400006: //RootNode
-    2100000: aiStandardSurface1SG
-    2300000: arm_arm
-    2300002: arm_arm_pCube1
-    2300004: arm_arm_pCube2
-    3300000: arm_arm
-    3300002: arm_arm_pCube1
-    3300004: arm_arm_pCube2
-    4300000: arm_arm
-    4300002: arm_arm_pCube1
-    4300004: arm_arm_pCube2
+    100000: //RootNode
+    400000: //RootNode
+    2100000: lambert1
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Scaffolding1
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -97,7 +86,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

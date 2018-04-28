@@ -24,6 +24,7 @@ public class Laser : MonoBehaviour
 
     //Laser state vars
     [Header("Laser Behavior")]
+	public LayerMask lMask;
     public float cooldownTime;
     public float laserTime;
 	public float damageAmt;
@@ -104,7 +105,7 @@ public class Laser : MonoBehaviour
     {
         for (int i = 0; i < 2; i++)
         {
-            Physics.Raycast(origins[i].transform.position, origins[i].transform.forward, out hits[i], maxDistance);
+			Physics.Raycast(origins[i].transform.position, origins[i].transform.forward, out hits[i], maxDistance, lMask, QueryTriggerInteraction.Collide);
 
             //Move and scale the beam to the appropriate position
             Vector3 currBeamLocalPosition = beams[i].transform.localPosition;

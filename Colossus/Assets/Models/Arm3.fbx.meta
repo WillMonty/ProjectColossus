@@ -1,48 +1,17 @@
 fileFormatVersion: 2
-guid: aa665651085d08c4a8d6cce8c19ef315
-timeCreated: 1524767606
+guid: 0af54029932a6594da66295359ea365f
+timeCreated: 1524888646
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: upper_arm
-    100004: upper_arm_elbow
-    100006: upper_arm_elbow1
-    100008: upper_arm_elbow1_finger_1
-    100010: upper_arm_elbow1_finger_2
-    100012: upper_arm_elbow1_finger_3
-    100014: upper_arm_pCylinder1
     400000: //RootNode
-    400002: upper_arm
-    400004: upper_arm_elbow
-    400006: upper_arm_elbow1
-    400008: upper_arm_elbow1_finger_1
-    400010: upper_arm_elbow1_finger_2
-    400012: upper_arm_elbow1_finger_3
-    400014: upper_arm_pCylinder1
-    2100000: aiStandardSurface1SG
-    2300000: upper_arm
-    2300002: upper_arm_elbow
-    2300004: upper_arm_elbow1
-    2300006: upper_arm_elbow1_finger_1
-    2300008: upper_arm_elbow1_finger_2
-    2300010: upper_arm_elbow1_finger_3
-    2300012: upper_arm_pCylinder1
-    3300000: upper_arm
-    3300002: upper_arm_elbow
-    3300004: upper_arm_elbow1
-    3300006: upper_arm_elbow1_finger_1
-    3300008: upper_arm_elbow1_finger_2
-    3300010: upper_arm_elbow1_finger_3
-    3300012: upper_arm_pCylinder1
-    4300000: upper_arm
-    4300002: upper_arm_elbow
-    4300004: upper_arm_elbow1
-    4300006: upper_arm_elbow1_finger_1
-    4300008: upper_arm_elbow1_finger_2
-    4300010: upper_arm_elbow1_finger_3
-    4300012: upper_arm_pCylinder1
+    2100000: aiStandardSurface1
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: upper_arm1
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -117,7 +86,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

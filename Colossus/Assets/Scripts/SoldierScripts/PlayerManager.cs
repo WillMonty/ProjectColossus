@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
 {
     // Player Manager
     const int STARTING_LIVES = 3;
-    const float RESPAWN_TIME = 5.0f;
+    const float RESPAWN_TIME = 0.0f;
     const float DAMAGING_OBJECT_MAGNITUDE = 5.0f;
     const float MAX_HEALTH = 100;
     const float MAX_FUEL = 5;
@@ -88,10 +88,8 @@ public class PlayerManager : MonoBehaviour
 		transform.position = GameManagerScript.instance.deathbox.transform.position;
 
         // Check how many lives the player has first
-        if (lives >= 1)
+        if (lives > 1)
         {
-            // Lower the life count
-            lives--;
 
             // Choose one of the spawn locations at random
             int spawnPoint = Random.Range(0, 6);
@@ -106,6 +104,9 @@ public class PlayerManager : MonoBehaviour
             // Call respawn after a player died (currently set to 0,0,0)
 			StartCoroutine(Respawn(spawnLocation));
         }
+
+		// Lower the life count
+		lives--;
     }
 
     /// <summary>

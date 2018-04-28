@@ -23,8 +23,6 @@ GameObject:
   - component: {fileID: 23727451127168374}
   - component: {fileID: 65022253380817032}
   - component: {fileID: 64222554525532618}
-  - component: {fileID: 114716314313811838}
-  - component: {fileID: 114375224531511440}
   - component: {fileID: 114763084312451530}
   - component: {fileID: 114827725894148952}
   m_Layer: 0
@@ -42,7 +40,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4158036782271738}
-  - component: {fileID: 114172614997755962}
   - component: {fileID: 114674826675951622}
   m_Layer: 0
   m_Name: TrashSpawner
@@ -104,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1153203033867660}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7, y: 4.83, z: 0}
+  m_LocalPosition: {x: 2.52, y: 4.19, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4855615753656236}
@@ -261,37 +258,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 225.8129, y: 9.952835, z: 52.414154}
   m_Center: {x: -0.34155273, y: 85.33686, z: 0}
---- !u!114 &114172614997755962
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1153203033867660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d017a8acdeb994b41bd298c160757248, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnTimeInterval: 3.5
-  spawnTimeVariation: 0.5
-  commonSpawnablePrefabs:
-  - {fileID: 0}
-  uncommonSpawnablePrefabs: []
-  rareSpawnablePrefabs: []
-  spawnForce: {x: 496.68, y: 0, z: 0}
-  spawnRadius: 16.5
---- !u!114 &114375224531511440
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1048287993467386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f553fb2146a112c42978404599cfb098, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementForce: {x: 15.73, y: 0, z: 0}
 --- !u!114 &114674826675951622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,22 +274,13 @@ MonoBehaviour:
   commonSpawnablePrefabs:
   - {fileID: 1337659906223482, guid: a9d71ffd75f0bf84b8d24f4fb6a179a8, type: 2}
   - {fileID: 1434484791173810, guid: f8ec98fed57ffbc42914c789f1eeece3, type: 2}
+  - {fileID: 1825952108269902, guid: 1c84ec43f7d6cd24fb8702ccacfa0a18, type: 2}
+  - {fileID: 1972340816490996, guid: 5e6e872e2ed7d5f40b743bb4817c82cd, type: 2}
+  - {fileID: 1259349372369734, guid: 92627a445016e9b449bb9cf896ed1692, type: 2}
   uncommonSpawnablePrefabs: []
   rareSpawnablePrefabs: []
   spawnForce: {x: 0, y: 0, z: 0}
   spawnRadius: 0.65
---- !u!114 &114716314313811838
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1048287993467386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2551a0f253dfa094786f08b8729814c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textureOffset: {x: -0.05, y: 0}
 --- !u!114 &114763084312451530
 MonoBehaviour:
   m_ObjectHideFlags: 1

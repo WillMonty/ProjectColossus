@@ -1,54 +1,23 @@
 fileFormatVersion: 2
-guid: 297fbd19332ac8345b9b21c0a9b14a4d
-timeCreated: 1524767606
+guid: eaa24323bec9c124795fce7b1318749d
+timeCreated: 1524888647
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: pCube2
-    100002: pCube2_pSphere2
-    100004: pCube2_pSphere2_pCylinder1
-    100006: pCube2_pSphere2_pCylinder1_pSphere3
-    100008: pCube2_pSphere2_pCylinder1_pSphere3_pSphere4
-    100010: pCube2_pSphere2_pCylinder1_pSphere3_pSphere5
-    100012: pCube2_pSphere2_pCylinder1_pSphere3_pSphere6
-    100014: //RootNode
-    400000: pCube2
-    400002: pCube2_pSphere2
-    400004: pCube2_pSphere2_pCylinder1
-    400006: pCube2_pSphere2_pCylinder1_pSphere3
-    400008: pCube2_pSphere2_pCylinder1_pSphere3_pSphere4
-    400010: pCube2_pSphere2_pCylinder1_pSphere3_pSphere5
-    400012: pCube2_pSphere2_pCylinder1_pSphere3_pSphere6
-    400014: //RootNode
-    2100000: aiStandardSurface1SG
-    2300000: pCube2
-    2300002: pCube2_pSphere2
-    2300004: pCube2_pSphere2_pCylinder1
-    2300006: pCube2_pSphere2_pCylinder1_pSphere3
-    2300008: pCube2_pSphere2_pCylinder1_pSphere3_pSphere4
-    2300010: pCube2_pSphere2_pCylinder1_pSphere3_pSphere5
-    2300012: pCube2_pSphere2_pCylinder1_pSphere3_pSphere6
-    3300000: pCube2
-    3300002: pCube2_pSphere2
-    3300004: pCube2_pSphere2_pCylinder1
-    3300006: pCube2_pSphere2_pCylinder1_pSphere3
-    3300008: pCube2_pSphere2_pCylinder1_pSphere3_pSphere4
-    3300010: pCube2_pSphere2_pCylinder1_pSphere3_pSphere5
-    3300012: pCube2_pSphere2_pCylinder1_pSphere3_pSphere6
-    4300000: pCube2
-    4300002: pCube2_pSphere2
-    4300004: pCube2_pSphere2_pCylinder1
-    4300006: pCube2_pSphere2_pCylinder1_pSphere3
-    4300008: pCube2_pSphere2_pCylinder1_pSphere3_pSphere4
-    4300010: pCube2_pSphere2_pCylinder1_pSphere3_pSphere5
-    4300012: pCube2_pSphere2_pCylinder1_pSphere3_pSphere6
+    100000: //RootNode
+    400000: //RootNode
+    2100000: arm2
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: arm3
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -117,7 +86,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
