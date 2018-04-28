@@ -14,7 +14,7 @@ public class GameManagerScript : MonoBehaviour
     #region Attributes
     // Static instance of the GameManager which allows it to be accessed from any script
     public static GameManagerScript instance = null;
-    public ColossusManager colossus =null;
+    public ColossusManager colossus = null;
     public PlayerManager soldier1 = null;
     public PlayerManager soldier2 = null;
 	public GameObject deathbox;
@@ -49,10 +49,12 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-		for(int i = 0; i < Input.GetJoystickNames().Length; i++)
+		Debug.Log(soldier1);
+		CheckWinCondition();
+		/*for(int i = 0; i < Input.GetJoystickNames().Length; i++)
 		{
-			//Debug.Log(Input.GetJoystickNames()[i]);	
-		}
+			Debug.Log(Input.GetJoystickNames()[i]);	
+		}*/
 
         OOOOOOOF();
 
@@ -92,18 +94,19 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void CheckWinCondition()
     {
-        if(instance.currentGameState == GameState.InGame && colossus.Health == 0)
+        if(instance.currentGameState == GameState.InGame && colossus.Health <= 0)
         {
-            soldier1.gameObject.GetComponent<SoldierUI>().WinMessage.SetActive(true);
-            soldier2.gameObject.GetComponent<SoldierUI>().WinMessage.SetActive(true);
+			soldier1.gameObject.GetComponent<SoldierUI>().WinGame();
+			soldier1.gameObject.GetComponent<SoldierUI>().WinGame();
             instance.currentGameState = GameState.ResistanceWin;
             StartCoroutine(ReturnToMainMenu(7f));
         }
-        else if(instance.currentGameState == GameState.InGame && soldier1.Lives == 0 && soldier2.Lives == 0)
+        else if(instance.currentGameState == GameState.InGame && soldier1.Lives <= 0 && soldier2.Lives <= 0)
         {
-            soldier1.gameObject.GetComponent<SoldierUI>().LoseMessage.SetActive(true);
-            soldier2.gameObject.GetComponent<SoldierUI>().LoseMessage.SetActive(true);
+			//soldier1.gameObject.GetComponent<SoldierUI>().LoseGame();
+			//soldier2.gameObject.GetComponent<SoldierUI>().LoseGame();
             instance.currentGameState = GameState.ResistanceLose;
+			StartCoroutine(ReturnToMainMenu(7f));
         }
     }
 

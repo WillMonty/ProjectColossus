@@ -7,12 +7,18 @@ ModelImporter:
   fileIDToRecycleName:
     100000: SteelBeam16:ZBrushPolyMesh3D
     100002: //RootNode
+    100004: SteelBeam11:ZBrushPolyMesh3D
     400000: SteelBeam16:ZBrushPolyMesh3D
     400002: //RootNode
+    400004: SteelBeam11:ZBrushPolyMesh3D
     2100000: SteelBeam16_ZBrushPolyMesh3DMat
+    2100002: SteelBeam11_ZBrushPolyMesh3DMat
     2300000: SteelBeam16:ZBrushPolyMesh3D
+    2300002: SteelBeam11:ZBrushPolyMesh3D
     3300000: SteelBeam16:ZBrushPolyMesh3D
+    3300002: SteelBeam11:ZBrushPolyMesh3D
     4300000: SteelBeam16:ZBrushPolyMesh3D
+    4300002: SteelBeam11:ZBrushPolyMesh3D
   externalObjects: {}
   materials:
     importMaterials: 1

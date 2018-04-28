@@ -10,27 +10,33 @@ ModelImporter:
     100004: Catwalk_Corner_pCylinder33
     100006: Catwalk_Corner_Rail_Corner
     100008: Floor_Catwalk_Corner
+    100010: Rail_Corner
     400000: //RootNode
     400002: Catwalk_Corner_pCylinder2_pCylinder3_pCylinder1
     400004: Catwalk_Corner_pCylinder33
     400006: Catwalk_Corner_Rail_Corner
     400008: Floor_Catwalk_Corner
+    400010: Rail_Corner
     2100000: Catwalk_Corner_pCylinder2_pCylinder3_pCylinder1Mat
     2100002: Catwalk_Corner_pCylinder33Mat
     2100004: Catwalk_Corner_Rail_CornerMat
     2100006: Floor_Catwalk_CornerMat
+    2100008: Rail_CornerMat
     2300000: Catwalk_Corner_pCylinder2_pCylinder3_pCylinder1
     2300002: Catwalk_Corner_pCylinder33
     2300004: Catwalk_Corner_Rail_Corner
     2300006: Floor_Catwalk_Corner
+    2300008: Rail_Corner
     3300000: Catwalk_Corner_pCylinder2_pCylinder3_pCylinder1
     3300002: Catwalk_Corner_pCylinder33
     3300004: Catwalk_Corner_Rail_Corner
     3300006: Floor_Catwalk_Corner
+    3300008: Rail_Corner
     4300000: Catwalk_Corner_pCylinder2_pCylinder3_pCylinder1
     4300002: Catwalk_Corner_pCylinder33
     4300004: Catwalk_Corner_Rail_Corner
     4300006: Floor_Catwalk_Corner
+    4300008: Rail_Corner
   externalObjects: {}
   materials:
     importMaterials: 1

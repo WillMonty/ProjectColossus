@@ -81,12 +81,10 @@ public class BulletScript : MonoBehaviour
             Instantiate(HitAudioObject, transform.position, Quaternion.identity);
             GameManagerScript.instance.colossus.Damage(damage);
         }
-        Debug.Log("Collision with: " + other.tag);
 
         // Destroy the projectile
         if (other.tag != "projectile" && other.tag != "resistancebullet" && other.tag != "resistanceplayer")
         {
-            Debug.Log("Destroy Bullet");
             Destroy(gameObject);
         }
     }
