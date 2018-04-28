@@ -20,6 +20,10 @@ public class GunScript : MonoBehaviour
     // Bullet prefab that will be shotout
     public GameObject bulletPrefab;
 
+	//Audio Source
+	private AudioSource source;
+	public AudioClip shootSound;
+
     // current gun Tracking variables
     //int bulletsInClip;
 
@@ -68,6 +72,8 @@ public class GunScript : MonoBehaviour
             reloadTime = 5.0f;
         }
         */
+
+		source = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -80,7 +86,7 @@ public class GunScript : MonoBehaviour
             
 
             // Check for shooting
-            if (rightTriggerFloat > 0 && justShot == false)
+			if (rightTriggerFloat > 0 && justShot == false && GameManagerScript.instance.currentGameState == GameState.InGame)
             {
             //Debug.Log("Player " + playerNum + " has " + bulletsInClip + " in their clip.");
             
@@ -121,6 +127,12 @@ public class GunScript : MonoBehaviour
     private void Shoot()
     {
         //Debug.Log("Shooting bullets");
+
+		if(!source.isPlaying)
+		{
+			source.clip = shootSound;
+			//source.Play();
+		}
 
         // Instantiate the bullet and shoot it
         Instantiate(bulletPrefab, transform.position, gameObject.transform.parent.GetComponent<PlayerInputManager>().eyes.transform.rotation);

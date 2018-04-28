@@ -13,6 +13,8 @@ TagManager:
   - colossusplayer
   - spawnpoint
   - throwable
+  - colossusarms
+  - colossushead
   layers:
   - Default
   - TransparentFX

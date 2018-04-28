@@ -28,6 +28,12 @@ public class GameManagerScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+		//Activate normal monitor
+		if(Display.displays.Length > 1)
+		{
+			Display.displays[1].Activate();	
+		}
+
         #region Singleton Design Pattern
         // Check for an instance, if it does exist, than set to this
         if (instance == null)

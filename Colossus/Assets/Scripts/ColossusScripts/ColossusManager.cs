@@ -14,6 +14,7 @@ public class ColossusManager : MonoBehaviour {
     const float RESPAWN_TIME = 5.0f;
     private bool playerInBot; //Is the player currently in the colossus and ready to play?
     private float health;
+	private bool gameEnded;
 
     // Public components needed for the toggling of the colossus
     [Header("Colossus Components")]
@@ -23,6 +24,7 @@ public class ColossusManager : MonoBehaviour {
     public GameObject neck;
     public GameObject colossusBody;
     public GameObject disabledColossus; //The starting stationary colossus that is turned off when playing
+	public GameObject resultsCanvas;
     Laser laser;
     //Will add variables for the rigged colossus model
 
@@ -40,6 +42,7 @@ public class ColossusManager : MonoBehaviour {
     public AudioSource torsoSource;
     public AudioClip hopInSound;
     public AudioClip damageSound;
+	public AudioClip deathSound;
 
     [Header("UI")]
     public Slider heathBar;
@@ -98,13 +101,20 @@ public class ColossusManager : MonoBehaviour {
     void Update ()
     {
         if (!playerInBot) CheckHopIn(); //Check if the player is jumping in the bot
-		/*
-		if(debugColossus && leftController.transform.childCount > 4)
+
+		if(GameManagerScript.instance.currentGameState == GameState.ResistanceWin)
 		{
-			//Turn off base dummy hand prefab
-			leftController.transform.GetChild(0).gameObject.SetActive(false);
-			rightController.transform.GetChild(0).gameObject.SetActive(false);
-		}*/
+			resultsCanvas.SetActive(true);
+			resultsCanvas.transform.GetChild(2).gameObject.SetActive(true);
+			KillColossus();
+		}
+
+		if(GameManagerScript.instance.currentGameState == GameState.ResistanceLose)
+		{
+			resultsCanvas.SetActive(true);
+			resultsCanvas.transform.GetChild(1).gameObject.SetActive(true);
+			KillColossus();
+		}
     }
     #endregion
 
@@ -195,4 +205,19 @@ public class ColossusManager : MonoBehaviour {
         map.transform.position = new Vector3(map.transform.position.x, playerY, map.transform.position.z);
         resistanceContainer.transform.position = new Vector3(resistanceContainer.transform.position.x, playerY + resistanceContainer.transform.position.y, resistanceContainer.transform.position.z);
     }
+
+	void KillColossus()
+	{
+		if(!gameEnded)
+		{
+			colossusBody.SetActive(false);
+			neck.SetActive(false);
+
+			headSource.Stop();
+			headSource.clip = deathSound;
+			headSource.Play();
+		}
+
+		gameEnded = true;
+	}
 }
