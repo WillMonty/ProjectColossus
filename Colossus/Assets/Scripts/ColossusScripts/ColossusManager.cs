@@ -78,9 +78,6 @@ public class ColossusManager : MonoBehaviour {
         health = STARTING_HEALTH;
 
         laser = gameObject.GetComponent<Laser>();
-
-        if (debugColossus) ToggleColossus(); //If in debug mode let the VR player start immediately in the colossus
-
         StartCoroutine(LateStart(0.2f));
 
     }
@@ -90,6 +87,8 @@ public class ColossusManager : MonoBehaviour {
         yield return new WaitForSeconds(waitTime);
         //Sets the instance after the game manager has actually initialized
         GameManagerScript.instance.colossus = this;
+
+		if (debugColossus) ToggleColossus(); //If in debug mode let the VR player start immediately in the colossus
     }
 
     #endregion
@@ -173,16 +172,16 @@ public class ColossusManager : MonoBehaviour {
 
         LowerMap();
 
+		//Start the game once the VR player is ready.
+		GameManagerScript.instance.currentGameState = GameState.InGame;
+
+		//Turn off base dummy hand prefab
+		leftController.transform.GetChild(1).gameObject.SetActive(false);
+		rightController.transform.GetChild(1).gameObject.SetActive(false);
+
         //Non-debug only
         if (!debugColossus)
         {
-			//Start the game once the VR player is ready.
-			GameManagerScript.instance.currentGameState = GameState.InGame;
-
-            //Turn off base dummy hand prefab
-            leftController.transform.GetChild(1).gameObject.SetActive(false);
-            rightController.transform.GetChild(1).gameObject.SetActive(false);
-
             headSource.clip = hopInSound;
             headSource.Play();
         }

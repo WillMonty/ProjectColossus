@@ -17,6 +17,7 @@ public class GameManagerScript : MonoBehaviour
     public ColossusManager colossus =null;
     public PlayerManager soldier1 = null;
     public PlayerManager soldier2 = null;
+	public GameObject deathbox;
 
     List<GameObject> escapeScreens;
     public GameState currentGameState;
@@ -48,8 +49,10 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        
-		//Debug.Log(UnityEngine.Input.GetJoystickNames());
+		for(int i = 0; i < Input.GetJoystickNames().Length; i++)
+		{
+			//Debug.Log(Input.GetJoystickNames()[i]);	
+		}
 	}
     #endregion
 

@@ -10,9 +10,7 @@ public class PlayerManager : MonoBehaviour
     const float RESPAWN_TIME = 5.0f;
     const float DAMAGING_OBJECT_MAGNITUDE = 5.0f;
     const float MAX_HEALTH = 100;
-    const float MAX_FUEL = 10;
-
-    Vector3 DEATHBOX = new Vector3(3000, 3000, 3000);
+    const float MAX_FUEL = 5;
 
     // Basic Player Management variables
     private int lives;
@@ -25,6 +23,8 @@ public class PlayerManager : MonoBehaviour
     // Ammo Variables
     // Change this variable to private at some point
     public int assaultRifleAmmo;
+
+	private GameObject[] spawnPoints;
 
     public int Lives
     {
@@ -52,6 +52,8 @@ public class PlayerManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+		spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
         // Start initializes 3 lives at start, can be changed later
         lives = STARTING_LIVES;
         health = 100.0f;
@@ -81,16 +83,15 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     void Death()
     {
+		// Reset the player's Stats
+		ResetPlayerValues();
+		transform.position = GameManagerScript.instance.deathbox.transform.position;
+
         // Check how many lives the player has first
         if (lives >= 1)
         {
             // Lower the life count
             lives--;
-
-            // Reset the player's Stats
-            ResetPlayerValues();
-
-            transform.position = DEATHBOX;
 
             // Choose one of the spawn locations at random
             int spawnPoint = Random.Range(0, 6);
@@ -100,35 +101,10 @@ public class PlayerManager : MonoBehaviour
             // Turn on the respawn message
             PlayerGUIManager.SwitchActiveStatesRespawnMessage();
 
-            switch(spawnPoint)
-            {
-                case 0:
-                    spawnLocation = new Vector3(0, 0, 0);
-                    break;
-                case 1:
-                    spawnLocation = new Vector3(0, 0, 0);
-                    break;
-                case 2:
-                    spawnLocation = new Vector3(0, 0, 0);
-                    break;
-                case 3:
-                    spawnLocation = new Vector3(0, 0, 0);
-                    break;
-                case 4:
-                    spawnLocation = new Vector3(0, 0, 0);
-                    break;
-                case 5:
-                    spawnLocation = new Vector3(0, 0, 0);
-                    break;
-
-            }
+			spawnLocation = spawnPoints[spawnPoint].transform.position;
 
             // Call respawn after a player died (currently set to 0,0,0)
-            StartCoroutine("Respawn", new Vector3(0, 0, 0));
-        }
-        else
-        {
-            transform.position = DEATHBOX;
+			StartCoroutine(Respawn(spawnLocation));
         }
     }
 
@@ -196,7 +172,7 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     /// <param name="spawnlocation"></param>
     /// <returns></returns>
-    IEnumerable Respawn(Vector3 spawnlocation)
+	IEnumerator Respawn(Vector3 spawnlocation)
     {
         // Check how many lives the player has first
         yield return new WaitForSeconds(RESPAWN_TIME);

@@ -11,6 +11,7 @@ TagManager:
   - resistancebullet
   - resistanceplayer
   - colossusplayer
+  - spawnpoint
   layers:
   - Default
   - TransparentFX
