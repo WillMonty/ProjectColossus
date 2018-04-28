@@ -23,7 +23,9 @@ public class SoldierUI : MonoBehaviour {
     public GameObject WinMessage;
     public GameObject RespawnMessage;
     public GameObject LivesText;
+    public GameObject PauseMenu;
 
+    private string pauseButton;
 
     // Use this for initialization
     public void Start()
@@ -34,6 +36,13 @@ public class SoldierUI : MonoBehaviour {
         WinMessage = transform.Find("WinCanvas").gameObject;
         RespawnMessage = transform.Find("RespawnMessageCanvas").gameObject;
         LivesText = transform.Find("LivesText").gameObject;
+
+        // For Pause Menu
+        if (playerNum == 1)
+        {
+            pauseButton = "J" + playerNum + "Pause";
+            PreGameMessage = transform.Find("PauseCanvas").gameObject;
+        }
 
         // Set Player controller stuff
         player = GameObject.Find("Player" + playerNum + "ControllerFPS").GetComponent<PlayerManager>();
@@ -47,6 +56,11 @@ public class SoldierUI : MonoBehaviour {
     void Update()
     {
         UIUpdate();
+
+        if(playerNum == 1 && Input.GetButtonDown(pauseButton))
+        {
+            SwitchActiveStatesPauseMenu();
+        }
 
     }
 
@@ -95,6 +109,18 @@ public class SoldierUI : MonoBehaviour {
         else
         {
             RespawnMessage.SetActive(false);
+        }
+    }
+
+    public void SwitchActiveStatesPauseMenu()
+    {
+        if (PauseMenu.activeSelf == false)
+        {
+            PauseMenu.SetActive(true);
+        }
+        else
+        {
+            PauseMenu.SetActive(false);
         }
     }
 }

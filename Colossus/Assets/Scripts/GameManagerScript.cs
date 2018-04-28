@@ -53,6 +53,9 @@ public class GameManagerScript : MonoBehaviour
 		{
 			//Debug.Log(Input.GetJoystickNames()[i]);	
 		}
+
+        OOOOOOOF();
+
 	}
     #endregion
 
@@ -113,4 +116,21 @@ public class GameManagerScript : MonoBehaviour
         SceneManager.LoadScene(0);
     }
     #endregion
+
+    /// <summary>
+    /// Emergency Restart for the game
+    /// </summary>
+    public void OOOOOOOF()
+    {
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
+
+    public void ExitGame()
+    {
+        // Last thing: Load the main menu
+        SceneManager.LoadScene(0);
+    }
 }
