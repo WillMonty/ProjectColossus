@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 54241759404791836}
   - component: {fileID: 114577724414160710}
   - component: {fileID: 114310963188528088}
+  - component: {fileID: 64352604410808692}
   m_Layer: 0
   m_Name: Arm3
   m_TagString: Untagged
@@ -102,6 +103,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &64352604410808692
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1259349372369734}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 0af54029932a6594da66295359ea365f, type: 3}
 --- !u!95 &95037862478645874
 Animator:
   serializedVersion: 3

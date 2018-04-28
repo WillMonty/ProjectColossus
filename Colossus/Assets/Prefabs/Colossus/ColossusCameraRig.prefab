@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4447656529739086}
   - component: {fileID: 33391924569213662}
   - component: {fileID: 23393506881186514}
+  - component: {fileID: 65012147231044116}
   m_Layer: 0
   m_Name: left_hand_palm
   m_TagString: colossusplayer
@@ -1228,6 +1229,7 @@ GameObject:
   - component: {fileID: 4445809922673232}
   - component: {fileID: 33444979987564020}
   - component: {fileID: 23287048998740938}
+  - component: {fileID: 65919111103969320}
   m_Layer: 0
   m_Name: right_hand_palm
   m_TagString: colossusplayer
@@ -1677,7 +1679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1668978260952000
 GameObject:
   m_ObjectHideFlags: 1
@@ -9350,6 +9352,18 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300050, guid: e32f1f40acaa4bb4681a79c794be78df, type: 3}
+--- !u!65 &65012147231044116
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000131344819812}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.096670754, y: 0.040875614, z: 0.020727376}
+  m_Center: {x: -0.048282653, y: 0.00005000562, z: -0.000000006394593}
 --- !u!65 &65093644684162356
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -9458,6 +9472,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.13539393, y: 0.050824072, z: 0.11684076}
   m_Center: {x: -0.000000015585446, y: 0.026139753, z: -0.0003222109}
+--- !u!65 &65919111103969320
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526715591333572}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.09704297, y: 0.040875625, z: 0.020727374}
+  m_Center: {x: 0.048769858, y: 0.00007930825, z: -0.0000000065107555}
 --- !u!65 &65995733657647264
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -9592,7 +9618,7 @@ Light:
   m_Type: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 2.1
-  m_Range: 11.88
+  m_Range: 50
   m_SpotAngle: 2
   m_CookieSize: 10
   m_Shadows:
@@ -9867,7 +9893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98695bcf37db62840b82c5c26149edac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugLaser: 0
+  debugLaser: 1
   origins:
   - {fileID: 1886769667961186}
   - {fileID: 1603699438857454}
@@ -9880,6 +9906,9 @@ MonoBehaviour:
   indicatorImage: {fileID: 114223274283578134}
   ready: {fileID: 2800000, guid: b02a782cdaab91b418dc76535cdbd234, type: 3}
   notReady: {fileID: 2800000, guid: a671b4ab78212ef4491187c5b60eea82, type: 3}
+  lMask:
+    serializedVersion: 2
+    m_Bits: 0
   cooldownTime: 6
   laserTime: 3
   damageAmt: 0.27
@@ -10261,7 +10290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae7b9bf6d28f2234097ccfee114fd2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugColossus: 0
+  debugColossus: 1
   leftController: {fileID: 1169498600120644}
   rightController: {fileID: 1453949699326800}
   headset: {fileID: 1541039505096830}
@@ -13936,7 +13965,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

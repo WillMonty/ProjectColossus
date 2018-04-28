@@ -125,6 +125,8 @@ public class Laser : MonoBehaviour
 
 
             lastDistance = hits[i].distance;
+
+			CheckHit(hits[i]);
         }
 
         currLaserTime += Time.deltaTime;
