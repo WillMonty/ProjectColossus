@@ -49,7 +49,6 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-		Debug.Log(soldier1);
 		CheckWinCondition();
 		/*for(int i = 0; i < Input.GetJoystickNames().Length; i++)
 		{

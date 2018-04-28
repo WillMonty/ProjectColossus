@@ -2754,7 +2754,17 @@ ModelImporter:
     13700010: model:Torso_retopo_done:Shirt_bottom
     13700012: model:Torso_retopo_done_2:Vest
     13700014: skinCage
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aiAmbientOcclusion1
+    second: {fileID: 2100000, guid: c22e23453b2090e46a17a4b43b77772b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 292bc7b95df00bd47b93d468c59e9dc8, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

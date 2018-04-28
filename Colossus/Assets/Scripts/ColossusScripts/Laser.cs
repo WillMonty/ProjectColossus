@@ -106,7 +106,7 @@ public class Laser : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
 			Physics.Raycast(origins[i].transform.position, origins[i].transform.forward, out hits[i], maxDistance, lMask, QueryTriggerInteraction.Collide);
-
+			Debug.DrawLine(origins[i].transform.position, origins[i].transform.forward * maxDistance);
             //Move and scale the beam to the appropriate position
             Vector3 currBeamLocalPosition = beams[i].transform.localPosition;
             Vector3 currBeamScale = beams[i].transform.localScale;
@@ -156,6 +156,7 @@ public class Laser : MonoBehaviour
 	void CheckHit(RaycastHit hit)
 	{
 		//If the raycast has hit something
+		Debug.Log(hit.collider);
 		if(hit.collider != null)
 		{
 			GameObject hitObj = hit.collider.gameObject;
