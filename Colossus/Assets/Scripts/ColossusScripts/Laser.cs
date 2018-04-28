@@ -137,7 +137,7 @@ public class Laser : MonoBehaviour
     }
 
     //Helper method to turn off the laser
-    void StopLaser()
+    public void StopLaser()
     {
         firing = false;
         StopCoroutine(ChargeUp());

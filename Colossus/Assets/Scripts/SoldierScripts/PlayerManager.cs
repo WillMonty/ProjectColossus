@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     // Player Manager
-    const int STARTING_LIVES = 3;
+    const int STARTING_LIVES = 2;
     const float RESPAWN_TIME = 5.0f;
     const float DAMAGING_OBJECT_MAGNITUDE = .02f;
     const float MAX_HEALTH = 100;

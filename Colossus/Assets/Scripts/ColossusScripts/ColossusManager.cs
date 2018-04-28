@@ -10,7 +10,7 @@ public class ColossusManager : MonoBehaviour {
     public bool debugColossus;
 
     // Robot Manager
-    const int STARTING_HEALTH = 1000;
+    const float STARTING_HEALTH = 1500.0f;
     const float RESPAWN_TIME = 5.0f;
     private bool playerInBot; //Is the player currently in the colossus and ready to play?
     private float health;
@@ -46,6 +46,7 @@ public class ColossusManager : MonoBehaviour {
 
     [Header("UI")]
     public Slider heathBar;
+    public Slider headHealth;
 
     [Header("Player Positioning")]
     public GameObject leftIndicator;
@@ -123,8 +124,9 @@ public class ColossusManager : MonoBehaviour {
     public void Damage(float damageFloat)
     {
         health -= damageFloat;
-        heathBar.value = (STARTING_HEALTH - health)/1000.0f;
-        
+        heathBar.value = (STARTING_HEALTH - health)/STARTING_HEALTH;
+        headHealth.value = (STARTING_HEALTH - health) / STARTING_HEALTH;
+
     }
 
     /// <summary>
@@ -174,8 +176,9 @@ public class ColossusManager : MonoBehaviour {
         neck.SetActive(true);
         laser.enabled = true;
 		playerInBot = true;
+        headHealth.gameObject.SetActive(true);
 
-		//Enable Map Objects
+        //Enable Map Objects
         disabledColossus.SetActive(false);
         lava.SetActive(true);
 		conveyors.SetActive(true);
@@ -212,6 +215,8 @@ public class ColossusManager : MonoBehaviour {
 		{
 			colossusBody.SetActive(false);
 			neck.SetActive(false);
+            laser.StopLaser();
+            laser.enabled = false;
 
 			headSource.Stop();
 			headSource.clip = deathSound;
