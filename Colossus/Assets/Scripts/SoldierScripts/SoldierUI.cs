@@ -88,6 +88,16 @@ public class SoldierUI : MonoBehaviour {
 			PreGameMessage.SetActive(false);
 		}
 
+        if(GameManagerScript.instance.currentGameState == GameState.ResistanceWin)
+        {
+            WinMessage.SetActive(true);
+        }
+
+        if (GameManagerScript.instance.currentGameState == GameState.ResistanceLose)
+        {
+            LoseMessage.SetActive(true);
+        }
+
         // Get current health and update the bar
         currentHealth = player.Health;
         healthBar.value = currentHealth;
@@ -100,6 +110,9 @@ public class SoldierUI : MonoBehaviour {
     }
 
 
+    /// <summary>
+    /// Switch the message for if respawning
+    /// </summary>
     public void SwitchActiveStatesRespawnMessage()
     {
         if(RespawnMessage.activeSelf == false)
@@ -112,6 +125,9 @@ public class SoldierUI : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Switch the state for the pause menu
+    /// </summary>
     public void SwitchActiveStatesPauseMenu()
     {
         if (PauseMenu.activeSelf == false)
@@ -123,13 +139,4 @@ public class SoldierUI : MonoBehaviour {
             PauseMenu.SetActive(false);
         }
     }
-
-	public void LoseGame()
-	{
-		LoseMessage.SetActive(true);
-	}
-	public void WinGame()
-	{
-		WinMessage.SetActive(true);
-	}
 }

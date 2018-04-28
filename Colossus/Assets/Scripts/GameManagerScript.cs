@@ -95,15 +95,11 @@ public class GameManagerScript : MonoBehaviour
     {
         if(instance.currentGameState == GameState.InGame && colossus.Health <= 0)
         {
-			soldier1.gameObject.GetComponent<SoldierUI>().WinGame();
-			soldier1.gameObject.GetComponent<SoldierUI>().WinGame();
             instance.currentGameState = GameState.ResistanceWin;
             StartCoroutine(ReturnToMainMenu(7f));
         }
         else if(instance.currentGameState == GameState.InGame && soldier1.Lives <= 0 && soldier2.Lives <= 0)
         {
-			//soldier1.gameObject.GetComponent<SoldierUI>().LoseGame();
-			//soldier2.gameObject.GetComponent<SoldierUI>().LoseGame();
             instance.currentGameState = GameState.ResistanceLose;
 			StartCoroutine(ReturnToMainMenu(7f));
         }
