@@ -7,8 +7,8 @@ public class PlayerManager : MonoBehaviour
 {
     // Player Manager
     const int STARTING_LIVES = 3;
-    const float RESPAWN_TIME = 0.0f;
-    const float DAMAGING_OBJECT_MAGNITUDE = 5.0f;
+    const float RESPAWN_TIME = 5.0f;
+    const float DAMAGING_OBJECT_MAGNITUDE = .02f;
     const float MAX_HEALTH = 100;
     const float MAX_FUEL = 5;
 
@@ -194,22 +194,30 @@ public class PlayerManager : MonoBehaviour
         jetPackFuel = MAX_FUEL;
     }
 
-    void OnCollisionEnter(Collision col)
-    {
-        //Debug.Log("Collision");
-        GameObject collisionObject = col.gameObject;
+	void OnTriggerEnter(Collider col)
+	{
+		
+		GameObject collisionObject = col.gameObject;
 
-        // If a player is hit with an object the robot throws
-        if (collisionObject.tag == "object")
-        {
-            // Only damage the player if the object is moveing at a high velocity (number can be determined and changed through the player constant)
-            if (collisionObject.GetComponent<Rigidbody>().velocity.magnitude > DAMAGING_OBJECT_MAGNITUDE)
-            {
-                float movingObjectDamage = collisionObject.GetComponent<Rigidbody>().velocity.magnitude;
+		// If a player is hit with an object the robot throws
+		if (collisionObject.tag == "throwable")
+		{
+			// Only damage the player if the object is moveing at a high velocity (number can be determined and changed through the player constant)
+			if (collisionObject.GetComponent<Rigidbody>().velocity.magnitude > DAMAGING_OBJECT_MAGNITUDE)
+			{
+				float movingObjectDamage = collisionObject.GetComponent<Rigidbody>().velocity.magnitude;
 
-                Damage(movingObjectDamage);
-                collisionObject.GetComponent<BulletScript>().deleteBullet();
-            }
-        }
-    }
+				Damage(movingObjectDamage);
+
+			}
+			else if(collisionObject.GetComponent<Rigidbody>().isKinematic)
+			{
+				float movingObjectDamage =collisionObject.GetComponent<Valve.VR.InteractionSystem.VelocityEstimator>().GetVelocityEstimate().magnitude;
+				if(movingObjectDamage<=0.0f)
+					movingObjectDamage=15f;
+				Damage(movingObjectDamage);
+			}
+		}
+	}
+
 }

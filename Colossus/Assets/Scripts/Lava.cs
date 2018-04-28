@@ -29,8 +29,10 @@ public class Lava : MonoBehaviour
                 break;
             case "MainCamera":
                 //Do nothing
+				break;
             default:
-                GameObject.Destroy(other.gameObject);
+				if(!other.attachedRigidbody.isKinematic)
+               		 GameObject.Destroy(other.gameObject);
                 break;
         }
     }

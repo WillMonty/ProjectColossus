@@ -8,7 +8,7 @@ public class PlayerInputManager : MonoBehaviour {
     public int playerNum;
 
     const float WALK_SPEED = 5.0f;
-    const float RUN_SPEED = 10.0f;
+    const float RUN_SPEED = 8.0f;
     const float JUMP_FORCE = 6.0f;
     const float JETPACK_FORCE = .5f;
     const float GRAVITY_FORCE = -.5f;

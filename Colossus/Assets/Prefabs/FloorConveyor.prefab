@@ -274,10 +274,10 @@ MonoBehaviour:
   commonSpawnablePrefabs:
   - {fileID: 1337659906223482, guid: a9d71ffd75f0bf84b8d24f4fb6a179a8, type: 2}
   - {fileID: 1434484791173810, guid: f8ec98fed57ffbc42914c789f1eeece3, type: 2}
+  uncommonSpawnablePrefabs:
   - {fileID: 1825952108269902, guid: 1c84ec43f7d6cd24fb8702ccacfa0a18, type: 2}
   - {fileID: 1972340816490996, guid: 5e6e872e2ed7d5f40b743bb4817c82cd, type: 2}
   - {fileID: 1259349372369734, guid: 92627a445016e9b449bb9cf896ed1692, type: 2}
-  uncommonSpawnablePrefabs: []
   rareSpawnablePrefabs: []
   spawnForce: {x: 0, y: 0, z: 0}
   spawnRadius: 0.65

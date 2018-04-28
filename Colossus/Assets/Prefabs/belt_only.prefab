@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4693119993464858}
-  - component: {fileID: 114296776050712740}
   - component: {fileID: 114007763012654534}
   m_Layer: 0
   m_Name: TrashSpawner
@@ -70,13 +69,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1672825507135772}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children: []
   m_Father: {fileID: 4616291050172202}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4616291050172202
 Transform:
   m_ObjectHideFlags: 1
@@ -183,29 +182,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a3f019b04ff9144b4d3fd23c5ec274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTimeInterval: 4
+  spawnTimeInterval: 5
   spawnTimeVariation: 0
   commonSpawnablePrefabs:
   - {fileID: 1337659906223482, guid: a9d71ffd75f0bf84b8d24f4fb6a179a8, type: 2}
   - {fileID: 1434484791173810, guid: f8ec98fed57ffbc42914c789f1eeece3, type: 2}
+  uncommonSpawnablePrefabs:
   - {fileID: 1825952108269902, guid: 1c84ec43f7d6cd24fb8702ccacfa0a18, type: 2}
   - {fileID: 1972340816490996, guid: 5e6e872e2ed7d5f40b743bb4817c82cd, type: 2}
   - {fileID: 1259349372369734, guid: 92627a445016e9b449bb9cf896ed1692, type: 2}
-  uncommonSpawnablePrefabs: []
   rareSpawnablePrefabs: []
   spawnForce: {x: 0, y: 0, z: 0}
   spawnRadius: 0.14
---- !u!114 &114296776050712740
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1431331734103654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114916344044602908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c77d455cd21cba408f67e4520933eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textureOffset: {x: -0.3, y: 0}
+  textureOffset: {x: 0.3, y: 0}
 --- !u!114 &114937721425908428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,4 +217,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8e953b56b606e4fb7bcd7504413aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementForce: {x: 98.96, y: 0, z: 0}
+  movementForce: {x: 1.5, y: 0, z: 0}

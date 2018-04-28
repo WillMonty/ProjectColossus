@@ -12,6 +12,7 @@ TagManager:
   - resistanceplayer
   - colossusplayer
   - spawnpoint
+  - throwable
   layers:
   - Default
   - TransparentFX
