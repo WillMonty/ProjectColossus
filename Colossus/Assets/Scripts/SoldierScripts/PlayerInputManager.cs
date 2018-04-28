@@ -13,7 +13,6 @@ public class PlayerInputManager : MonoBehaviour {
     const float JETPACK_FORCE = .5f;
     const float GRAVITY_FORCE = -.5f;
 
-
     // Player variables
     public float speed = 2f;
     public float lookSensitivityX = .001f;
@@ -48,6 +47,10 @@ public class PlayerInputManager : MonoBehaviour {
     private string triggerLeft;
     private string runButton;
 
+    // Animation Stuff
+    public GameObject StandingPose;
+    public GameObject RunningAnimation;
+
     // Use this for initialization
     void Start()
     {
@@ -55,6 +58,10 @@ public class PlayerInputManager : MonoBehaviour {
         player = GetComponent<CharacterController>();
         eyes = gameObject.transform.Find("Player" + playerNum + "Eyes").gameObject;
         rifle = gameObject.transform.Find("Rifle").gameObject;
+
+        //StandingPose = gameObject.transform.Find("Resistance_Shooting_Pose").gameObject;
+        //RunningAnimation = gameObject.transform.Find("Resistance_Run_Animation").gameObject;
+
 
         // Give an instance to this soldier to the gamemanager
         StartCoroutine(LateStart(0.2f));
@@ -125,6 +132,13 @@ public class PlayerInputManager : MonoBehaviour {
         if (Input.GetAxis(moveYAxis) > .2  || Input.GetAxis(moveYAxis) < -.2 )
         {
             moveFB = -Input.GetAxis(moveYAxis) * speed;
+
+            // Turn on running animation and turn off standing pose
+            if (RunningAnimation.activeSelf == false)
+            {
+                RunningAnimation.SetActive(true);
+                StandingPose.SetActive(false);
+            }
         }
         else
         {
@@ -134,10 +148,27 @@ public class PlayerInputManager : MonoBehaviour {
         if (Input.GetAxis(moveXAxis) > .2 || Input.GetAxis(moveXAxis) < -.2)
         {
             moveLR = Input.GetAxis(moveXAxis) * speed;
+
+            // Turn on running animation and turn off standing pose
+            if (RunningAnimation.activeSelf == false)
+            {
+                RunningAnimation.SetActive(true);
+                StandingPose.SetActive(false);
+            }
         }
         else
         {
             moveLR = 0;
+        }
+
+        if(moveLR==0 && moveFB==0)
+        {
+            // Turn on standing pose
+            if (RunningAnimation.activeSelf == true)
+            {
+                RunningAnimation.SetActive(false);
+                StandingPose.SetActive(true);
+            }
         }
 
         // Rotate the player
