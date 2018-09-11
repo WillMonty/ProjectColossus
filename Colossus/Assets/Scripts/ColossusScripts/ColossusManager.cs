@@ -6,28 +6,24 @@ using UnityEngine.UI;
 public class ColossusManager : MonoBehaviour {
 
     #region Robot Attributes
-    //Debug variable to allow the game to start with the colossus on
+    //Debug variable to allow the game to start with the game running
     public bool debugColossus;
 
-    // Robot Manager
     const float STARTING_HEALTH = 1500.0f;
-    const float RESPAWN_TIME = 5.0f;
     private bool playerInBot; //Is the player currently in the colossus and ready to play?
     private float health;
 	private bool gameEnded;
 
-    // Public components needed for the toggling of the colossus
+    // Components needed for the toggling of the colossus
     [Header("Colossus Components")]
     public GameObject leftController;
     public GameObject rightController;
     public GameObject headset;
-    public GameObject neck;
-    public GameObject colossusBody;
     public GameObject disabledColossus; //The starting stationary colossus that is turned off when playing
 	public GameObject resultsCanvas;
     Laser laser;
-    //Will add variables for the rigged colossus model
 
+	//Objects dealing with the environment
     [Header("Map")]
     public GameObject map;
     public float lowerMapAmount;
@@ -45,8 +41,9 @@ public class ColossusManager : MonoBehaviour {
 	public AudioClip deathSound;
 
     [Header("UI")]
-    public Slider heathBar;
-    public Slider headHealth;
+    public Slider armHealthbar;
+    public Slider headHealthbar;
+	public GameObject handUI;
 
     [Header("Player Positioning")]
     public GameObject leftIndicator;
@@ -124,8 +121,8 @@ public class ColossusManager : MonoBehaviour {
     public void Damage(float damageFloat)
     {
         health -= damageFloat;
-        heathBar.value = (STARTING_HEALTH - health)/STARTING_HEALTH;
-        headHealth.value = (STARTING_HEALTH - health) / STARTING_HEALTH;
+        armHealthbar.value = (STARTING_HEALTH - health)/STARTING_HEALTH;
+        headHealthbar.value = (STARTING_HEALTH - health) / STARTING_HEALTH;
 
     }
 
@@ -172,11 +169,11 @@ public class ColossusManager : MonoBehaviour {
         rightHand.SetActive(true);
 
         //Enable Colossus
-        colossusBody.SetActive(true);
-        neck.SetActive(true);
-        laser.enabled = true;
 		playerInBot = true;
-        headHealth.gameObject.SetActive(true);
+        laser.enabled = true;
+		armHealthbar.gameObject.SetActive(true);
+		handUI.gameObject.SetActive(true);
+        headHealthbar.gameObject.SetActive(true);
 
         //Enable Map Objects
         disabledColossus.SetActive(false);
@@ -213,8 +210,6 @@ public class ColossusManager : MonoBehaviour {
 	{
 		if(!gameEnded)
 		{
-			colossusBody.SetActive(false);
-			neck.SetActive(false);
             laser.StopLaser();
             laser.enabled = false;
 

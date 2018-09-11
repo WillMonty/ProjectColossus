@@ -37,3 +37,4 @@ sysinfo.txt
 /Colossus/.vs/Colossus/v15/sqlite3/storage.ide-shm
 /Colossus/.vs/Colossus/v15/sqlite3/storage.ide-wal
 Builds/
+Colossus/Assets/Packages/Plugins/RootMotion/
