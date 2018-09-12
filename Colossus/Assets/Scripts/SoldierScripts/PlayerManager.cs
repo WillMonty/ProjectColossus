@@ -76,6 +76,11 @@ public class PlayerManager : MonoBehaviour
             Death();
         }
 
+
+        if(Input.GetKeyDown(KeyCode.KeypadMinus))
+        {
+            health -= 10;
+        }
     }
 
     /// <summary>
