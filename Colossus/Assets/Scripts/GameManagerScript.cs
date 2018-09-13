@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 // GameState Enum
@@ -19,8 +20,14 @@ public class GameManagerScript : MonoBehaviour
     public PlayerManager soldier2 = null;
 	public GameObject deathbox;
 
+    public GameObject soldierUI;
+    public GameObject pauseMenu;
+
     List<GameObject> escapeScreens;
     public GameState currentGameState;
+
+    public enum PauseOwner { Player1, Player2, Colossus, None}
+    public PauseOwner currentPauseOwner;
 
     #endregion
 
@@ -33,6 +40,8 @@ public class GameManagerScript : MonoBehaviour
 		{
 			Display.displays[1].Activate();	
 		}
+
+        currentPauseOwner = PauseOwner.None;
 
         #region Singleton Design Pattern
         // Check for an instance, if it does exist, than set to this
@@ -61,37 +70,62 @@ public class GameManagerScript : MonoBehaviour
 			Debug.Log(Input.GetJoystickNames()[i]);	
 		}*/
 
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+
         OOOOOOOF();
 
 	}
     #endregion
 
     #region Pause and Play Game
-    // Game Management Pausing and Resuming Methods
-    public void PauseGame()
+
+    void TogglePause()
     {
         if (instance.currentGameState == GameState.InGame)
         {
-            for (int i = 0; i < escapeScreens.Count; i++)
-            {
-                escapeScreens[i].SetActive(true);
-            }
-            instance.currentGameState = GameState.Paused;
-            Time.timeScale = 0;
+            PauseGame();
+
+            //set pause owner here
         }
+
+        else if(instance.currentGameState == GameState.Paused)
+        {
+            ResumeGame();
+
+            currentPauseOwner = PauseOwner.None;
+        }
+    }
+
+    // Game Management Pausing and Resuming Methods
+    public void PauseGame()
+    {
+        //for (int i = 0; i < escapeScreens.Count; i++)
+        //{
+        //    escapeScreens[i].SetActive(true);
+        //}
+
+        pauseMenu.SetActive(true);
+        
+        instance.currentGameState = GameState.Paused;
+        
+        Time.timeScale = 0;
     }
 
     public void ResumeGame()
     {
-        if (instance.currentGameState == GameState.Paused)
-        {
-            for (int i = 0; i < escapeScreens.Count; i++)
-            {
-                escapeScreens[i].SetActive(false);
-            }
-            instance.currentGameState = GameState.InGame;
-            Time.timeScale = 0;
-        }
+        //for (int i = 0; i < escapeScreens.Count; i++)
+        //{
+        //    escapeScreens[i].SetActive(false);
+        //}
+
+        pauseMenu.SetActive(false);
+
+        instance.currentGameState = GameState.InGame;
+
+        Time.timeScale = 1;
     }
 
     /// <summary>
@@ -99,15 +133,18 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void CheckWinCondition()
     {
-        if(instance.currentGameState == GameState.InGame && colossus.Health <= 0)
+        if(colossus != null && soldier1 != null && soldier2 != null)
         {
-            instance.currentGameState = GameState.ResistanceWin;
-            StartCoroutine(ReturnToMainMenu(7f));
-        }
-        else if(instance.currentGameState == GameState.InGame && soldier1.Lives <= 0 && soldier2.Lives <= 0)
-        {
-            instance.currentGameState = GameState.ResistanceLose;
-			StartCoroutine(ReturnToMainMenu(7f));
+            if (instance.currentGameState == GameState.InGame && colossus.Health <= 0)
+            {
+                instance.currentGameState = GameState.ResistanceWin;
+                StartCoroutine(ReturnToMainMenu(7f));
+            }
+            else if (instance.currentGameState == GameState.InGame && soldier1.Lives <= 0 && soldier2.Lives <= 0)
+            {
+                instance.currentGameState = GameState.ResistanceLose;
+                StartCoroutine(ReturnToMainMenu(7f));
+            }
         }
     }
 

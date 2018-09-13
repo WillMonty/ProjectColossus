@@ -5,48 +5,85 @@ using UnityEngine.UI;
 
 public class SoldierUINew : MonoBehaviour {
 
-    public PlayerManager player1;
-    public PlayerManager player2;
-
-
+    public PlayerManager soldier1;
+    public PlayerManager soldier2;
+    
     public float maxHealth;
 
-    public float p1CurrentHealth;
-    public Image p1HealthBar;
+    public float s1CurrentHealth;
+    public Image s1Healthbar;
 
-    public float p2CurrentHealth;
-    public Image p2HealthBar;
+    public float s2CurrentHealth;
+    public Image s2Healthbar;
+
+
+    public float maxFuel;
+
+    public float s1CurrentFuel;
+    public Image s1Fuelbar;
+
+    public float s2CurrentFuel;
+    public Image s2Fuelbar;
 
     // Use this for initialization
     void Start ()
     {
-        maxHealth = player1.GetComponent<PlayerManager>().MaxHealth;
+        maxHealth = soldier1.GetComponent<PlayerManager>().MaxHealth;
 
-        p1CurrentHealth = player1.GetComponent<PlayerManager>().Health;
+        s1CurrentHealth = soldier1.GetComponent<PlayerManager>().Health;
+        s1Healthbar.fillAmount = s1CurrentHealth / maxHealth;
 
-        p2CurrentHealth = player2.GetComponent<PlayerManager>().Health;
+        s2CurrentHealth = soldier2.GetComponent<PlayerManager>().Health;
+        s2Healthbar.fillAmount = s2CurrentHealth / maxHealth;
+
+        maxFuel = soldier1.GetComponent<PlayerManager>().MaxFuel;
+
+        s1CurrentFuel = soldier1.GetComponent<PlayerManager>().JetPackFuel;
+        s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
+
+        s2CurrentFuel = soldier2.GetComponent<PlayerManager>().JetPackFuel;
+        s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        UpdateHealthBar();
+        UpdateHealthbar();
+
+        UpdateFuelbar();
 	}
 
-    void UpdateHealthBar()
+    void UpdateHealthbar()
     {
-        if (p1CurrentHealth != player1.GetComponent<PlayerManager>().Health)
+        if (s1CurrentHealth != soldier1.GetComponent<PlayerManager>().Health)
         {
-            p1CurrentHealth = player1.GetComponent<PlayerManager>().Health;
+            s1CurrentHealth = soldier1.GetComponent<PlayerManager>().Health;
 
-            p1HealthBar.fillAmount = p1CurrentHealth / maxHealth;
+            s1Healthbar.fillAmount = s1CurrentHealth / maxHealth;
         }
 
-        if (p2CurrentHealth != player2.GetComponent<PlayerManager>().Health)
+        if (s2CurrentHealth != soldier2.GetComponent<PlayerManager>().Health)
         {
-            p2CurrentHealth = player2.GetComponent<PlayerManager>().Health;
+            s2CurrentHealth = soldier2.GetComponent<PlayerManager>().Health;
 
-            p2HealthBar.fillAmount = p2CurrentHealth / maxHealth;
+            s2Healthbar.fillAmount = s2CurrentHealth / maxHealth;
+        }
+    }
+
+    void UpdateFuelbar()
+    {
+        if(s1CurrentFuel != soldier1.GetComponent<PlayerManager>().JetPackFuel)
+        {
+            s1CurrentFuel = soldier1.GetComponent<PlayerManager>().JetPackFuel;
+
+            s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
+        }
+
+        if (s2CurrentFuel != soldier2.GetComponent<PlayerManager>().JetPackFuel)
+        {
+            s2CurrentFuel = soldier2.GetComponent<PlayerManager>().JetPackFuel;
+
+            s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
         }
     }
 }
