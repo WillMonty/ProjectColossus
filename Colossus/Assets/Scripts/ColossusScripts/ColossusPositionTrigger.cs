@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisabledColossusTrigger : MonoBehaviour {
+public class ColossusPositionTrigger : MonoBehaviour {
 
     bool headsetInTrigger;
 

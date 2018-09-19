@@ -15,24 +15,35 @@ public class GameManagerScript : MonoBehaviour
     #region Attributes
     // Static instance of the GameManager which allows it to be accessed from any script
     public static GameManagerScript instance = null;
+
+	public bool forceStartGame;
+
+	[Header("Players")]
     public ColossusManager colossus = null;
     public PlayerManager soldier1 = null;
     public PlayerManager soldier2 = null;
-	public GameObject deathbox;
 
-    public GameObject soldierUI;
+	[Header("Game Pieces")]
+	public GameObject[] gamePieces; //Pieces of the scene only shown/used InGame
+
+
+	[Header("Pausing")]
     public GameObject pauseMenu;
-
-    List<GameObject> escapeScreens;
     public GameState currentGameState;
-
     public enum PauseOwner { Player1, Player2, Colossus, None}
     public PauseOwner currentPauseOwner;
+	List<GameObject> escapeScreens;
+
+	public GameObject deathbox;
 
     #endregion
 
     #region Start
-    // Use this for initialization
+	void Awake ()
+	{
+		DontDestroyOnLoad(this);
+	}
+
     void Start ()
     {
 		//Activate normal monitor
@@ -47,16 +58,32 @@ public class GameManagerScript : MonoBehaviour
         // Check for an instance, if it does exist, than set to this
         if (instance == null)
         {
-            // The gamestate should be set as mainmenu originally
-            currentGameState = GameState.MainMenu;
-
             instance = this;
         }
         else if(instance!=this) // If a new Gamemanger is loaded and it isn't the one that is loaded already than delete it
         {
-            Destroy(gameObject);
+			if (FindObjectsOfType(GetType()).Length > 1)
+				Destroy(gameObject);
         }
         #endregion
+
+		//Set game state
+		string currScene = SceneManager.GetActiveScene().name;
+		switch(currScene){
+			case "MainMenu":
+				currentGameState = GameState.MainMenu;
+				break;
+			case "MainGame":
+				currentGameState = GameState.Pregame;
+				break;	
+		}
+
+		//Check for debug
+		if(forceStartGame)
+		{
+			colossus.ToggleColossus();
+			StartGame();
+		}
     }
     #endregion
 
@@ -65,10 +92,6 @@ public class GameManagerScript : MonoBehaviour
     void Update ()
     {
 		CheckWinCondition();
-		/*for(int i = 0; i < Input.GetJoystickNames().Length; i++)
-		{
-			Debug.Log(Input.GetJoystickNames()[i]);	
-		}*/
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -76,9 +99,16 @@ public class GameManagerScript : MonoBehaviour
         }
 
         OOOOOOOF();
-
 	}
     #endregion
+
+	//General function to set up the game's pieces and state
+	public void StartGame()
+	{
+		GamePiecesSwitch();
+		currentGameState = GameState.InGame;
+	}
+
 
     #region Pause and Play Game
 
@@ -128,6 +158,21 @@ public class GameManagerScript : MonoBehaviour
         Time.timeScale = 1;
     }
 
+	/// <summary>
+	/// Turns objects present in the gamePieces array on or off
+	/// </summary>
+	public void GamePiecesSwitch()
+	{
+		for(int i = 0; i < gamePieces.Length; i++)
+		{
+			if(gamePieces[i] != null)
+			{
+				Debug.Log(gamePieces[i].gameObject.activeSelf);
+				gamePieces[i].SetActive(!gamePieces[i].gameObject.activeSelf);
+			}
+		}
+	}
+
     /// <summary>
     /// Check to see who wins the game
     /// </summary>
@@ -165,6 +210,7 @@ public class GameManagerScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
+			currentGameState = GameState.MainMenu;
             SceneManager.LoadScene(0);
         }
     }

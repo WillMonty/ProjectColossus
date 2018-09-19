@@ -19,7 +19,7 @@ public class ColossusManager : MonoBehaviour {
     public GameObject leftController;
     public GameObject rightController;
     public GameObject headset;
-    public GameObject disabledColossus; //The starting stationary colossus that is turned off when playing
+    public GameObject pregameIndicator; //Gameobjects showing the player where to go to start the game
 	public GameObject resultsCanvas;
     Laser laser;
 
@@ -35,27 +35,20 @@ public class ColossusManager : MonoBehaviour {
     //Audio
     [Header("Audio")]
     public AudioSource headSource;
-    public AudioSource torsoSource;
     public AudioClip hopInSound;
     public AudioClip damageSound;
-	public AudioClip deathSound;
+	public AudioClip deathSound;	
 
     [Header("UI")]
     public Slider armHealthbar;
     public Slider headHealthbar;
-	public GameObject handUI;
 
-    [Header("Player Positioning")]
+    [Header("Colossus Positioning")]
     public GameObject leftIndicator;
     public GameObject rightIndicator;
     public Material inPositionMat;
     public Material outPositionMat;
 
- 
-    
-    // Ammo Variables
-    // Change this variable to private at some point
-    //public int assaultRifleAmmo;
     #endregion
 
     #region Properties
@@ -132,7 +125,7 @@ public class ColossusManager : MonoBehaviour {
     private void CheckHopIn()
     {
         //Check if the headset is in the collider
-        bool headsetIn = disabledColossus.GetComponent<DisabledColossusTrigger>().HeadsetInTrigger;
+		bool headsetIn = pregameIndicator.GetComponent<ColossusPositionTrigger>().HeadsetInTrigger;
         if(headsetIn)
         {
             //Make the indicators green
@@ -154,40 +147,35 @@ public class ColossusManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Method to toggle the player into the colossus and remove the disabled version
+    /// Method to toggle the player into the colossus
     /// </summary>
-    private void ToggleColossus()
+    public void ToggleColossus()
     {
         //Turn off indicators
         leftIndicator.SetActive(false);
         rightIndicator.SetActive(false);
 
-        //Enable hands
-        GameObject leftHand = leftController.transform.GetChild(0).gameObject;
-        GameObject rightHand = rightController.transform.GetChild(0).gameObject;
-        leftHand.SetActive(true);
-        rightHand.SetActive(true);
+		//Turn off base dummy hand prefab
+		leftController.transform.GetChild(1).gameObject.SetActive(false);
+		rightController.transform.GetChild(1).gameObject.SetActive(false);
+
+        //Enable regular hands
+		leftController.transform.GetChild(0).gameObject.SetActive(true);
+		rightController.transform.GetChild(0).gameObject.SetActive(true);
 
         //Enable Colossus
 		playerInBot = true;
         laser.enabled = true;
 		armHealthbar.gameObject.SetActive(true);
-		handUI.gameObject.SetActive(true);
         headHealthbar.gameObject.SetActive(true);
 
-        //Enable Map Objects
-        disabledColossus.SetActive(false);
-        lava.SetActive(true);
-		conveyors.SetActive(true);
+		pregameIndicator.SetActive(false);
+        //lava.SetActive(true);
+		//conveyors.SetActive(true);
 
         LowerMap();
 
-		//Start the game once the VR player is ready.
-		GameManagerScript.instance.currentGameState = GameState.InGame;
-
-		//Turn off base dummy hand prefab
-		leftController.transform.GetChild(1).gameObject.SetActive(false);
-		rightController.transform.GetChild(1).gameObject.SetActive(false);
+		GameManagerScript.instance.StartGame();
 
         //Non-debug only
         if (!debugColossus)
@@ -203,7 +191,10 @@ public class ColossusManager : MonoBehaviour {
     {
         float playerY = headset.transform.position.y - lowerMapAmount;
         map.transform.position = new Vector3(map.transform.position.x, playerY, map.transform.position.z);
-        resistanceContainer.transform.position = new Vector3(resistanceContainer.transform.position.x, playerY + resistanceContainer.transform.position.y, resistanceContainer.transform.position.z);
+
+		//Don't bother if there aren't resistance in the scene
+		if(resistanceContainer != null)
+        	resistanceContainer.transform.position = new Vector3(resistanceContainer.transform.position.x, playerY + resistanceContainer.transform.position.y, resistanceContainer.transform.position.z);
     }
 
 	void KillColossus()

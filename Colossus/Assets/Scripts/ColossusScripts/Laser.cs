@@ -10,6 +10,7 @@ public class Laser : MonoBehaviour
 
     //With these arrays, 0 index is left and 1 index is right
     [Header("Laser Components")]
+	public GameObject container;
     public GameObject[] origins = new GameObject[2]; //Starting object beams come from
     public GameObject[] beams = new GameObject[2]; //Beam cylinders
     public SteamVR_TrackedController[] controllers = new SteamVR_TrackedController[2]; //Player's Controllers
@@ -42,10 +43,14 @@ public class Laser : MonoBehaviour
     public AudioClip misfireSound;
     public AudioClip readySound;
 
+	[Header("UI")]
+	public GameObject laserUI;
+
     // Use this for initialization
     void Start()
     {
-
+		container.SetActive(true);
+		laserUI.SetActive(true);
     }
 
     // Update is called once per frame
@@ -63,12 +68,6 @@ public class Laser : MonoBehaviour
         {
             TryShoot();
         }
-
-        //If the player releases the pads while firing
-       /* if (firing && (!(controllers[0].padPressed && controllers[1].padPressed)))
-        {
-            StopLaser();
-        }*/
 
         //Update the raycasts if firing
         if (firing)
