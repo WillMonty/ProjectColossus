@@ -171,6 +171,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114722520695496446, guid: 705881de20613e84dbb19bc26d266952,
+        type: 2}
+      propertyPath: otherInput
+      value: 
+      objectReference: {fileID: 1197275104}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 705881de20613e84dbb19bc26d266952, type: 2}
   m_IsPrefabParent: 0
@@ -316,6 +321,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 408085629}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &475605207 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114722520695496446, guid: 705881de20613e84dbb19bc26d266952,
+    type: 2}
+  m_PrefabInternal: {fileID: 232523376}
+  m_Script: {fileID: 11500000, guid: 569f7316d9a4a034bb6d448ec407bf05, type: 3}
 --- !u!1001 &632586209
 Prefab:
   m_ObjectHideFlags: 0
@@ -524,6 +535,11 @@ Prefab:
       propertyPath: shootSound
       value: 
       objectReference: {fileID: 8300000, guid: a00104a47f6fa4b449102e3225da544a, type: 3}
+    - target: {fileID: 114448129284797174, guid: 9e4a6dd1580d3c149b83e31476df5d5d,
+        type: 2}
+      propertyPath: otherInput
+      value: 
+      objectReference: {fileID: 475605207}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e4a6dd1580d3c149b83e31476df5d5d, type: 2}
   m_IsPrefabParent: 0
@@ -805,6 +821,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1197275104 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114448129284797174, guid: 9e4a6dd1580d3c149b83e31476df5d5d,
+    type: 2}
+  m_PrefabInternal: {fileID: 846361064}
+  m_Script: {fileID: 11500000, guid: 569f7316d9a4a034bb6d448ec407bf05, type: 3}
 --- !u!1001 &1222374292
 Prefab:
   m_ObjectHideFlags: 0

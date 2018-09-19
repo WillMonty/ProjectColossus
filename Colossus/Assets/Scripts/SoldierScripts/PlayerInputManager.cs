@@ -1,11 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
-public class PlayerInputManager : MonoBehaviour {
+public class PlayerInputManager : MonoBehaviour
+{
 
     // Attributes
     public int playerNum;
+
+
+    //Gamepad Variables
+    PlayerIndex playerIndex;
+    bool playerIndexSet = false;
+
+    GamePadState state;
+    GamePadState prevState;
+
 
     const float WALK_SPEED = 5.0f;
     const float RUN_SPEED = 8.0f;
@@ -22,7 +33,7 @@ public class PlayerInputManager : MonoBehaviour {
     // Component Variables
     CharacterController player;
     public GameObject eyes;
-    GameObject rifle;
+    public GameObject rifle;
 
     // Movement Variables
     float moveFB; // Movement forward and backwards
@@ -35,44 +46,30 @@ public class PlayerInputManager : MonoBehaviour {
     float verticalVelocity;
     float timeFalling;
 
-    // Controller Variables
-    private string moveXAxis;
-    private string moveYAxis;
-    private string horizontalAxis;
-    private string verticalAxis;
-    private string aButton;
-    private string bButton;
-    private string yButton;
-    private string triggerRight;
-    private string triggerLeft;
-    private string runButton;
-
     // Animation Stuff
     public GameObject StandingPose;
     public GameObject RunningAnimation;
 
+    //Gun variable 
+    GunScript gunState;
+
     // Use this for initialization
     void Start()
     {
-        SetControllerVariables();
+       
         player = GetComponent<CharacterController>();
-        eyes = gameObject.transform.Find("Player" + playerNum + "Eyes").gameObject;
-        rifle = gameObject.transform.Find("Rifle").gameObject;
-
-        //StandingPose = gameObject.transform.Find("Resistance_Shooting_Pose").gameObject;
-        //RunningAnimation = gameObject.transform.Find("Resistance_Run_Animation").gameObject;
-
-
+        gunState = rifle.GetComponent<GunScript>();
         // Give an instance to this soldier to the gamemanager
         StartCoroutine(LateStart(0.2f));
+        
+      
     }
-
 
     IEnumerator LateStart(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         //Sets the instance after the game manager has actually initializes
-        switch(playerNum)
+        switch (playerNum)
         {
             case 1:
                 GameManagerScript.instance.soldier1 = GetComponent<PlayerManager>();
@@ -83,31 +80,37 @@ public class PlayerInputManager : MonoBehaviour {
         }
     }
 
-
     // Update is called once per frame
     void Update()
     {
+        if (!playerIndexSet || !prevState.IsConnected)
+        {
+            for (int i = 0; i < 4; ++i)
+            {
+                PlayerIndex testPlayerIndex = (PlayerIndex)i;
+                GamePadState testState = GamePad.GetState(testPlayerIndex);
+                if (testState.IsConnected)
+                {
+                    Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
+                    playerIndex = testPlayerIndex;
+                    playerIndexSet = true;
+                }
+            }
+        }
+
+        prevState = state;
+        state = GamePad.GetState(playerIndex);
+
         if (GameManagerScript.instance.currentGameState == GameState.InGame)
         {
             Move();
             Jump();
         }
-            //Debug.Log(player.isGrounded);
-    }
 
 
-    // Helper method to help set up the player controller
-    void SetControllerVariables()
-    {
-        moveXAxis = "J" + playerNum + "MoveX";
-        moveYAxis = "J" + playerNum + "MoveY";
-        horizontalAxis = "J" + playerNum + "Horizontal";
-        verticalAxis = "J" + playerNum + "Vertical";
-        aButton = "J" + playerNum + "A";
-        bButton = "J" + playerNum + "B";
-        yButton = "J" + playerNum + "Y";
-        triggerLeft = "J" + playerNum + "TriggerLeft";
-        runButton = "J" + playerNum + "LeftStickClick";
+        gunState.rightTrigger = state.Triggers.Right;
+        gunState.reloadButton = (ButtonState.Pressed==state.Buttons.X);
+        
     }
 
     /// <summary>
@@ -117,11 +120,11 @@ public class PlayerInputManager : MonoBehaviour {
     {
         #region Handles Running
         // Handles Running
-        if (Input.GetButtonDown(runButton))
+        if (state.Triggers.Left > 0 )
         {
             speed = RUN_SPEED;
         }
-        if (Input.GetButtonUp(runButton))
+        else
         {
             speed = WALK_SPEED;
         }
@@ -129,9 +132,10 @@ public class PlayerInputManager : MonoBehaviour {
 
         #region Getting Input
         // Movement variables/axis
-        if (Input.GetAxis(moveYAxis) > .2  || Input.GetAxis(moveYAxis) < -.2 )
+        
+        if (state.ThumbSticks.Left.Y > .2 || state.ThumbSticks.Left.Y < -.2)
         {
-            moveFB = -Input.GetAxis(moveYAxis) * speed;
+            moveFB = state.ThumbSticks.Left.Y * speed;
 
             // Turn on running animation and turn off standing pose
             if (RunningAnimation.activeSelf == false)
@@ -145,9 +149,9 @@ public class PlayerInputManager : MonoBehaviour {
             moveFB = 0;
         }
         //Debug.Log("Move FB: " + moveFB);
-        if (Input.GetAxis(moveXAxis) > .2 || Input.GetAxis(moveXAxis) < -.2)
+        if (state.ThumbSticks.Left.X > .2 || state.ThumbSticks.Left.X < -.2)
         {
-            moveLR = Input.GetAxis(moveXAxis) * speed;
+            moveLR = state.ThumbSticks.Left.X * speed;
 
             // Turn on running animation and turn off standing pose
             if (RunningAnimation.activeSelf == false)
@@ -161,7 +165,7 @@ public class PlayerInputManager : MonoBehaviour {
             moveLR = 0;
         }
 
-        if(moveLR==0 && moveFB==0)
+        if (moveLR == 0 && moveFB == 0)
         {
             // Turn on standing pose
             if (RunningAnimation.activeSelf == true)
@@ -173,23 +177,23 @@ public class PlayerInputManager : MonoBehaviour {
 
         // Rotate the player
         // Look axis
-        if (Input.GetAxis(horizontalAxis) > .2 || Input.GetAxis(horizontalAxis)<-.2)
+        if (state.ThumbSticks.Right.X > .2 || state.ThumbSticks.Right.X < -.2)
         {
-            rotX = Input.GetAxis(horizontalAxis) * lookSensitivityX;
+            rotX = state.ThumbSticks.Right.X * lookSensitivityX;
         }
         else
         {
             rotX = 0;
         }
-        if (Input.GetAxis(verticalAxis) > .2 || Input.GetAxis(verticalAxis) < -.2)
+        if (state.ThumbSticks.Right.Y > .2 || state.ThumbSticks.Right.Y < -.2)
         {
-            rotY = Input.GetAxis(verticalAxis) * lookSensitivityY;
+            rotY = -state.ThumbSticks.Right.Y * lookSensitivityY;
         }
         else
         {
             rotY = 0;
         }
-        //Debug.Log("Rot X: " + rotX + " Rot Y: " + rotY + " Move FB: " + moveFB + " Move LR: " + moveLR);
+
 
         // Adding an xAxis
         xAxisClamp += rotY;
@@ -209,7 +213,7 @@ public class PlayerInputManager : MonoBehaviour {
             xAxisClamp = 90;
             targetCamRot.x = 90;
         }
-        else if(xAxisClamp<-90)
+        else if (xAxisClamp < -90)
         {
             xAxisClamp = -90;
             targetCamRot.x = 270;
@@ -241,13 +245,13 @@ public class PlayerInputManager : MonoBehaviour {
     /// </summary>
     private void Jump()
     {
-        //Debug.Log("Vert Velocity" + verticalVelocity);
-        //Debug.Log("Player Grounded: " + player.isGrounded);
+    
         if (player.isGrounded)
         {
-            if (Input.GetButtonDown(aButton))
+
+            if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
             {
-                //Debug.Log("Jump!" + playerNum);
+               
                 verticalVelocity = JUMP_FORCE;
                 timeFalling = 0;
             }
@@ -256,22 +260,22 @@ public class PlayerInputManager : MonoBehaviour {
                 verticalVelocity += GRAVITY_FORCE;
             }
         }
-        else if (Input.GetButton(aButton) && GetComponent<PlayerManager>().JetPackFuel>0)
+        else if (state.Buttons.A == ButtonState.Pressed && GetComponent<PlayerManager>().JetPackFuel > 0)
         {
-            verticalVelocity+=JETPACK_FORCE;
+            verticalVelocity += JETPACK_FORCE;
             GetComponent<PlayerManager>().FuelDown();
             timeFalling -= Time.deltaTime;
         }
         else
         {
-            if(timeFalling<0)
+            if (timeFalling < 0)
             {
                 timeFalling = 0;
             }
             timeFalling += Time.deltaTime;
-            verticalVelocity += (GRAVITY_FORCE*timeFalling);
+            verticalVelocity += (GRAVITY_FORCE * timeFalling);
         }
-         verticalVelocity = Mathf.Clamp(verticalVelocity, -30, 5);
+        verticalVelocity = Mathf.Clamp(verticalVelocity, -30, 5);
     }
     #endregion
 

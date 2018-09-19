@@ -11,6 +11,9 @@ public enum Weapons
 
 public class GunScript : MonoBehaviour
 {
+    public float rightTrigger;
+    public bool reloadButton;
+
     // Total ammo a gun can have in general
     const int MAX_AMMO = 500;
 
@@ -38,10 +41,6 @@ public class GunScript : MonoBehaviour
 
 
     // Variables that handle input
-    string shootTriggerString;
-    float rightTriggerFloat;
-    string reloadButtonString;
-    float reloadButton;
 
     public int playerNum;
 
@@ -53,10 +52,6 @@ public class GunScript : MonoBehaviour
         // Set bool variables initially
         justShot = false;
         reloadingBool = false;
-
-        // Set the input variable for the trigger to shoot
-        shootTriggerString = "J" + playerNum + "TriggerRight";
-        reloadButtonString = "J" + playerNum + "X";
 
 
         // For testing
@@ -80,13 +75,10 @@ public class GunScript : MonoBehaviour
 	void Update ()
     {
         //if (GameManagerScript.instance.currentGameState == GameState.InGame)
-        //{ 
-            // Update the infor for game Input
-            GunInput();
-            
+        //{        
 
             // Check for shooting
-			if (rightTriggerFloat > 0 && justShot == false && GameManagerScript.instance.currentGameState == GameState.InGame)
+			if (rightTrigger > 0 && justShot == false && GameManagerScript.instance.currentGameState == GameState.InGame)
             {
             //Debug.Log("Player " + playerNum + " has " + bulletsInClip + " in their clip.");
             
@@ -103,25 +95,13 @@ public class GunScript : MonoBehaviour
             }
 
             // Check for reloading
-        if(reloadingBool == false && reloadButton>0)
+        if(reloadingBool == false && reloadButton)
         {
             //Debug.Log("Manually Reloaded");
             //Reload();
         }
 	}
 
-    /// <summary>
-    /// Handles input variables for weapons
-    /// </summary>
-    private void GunInput()
-    {
-        // Set the float variable of the right trigger
-        rightTriggerFloat = Input.GetAxis(shootTriggerString);
-        //Debug.Log(shootTriggerString);
-
-        // Set the float variable of the right trigger
-        reloadButton = Input.GetAxis(reloadButtonString);
-    }
 
 
     private void Shoot()
