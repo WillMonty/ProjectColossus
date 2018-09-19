@@ -81032,6 +81032,7 @@ MonoBehaviour:
   lookSensitivityX: 2
   lookSensitivityY: 2
   eyes: {fileID: 1384608207220884}
+  rifle: {fileID: 1263880432974754}
   StandingPose: {fileID: 1914382022412058}
   RunningAnimation: {fileID: 1429227034771976}
 --- !u!114 &114800843017103110
@@ -81219,6 +81220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1908763544431680, guid: 17a33ce2f42f8a34d84254109e9fd250,
     type: 2}
+  shootSound: {fileID: 0}
   playerNum: 2
 --- !u!114 &114959428591775112
 MonoBehaviour:
