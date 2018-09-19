@@ -27,9 +27,7 @@ public class ColossusManager : MonoBehaviour {
     [Header("Map")]
     public GameObject map;
     public float lowerMapAmount;
-    public GameObject lava;
     public GameObject resistanceContainer;
-	public GameObject conveyors;
 
 
     //Audio
@@ -168,10 +166,7 @@ public class ColossusManager : MonoBehaviour {
         laser.enabled = true;
 		armHealthbar.gameObject.SetActive(true);
         headHealthbar.gameObject.SetActive(true);
-
 		pregameIndicator.SetActive(false);
-        //lava.SetActive(true);
-		//conveyors.SetActive(true);
 
         LowerMap();
 
