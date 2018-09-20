@@ -61,7 +61,8 @@ public class PlayerInputManager : MonoBehaviour
         gunState = rifle.GetComponent<GunScript>();
         // Give an instance to this soldier to the gamemanager
         StartCoroutine(LateStart(0.2f));
-        
+
+        playerIndex = (PlayerIndex)(playerNum - 1);
       
     }
 
@@ -83,31 +84,37 @@ public class PlayerInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        GamePadState testState = GamePad.GetState(playerIndex);
+        
         if (!playerIndexSet || !prevState.IsConnected)
         {
-            for (int i = 0; i < 4; ++i)
-            {
-                PlayerIndex testPlayerIndex = (PlayerIndex)i;
-                GamePadState testState = GamePad.GetState(testPlayerIndex);
-                if (testState.IsConnected)
+            playerIndexSet = false;
+            if (testState.IsConnected)
                 {
-                    Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
-                    playerIndex = testPlayerIndex;
+                    Debug.Log(string.Format("GamePad found {0}", playerIndex));
                     playerIndexSet = true;
-                }
+                }           
+        }
+       
+        if (testState.IsConnected)
+        {
+            prevState = state;
+            state = GamePad.GetState(playerIndex);
+
+            if (GameManagerScript.instance.currentGameState == GameState.InGame)
+            {
+                Move();
+                Jump();
             }
         }
-
-        prevState = state;
-        state = GamePad.GetState(playerIndex);
-
-        if (GameManagerScript.instance.currentGameState == GameState.InGame)
+        else
         {
-            Move();
-            Jump();
+            Debug.Log(string.Format("GamePad at {0} disconnected", playerIndex));
+            playerIndexSet = false;
         }
 
-
+        //Sends required gamepad info to the gun script
         gunState.rightTrigger = state.Triggers.Right;
         gunState.reloadButton = (ButtonState.Pressed==state.Buttons.X);
         
