@@ -78,13 +78,20 @@ public class GameManagerScript : MonoBehaviour
 				break;	
 		}
 
+		StartCoroutine(LateStart(0.2f));
+    }
+
+	IEnumerator LateStart(float waitTime)
+	{
+		yield return new WaitForSeconds(waitTime);
 		//Check for debug
 		if(forceStartGame)
 		{
 			colossus.ToggleColossus();
 			StartGame();
 		}
-    }
+
+	}
     #endregion
 
     #region Update

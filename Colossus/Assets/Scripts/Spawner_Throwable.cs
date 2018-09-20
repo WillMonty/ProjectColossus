@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(SphereCollider))]
-
 // Spawns throwable objects at random rotations and locations within the collider attached to it
 public class Spawner_Throwable : MonoBehaviour {
 

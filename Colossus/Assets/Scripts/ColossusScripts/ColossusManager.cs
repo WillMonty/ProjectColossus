@@ -50,11 +50,6 @@ public class ColossusManager : MonoBehaviour {
     #endregion
 
     #region Properties
-    // Properties
-
-    /// <summary>
-    /// Could be used for a boss health GUI element for soldiers
-    /// </summary>
     public float Health
     {
         get { return health; }
