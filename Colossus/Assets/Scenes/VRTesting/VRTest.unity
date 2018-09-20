@@ -113,63 +113,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &85828060 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4000010733554458, guid: e0b086fbb874df143b6ac8f53cea5424,
-    type: 2}
-  m_PrefabInternal: {fileID: 1328357951}
---- !u!1 &209306239
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 209306241}
-  - component: {fileID: 209306240}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &209306240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 209306239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6d8d9709491137408017c1c3b00e0f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceStartGame: 0
-  colossus: {fileID: 1498786080}
-  soldier1: {fileID: 0}
-  soldier2: {fileID: 0}
-  gamePieces:
-  - {fileID: 1064257319}
-  - {fileID: 767062219}
-  pauseMenu: {fileID: 0}
-  currentGameState: 4
-  currentPauseOwner: 3
-  deathbox: {fileID: 0}
---- !u!4 &209306241
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 209306239}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &283782347
+--- !u!43 &13016622
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -299,6 +243,75 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!4 &85828060 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000010733554458, guid: e0b086fbb874df143b6ac8f53cea5424,
+    type: 2}
+  m_PrefabInternal: {fileID: 1328357951}
+--- !u!1 &209306239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 209306241}
+  - component: {fileID: 209306240}
+  - component: {fileID: 209306242}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &209306240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 209306239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6d8d9709491137408017c1c3b00e0f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceStartGame: 1
+  colossus: {fileID: 1498786080}
+  soldier1: {fileID: 0}
+  soldier2: {fileID: 0}
+  gamePieces:
+  - {fileID: 1064257319}
+  - {fileID: 767062219}
+  pauseMenu: {fileID: 0}
+  currentGameState: 4
+  currentPauseOwner: 3
+  deathbox: {fileID: 0}
+--- !u!4 &209306241
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 209306239}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &209306242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 209306239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253bd74bfa96a9e49ac47b776d0a6c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRubbishCount: 30
 --- !u!1 &716445444
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,6 +614,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114370828468637826, guid: 90192db8bf7d90e4d84bfde53d57a231,
+        type: 2}
+      propertyPath: spawnTimeVariation
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90192db8bf7d90e4d84bfde53d57a231, type: 2}
   m_IsPrefabParent: 0
@@ -767,12 +785,12 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1813740574}
+      objectReference: {fileID: 1958122105}
     - target: {fileID: 33953989215874084, guid: 45340bf8a73433c42a71bccd5021d759,
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 283782347}
+      objectReference: {fileID: 13016622}
     - target: {fileID: 114809903612954868, guid: 45340bf8a73433c42a71bccd5021d759,
         type: 2}
       propertyPath: map
@@ -909,7 +927,7 @@ GameObject:
   m_PrefabParentObject: {fileID: 1613819174452748, guid: 1beb3bb0a568dff48a25b0899a6cb42e,
     type: 2}
   m_PrefabInternal: {fileID: 1509707623}
---- !u!21 &1813740574
+--- !u!21 &1958122105
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0

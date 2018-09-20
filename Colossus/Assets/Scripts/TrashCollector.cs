@@ -23,7 +23,7 @@ public class TrashCollector : MonoBehaviour {
     {
         rubbishList.Add(rubbishObject);
 
-        if (rubbishList.Count > maxCount)
+		if (rubbishList.Count > maxCount)
         {
             Destroy(rubbishList[0]);
             rubbishList.RemoveAt(0);

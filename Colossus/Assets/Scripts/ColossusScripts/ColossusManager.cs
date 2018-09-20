@@ -168,7 +168,7 @@ public class ColossusManager : MonoBehaviour {
 		GameManagerScript.instance.StartGame();
 
         //Non-debug only
-        if (!debugColossus)
+		if (!GameManagerScript.instance.forceStartGame)
         {
             headSource.clip = hopInSound;
             headSource.Play();

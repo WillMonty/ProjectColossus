@@ -174,7 +174,6 @@ public class GameManagerScript : MonoBehaviour
 		{
 			if(gamePieces[i] != null)
 			{
-				Debug.Log(gamePieces[i].gameObject.activeSelf);
 				gamePieces[i].SetActive(!gamePieces[i].gameObject.activeSelf);
 			}
 		}
