@@ -1,9 +1,9 @@
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/Assets/AssetStoreTools*
+Colossus/[Ll]ibrary/
+Colossus/[Tt]emp/
+Colossus/[Oo]bj/
+Colossus/[Bb]uild/
+Colossus/[Bb]uilds/
+Colossus/Assets/AssetStoreTools*
 
 # Visual Studio 2015 cache directory
 /.vs/
@@ -32,3 +32,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+/Colossus/.vs/Colossus/v15/Server/sqlite3
+/Colossus/.vs/Colossus/v15/sqlite3/db.lock
+/Colossus/.vs/Colossus/v15/sqlite3/storage.ide-shm
+/Colossus/.vs/Colossus/v15/sqlite3/storage.ide-wal
+Builds/
+Colossus/Assets/Packages/Plugins/RootMotion/
