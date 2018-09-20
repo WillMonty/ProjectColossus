@@ -25,6 +25,10 @@ public class SoldierUINew : MonoBehaviour {
     public float s2CurrentFuel;
     public Image s2Fuelbar;
 
+    public Text s1currentMag;
+
+    public Text s2currentMag;
+
     // Use this for initialization
     void Start ()
     {
@@ -51,7 +55,10 @@ public class SoldierUINew : MonoBehaviour {
         UpdateHealthbar();
 
         UpdateFuelbar();
-	}
+
+        UpdateCurrentMag();
+
+    }
 
     void UpdateHealthbar()
     {
@@ -85,5 +92,12 @@ public class SoldierUINew : MonoBehaviour {
 
             s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
         }
+    }
+
+    void UpdateCurrentMag()
+    {
+        s1currentMag.text = soldier1.GetComponent<PlayerInputManager>().gunState.BulletsInMag.ToString();
+
+        s2currentMag.text = soldier2.GetComponent<PlayerInputManager>().gunState.BulletsInMag.ToString();
     }
 }

@@ -6,7 +6,7 @@ public enum Weapons
 {
     AssaultRifle,
     Sniper,
-    Shotgun,
+    GrenadeLauncher,
 }
 
 public class GunScript : MonoBehaviour
@@ -28,11 +28,16 @@ public class GunScript : MonoBehaviour
 	public AudioClip shootSound;
 
     // current gun Tracking variables
-    //int bulletsInClip;
+    int bulletsInMag;
+
+    public int BulletsInMag
+    {
+        get { return bulletsInMag; }
+    }
 
     // Specific balencing shooting variables
     float fireDelay;
-    int clipSize;
+    int magSize;
     float reloadTime;
 
     // Variables to keep shooting from breaking and balanced
@@ -59,14 +64,15 @@ public class GunScript : MonoBehaviour
         //bulletsInClip = 30;
         //reloadTime = 3.0f;
         fireDelay = .05f;
-        /*
+        
         if (weaponType == Weapons.AssaultRifle)
         {
-            fireDelay = .5f;
-            clipSize = 30;
-            reloadTime = 5.0f;
+            fireDelay = .05f;
+            magSize = 30;
+            reloadTime = 2.0f;
         }
-        */
+
+        bulletsInMag = magSize;
 
 		source = GetComponent<AudioSource>();
 	}
@@ -78,27 +84,27 @@ public class GunScript : MonoBehaviour
         //{        
 
             // Check for shooting
-			if (rightTrigger > 0 && justShot == false && GameManagerScript.instance.currentGameState == GameState.InGame)
+			if (rightTrigger > 0 && justShot == false && GameManagerScript.instance.currentGameState == GameState.InGame && !reloadingBool)
             {
             //Debug.Log("Player " + playerNum + " has " + bulletsInClip + " in their clip.");
+
             
-            // If not reloading you can shoot or if you have greater than zero bullets
-                //if((reloadingBool==false) && bulletsInClip > 0)
-                //{
+                if (bulletsInMag > 0)
+                {
                     Shoot();
-                //}
-                // If not reloading you can shoot or if you have greater than zero bullets
-                //if ((reloadingBool == false) && bulletsInClip < 1)
-                //{
+                }
+            
+                else
+                {
                     Reload();
-                //}
+                }
+                    
             }
 
             // Check for reloading
-        if(reloadingBool == false && reloadButton)
+        if(!reloadingBool && reloadButton)
         {
-            //Debug.Log("Manually Reloaded");
-            //Reload();
+            Reload();
         }
 	}
 
@@ -117,7 +123,7 @@ public class GunScript : MonoBehaviour
         // Instantiate the bullet and shoot it
         Instantiate(bulletPrefab, transform.position, gameObject.transform.parent.GetComponent<PlayerInputManager>().eyes.transform.rotation);
 
-        //bulletsInClip--;
+        bulletsInMag--;
 
         justShot = true;
         StartCoroutine("ShootingBoolReset");
@@ -165,6 +171,7 @@ public class GunScript : MonoBehaviour
     public IEnumerator ReloadingBoolReset()
     {
         yield return new WaitForSeconds(reloadTime);
+        bulletsInMag = magSize;
         reloadingBool = false;
     }
 

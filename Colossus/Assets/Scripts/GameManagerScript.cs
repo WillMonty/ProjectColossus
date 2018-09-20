@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using XInputDotNetPure;
 
 
 // GameState Enum
@@ -30,9 +31,25 @@ public class GameManagerScript : MonoBehaviour
 	[Header("Pausing")]
     public GameObject pauseMenu;
     public GameState currentGameState;
+
+
+
     public enum PauseOwner { Player1, Player2, Colossus, None}
     public PauseOwner currentPauseOwner;
-	List<GameObject> escapeScreens;
+    private Dictionary<int, PauseOwner> playerNumToPauseOwner = new Dictionary<int, PauseOwner>()
+    {
+        { 0, PauseOwner.Colossus },
+        { 1, PauseOwner.Player1},
+        { 2, PauseOwner.Player2 }
+    };
+
+    GamePadState state1;
+    GamePadState prevState1;
+
+    GamePadState state2;
+    GamePadState prevState2;
+
+    List<GameObject> escapeScreens;
 
 	public GameObject deathbox;
 
@@ -100,10 +117,9 @@ public class GameManagerScript : MonoBehaviour
     {
 		CheckWinCondition();
 
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePause();
-        }
+
+        PauseInputs();
+
 
         OOOOOOOF();
 	}
@@ -119,25 +135,50 @@ public class GameManagerScript : MonoBehaviour
 
     #region Pause and Play Game
 
-    void TogglePause()
+    void PauseInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause(0);
+        }
+
+        prevState1 = state1;
+        state1 = GamePad.GetState((PlayerIndex)(0));
+
+        prevState2 = state2;
+        state2 = GamePad.GetState((PlayerIndex)(1));
+
+        if(state1.Buttons.Start == ButtonState.Pressed && prevState1.Buttons.Start == ButtonState.Released)
+        {
+            TogglePause(1);
+        }
+
+        if(state2.Buttons.Start == ButtonState.Pressed && prevState2.Buttons.Start == ButtonState.Released)
+        {
+            TogglePause(2);
+        }
+    }
+
+    public void TogglePause(int playerNum)
     {
         if (instance.currentGameState == GameState.InGame)
         {
             PauseGame();
 
-            //set pause owner here
+            instance.currentPauseOwner = playerNumToPauseOwner[playerNum];
         }
 
-        else if(instance.currentGameState == GameState.Paused)
+        else if(instance.currentGameState == GameState.Paused 
+                && playerNumToPauseOwner[playerNum] == instance.currentPauseOwner)
         {
             ResumeGame();
 
-            currentPauseOwner = PauseOwner.None;
+            instance.currentPauseOwner = PauseOwner.None;
         }
     }
 
     // Game Management Pausing and Resuming Methods
-    public void PauseGame()
+    void PauseGame()
     {
         //for (int i = 0; i < escapeScreens.Count; i++)
         //{

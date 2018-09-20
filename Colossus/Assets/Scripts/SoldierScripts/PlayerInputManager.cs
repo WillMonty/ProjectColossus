@@ -51,7 +51,7 @@ public class PlayerInputManager : MonoBehaviour
     public GameObject RunningAnimation;
 
     //Gun variable 
-    GunScript gunState;
+    public GunScript gunState;
 
     // Use this for initialization
     void Start()
@@ -110,7 +110,7 @@ public class PlayerInputManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(string.Format("GamePad at {0} disconnected", playerIndex));
+            //Debug.Log(string.Format("GamePad at {0} disconnected", playerIndex));
             playerIndexSet = false;
         }
 
@@ -119,7 +119,7 @@ public class PlayerInputManager : MonoBehaviour
         gunState.reloadButton = (ButtonState.Pressed==state.Buttons.X);
         
     }
-
+    
     /// <summary>
     /// Handles all movement calls
     /// </summary>
