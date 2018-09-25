@@ -6,9 +6,6 @@ using UnityEngine.UI;
 public class ColossusManager : MonoBehaviour {
 
     #region Robot Attributes
-    //Debug variable to allow the game to start with the game running
-    public bool debugColossus;
-
     const float STARTING_HEALTH = 1500.0f;
     private bool playerInBot; //Is the player currently in the colossus and ready to play?
     private float health;
@@ -16,21 +13,21 @@ public class ColossusManager : MonoBehaviour {
 
     // Components needed for the toggling of the colossus
     [Header("Colossus Components")]
-    public GameObject leftController;
-    public GameObject rightController;
+    private GameObject leftController;
+    private GameObject rightController;
     public GameObject headset;
     public GameObject pregameIndicator; //Gameobjects showing the player where to go to start the game
 	public GameObject resultsCanvas;
-    Laser laser;
 
-	//Objects dealing with the environment
+	//Ability scripts
+	List<ColossusAbility> chosenAbilities;
+
     [Header("Map")]
     public GameObject map;
     public float lowerMapAmount;
     public GameObject resistanceContainer;
 
 
-    //Audio
     [Header("Audio")]
     public AudioSource headSource;
     public AudioClip hopInSound;
@@ -62,11 +59,18 @@ public class ColossusManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        health = STARTING_HEALTH;
 
-        laser = gameObject.GetComponent<Laser>();
+		//Get controllers
+		leftController = this.GetComponent<SteamVR_ControllerManager>().left;
+		rightController = this.GetComponent<SteamVR_ControllerManager>().right;
+
+		//Set up abilities
+		chosenAbilities = new List<ColossusAbility>();
+		GetChosenAbilities();
+
+		health = STARTING_HEALTH;
+
         StartCoroutine(LateStart(0.2f));
-
     }
 
     IEnumerator LateStart(float waitTime)
@@ -74,8 +78,6 @@ public class ColossusManager : MonoBehaviour {
         yield return new WaitForSeconds(waitTime);
         //Sets the instance after the game manager has actually initialized
         GameManagerScript.instance.colossus = this;
-
-		if (debugColossus) ToggleColossus(); //If in debug mode let the VR player start immediately in the colossus
     }
 
     #endregion
@@ -103,6 +105,27 @@ public class ColossusManager : MonoBehaviour {
     #endregion
 
     #region Helper Methods
+	private void GetChosenAbilities()
+	{
+		//Get head abilities
+		switch(AbilityManagerScript.instance.headColossus)
+		{
+			case(ColossusHeadAbilities.Laser):
+				chosenAbilities.Add(this.GetComponent<HeadLaser>());
+				break;
+		}
+
+		if(AbilityManagerScript.instance.leftHandColossus == ColossusHandAbilities.Hand || AbilityManagerScript.instance.rightHandColossus == ColossusHandAbilities.Hand)
+		{
+			chosenAbilities.Add(this.GetComponent<ColossusHand>());	
+		}
+
+		if(AbilityManagerScript.instance.leftHandColossus == ColossusHandAbilities.Shield || AbilityManagerScript.instance.rightHandColossus == ColossusHandAbilities.Shield)
+		{
+			//chosenAbilities.Add(this.GetComponent<ColossusHand>());	
+		}
+	}
+
     // Damage helper method
     public void Damage(float damageFloat)
     {
@@ -148,17 +171,16 @@ public class ColossusManager : MonoBehaviour {
         leftIndicator.SetActive(false);
         rightIndicator.SetActive(false);
 
-		//Turn off base dummy hand prefab
-		leftController.transform.GetChild(1).gameObject.SetActive(false);
-		rightController.transform.GetChild(1).gameObject.SetActive(false);
+		//Turn off hands
+		this.GetComponent<ColossusHand>().Disable();
 
-        //Enable regular hands
-		leftController.transform.GetChild(0).gameObject.SetActive(true);
-		rightController.transform.GetChild(0).gameObject.SetActive(true);
+        //Enable Colossus abilities
+		for(int i = 0; i < chosenAbilities.Count; i++)
+		{
+			chosenAbilities[i].Enable();
+		}
 
-        //Enable Colossus
 		playerInBot = true;
-        laser.enabled = true;
 		armHealthbar.gameObject.SetActive(true);
         headHealthbar.gameObject.SetActive(true);
 		pregameIndicator.SetActive(false);
@@ -191,8 +213,10 @@ public class ColossusManager : MonoBehaviour {
 	{
 		if(!gameEnded)
 		{
-            laser.StopLaser();
-            laser.enabled = false;
+			foreach(ColossusAbility ability in chosenAbilities)
+			{
+				ability.Disable();
+			}
 
 			headSource.Stop();
 			headSource.clip = deathSound;

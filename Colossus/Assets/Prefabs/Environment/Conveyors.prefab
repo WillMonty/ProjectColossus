@@ -891,7 +891,7 @@ MonoBehaviour:
   - {fileID: 1259349372369734, guid: 92627a445016e9b449bb9cf896ed1692, type: 2}
   rareSpawnablePrefabs: []
   spawnForce: {x: 0, y: 0, z: 0}
-  spawnRadius: 0.65
+  spawnRadius: 0.14
 --- !u!114 &114099420825964142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1008,7 +1008,7 @@ MonoBehaviour:
   - {fileID: 1259349372369734, guid: 92627a445016e9b449bb9cf896ed1692, type: 2}
   rareSpawnablePrefabs: []
   spawnForce: {x: 0, y: 0, z: 0}
-  spawnRadius: 0.65
+  spawnRadius: 0.14
 --- !u!114 &114652146165840680
 MonoBehaviour:
   m_ObjectHideFlags: 1

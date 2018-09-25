@@ -1166,12 +1166,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4899019941749452}
   m_Layer: 0
-  m_Name: Beam Container
+  m_Name: Head Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1595970785729094
 GameObject:
   m_ObjectHideFlags: 1
@@ -7952,6 +7952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugLaser: 0
+  container: {fileID: 1587645286708780}
   origins:
   - {fileID: 1886769667961186}
   - {fileID: 1603699438857454}
@@ -7971,6 +7972,7 @@ MonoBehaviour:
   fireSound: {fileID: 8300000, guid: bfa31ad800f34644eb9c2469948fb041, type: 3}
   misfireSound: {fileID: 8300000, guid: 429d61b3b97fb9d4f817eb118e86dcb2, type: 3}
   readySound: {fileID: 8300000, guid: 19d44597bfe0afd41b7084569c87835b, type: 3}
+  laserUI: {fileID: 1887068191899508}
 --- !u!114 &114378761543110090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8424,21 +8426,17 @@ MonoBehaviour:
   leftController: {fileID: 1169498600120644}
   rightController: {fileID: 1453949699326800}
   headset: {fileID: 1541039505096830}
-  disabledColossus: {fileID: 0}
+  pregameIndicator: {fileID: 0}
   resultsCanvas: {fileID: 1007251804405174}
   map: {fileID: 0}
   lowerMapAmount: 2.5
-  lava: {fileID: 0}
   resistanceContainer: {fileID: 0}
-  conveyors: {fileID: 0}
   headSource: {fileID: 82938316321286606}
-  torsoSource: {fileID: 0}
   hopInSound: {fileID: 8300000, guid: 39c06ad0d6e1be348910af00db0b931b, type: 3}
   damageSound: {fileID: 8300000, guid: 7d8cc7957e0597d439f71f8b8ca46d9f, type: 3}
   deathSound: {fileID: 8300000, guid: cfaf067b82022fb4b80d64b6e16eedd5, type: 3}
   armHealthbar: {fileID: 114011273006109620}
   headHealthbar: {fileID: 114083269919350812}
-  handUI: {fileID: 1887068191899508}
   leftIndicator: {fileID: 1895226997797494}
   rightIndicator: {fileID: 1346088167229586}
   inPositionMat: {fileID: 2100000, guid: 000bf922200a0254d9d2d77fd47349c6, type: 2}

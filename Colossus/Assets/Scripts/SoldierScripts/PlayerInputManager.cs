@@ -73,10 +73,10 @@ public class PlayerInputManager : MonoBehaviour
         switch (playerNum)
         {
             case 1:
-                GameManagerScript.instance.soldier1 = GetComponent<PlayerManager>();
+                GameManagerScript.instance.resistance1 = GetComponent<PlayerManager>();
                 break;
             case 2:
-                GameManagerScript.instance.soldier2 = GetComponent<PlayerManager>();
+                GameManagerScript.instance.resistance2 = GetComponent<PlayerManager>();
                 break;
         }
     }

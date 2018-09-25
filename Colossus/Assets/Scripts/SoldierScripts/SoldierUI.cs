@@ -25,7 +25,6 @@ public class SoldierUI : MonoBehaviour {
     public GameObject LivesText;
     public GameObject PauseMenu;
 
-    private string pauseButton;
 
     // Use this for initialization
     public void Start()
@@ -40,7 +39,6 @@ public class SoldierUI : MonoBehaviour {
         // For Pause Menu
         if (playerNum == 1)
         {
-            pauseButton = "J" + playerNum + "Pause";
 			PauseMenu = transform.Find("PauseCanvas").gameObject;
         }
 
@@ -57,7 +55,7 @@ public class SoldierUI : MonoBehaviour {
     {
         UIUpdate();
 
-        if(playerNum == 1 && Input.GetButtonDown(pauseButton))
+		if(playerNum == 1 && Input.GetButtonDown("Cancel"))
         {
             SwitchActiveStatesPauseMenu();
         }
