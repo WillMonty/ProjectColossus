@@ -3,28 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerManager : MonoBehaviour
+public enum SoldierClass
+{
+    Assault,
+    Skulker,
+    Grenadier,
+}
+
+public class PlayerData : MonoBehaviour
 {
     // Player Manager
     const int STARTING_LIVES = 2;
     const float RESPAWN_TIME = 5.0f;
     const float DAMAGING_OBJECT_MAGNITUDE = .02f;
     const float MAX_HEALTH = 100;
-    const float MAX_FUEL = 5;
+    
 
     // Basic Player Management variables
     private int lives;
     private float health;
-    private float jetPackFuel;
+    
     private Weapons currentWeapon;
 
-    SoldierUI PlayerGUIManager;
 
-    // Ammo Variables
-    // Change this variable to private at some point
-    public int assaultRifleAmmo;
+    public int playerNumber;
+    public SoldierClass PlayerClass;
+    public GameObject eyes;
+    public GameObject gun;
+    public GunScript gunState;
 
-	private GameObject[] spawnPoints;
+    private GameObject[] spawnPoints;
 
     public int Lives
     {
@@ -34,18 +42,12 @@ public class PlayerManager : MonoBehaviour
     {
         get { return MAX_HEALTH; }
     }
-    public float MaxFuel
-    {
-        get { return MAX_FUEL; }
-    }
+   
     public float Health
     {
         get { return health; }
     }
-    public float JetPackFuel
-    {
-        get { return jetPackFuel; }
-    }
+    
 
 
 
@@ -55,17 +57,35 @@ public class PlayerManager : MonoBehaviour
 
 		spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
         // Start initializes 3 lives at start, can be changed later
+
         lives = STARTING_LIVES;
         health = 100.0f;
-        jetPackFuel = MAX_FUEL;
+              
+        
+        gunState.PlayerNum = playerNumber;
 
+        SetCamera();
+        StartCoroutine(LateStart(0.2f));
 
-        // Set ammo at the beginning
-        currentWeapon = Weapons.AssaultRifle;
-        assaultRifleAmmo = 250;
-
-        PlayerGUIManager = transform.Find("Player" + GetComponent<PlayerInputManager>().playerNum + "GUI").GetComponent<SoldierUI>();
+        
     }
+
+
+    IEnumerator LateStart(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        //Sets the instance after the game manager has actually initializes
+        switch (playerNumber)
+        {
+            case 1:
+                GameManagerScript.instance.soldier1 = GetComponent<PlayerData>();
+                break;
+            case 2:
+                GameManagerScript.instance.soldier2 = GetComponent<PlayerData>();
+                break;
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -76,10 +96,22 @@ public class PlayerManager : MonoBehaviour
             Death();
         }
 
-
         if(Input.GetKeyDown(KeyCode.KeypadMinus))
         {
             health -= 10;
+        }
+    }
+
+    /// <summary>
+    /// Method for setting viewport based on player number
+    /// </summary>
+    void SetCamera()
+    {
+        if(playerNumber==2)
+        {
+            Rect temp = eyes.GetComponent<Camera>().rect;
+            temp.x = 0.5f;
+            eyes.GetComponent<Camera>().rect = temp;
         }
     }
 
@@ -100,9 +132,6 @@ public class PlayerManager : MonoBehaviour
             int spawnPoint = Random.Range(0, 6);
 
             Vector3 spawnLocation = Vector3.zero;
-
-            // Turn on the respawn message
-            PlayerGUIManager.SwitchActiveStatesRespawnMessage();
 
 			spawnLocation = spawnPoints[spawnPoint].transform.position;
 
@@ -147,6 +176,7 @@ public class PlayerManager : MonoBehaviour
     /// <summary>
     /// Add fuel back to the player's jetpack
     /// </summary>
+    /*
     public bool Fuel(float fuelFloat)
     {
         bool used = false;
@@ -163,14 +193,8 @@ public class PlayerManager : MonoBehaviour
         }
         return used;
     }
+    */
 
-    /// <summary>
-    /// Remove fuel back to the player's jetpack
-    /// </summary>
-    public void FuelDown()
-    {
-        jetPackFuel -= Time.deltaTime;
-    }
 
 
     /// <summary>
@@ -183,9 +207,6 @@ public class PlayerManager : MonoBehaviour
         // Check how many lives the player has first
         yield return new WaitForSeconds(RESPAWN_TIME);
 
-        // Turn off the respawn message
-        PlayerGUIManager.SwitchActiveStatesRespawnMessage();
-
         // Place the player in new spawn position
         gameObject.transform.position = spawnlocation;
     }
@@ -196,7 +217,7 @@ public class PlayerManager : MonoBehaviour
     void ResetPlayerValues()
     {
         health = MAX_HEALTH;
-        jetPackFuel = MAX_FUEL;
+       
     }
 
 	void OnTriggerEnter(Collider col)

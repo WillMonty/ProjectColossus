@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SoldierUINew : MonoBehaviour {
 
-    public PlayerManager soldier1;
-    public PlayerManager soldier2;
+    public PlayerData soldier1;
+    public PlayerData soldier2;
     
     public float maxHealth;
 
@@ -32,20 +32,20 @@ public class SoldierUINew : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        maxHealth = soldier1.GetComponent<PlayerManager>().MaxHealth;
+        maxHealth = soldier1.GetComponent<PlayerData>().MaxHealth;
 
-        s1CurrentHealth = soldier1.GetComponent<PlayerManager>().Health;
+        s1CurrentHealth = soldier1.GetComponent<PlayerData>().Health;
         s1Healthbar.fillAmount = s1CurrentHealth / maxHealth;
 
-        s2CurrentHealth = soldier2.GetComponent<PlayerManager>().Health;
+        s2CurrentHealth = soldier2.GetComponent<PlayerData>().Health;
         s2Healthbar.fillAmount = s2CurrentHealth / maxHealth;
 
-        maxFuel = soldier1.GetComponent<PlayerManager>().MaxFuel;
+        maxFuel = soldier1.GetComponent<JetPack>().MaxFuel;
 
-        s1CurrentFuel = soldier1.GetComponent<PlayerManager>().JetPackFuel;
+        s1CurrentFuel = soldier1.GetComponent<JetPack>().JetPackFuel;
         s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
 
-        s2CurrentFuel = soldier2.GetComponent<PlayerManager>().JetPackFuel;
+        s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
         s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
     }
 	
@@ -62,16 +62,16 @@ public class SoldierUINew : MonoBehaviour {
 
     void UpdateHealthbar()
     {
-        if (s1CurrentHealth != soldier1.GetComponent<PlayerManager>().Health)
+        if (s1CurrentHealth != soldier1.GetComponent<PlayerData>().Health)
         {
-            s1CurrentHealth = soldier1.GetComponent<PlayerManager>().Health;
+            s1CurrentHealth = soldier1.GetComponent<PlayerData>().Health;
 
             s1Healthbar.fillAmount = s1CurrentHealth / maxHealth;
         }
 
-        if (s2CurrentHealth != soldier2.GetComponent<PlayerManager>().Health)
+        if (s2CurrentHealth != soldier2.GetComponent<PlayerData>().Health)
         {
-            s2CurrentHealth = soldier2.GetComponent<PlayerManager>().Health;
+            s2CurrentHealth = soldier2.GetComponent<PlayerData>().Health;
 
             s2Healthbar.fillAmount = s2CurrentHealth / maxHealth;
         }
@@ -79,16 +79,16 @@ public class SoldierUINew : MonoBehaviour {
 
     void UpdateFuelbar()
     {
-        if(s1CurrentFuel != soldier1.GetComponent<PlayerManager>().JetPackFuel)
+        if(s1CurrentFuel != soldier1.GetComponent<JetPack>().JetPackFuel)
         {
-            s1CurrentFuel = soldier1.GetComponent<PlayerManager>().JetPackFuel;
+            s1CurrentFuel = soldier1.GetComponent<JetPack>().JetPackFuel;
 
             s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
         }
 
-        if (s2CurrentFuel != soldier2.GetComponent<PlayerManager>().JetPackFuel)
+        if (s2CurrentFuel != soldier2.GetComponent<JetPack>().JetPackFuel)
         {
-            s2CurrentFuel = soldier2.GetComponent<PlayerManager>().JetPackFuel;
+            s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
 
             s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
         }
@@ -96,8 +96,8 @@ public class SoldierUINew : MonoBehaviour {
 
     void UpdateCurrentMag()
     {
-        s1currentMag.text = soldier1.GetComponent<PlayerInputManager>().gunState.BulletsInMag.ToString();
+        s1currentMag.text = soldier1.GetComponent<PlayerData>().gunState.BulletsInMag.ToString();
 
-        s2currentMag.text = soldier2.GetComponent<PlayerInputManager>().gunState.BulletsInMag.ToString();
+        s2currentMag.text = soldier2.GetComponent<PlayerData>().gunState.BulletsInMag.ToString();
     }
 }

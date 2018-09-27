@@ -34,10 +34,10 @@ public class HealthOrb : MonoBehaviour
             switch(orbType)
             {
                 case OrbType.healthOrb:
-                    used = collisionObject.gameObject.GetComponent<PlayerManager>().Heal(restoreAmount);
+                    used = collisionObject.gameObject.GetComponent<PlayerData>().Heal(restoreAmount);
                     break;
                 case OrbType.fuelOrb:
-                    used = collisionObject.gameObject.GetComponent<PlayerManager>().Fuel(restoreAmount);
+                  //  used = collisionObject.gameObject.GetComponent<PlayerData>().Fuel(restoreAmount);
                     break;
             }
 

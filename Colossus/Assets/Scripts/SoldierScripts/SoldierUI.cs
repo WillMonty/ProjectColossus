@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SoldierUI : MonoBehaviour {
     public GameObject playerCamera;
-    public PlayerManager player;
-    public int playerNum;
+    public PlayerData player;
+    int playerNum;
 
     // Values needed for health bar
     public float maxHealth;
@@ -36,7 +36,7 @@ public class SoldierUI : MonoBehaviour {
         WinMessage = transform.Find("WinCanvas").gameObject;
         RespawnMessage = transform.Find("RespawnMessageCanvas").gameObject;
         LivesText = transform.Find("LivesText").gameObject;
-
+        playerNum = player.playerNumber;
         // For Pause Menu
         if (playerNum == 1)
         {
@@ -45,7 +45,7 @@ public class SoldierUI : MonoBehaviour {
         }
 
         // Set Player controller stuff
-        player = GameObject.Find("Player" + playerNum + "ControllerFPS").GetComponent<PlayerManager>();
+        player = GameObject.Find("Player" + playerNum + "ControllerFPS").GetComponent<PlayerData>();
         playerCamera = player.transform.Find("Player" + playerNum + "Eyes").gameObject;
         GetComponent<Canvas>().worldCamera= playerCamera.GetComponent<Camera>();
         UIBarInstantiate();
@@ -74,7 +74,7 @@ public class SoldierUI : MonoBehaviour {
         healthBar.maxValue = maxHealth;
 
         // Set the healthBar Max value
-        maxFuel = player.MaxFuel;
+       // maxFuel = player.MaxFuel;
         fuelBar.maxValue = maxFuel;
     }
 
@@ -103,7 +103,7 @@ public class SoldierUI : MonoBehaviour {
         healthBar.value = currentHealth;
 
         // Get current health and update the bar
-        currentFuel = player.JetPackFuel;
+        //currentFuel = player.JetPackFuel;
         fuelBar.value = currentFuel;
 
         LivesText.GetComponent<Text>().text = "Lives: " + player.Lives;

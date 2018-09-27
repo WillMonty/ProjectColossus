@@ -159,7 +159,7 @@ public class Laser : MonoBehaviour
 			switch(hitObj.tag)
 			{
 				case "resistanceplayer":
-					hitObj.GetComponent<PlayerManager>().Damage(damageAmt);
+					hitObj.GetComponent<PlayerData>().Damage(damageAmt);
 					break;
 			}
 		}
