@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Laser : MonoBehaviour
+public class HeadLaser : ColossusAbility
 {
 
     public bool debugLaser;
 
-    //With these arrays, 0 index is left and 1 index is right
     [Header("Laser Components")]
 	public GameObject container;
+	//With these arrays, 0 index is left and 1 index is right
     public GameObject[] origins = new GameObject[2]; //Starting object beams come from
     public GameObject[] beams = new GameObject[2]; //Beam cylinders
-    public SteamVR_TrackedController[] controllers = new SteamVR_TrackedController[2]; //Player's Controllers
     public RawImage indicatorImage;
     public Texture ready;
     public Texture notReady;
@@ -49,22 +48,43 @@ public class Laser : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		leftControllerTracked = this.GetComponent<SteamVR_ControllerManager>().left.GetComponent<SteamVR_TrackedController>();
+		rightControllerTracked = this.GetComponent<SteamVR_ControllerManager>().right.GetComponent<SteamVR_TrackedController>();
+    }
+
+	public override void Enable()
+	{
+		enabled = true;
+
 		container.SetActive(true);
 		laserUI.SetActive(true);
-    }
+	}
+
+	public override void Disable()
+	{
+		enabled = false;
+
+		StopLaser();
+		container.SetActive(false);
+		laserUI.SetActive(false);
+	}
 
     // Update is called once per frame
     void Update()
     {
-        if (debugLaser)
-        {
-            origins[0].SetActive(true);
-            origins[1].SetActive(true);
-            FireLaser();
-            return;
-        }
+		if (debugLaser)
+		{
+			Enable();
+			origins[0].SetActive(true);
+			origins[1].SetActive(true);
+			FireLaser();
+			return;
+		}
+
+		if(!enabled) return;
+
         //If both controllers pads are pressed
-        if (controllers[0].padPressed && controllers[1].padPressed)
+		if (leftControllerTracked.padPressed && rightControllerTracked.padPressed)
         {
             TryShoot();
         }

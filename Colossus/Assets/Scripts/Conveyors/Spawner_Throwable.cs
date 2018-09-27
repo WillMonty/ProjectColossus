@@ -35,6 +35,7 @@ public class Spawner_Throwable : MonoBehaviour {
         {
             spawnTimeVariation = 0;
         }
+		SpawnObject(); //Spawn an initial object
         SelectNewSpawnTime();
 	}
 	
@@ -137,7 +138,7 @@ public class Spawner_Throwable : MonoBehaviour {
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + transform.rotation * spawnForce);
+        //Gizmos.DrawLine(transform.position, transform.position + transform.rotation * spawnForce);
 
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, spawnRadius);

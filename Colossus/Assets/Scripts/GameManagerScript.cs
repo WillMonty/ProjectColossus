@@ -17,22 +17,26 @@ public class GameManagerScript : MonoBehaviour
     // Static instance of the GameManager which allows it to be accessed from any script
     public static GameManagerScript instance = null;
 
+	public GameState currentGameState;
+
 	public bool forceStartGame;
 
 	[Header("Players")]
     public ColossusManager colossus = null;
+<<<<<<< HEAD
     public PlayerData soldier1 = null;
     public PlayerData soldier2 = null;
+=======
+    public PlayerManager resistance1 = null;
+    public PlayerManager resistance2 = null;
+>>>>>>> 1e1e0e6821243584b2c71595d8c119253741a883
 
 	[Header("Game Pieces")]
-	public GameObject[] gamePieces; //Pieces of the scene only shown/used InGame
+	public List<GameObject> gamePieces = new List<GameObject>(); //Pieces of the scene only shown/used InGame
 
 
 	[Header("Pausing")]
     public GameObject pauseMenu;
-    public GameState currentGameState;
-
-
 
     public enum PauseOwner { Player1, Player2, Colossus, None}
     public PauseOwner currentPauseOwner;
@@ -49,13 +53,11 @@ public class GameManagerScript : MonoBehaviour
     GamePadState state2;
     GamePadState prevState2;
 
-    List<GameObject> escapeScreens;
-
 	public GameObject deathbox;
 
     #endregion
 
-    #region Start
+    #region Awake/Start
 	void Awake ()
 	{
 		DontDestroyOnLoad(this);
@@ -116,11 +118,7 @@ public class GameManagerScript : MonoBehaviour
     void Update ()
     {
 		CheckWinCondition();
-
-
         PauseInputs();
-
-
         OOOOOOOF();
 	}
     #endregion
@@ -180,11 +178,6 @@ public class GameManagerScript : MonoBehaviour
     // Game Management Pausing and Resuming Methods
     void PauseGame()
     {
-        //for (int i = 0; i < escapeScreens.Count; i++)
-        //{
-        //    escapeScreens[i].SetActive(true);
-        //}
-
         pauseMenu.SetActive(true);
         
         instance.currentGameState = GameState.Paused;
@@ -194,11 +187,6 @@ public class GameManagerScript : MonoBehaviour
 
     public void ResumeGame()
     {
-        //for (int i = 0; i < escapeScreens.Count; i++)
-        //{
-        //    escapeScreens[i].SetActive(false);
-        //}
-
         pauseMenu.SetActive(false);
 
         instance.currentGameState = GameState.InGame;
@@ -211,7 +199,7 @@ public class GameManagerScript : MonoBehaviour
 	/// </summary>
 	public void GamePiecesSwitch()
 	{
-		for(int i = 0; i < gamePieces.Length; i++)
+		for(int i = 0; i < gamePieces.Count; i++)
 		{
 			if(gamePieces[i] != null)
 			{
@@ -225,14 +213,14 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void CheckWinCondition()
     {
-        if(colossus != null && soldier1 != null && soldier2 != null)
+        if(colossus != null && resistance1 != null && resistance2 != null)
         {
             if (instance.currentGameState == GameState.InGame && colossus.Health <= 0)
             {
                 instance.currentGameState = GameState.ResistanceWin;
                 StartCoroutine(ReturnToMainMenu(7f));
             }
-            else if (instance.currentGameState == GameState.InGame && soldier1.Lives <= 0 && soldier2.Lives <= 0)
+            else if (instance.currentGameState == GameState.InGame && resistance1.Lives <= 0 && resistance2.Lives <= 0)
             {
                 instance.currentGameState = GameState.ResistanceLose;
                 StartCoroutine(ReturnToMainMenu(7f));
