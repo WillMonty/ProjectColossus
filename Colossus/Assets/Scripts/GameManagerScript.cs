@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using XInputDotNetPure;
 
 
 // GameState Enum
-public enum GameState { MainMenu, Instructions, InGame, Paused, Pregame, ResistanceWin, ResistanceLose };
+public enum GameState { MainMenu, Instructions, CharacterSelect, InGame, Paused, Pregame, ResistanceWin, ResistanceLose };
 
 
 public class GameManagerScript : MonoBehaviour
@@ -32,6 +33,7 @@ public class GameManagerScript : MonoBehaviour
 
 	[Header("Pausing")]
     public GameObject pauseMenu;
+    public GameObject pauseMenuDefaultButton;
 
     public enum PauseOwner { Player1, Player2, Colossus, None}
     public PauseOwner currentPauseOwner;
@@ -49,6 +51,8 @@ public class GameManagerScript : MonoBehaviour
     GamePadState prevState2;
 
 	public GameObject deathbox;
+
+    
 
     #endregion
 
@@ -121,8 +125,11 @@ public class GameManagerScript : MonoBehaviour
 	//General function to set up the game's pieces and state
 	public void StartGame()
 	{
+        Debug.Log("StartGame");
+
 		GamePiecesSwitch();
 		currentGameState = GameState.InGame;
+        
 	}
 
 
@@ -176,7 +183,7 @@ public class GameManagerScript : MonoBehaviour
         pauseMenu.SetActive(true);
         
         instance.currentGameState = GameState.Paused;
-        
+
         Time.timeScale = 0;
     }
 
@@ -232,6 +239,33 @@ public class GameManagerScript : MonoBehaviour
         SceneManager.LoadScene(0);
     }
     #endregion
+
+    
+    public void SetSoldier1Class(int indexIn)
+    {
+        switch(indexIn)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+        }
+    }
+
+    public void SetSoldier2Class(int indexIn)
+    {
+        switch (indexIn)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+        }
+    }
 
     /// <summary>
     /// Emergency Restart for the game

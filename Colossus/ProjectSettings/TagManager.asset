@@ -15,6 +15,7 @@ TagManager:
   - throwable
   - colossusarms
   - colossushead
+  - PauseMenuUI
   layers:
   - Default
   - TransparentFX

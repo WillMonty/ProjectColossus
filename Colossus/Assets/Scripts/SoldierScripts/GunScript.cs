@@ -38,6 +38,12 @@ public class GunScript : MonoBehaviour
     // Specific balencing shooting variables
     float fireDelay;
     int magSize;
+
+    public int MagSize
+    {
+        get { return magSize; }
+    }
+
     float reloadTime;
 
     // Variables to keep shooting from breaking and balanced
@@ -147,6 +153,9 @@ public class GunScript : MonoBehaviour
     private void Reload()
     {
         reloadingBool = true;
+
+        bulletsInMag = 0;
+
         //Debug.Log("Reload Called: " + reloadTime);
         // Check the player manager and see how much ammo they have before reloading
         //if(PlayerManager.ammo>clipSize)

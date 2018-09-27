@@ -25,9 +25,11 @@ public class SoldierUINew : MonoBehaviour {
     public float s2CurrentFuel;
     public Image s2Fuelbar;
 
-    public Text s1currentMag;
+    public Text s1CurrentMag;
+    public Text s1MagMax;
 
-    public Text s2currentMag;
+    public Text s2CurrentMag;
+    public Text s2MagMax;
 
     // Use this for initialization
     void Start ()
@@ -47,16 +49,24 @@ public class SoldierUINew : MonoBehaviour {
 
         s2CurrentFuel = soldier2.GetComponent<PlayerManager>().JetPackFuel;
         s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
+
+        s1MagMax.text = "/" + soldier1.GetComponent<PlayerInputManager>().gunState.MagSize;
+        s2MagMax.text = "/" + soldier2.GetComponent<PlayerInputManager>().gunState.MagSize;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         UpdateHealthbar();
 
         UpdateFuelbar();
 
         UpdateCurrentMag();
+
+        if(s1MagMax.text == "test" || s2MagMax.text == "test")
+        {
+            UpdateMagMax();
+        }
 
     }
 
@@ -96,8 +106,15 @@ public class SoldierUINew : MonoBehaviour {
 
     void UpdateCurrentMag()
     {
-        s1currentMag.text = soldier1.GetComponent<PlayerInputManager>().gunState.BulletsInMag.ToString();
+        s1CurrentMag.text = soldier1.GetComponent<PlayerInputManager>().gunState.BulletsInMag.ToString();
 
-        s2currentMag.text = soldier2.GetComponent<PlayerInputManager>().gunState.BulletsInMag.ToString();
+        s2CurrentMag.text = soldier2.GetComponent<PlayerInputManager>().gunState.BulletsInMag.ToString();
+    }
+
+    void UpdateMagMax()
+    {
+        s1MagMax.text = "/" + soldier1.GetComponent<PlayerInputManager>().gunState.MagSize;
+
+        s2MagMax.text = "/" + soldier2.GetComponent<PlayerInputManager>().gunState.MagSize;
     }
 }
