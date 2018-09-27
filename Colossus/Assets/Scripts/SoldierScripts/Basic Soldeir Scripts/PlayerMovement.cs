@@ -62,17 +62,10 @@ public class PlayerMovement : MonoBehaviour {
         prevState = GetComponent<PlayerInput>().PrevState;
         if (GameManagerScript.instance.currentGameState == GameState.InGame && GetComponent<PlayerInput>().PlayerIndexSet)
         {
-<<<<<<< HEAD:Colossus/Assets/Scripts/SoldierScripts/Basic Soldeir Scripts/PlayerMovement.cs
+
             Move();
             Jump();
-=======
-            case 1:
-                GameManagerScript.instance.resistance1 = GetComponent<PlayerManager>();
-                break;
-            case 2:
-                GameManagerScript.instance.resistance2 = GetComponent<PlayerManager>();
-                break;
->>>>>>> 1e1e0e6821243584b2c71595d8c119253741a883:Colossus/Assets/Scripts/SoldierScripts/PlayerInputManager.cs
+
         }
     }
 

@@ -23,13 +23,13 @@ public class GameManagerScript : MonoBehaviour
 
 	[Header("Players")]
     public ColossusManager colossus = null;
-<<<<<<< HEAD
+
     public PlayerData soldier1 = null;
     public PlayerData soldier2 = null;
-=======
+
     public PlayerManager resistance1 = null;
     public PlayerManager resistance2 = null;
->>>>>>> 1e1e0e6821243584b2c71595d8c119253741a883
+
 
 	[Header("Game Pieces")]
 	public List<GameObject> gamePieces = new List<GameObject>(); //Pieces of the scene only shown/used InGame
