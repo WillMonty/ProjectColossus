@@ -14,17 +14,17 @@ public class GunScript : MonoBehaviour
     public float rightTrigger;
     public bool reloadButton;
 
-    // Total ammo a gun can have in general
-    const int MAX_AMMO = 500;
-
     // Variables
     private Weapons weaponType;
 
     // Bullet prefab that will be shotout
     public GameObject bulletPrefab;
+    public GameObject grenadePrefab;
+    public GameObject snipePrefab;
 
-	//Audio Source
-	private AudioSource source;
+    GameObject projectile;
+    //Audio Source
+    private AudioSource source;
 	public AudioClip shootSound;
 
     // current gun Tracking variables
@@ -53,22 +53,20 @@ public class GunScript : MonoBehaviour
 
     // Variables that handle input
 
-    public int playerNum;
+    int playerNum;
 
+    public int PlayerNum
+    {
+        set { playerNum = value; }
+    }
 
-
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         // Set bool variables initially
         justShot = false;
         reloadingBool = false;
 
-
-        // For testing
-        //clipSize = 30;
-        //bulletsInClip = 30;
-        //reloadTime = 3.0f;
         fireDelay = .05f;
         
         if (weaponType == Weapons.AssaultRifle)
@@ -76,6 +74,23 @@ public class GunScript : MonoBehaviour
             fireDelay = .05f;
             magSize = 30;
             reloadTime = 2.0f;
+            projectile = bulletPrefab;
+        }
+
+        else if (weaponType == Weapons.GrenadeLauncher)
+        {
+            fireDelay = 1f;
+            magSize = 6;
+            reloadTime = 4.0f;
+            projectile = grenadePrefab;
+        }
+
+        else if (weaponType == Weapons.Sniper)
+        {
+            fireDelay = 0.5f;
+            magSize = 10;
+            reloadTime = 3.0f;
+            projectile = snipePrefab;
         }
 
         bulletsInMag = magSize;
@@ -86,15 +101,9 @@ public class GunScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        //if (GameManagerScript.instance.currentGameState == GameState.InGame)
-        //{        
-
             // Check for shooting
 			if (rightTrigger > 0 && justShot == false && GameManagerScript.instance.currentGameState == GameState.InGame && !reloadingBool)
-            {
-            //Debug.Log("Player " + playerNum + " has " + bulletsInClip + " in their clip.");
-
-            
+            {     
                 if (bulletsInMag > 0)
                 {
                     Shoot();
@@ -126,8 +135,8 @@ public class GunScript : MonoBehaviour
 			//source.Play();
 		}
 
-        // Instantiate the bullet and shoot it
-        Instantiate(bulletPrefab, transform.position, gameObject.transform.parent.GetComponent<PlayerInputManager>().eyes.transform.rotation);
+        // Instantiate the projectile and shoot it
+        Instantiate(projectile, transform.position, gameObject.transform.parent.GetComponent<PlayerData>().eyes.transform.rotation);
 
         bulletsInMag--;
 
@@ -153,6 +162,7 @@ public class GunScript : MonoBehaviour
     private void Reload()
     {
         reloadingBool = true;
+<<<<<<< HEAD:Colossus/Assets/Scripts/SoldierScripts/GunScript.cs
 
         bulletsInMag = 0;
 
@@ -171,6 +181,8 @@ public class GunScript : MonoBehaviour
         }
         */
         //bulletsInClip += clipSize;
+=======
+>>>>>>> f45a764ff4433c2f0e1ca4a7c2081fc811b72c53:Colossus/Assets/Scripts/SoldierScripts/Weapons/GunScript.cs
         StartCoroutine("ReloadingBoolReset");
     }
     /// <summary>

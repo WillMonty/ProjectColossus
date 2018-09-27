@@ -22,7 +22,7 @@ public class Lava : MonoBehaviour
         {
             case "resistanceplayer":
 				//Kill player
-				other.gameObject.GetComponent<PlayerManager>().Damage(100.0f);
+				other.gameObject.GetComponent<PlayerData>().Damage(100.0f);
                 break;
             case "colossusplayer":
                 //Do nothing

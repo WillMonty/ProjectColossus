@@ -3,37 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
-public class PlayerInputManager : MonoBehaviour
-{
-
-    // Attributes
-    public int playerNum;
-
-
-    //Gamepad Variables
-    PlayerIndex playerIndex;
-    bool playerIndexSet = false;
-
-    GamePadState state;
-    GamePadState prevState;
-
+public class PlayerMovement : MonoBehaviour {
 
     const float WALK_SPEED = 5.0f;
     const float RUN_SPEED = 8.0f;
     const float JUMP_FORCE = 6.0f;
-    const float JETPACK_FORCE = .5f;
     const float GRAVITY_FORCE = -.5f;
+
+    CharacterController player;
 
     // Player variables
     public float speed = 2f;
     public float lookSensitivityX = .001f;
     public float lookSensitivityY = .001f;
+
     float xAxisClamp;
 
-    // Component Variables
-    CharacterController player;
-    public GameObject eyes;
-    public GameObject rifle;
+    GamePadState state;
+    GamePadState prevState;
+
+    // Movement Behavior Variables
+    float verticalVelocity;
+    public float VerticalVelocity
+    {
+        get{ return verticalVelocity; }
+        set { verticalVelocity = value; }
+    }
+
+    float timeFalling;
+    public float TimeFalling
+    {
+        get { return timeFalling; }
+        set { timeFalling = value; }
+    }
+
+    // Animation Stuff
+    public GameObject StandingPose;
+    public GameObject RunningAnimation;
 
     // Movement Variables
     float moveFB; // Movement forward and backwards
@@ -42,84 +48,27 @@ public class PlayerInputManager : MonoBehaviour
     float rotX; // rotation by the X axis
     float rotY; // rotation by the Y axis
 
-    // Movement Behavior Variables
-    float verticalVelocity;
-    float timeFalling;
-
-    // Animation Stuff
-    public GameObject StandingPose;
-    public GameObject RunningAnimation;
-
-    //Gun variable 
-    public GunScript gunState;
-
     // Use this for initialization
-    void Start()
+    void Start ()
     {
-       
         player = GetComponent<CharacterController>();
-        gunState = rifle.GetComponent<GunScript>();
-        // Give an instance to this soldier to the gamemanager
-        StartCoroutine(LateStart(0.2f));
 
-        playerIndex = (PlayerIndex)(playerNum - 1);
-      
     }
-
-    IEnumerator LateStart(float waitTime)
+	
+	// Update is called once per frame
+	void LateUpdate ()
     {
-        yield return new WaitForSeconds(waitTime);
-        //Sets the instance after the game manager has actually initializes
-        switch (playerNum)
+        state = GetComponent<PlayerInput>().State;
+        prevState = GetComponent<PlayerInput>().PrevState;
+        if (GameManagerScript.instance.currentGameState == GameState.InGame && GetComponent<PlayerInput>().PlayerIndexSet)
         {
-            case 1:
-                GameManagerScript.instance.resistance1 = GetComponent<PlayerManager>();
-                break;
-            case 2:
-                GameManagerScript.instance.resistance2 = GetComponent<PlayerManager>();
-                break;
+
+            Move();
+            Jump();
+
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        GamePadState testState = GamePad.GetState(playerIndex);
-        
-        if (!playerIndexSet || !prevState.IsConnected)
-        {
-            playerIndexSet = false;
-            if (testState.IsConnected)
-                {
-                    Debug.Log(string.Format("GamePad found {0}", playerIndex));
-                    playerIndexSet = true;
-                }           
-        }
-       
-        if (testState.IsConnected)
-        {
-            prevState = state;
-            state = GamePad.GetState(playerIndex);
-
-            if (GameManagerScript.instance.currentGameState == GameState.InGame)
-            {
-                Move();
-                Jump();
-            }
-        }
-        else
-        {
-            //Debug.Log(string.Format("GamePad at {0} disconnected", playerIndex));
-            playerIndexSet = false;
-        }
-
-        //Sends required gamepad info to the gun script
-        gunState.rightTrigger = state.Triggers.Right;
-        gunState.reloadButton = (ButtonState.Pressed==state.Buttons.X);
-        
-    }
-    
     /// <summary>
     /// Handles all movement calls
     /// </summary>
@@ -127,7 +76,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         #region Handles Running
         // Handles Running
-        if (state.Triggers.Left > 0 )
+        if (state.Triggers.Left > 0)
         {
             speed = RUN_SPEED;
         }
@@ -139,7 +88,7 @@ public class PlayerInputManager : MonoBehaviour
 
         #region Getting Input
         // Movement variables/axis
-        
+
         if (state.ThumbSticks.Left.Y > .2 || state.ThumbSticks.Left.Y < -.2)
         {
             moveFB = state.ThumbSticks.Left.Y * speed;
@@ -201,12 +150,11 @@ public class PlayerInputManager : MonoBehaviour
             rotY = 0;
         }
 
-
         // Adding an xAxis
         xAxisClamp += rotY;
 
         // Set a temporary vector3 for rotation
-        Vector3 targetCamRot = eyes.transform.rotation.eulerAngles;
+        Vector3 targetCamRot = GetComponent<PlayerData>().eyes.transform.rotation.eulerAngles;
         Vector3 targetBodyRot = transform.rotation.eulerAngles;
 
         // Up/Down Rotation
@@ -227,53 +175,43 @@ public class PlayerInputManager : MonoBehaviour
         }
 
         // Applying the rotations to the player
-        eyes.transform.rotation = Quaternion.Euler(targetCamRot);
-        rifle.transform.rotation = Quaternion.Euler(targetCamRot);
+        GetComponent<PlayerData>().eyes.transform.rotation = Quaternion.Euler(targetCamRot);
+        GetComponent<PlayerData>().gun.transform.rotation = Quaternion.Euler(targetCamRot);
         transform.rotation = Quaternion.Euler(targetBodyRot);
         #endregion
 
         #region Applying movement
         // Create a vector movement
         Vector3 movement = new Vector3(moveLR, verticalVelocity, moveFB);
-
-        //Debug.Log("Player " + playerNum + " Movement: " + movement);
         movement = transform.rotation * movement;
-
-        //Debug.Log(rb.velocity);
 
         // Apply the final movement to the player
         player.Move(movement * Time.deltaTime);
         #endregion
     }
 
-    #region Jumping helper method
+    
     /// <summary>
     /// Method to handle jumping and jetpack
     /// </summary>
     private void Jump()
     {
-    
+
         if (player.isGrounded)
         {
-
-            if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
+            if (GetComponent<PlayerInput>().JumpState==1)
             {
-               
+            
                 verticalVelocity = JUMP_FORCE;
                 timeFalling = 0;
             }
-            else
+            else if (GetComponent<PlayerInput>().JumpState == 0)
             {
                 verticalVelocity += GRAVITY_FORCE;
             }
+            
         }
-        else if (state.Buttons.A == ButtonState.Pressed && GetComponent<PlayerManager>().JetPackFuel > 0)
-        {
-            verticalVelocity += JETPACK_FORCE;
-            GetComponent<PlayerManager>().FuelDown();
-            timeFalling -= Time.deltaTime;
-        }
-        else
+        else 
         {
             if (timeFalling < 0)
             {
@@ -284,6 +222,5 @@ public class PlayerInputManager : MonoBehaviour
         }
         verticalVelocity = Mathf.Clamp(verticalVelocity, -30, 5);
     }
-    #endregion
-
+   
 }
