@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public enum Weapons
 {
     AssaultRifle,
@@ -11,18 +13,14 @@ public enum Weapons
 
 public class GunScript : MonoBehaviour
 {
-    public float rightTrigger;
-    public bool reloadButton;
+   
 
     // Variables
     private Weapons weaponType;
 
     // Bullet prefab that will be shotout
-    public GameObject bulletPrefab;
-    public GameObject grenadePrefab;
-    public GameObject snipePrefab;
-
-    GameObject projectile;
+    public GameObject projectile;
+    PlayerInput playerInput; 
     //Audio Source
     private AudioSource source;
 	public AudioClip shootSound;
@@ -66,15 +64,14 @@ public class GunScript : MonoBehaviour
         // Set bool variables initially
         justShot = false;
         reloadingBool = false;
-
-        fireDelay = .05f;
+        playerInput = GetComponent<PlayerInput>();
+  
         
         if (weaponType == Weapons.AssaultRifle)
         {
             fireDelay = .05f;
             magSize = 30;
             reloadTime = 2.0f;
-            projectile = bulletPrefab;
         }
 
         else if (weaponType == Weapons.GrenadeLauncher)
@@ -82,15 +79,13 @@ public class GunScript : MonoBehaviour
             fireDelay = 1f;
             magSize = 6;
             reloadTime = 4.0f;
-            projectile = grenadePrefab;
         }
 
         else if (weaponType == Weapons.Sniper)
         {
             fireDelay = 0.5f;
-            magSize = 10;
+            magSize = 1;
             reloadTime = 3.0f;
-            projectile = snipePrefab;
         }
 
         bulletsInMag = magSize;
@@ -102,7 +97,7 @@ public class GunScript : MonoBehaviour
 	void Update ()
     {
             // Check for shooting
-			if (rightTrigger > 0 && justShot == false && GameManagerScript.instance.currentGameState == GameState.InGame && !reloadingBool)
+			if (playerInput.RightTrigger>0 == false && GameManagerScript.instance.currentGameState == GameState.InGame && !reloadingBool)
             {     
                 if (bulletsInMag > 0)
                 {
@@ -117,7 +112,7 @@ public class GunScript : MonoBehaviour
             }
 
             // Check for reloading
-        if(!reloadingBool && reloadButton)
+        if(!reloadingBool && playerInput.ReloadButton)
         {
             Reload();
         }
@@ -127,8 +122,6 @@ public class GunScript : MonoBehaviour
 
     private void Shoot()
     {
-        //Debug.Log("Shooting bullets");
-
 		if(!source.isPlaying)
 		{
 			source.clip = shootSound;

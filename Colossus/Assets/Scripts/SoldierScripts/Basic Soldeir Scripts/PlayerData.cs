@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum SoldierClass
-{
-    Assault,
-    Skulker,
-    Grenadier,
-}
 
 public class PlayerData : MonoBehaviour
 {
@@ -27,7 +21,6 @@ public class PlayerData : MonoBehaviour
 
 
     public int playerNumber;
-    public SoldierClass PlayerClass;
     public GameObject eyes;
     public GameObject gun;
     public GunScript gunState;
@@ -173,27 +166,7 @@ public class PlayerData : MonoBehaviour
         return used;
     }
 
-    /// <summary>
-    /// Add fuel back to the player's jetpack
-    /// </summary>
-    /*
-    public bool Fuel(float fuelFloat)
-    {
-        bool used = false;
 
-        if (jetPackFuel < MAX_FUEL)
-        {
-            jetPackFuel += fuelFloat;
-            used = true;
-        }
-
-        if (jetPackFuel > MAX_FUEL)
-        {
-            jetPackFuel = MAX_FUEL;
-        }
-        return used;
-    }
-    */
 
 
 

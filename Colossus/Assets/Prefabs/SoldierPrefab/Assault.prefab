@@ -21469,7 +21469,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1071774053901822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.34, y: 1.91, z: 0}
+  m_LocalPosition: {x: -3, y: 1.91, z: -17.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4831718625382480}
@@ -40623,13 +40623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d91e8de4fbf20af46a4e22df3a96cc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightTrigger: 0
-  reloadButton: 0
-  bulletPrefab: {fileID: 1572466318819412, guid: d9c940578f2c2c54cb88f7ee0e633b5a,
-    type: 2}
-  grenadePrefab: {fileID: 0}
-  snipePrefab: {fileID: 0}
-  shootSound: {fileID: 0}
+  projectile: {fileID: 1572466318819412, guid: d9c940578f2c2c54cb88f7ee0e633b5a, type: 2}
+  shootSound: {fileID: 8300000, guid: a00104a47f6fa4b449102e3225da544a, type: 3}
 --- !u!124 &124406664748010198
 Behaviour:
   m_ObjectHideFlags: 1
