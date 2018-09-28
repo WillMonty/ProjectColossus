@@ -2,44 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shield : ColossusAbility {
+public class Shield : MonoBehaviour {
 
-	public GameObject leftShield;
-	public GameObject rightShield;
+	public bool activated;
+	private bool prevActivated;
 
-	private GameObject activeShield;
+	public GameObject hitPrefab;
 
-
-	void Start () 
+	void Awake()
 	{
-		SetupTrackedControllers();
+		prevActivated = activated;
 	}
 
-	public override void Enable()
-	{
-		enabled = true;
-
-		if(AbilityManagerScript.instance.leftHandColossus == ColossusHandAbilities.Hand)
-		{
-			leftShield.SetActive(true);	
-		}
-
-		if(AbilityManagerScript.instance.rightHandColossus == ColossusHandAbilities.Hand)
-		{
-			rightShield.SetActive(true);	
-		}
-	}
-
-	public override void Disable()
-	{
-		enabled = false;
-
-		leftShield.SetActive(false);
-		rightShield.SetActive(false);
+	// Use this for initialization
+	void Start () {
+		
 	}
 	
+	// Update is called once per frame
+	void Update () 
+	{
+		if(prevActivated != activated)
+		{
+			if(activated) TurnOn(); 
+			else TurnOff();
 
-	void Update () {
+			prevActivated = activated;
+		}	
+	}
+
+	void TurnOn()
+	{
+
+	}
+
+	void TurnOff()
+	{
+
+	}
+
+	void OnCollisionEnter(Collision collision)
+	{
+		//Determine if it's some sort of bullet
+		if(collision.collider.tag == "projectile")
+		{
+			if(activated)
+			{
+				Reflect(collision.gameObject);
+			}
+			else
+			{
+				//Delete the projectile...
+			}
+
+			//Make audio object
+			Instantiate(hitPrefab, collision.contacts[0].point, Quaternion.identity);
+		}
+	}
+
+	//Re-instantiates a projectile hitting the shield to fire it back at an angle
+	void Reflect(GameObject projectile)
+	{
 		
 	}
 }

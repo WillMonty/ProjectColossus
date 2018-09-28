@@ -13,11 +13,6 @@ public class TrashCollector : MonoBehaviour {
         rubbishList = new List<GameObject>();
         maxCount = maxRubbishCount;
 	}
-	
-	// Update is called once per frame
-	//void Update () {
-		
-	//}
 
     public static void AddRubbishToList(GameObject rubbishObject)
     {

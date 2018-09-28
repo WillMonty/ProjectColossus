@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeadLaser : ColossusAbility
+public class HeadLaserAbility : ColossusAbility
 {
 
     public bool debugLaser;
@@ -53,7 +53,7 @@ public class HeadLaser : ColossusAbility
 
 	public override void Enable()
 	{
-		enabled = true;
+		abilityEnabled = true;
 
 		container.SetActive(true);
 		laserUI.SetActive(true);
@@ -61,7 +61,7 @@ public class HeadLaser : ColossusAbility
 
 	public override void Disable()
 	{
-		enabled = false;
+		abilityEnabled = false;
 
 		StopLaser();
 		container.SetActive(false);
@@ -80,7 +80,7 @@ public class HeadLaser : ColossusAbility
 			return;
 		}
 
-		if(!enabled) return;
+		if(!abilityEnabled) return;
 
         //If both controllers pads are pressed
 		if (leftControllerTracked.padPressed && rightControllerTracked.padPressed)

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 82402699987001024}
   - component: {fileID: 114134736961217000}
   m_Layer: 0
-  m_Name: CollosusHit
+  m_Name: HitColossusBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

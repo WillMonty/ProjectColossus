@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public abstract class ColossusAbility : MonoBehaviour {
 
-	protected bool enabled;
+	protected bool abilityEnabled;
 
 	protected SteamVR_TrackedController leftControllerTracked;
 	protected SteamVR_TrackedController rightControllerTracked;
