@@ -48,8 +48,7 @@ public class HeadLaser : ColossusAbility
     // Use this for initialization
     void Start()
     {
-		leftControllerTracked = this.GetComponent<SteamVR_ControllerManager>().left.GetComponent<SteamVR_TrackedController>();
-		rightControllerTracked = this.GetComponent<SteamVR_ControllerManager>().right.GetComponent<SteamVR_TrackedController>();
+		SetupTrackedControllers();
     }
 
 	public override void Enable()

@@ -504,6 +504,32 @@ namespace Valve.VR.InteractionSystem
 			// DebugVar
 			int iActualColliderCount = 0;
 
+			//****
+			// WILL'S NOT SO GOOD "DISABLE THROWING" FIX
+
+			//You probably forgot to delete this trash when you made a new VR project
+			if(otherHand.isActiveAndEnabled && !GameManagerScript.instance)
+			{
+				Debug.Log("Hey buddy, you just blow in from stupid town?");
+			}
+
+			if(startingHandType == HandType.Left)
+			{
+				if(AbilityManagerScript.instance.leftHandColossus != ColossusHandAbilities.Hand)
+				{
+					return;
+				}
+			}
+
+			if(startingHandType == HandType.Right)
+			{
+				if(AbilityManagerScript.instance.rightHandColossus != ColossusHandAbilities.Hand)
+				{
+					return;
+				}
+			}
+			//****
+
 			foreach ( Collider collider in overlappingColliders )
 			{
 				if ( collider == null )
