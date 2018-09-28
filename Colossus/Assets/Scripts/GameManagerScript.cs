@@ -28,8 +28,8 @@ public class GameManagerScript : MonoBehaviour
     public PlayerData soldier1 = null;
     public PlayerData soldier2 = null;
 
-    public PlayerManager resistance1 = null;
-    public PlayerManager resistance2 = null;
+    //public PlayerManager resistance1 = null;
+    //public PlayerManager resistance2 = null;
 
 
 	[Header("Game Pieces")]
@@ -220,14 +220,14 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void CheckWinCondition()
     {
-        if(colossus != null && resistance1 != null && resistance2 != null)
+        if(colossus != null && soldier1 != null && soldier2 != null)
         {
             if (instance.currentGameState == GameState.InGame && colossus.Health <= 0)
             {
                 instance.currentGameState = GameState.ResistanceWin;
                 StartCoroutine(ReturnToMainMenu(7f));
             }
-            else if (instance.currentGameState == GameState.InGame && resistance1.Lives <= 0 && resistance2.Lives <= 0)
+            else if (instance.currentGameState == GameState.InGame && soldier1.Lives <= 0 && soldier2.Lives <= 0)
             {
                 instance.currentGameState = GameState.ResistanceLose;
                 StartCoroutine(ReturnToMainMenu(7f));

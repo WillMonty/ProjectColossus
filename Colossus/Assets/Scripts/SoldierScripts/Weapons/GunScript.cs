@@ -162,7 +162,6 @@ public class GunScript : MonoBehaviour
     private void Reload()
     {
         reloadingBool = true;
-<<<<<<< HEAD:Colossus/Assets/Scripts/SoldierScripts/GunScript.cs
 
         bulletsInMag = 0;
 
@@ -181,8 +180,6 @@ public class GunScript : MonoBehaviour
         }
         */
         //bulletsInClip += clipSize;
-=======
->>>>>>> f45a764ff4433c2f0e1ca4a7c2081fc811b72c53:Colossus/Assets/Scripts/SoldierScripts/Weapons/GunScript.cs
         StartCoroutine("ReloadingBoolReset");
     }
     /// <summary>
