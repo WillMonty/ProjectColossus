@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColossusHand : ColossusAbility {
+public class HandsAbility : ColossusAbility {
 
 	public GameObject leftHand;
 	public GameObject rightHand;
 
 	public override void Enable ()
 	{
-		enabled = true;
+		abilityEnabled = true;
 
 		if(AbilityManagerScript.instance.leftHandColossus == ColossusHandAbilities.Hand)
 		{
@@ -24,7 +24,7 @@ public class ColossusHand : ColossusAbility {
 
 	public override void Disable ()
 	{
-		enabled = false;
+		abilityEnabled = false;
 
 		leftHand.SetActive(false);
 		rightHand.SetActive(false);

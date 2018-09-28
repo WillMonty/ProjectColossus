@@ -74,29 +74,30 @@ public class BulletScript : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "colossusplayer")
-        {
-            Instantiate(HitAudioObject, transform.position, Quaternion.identity);
-            GameManagerScript.instance.colossus.Damage(damage);
-        }
-		else if(other.tag == "colossusarms")
+	void OnCollisionEnter(Collision collision)
+	{
+
+		if (collision.gameObject.tag == "colossusplayer")
+		{
+			Instantiate(HitAudioObject, transform.position, Quaternion.identity);
+			GameManagerScript.instance.colossus.Damage(damage);
+		}
+		else if(collision.gameObject.tag == "colossusarms")
 		{
 			Instantiate(HitAudioObject, transform.position, Quaternion.identity);
 			GameManagerScript.instance.colossus.Damage(damage*0.75f);
 		}
-		else if(other.tag == "colossushead")
+		else if(collision.gameObject.tag == "colossushead")
 		{
 			Instantiate(HitAudioObject, transform.position, Quaternion.identity);
 			GameManagerScript.instance.colossus.Damage(damage*1.20f);
 		}
-
-        // Destroy the projectile
-        if (other.tag != "projectile" && other.tag != "resistancebullet" && other.tag != "resistanceplayer")
-        {
-            Destroy(gameObject);
-        }
-    }
+			
+		// Destroy the projectile
+		if (collision.gameObject.tag != "projectile" && collision.gameObject.tag != "resistancebullet" && collision.gameObject.tag != "resistanceplayer")
+		{
+			Destroy(gameObject);
+		}
+	}
 
 }

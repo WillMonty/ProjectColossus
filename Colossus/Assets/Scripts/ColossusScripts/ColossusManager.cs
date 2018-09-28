@@ -111,18 +111,21 @@ public class ColossusManager : MonoBehaviour {
 		switch(AbilityManagerScript.instance.headColossus)
 		{
 			case(ColossusHeadAbilities.Laser):
-				chosenAbilities.Add(this.GetComponent<HeadLaser>());
+				chosenAbilities.Add(this.GetComponent<HeadLaserAbility>());
 				break;
 		}
 
+		//Arm abilities
+		//Hands
 		if(AbilityManagerScript.instance.leftHandColossus == ColossusHandAbilities.Hand || AbilityManagerScript.instance.rightHandColossus == ColossusHandAbilities.Hand)
 		{
-			chosenAbilities.Add(this.GetComponent<ColossusHand>());	
+			chosenAbilities.Add(this.GetComponent<HandsAbility>());	
 		}
 
+		//Shield
 		if(AbilityManagerScript.instance.leftHandColossus == ColossusHandAbilities.Shield || AbilityManagerScript.instance.rightHandColossus == ColossusHandAbilities.Shield)
 		{
-			//chosenAbilities.Add(this.GetComponent<ColossusHand>());	
+			chosenAbilities.Add(this.GetComponent<ShieldsAbility>());	
 		}
 	}
 
@@ -172,7 +175,7 @@ public class ColossusManager : MonoBehaviour {
         rightIndicator.SetActive(false);
 
 		//Turn off hands
-		this.GetComponent<ColossusHand>().Disable();
+		this.GetComponent<HandsAbility>().Disable();
 
         //Enable Colossus abilities
 		for(int i = 0; i < chosenAbilities.Count; i++)
