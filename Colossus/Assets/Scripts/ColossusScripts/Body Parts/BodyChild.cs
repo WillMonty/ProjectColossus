@@ -20,7 +20,6 @@ public class BodyChild : MonoBehaviour {
 	{
 		if(collision.gameObject.tag == "projectile")
 		{
-			Debug.Log("Child " + gameObject.name + "hit");
 			parent.OnCollisionEnter(collision);
 		}
 			

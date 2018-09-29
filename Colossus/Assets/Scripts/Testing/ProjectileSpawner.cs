@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletSpawner : MonoBehaviour {
+public class ProjectileSpawner : MonoBehaviour {
 
 	public GameObject bullet;
 
@@ -10,7 +10,7 @@ public class BulletSpawner : MonoBehaviour {
 	public float timeBetweenShots;
 	private float currentTime;
 
-	public float shotForce;
+	public float shotSpeed;
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +34,7 @@ public class BulletSpawner : MonoBehaviour {
 
 	void SetupShot(GameObject newBullet)
 	{
-		newBullet.GetComponent<Rigidbody>().AddForce(transform.localPosition.normalized * shotForce);
+		newBullet.GetComponent<BulletScript>().bulletSpeed = shotSpeed;
 		TrashCollector.AddRubbishToList(newBullet);
 	}
 
@@ -42,6 +42,6 @@ public class BulletSpawner : MonoBehaviour {
 	void OnDrawGizmos()
 	{
 		Gizmos.color = Color.yellow;
-		Gizmos.DrawLine(transform.position, transform.position + transform.forward * shotForce);
+		Gizmos.DrawLine(transform.position, transform.position + transform.forward * shotSpeed);
 	}
 }

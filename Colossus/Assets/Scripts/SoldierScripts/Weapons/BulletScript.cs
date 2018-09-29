@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+
     #region attributes
     // Attributes
-    const float BULLETSPEED = 50f;
+    public float bulletSpeed = 12.5f;
     
     // Properties
     public Weapons gunOwnerType;
-    public GameObject HitAudioObject;
+	public int ownerNumber;
 
     private Vector3 startPos;
     private float damage;
@@ -46,10 +47,10 @@ public class BulletScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        bulletMove();
+        BulletMove();
         if ((transform.position - startPos).magnitude > 300)
         {
-            deleteBullet();
+			Destroy(gameObject);
         }
 	}
 
@@ -58,40 +59,15 @@ public class BulletScript : MonoBehaviour
     /// <summary>
     /// Updates the bullets position
     /// </summary>
-    void bulletMove()
+    void BulletMove()
     {
-        rb.velocity = transform.forward * BULLETSPEED;
+        rb.velocity = transform.forward * bulletSpeed;
         //Debug.Log("Move " + bulletSpeed);
-    }
-
-    /// <summary>
-    /// Deletes the bullet if it moves too far from it's start point to prevent too many bullets being on screen
-    /// </summary>
-    public void deleteBullet()
-    {
-        // Destroy this bullet if it gets too far
-        Destroy(gameObject);
-
     }
 
 	void OnCollisionEnter(Collision collision)
 	{
-
-		if (collision.gameObject.tag == "colossusplayer")
-		{
-			Instantiate(HitAudioObject, transform.position, Quaternion.identity);
-			GameManagerScript.instance.colossus.Damage(damage);
-		}
-		else if(collision.gameObject.tag == "colossusarms")
-		{
-			Instantiate(HitAudioObject, transform.position, Quaternion.identity);
-			GameManagerScript.instance.colossus.Damage(damage*0.75f);
-		}
-		else if(collision.gameObject.tag == "colossushead")
-		{
-			Instantiate(HitAudioObject, transform.position, Quaternion.identity);
-			GameManagerScript.instance.colossus.Damage(damage*1.20f);
-		}
+		//TODO: Factor in bullet owner eventually
 			
 		// Destroy the projectile
 		if (collision.gameObject.tag != "projectile" && collision.gameObject.tag != "resistancebullet" && collision.gameObject.tag != "resistanceplayer")
