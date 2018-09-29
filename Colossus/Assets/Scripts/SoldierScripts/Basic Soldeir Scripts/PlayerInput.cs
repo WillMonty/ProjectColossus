@@ -26,14 +26,6 @@ public class PlayerInput : MonoBehaviour
         get { return prevState; }
     }
 
-    bool reloadButton;
-    public bool ReloadButton
-    {
-        get { return reloadButton; }
-    }
-
-    
-
     public int JumpState
     {
         get{
@@ -48,11 +40,22 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    float rightTrigger;
-    public float RightTrigger
+    public int ActionState
     {
-        get { return rightTrigger; }
+        get
+        {
+            if (playerIndexSet)
+            {
+                if (state.Buttons.LeftShoulder == ButtonState.Pressed && prevState.Buttons.LeftShoulder == ButtonState.Released)
+                    return 1; //Pressed 
+                else if (state.Buttons.LeftShoulder == ButtonState.Pressed && prevState.Buttons.LeftShoulder == ButtonState.Pressed)
+                    return 2; //Held             
+            }
+            return 0;
+        }
     }
+
+
 
     // Use this for initialization
     void Start()
@@ -90,8 +93,8 @@ public class PlayerInput : MonoBehaviour
         }
 
         //Shooting button states
-        rightTrigger = state.Triggers.Right;
-        reloadButton = (ButtonState.Pressed==state.Buttons.X);
+        GetComponent<PlayerData>().GunBase.RightTrigger = state.Triggers.Right;
+        GetComponent<PlayerData>().GunBase.ReloadButton = (ButtonState.Pressed==state.Buttons.X);
         
     }
    

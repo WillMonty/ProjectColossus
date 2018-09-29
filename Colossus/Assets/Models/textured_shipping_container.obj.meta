@@ -10,6 +10,7 @@ ModelImporter:
     400000: Shipping_Container
     400002: //RootNode
     2100000: aiStandardSurface1SG
+    2100002: Shipping_ContainerMat
     2300000: Shipping_Container
     3300000: Shipping_Container
     4300000: Shipping_Container

@@ -44,14 +44,18 @@ public class SoldierUINew : MonoBehaviour {
 
         maxFuel = soldier1.GetComponent<JetPack>().MaxFuel;
 
-        s1CurrentFuel = soldier1.GetComponent<JetPack>().JetPackFuel;
-        s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
+        if (soldier1.soldierClass == SoldierClass.Assault)
+        {
+            s1CurrentFuel = soldier1.GetComponent<JetPack>().JetPackFuel;
+            s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
+        }
 
-        s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
-        s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
+        if (soldier2.soldierClass == SoldierClass.Assault)
+        {
+            s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
+            s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
+        }
 
-        s1MagMax.text = "/" + soldier1.GetComponent<PlayerData>().gunState.MagSize;
-        s2MagMax.text = "/" + soldier2.GetComponent<PlayerData>().gunState.MagSize;
     }
 
     // Update is called once per frame
@@ -89,14 +93,14 @@ public class SoldierUINew : MonoBehaviour {
 
     void UpdateFuelbar()
     {
-        if(s1CurrentFuel != soldier1.GetComponent<JetPack>().JetPackFuel)
+        if(soldier1.soldierClass == SoldierClass.Assault && s1CurrentFuel != soldier1.GetComponent<JetPack>().JetPackFuel)
         {
             s1CurrentFuel = soldier1.GetComponent<JetPack>().JetPackFuel;
 
             s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
         }
 
-        if (s2CurrentFuel != soldier2.GetComponent<JetPack>().JetPackFuel)
+        if (soldier2.soldierClass == SoldierClass.Assault && s2CurrentFuel != soldier2.GetComponent<JetPack>().JetPackFuel)
         {
             s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
 
@@ -106,19 +110,19 @@ public class SoldierUINew : MonoBehaviour {
 
     void UpdateCurrentMag()
     {
-        s1CurrentMag.text = soldier1.GetComponent<PlayerData>().gunState.BulletsInMag.ToString();
+        s1CurrentMag.text = soldier1.GetComponent<PlayerData>().GunBase.BulletsInMag.ToString();
 
-        s2CurrentMag.text = soldier2.GetComponent<PlayerData>().gunState.BulletsInMag.ToString();
+        s2CurrentMag.text = soldier2.GetComponent<PlayerData>().GunBase.BulletsInMag.ToString();
     }
 
     void UpdateMagMax()
     {
-        s1MagMax.text = "/" + soldier1.GetComponent<PlayerData>().gunState.MagSize;
+        s1MagMax.text = "/" + soldier1.GetComponent<PlayerData>().GunBase.MagSize;
 
-        s2MagMax.text = "/" + soldier2.GetComponent<PlayerData>().gunState.MagSize;
+        s2MagMax.text = "/" + soldier2.GetComponent<PlayerData>().GunBase.MagSize;
 
-        s1CurrentMag.text = soldier1.GetComponent<PlayerData>().gunState.BulletsInMag.ToString();
+        s1CurrentMag.text = soldier1.GetComponent<PlayerData>().GunBase.BulletsInMag.ToString();
 
-        s2CurrentMag.text = soldier2.GetComponent<PlayerData>().gunState.BulletsInMag.ToString();
+        s2CurrentMag.text = soldier2.GetComponent<PlayerData>().GunBase.BulletsInMag.ToString();
     }
 }

@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum SoldierClass
+{
+    Assault,
+    Grenadier,
+    Skulker,
+}
 
 public class PlayerData : MonoBehaviour
 {
@@ -16,15 +22,17 @@ public class PlayerData : MonoBehaviour
     // Basic Player Management variables
     private int lives;
     private float health;
-    
-    private Weapons currentWeapon;
-
 
     public int playerNumber;
+    public SoldierClass soldierClass;
     public GameObject eyes;
     public GameObject gun;
-    public GunScript gunState;
 
+    IWeapon gunBase;
+    public IWeapon GunBase
+    {
+        get { return gunBase; }
+    }
     private GameObject[] spawnPoints;
 
     public int Lives
@@ -53,9 +61,10 @@ public class PlayerData : MonoBehaviour
 
         lives = STARTING_LIVES;
         health = 100.0f;
-              
-        
-        gunState.PlayerNum = playerNumber;
+
+
+        gunBase = gun.GetComponent<IWeapon>();
+        gunBase.PlayerNum = playerNumber;
 
         SetCamera();
         StartCoroutine(LateStart(0.2f));
