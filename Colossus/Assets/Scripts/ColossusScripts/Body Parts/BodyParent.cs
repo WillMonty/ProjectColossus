@@ -24,12 +24,9 @@ public class BodyParent : MonoBehaviour {
 		if(collision.collider.tag == "projectile")
 		{
 
-			Debug.Log(gameObject.name + " group hit.");
-
-			//Get damage from projectile
-
 			//Apply damage to Colossus
-			//colossus.Damage(0.0f * damageMultiplier);
+			//colossus.Damage(collision.gameObject.GetComponent<IDamage>().Damage * damageMultiplier);
+			colossus.Damage(damageMultiplier);
 
 			//Make audio object
 			Instantiate(hitPrefab, collision.contacts[0].point, Quaternion.identity);
