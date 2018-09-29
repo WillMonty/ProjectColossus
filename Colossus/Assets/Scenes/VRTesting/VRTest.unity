@@ -248,88 +248,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4000010733554458, guid: e0b086fbb874df143b6ac8f53cea5424,
     type: 2}
   m_PrefabInternal: {fileID: 1328357951}
---- !u!1 &209306239
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 209306241}
-  - component: {fileID: 209306240}
-  - component: {fileID: 209306242}
-  - component: {fileID: 209306243}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &209306240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 209306239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6d8d9709491137408017c1c3b00e0f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentGameState: 4
-  forceStartGame: 1
-  colossus: {fileID: 1498786080}
-  soldier1: {fileID: 0}
-  soldier2: {fileID: 0}
-  gamePieces:
-  - {fileID: 767062219}
-  - {fileID: 1064257319}
-  pauseMenu: {fileID: 0}
-  pauseMenuDefaultButton: {fileID: 0}
-  currentPauseOwner: 3
-  deathbox: {fileID: 0}
---- !u!4 &209306241
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 209306239}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &209306242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 209306239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 253bd74bfa96a9e49ac47b776d0a6c0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxRubbishCount: 30
---- !u!114 &209306243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 209306239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d97dd221a3ff9a4a820a821fcd5e037, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftHandColossus: 0
-  rightHandColossus: 1
-  headColossus: 1
-  resistance1: 0
-  resistance2: 0
 --- !u!1 &716445444
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,16 +608,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 33953989215874084, guid: 45340bf8a73433c42a71bccd5021d759,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 31025566}
     - target: {fileID: 23859033168665758, guid: 45340bf8a73433c42a71bccd5021d759,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2099697719}
+    - target: {fileID: 33953989215874084, guid: 45340bf8a73433c42a71bccd5021d759,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 31025566}
     - target: {fileID: 114809903612954868, guid: 45340bf8a73433c42a71bccd5021d759,
         type: 2}
       propertyPath: pregameIndicator
@@ -710,6 +628,11 @@ Prefab:
       propertyPath: map
       value: 
       objectReference: {fileID: 1337873632}
+    - target: {fileID: 64077819641181112, guid: 45340bf8a73433c42a71bccd5021d759,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45340bf8a73433c42a71bccd5021d759, type: 2}
   m_IsPrefabParent: 0
@@ -860,6 +783,63 @@ Transform:
   m_PrefabParentObject: {fileID: 4546481181968224, guid: 1beb3bb0a568dff48a25b0899a6cb42e,
     type: 2}
   m_PrefabInternal: {fileID: 1509707623}
+--- !u!1001 &1555397768
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114851049906826984, guid: fdd7556324937854b84c444cbafc7063,
+        type: 2}
+      propertyPath: colossus
+      value: 
+      objectReference: {fileID: 1498786080}
+    - target: {fileID: 114851049906826984, guid: fdd7556324937854b84c444cbafc7063,
+        type: 2}
+      propertyPath: gamePieces.Array.data[0]
+      value: 
+      objectReference: {fileID: 767062219}
+    - target: {fileID: 114851049906826984, guid: fdd7556324937854b84c444cbafc7063,
+        type: 2}
+      propertyPath: gamePieces.Array.data[1]
+      value: 
+      objectReference: {fileID: 1064257319}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1615437906
 Prefab:
   m_ObjectHideFlags: 0

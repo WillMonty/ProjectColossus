@@ -107,11 +107,11 @@ public class GameManagerScript : MonoBehaviour
 	IEnumerator LateStart(float waitTime)
 	{
 		yield return new WaitForSeconds(waitTime);
+
 		//Check for debug
 		if(forceStartGame)
 		{
 			colossus.ToggleColossus();
-			StartGame();
 		}
 
 	}
@@ -131,11 +131,8 @@ public class GameManagerScript : MonoBehaviour
 	//General function to set up the game's pieces and state
 	public void StartGame()
 	{
-        Debug.Log("StartGame");
-
 		GamePiecesSwitch();
 		currentGameState = GameState.InGame;
-        
 	}
 
 
