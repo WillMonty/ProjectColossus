@@ -42,16 +42,18 @@ public class SoldierUINew : MonoBehaviour {
         s2CurrentHealth = soldier2.GetComponent<PlayerData>().Health;
         s2Healthbar.fillAmount = s2CurrentHealth / maxHealth;
 
-        maxFuel = soldier1.GetComponent<JetPack>().MaxFuel;
+        
 
         if (soldier1.soldierClass == SoldierClass.Assault)
         {
+            maxFuel = soldier1.GetComponent<JetPack>().MaxFuel;
             s1CurrentFuel = soldier1.GetComponent<JetPack>().JetPackFuel;
             s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
         }
 
         if (soldier2.soldierClass == SoldierClass.Assault)
         {
+            maxFuel = soldier2.GetComponent<JetPack>().MaxFuel;
             s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
             s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
         }

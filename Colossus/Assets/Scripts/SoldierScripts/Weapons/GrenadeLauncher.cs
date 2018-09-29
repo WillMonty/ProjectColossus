@@ -12,6 +12,9 @@ public class GrenadeLauncher : GunBase
         base.Start();
     }
 
-
+    protected override void Reload()
+    {
+        base.Reload();
+    }
 
 }

@@ -124,6 +124,7 @@ public class GameManagerScript : MonoBehaviour
 		CheckWinCondition();
         PauseInputs();
         OOOOOOOF();
+        currentGameState = GameState.InGame;
 	}
     #endregion
 

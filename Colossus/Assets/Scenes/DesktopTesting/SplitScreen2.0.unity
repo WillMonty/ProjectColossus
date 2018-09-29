@@ -439,6 +439,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114358249367366222, guid: aaa0deb5ba866c9408c713310656b0ae,
+        type: 2}
+      propertyPath: playerNumber
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aaa0deb5ba866c9408c713310656b0ae, type: 2}
   m_IsPrefabParent: 0
@@ -549,12 +554,12 @@ Prefab:
         type: 2}
       propertyPath: soldier1
       value: 
-      objectReference: {fileID: 918247063}
+      objectReference: {fileID: 109616731}
     - target: {fileID: 114028336522085264, guid: d7a720baab1e282499bd2b0f0c17ccce,
         type: 2}
       propertyPath: soldier2
       value: 
-      objectReference: {fileID: 109616731}
+      objectReference: {fileID: 918247063}
     - target: {fileID: 1537516300912974, guid: d7a720baab1e282499bd2b0f0c17ccce, type: 2}
       propertyPath: m_IsActive
       value: 1
@@ -949,7 +954,7 @@ Prefab:
     - target: {fileID: 114546256199631042, guid: 3330675f89359a8469ed7bc0de717438,
         type: 2}
       propertyPath: playerNumber
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3330675f89359a8469ed7bc0de717438, type: 2}
