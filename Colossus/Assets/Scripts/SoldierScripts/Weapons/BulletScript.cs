@@ -17,6 +17,8 @@ public class BulletScript : MonoBehaviour
     private float damage;
 
     Rigidbody rb;
+
+	[HideInInspector] public Vector3 oldVelocity;
     #endregion
     
     #region Properties
@@ -52,6 +54,12 @@ public class BulletScript : MonoBehaviour
         {
 			Destroy(gameObject);
         }
+	}
+		
+	void FixedUpdate()
+	{
+		//Update oldVelocity
+		oldVelocity = this.GetComponent<Rigidbody>().velocity;
 	}
 
 

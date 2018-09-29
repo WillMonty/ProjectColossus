@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour {
 
-	public bool activated;
-	private bool prevActivated;
+	public bool playerActive; //Is the player trying to activate the reflect?
+	private bool prevPlayerActive;
+	private bool reflecting; //Reflecting currently on
+
+	public float reflectTime;
+	private float currReflect;
+
 
 	public GameObject hitPrefab;
+	public GameObject hitReflectPrefab;
 
 	void Awake()
 	{
-		prevActivated = activated;
+		prevPlayerActive = playerActive;
 	}
 
 	// Use this for initialization
@@ -22,23 +28,23 @@ public class Shield : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(prevActivated != activated)
+		if(prevPlayerActive != playerActive)
 		{
-			if(activated) TurnOn(); 
+			if(playerActive) TurnOn(); 
 			else TurnOff();
 
-			prevActivated = activated;
+			prevPlayerActive = playerActive;
 		}	
 	}
 
 	void TurnOn()
 	{
-
+		reflecting = true;
 	}
 
 	void TurnOff()
 	{
-
+		reflecting = false;
 	}
 
 	void OnCollisionEnter(Collision collision)
@@ -46,13 +52,9 @@ public class Shield : MonoBehaviour {
 		//Determine if it's some sort of bullet
 		if(collision.collider.tag == "projectile")
 		{
-			if(activated)
+			if(reflecting)
 			{
-				Reflect(collision.gameObject);
-			}
-			else
-			{
-				//Delete the projectile...
+				Reflect(collision);
 			}
 
 			//Make audio object
@@ -60,9 +62,22 @@ public class Shield : MonoBehaviour {
 		}
 	}
 
-	//Re-instantiates a projectile hitting the shield to fire it back at an angle
-	void Reflect(GameObject projectile)
+	//Re-instantiates a projectile hitting the shield to fire it back at the appropriate angle
+	void Reflect(Collision collision)
 	{
-		
+		GameObject projectile = collision.gameObject;
+
+		GameObject createdProjectile = Instantiate(projectile, projectile.transform.position, projectile.transform.localRotation);
+		Vector3 inV = projectile.GetComponent<BulletScript>().oldVelocity; //Do I need this?
+		//inV.Scale(projectile.GetComponent<Rigidbody>().velocity);
+		Vector3 reflectionV = Vector3.Reflect(inV, collision.contacts[0].normal);
+
+		Debug.Log("In: " + inV);
+		Debug.Log("Out: " + reflectionV);
+
+		createdProjectile.GetComponent<Rigidbody>().velocity = reflectionV;
+
+		TrashCollector.AddRubbishToList(createdProjectile);
+
 	}
 }

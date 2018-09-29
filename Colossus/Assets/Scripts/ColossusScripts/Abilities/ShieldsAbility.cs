@@ -7,9 +7,6 @@ public class ShieldsAbility : ColossusAbility {
 	public GameObject leftShield;
 	public GameObject rightShield;
 
-	private Shield leftShieldScript;
-	private Shield rightShieldScript;
-
 	void Start () 
 	{
 		SetupTrackedControllers();
@@ -41,6 +38,31 @@ public class ShieldsAbility : ColossusAbility {
 
 	void Update () 
 	{
-		
+		if(leftShield.activeSelf)
+		{
+			CheckActivating(leftShield, leftControllerTracked);
+		}
+
+		if(rightShield.activeSelf)
+		{
+			CheckActivating(rightShield, rightControllerTracked);
+		}
+
+
 	}
+
+	void CheckActivating(GameObject targetShield, SteamVR_TrackedController targetController)
+	{
+		if(targetController.triggerPressed)
+		{
+			targetShield.GetComponent<Shield>().playerActive = true;	
+		}
+		else
+		{
+			targetShield.GetComponent<Shield>().playerActive = false;	
+		}
+	}
+
 }
+
+
