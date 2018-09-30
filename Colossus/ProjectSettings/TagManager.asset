@@ -16,6 +16,7 @@ TagManager:
   - colossusarms
   - colossushead
   - PauseMenuUI
+  - explosion
   layers:
   - Default
   - TransparentFX

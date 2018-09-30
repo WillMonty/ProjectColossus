@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class BulletScript : MonoBehaviour ,IDamage
 {
 
     #region attributes
@@ -26,6 +26,12 @@ public class BulletScript : MonoBehaviour
     public float Damage
     {
         get { return damage; }
+    }
+
+    public int Owner
+    {
+        get { return ownerNumber; }
+        set { ownerNumber = value; }
     }
     #endregion
 

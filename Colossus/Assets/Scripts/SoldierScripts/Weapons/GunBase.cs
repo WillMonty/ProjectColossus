@@ -13,6 +13,13 @@ public interface IWeapon
     bool ReloadButton { set; }
 }
 
+//Generic Interface for player projectiles
+public interface IDamage
+{
+    int Owner { get; set; }
+    float Damage { get; }
+}
+
 public enum Weapons
 {
     AssaultRifle,
@@ -22,7 +29,7 @@ public enum Weapons
 
 public class GunBase : MonoBehaviour, IWeapon
 {
-    // Variables
+    
     protected Weapons weaponType;
     public Weapons WeaponType
     {
@@ -31,6 +38,7 @@ public class GunBase : MonoBehaviour, IWeapon
 
     // Bullet prefab that will be shot
     public GameObject projectile;
+    GameObject projClone;
 
     //Audio Source
     protected AudioSource source;
@@ -151,8 +159,8 @@ public class GunBase : MonoBehaviour, IWeapon
 		}
 
         // Instantiate the projectile and shoot it
-        Instantiate(projectile, transform.position, gameObject.transform.parent.GetComponent<PlayerData>().eyes.transform.rotation);
-
+        projClone=Instantiate(projectile, transform.position, gameObject.transform.parent.GetComponent<PlayerData>().eyes.transform.rotation);
+        projClone.GetComponent<IDamage>().Owner = playerNum;
         bulletsInMag--;
 
         justShot = true;
