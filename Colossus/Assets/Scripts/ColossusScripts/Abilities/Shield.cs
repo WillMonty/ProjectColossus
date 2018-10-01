@@ -1,19 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shield : MonoBehaviour {
 
 	public bool playerActive; //Is the player trying to activate the reflect?
-	private bool prevPlayerActive;
-	private bool reflecting; //Reflecting currently on
+	bool prevPlayerActive;
+	bool reflecting; //Reflecting currently on
 
 	public float reflectTime;
-	private float currReflect;
+	float currReflect;
 
+	public Slider sliderReflect;
 
+	[Header("Material Settings")]
+	private Material mat;
+
+	[Range(0.0f,1.0f)]
+	public float offAlpha;
+	[Range(0.0f,1.0f)]
+	public float onAlpha;
+
+	[Header("Audio Objects")]
 	public GameObject hitPrefab;
 	public GameObject hitReflectPrefab;
+	public AudioClip reflectOnSound;
+	public AudioClip noReflectSound;
+
+	AudioSource source;
 
 	void Awake()
 	{
@@ -22,29 +37,99 @@ public class Shield : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		currReflect = reflectTime;
+		mat = gameObject.GetComponent<Renderer>().material;
+		source = gameObject.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
-	{
+	{		
+		UpdateReflectTime();
+
 		if(prevPlayerActive != playerActive)
 		{
-			if(playerActive) TurnOn(); 
+			if(playerActive) TryTurnOn(); 
 			else TurnOff();
 
 			prevPlayerActive = playerActive;
-		}	
+		}
 	}
 
-	void TurnOn()
+	void TryTurnOn()
 	{
+		if(currReflect <= 0.0f)
+		{
+			//Play noReflectSound if it isnt playing
+			return;
+		}
+
+		//Set material alpha
+		mat.color = new Color(1.0f, 1.0f, 1.0f, onAlpha);
+
 		reflecting = true;
+
+		//Play reflectOnSound. Loop it?
 	}
 
 	void TurnOff()
 	{
+		
+		mat.color = new Color(1.0f, 1.0f, 1.0f, offAlpha);
 		reflecting = false;
+	}
+
+	/// <summary>
+	/// Updates the reflect time.
+	/// </summary>
+	void UpdateReflectTime()
+	{
+		if(reflecting && currReflect > 0.0f)
+		{
+			currReflect -= Time.deltaTime;
+		}
+		else if(!playerActive && currReflect < reflectTime)
+		{
+			currReflect += Time.deltaTime;	
+		}
+
+		if(currReflect < 0.0f) currReflect = 0.0f;
+		if(currReflect > reflectTime) currReflect = reflectTime;
+
+		if(currReflect == 0.0f) TurnOff();
+
+		//Update UI
+		sliderReflect.value = 1 - (reflectTime - currReflect)/reflectTime;
+	}
+
+	/// <summary>
+	/// Re-instantiates a projectile hitting the shield to fire it back at the appropriate angle
+	/// </summary>
+	/// <param name="collision">Collision.</param>
+	void Reflect(Collision collision)
+	{
+		GameObject projectile = collision.gameObject;
+
+		//Get reflection
+		Vector3 inV = projectile.GetComponent<BulletScript>().oldVelocity; //Do I need this?
+		Vector3 reflectionV = Vector3.Reflect(inV, collision.contacts[0].normal);
+
+		Vector3 spawnPos = collision.contacts[0].point + (reflectionV * 0.04f);
+
+		//Instantiate new projectile
+		GameObject createdProjectile = Instantiate(projectile, spawnPos, projectile.transform.localRotation);
+
+		float shieldVelocity = gameObject.GetComponent<Valve.VR.InteractionSystem.VelocityEstimator>().GetVelocityEstimate().magnitude;
+
+		if(shieldVelocity >= 1)
+			reflectionV *= shieldVelocity;
+
+		//Add owner of projectile?
+
+		createdProjectile.GetComponent<Rigidbody>().velocity = reflectionV;
+
+		TrashCollector.AddRubbishToList(createdProjectile);
+
 	}
 
 	void OnCollisionEnter(Collision collision)
@@ -55,29 +140,12 @@ public class Shield : MonoBehaviour {
 			if(reflecting)
 			{
 				Reflect(collision);
+				Instantiate(hitReflectPrefab, collision.contacts[0].point, Quaternion.identity);
 			}
-
-			//Make audio object
-			Instantiate(hitPrefab, collision.contacts[0].point, Quaternion.identity);
+			else
+			{
+				Instantiate(hitPrefab, collision.contacts[0].point, Quaternion.identity);
+			}
 		}
-	}
-
-	//Re-instantiates a projectile hitting the shield to fire it back at the appropriate angle
-	void Reflect(Collision collision)
-	{
-		GameObject projectile = collision.gameObject;
-
-		GameObject createdProjectile = Instantiate(projectile, projectile.transform.position, projectile.transform.localRotation);
-		Vector3 inV = projectile.GetComponent<BulletScript>().oldVelocity; //Do I need this?
-		//inV.Scale(projectile.GetComponent<Rigidbody>().velocity);
-		Vector3 reflectionV = Vector3.Reflect(inV, collision.contacts[0].normal);
-
-		Debug.Log("In: " + inV);
-		Debug.Log("Out: " + reflectionV);
-
-		createdProjectile.GetComponent<Rigidbody>().velocity = reflectionV;
-
-		TrashCollector.AddRubbishToList(createdProjectile);
-
 	}
 }

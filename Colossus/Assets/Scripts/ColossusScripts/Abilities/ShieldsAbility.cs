@@ -47,8 +47,6 @@ public class ShieldsAbility : ColossusAbility {
 		{
 			CheckActivating(rightShield, rightControllerTracked);
 		}
-
-
 	}
 
 	void CheckActivating(GameObject targetShield, SteamVR_TrackedController targetController)

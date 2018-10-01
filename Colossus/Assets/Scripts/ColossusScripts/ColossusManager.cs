@@ -133,8 +133,9 @@ public class ColossusManager : MonoBehaviour {
     public void Damage(float damageFloat)
     {
         health -= damageFloat;
-        armHealthbar.value = (STARTING_HEALTH - health)/STARTING_HEALTH;
-        headHealthbar.value = (STARTING_HEALTH - health) / STARTING_HEALTH;
+		float healthPct = (STARTING_HEALTH - health)/STARTING_HEALTH;
+		armHealthbar.value = healthPct;
+		headHealthbar.value = healthPct;
 
     }
 

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 82402699987001024}
   - component: {fileID: 114134736961217000}
   m_Layer: 0
-  m_Name: HitColossusBody
+  m_Name: HitReflectShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,9 +50,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7d8cc7957e0597d439f71f8b8ca46d9f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: bb9df8aaf058f7d49b2510c98c605744, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.389
+  m_Volume: 0.21
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -61,7 +61,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1.82
   MinDistance: 1
-  MaxDistance: 5.7
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -133,4 +133,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomizePitch: 1
-  pitchChangePercentage: 0.057
+  pitchChangePercentage: 0.066

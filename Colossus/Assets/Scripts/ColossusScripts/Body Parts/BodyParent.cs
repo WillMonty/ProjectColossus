@@ -20,13 +20,11 @@ public class BodyParent : MonoBehaviour {
 
 	public void OnCollisionEnter(Collision collision)
 	{
-		//Determine if it's some sort of bullet
-		if(collision.collider.tag == "projectile")
+		//Determine if it's some sort of damaging object
+		if(collision.gameObject.GetComponent<IDamage>())
 		{
-
 			//Apply damage to Colossus
-			//colossus.Damage(collision.gameObject.GetComponent<IDamage>().Damage * damageMultiplier);
-			colossus.Damage(damageMultiplier);
+			colossus.Damage(collision.gameObject.GetComponent<IDamage>().Damage * damageMultiplier);
 
 			//Make audio object
 			Instantiate(hitPrefab, collision.contacts[0].point, Quaternion.identity);

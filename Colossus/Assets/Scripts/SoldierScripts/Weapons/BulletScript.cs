@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour ,IDamage
+public class BulletScript : MonoBehaviour, IDamage
 {
 
     #region attributes

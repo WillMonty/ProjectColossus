@@ -215,7 +215,7 @@ public class PlayerData : MonoBehaviour
 	{
 		
 		GameObject collisionObject = col.gameObject;
-
+		Debug.Log(collisionObject);
 		// If a player is hit with an object the robot throws
 		if (collisionObject.tag == "throwable")
 		{
