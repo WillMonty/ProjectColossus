@@ -21,7 +21,7 @@ public class BodyParent : MonoBehaviour {
 	public void OnCollisionEnter(Collision collision)
 	{
 		//Determine if it's some sort of damaging object
-		if(collision.gameObject.GetComponent<IDamage>())
+		if(collision.gameObject.GetComponent<IDamage>() != null)
 		{
 			//Apply damage to Colossus
 			colossus.Damage(collision.gameObject.GetComponent<IDamage>().Damage * damageMultiplier);
