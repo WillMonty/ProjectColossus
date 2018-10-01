@@ -26,6 +26,7 @@ public class PlayerInput : MonoBehaviour
         get { return prevState; }
     }
 
+    //A button state for jumping.
     public int JumpState
     {
         get{
@@ -40,15 +41,16 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
+    //Left Trigger State for soldier abilities
     public int ActionState
     {
         get
         {
             if (playerIndexSet)
             {
-                if (state.Buttons.LeftShoulder == ButtonState.Pressed && prevState.Buttons.LeftShoulder == ButtonState.Released)
+                if (state.Triggers.Left > 0  && prevState.Triggers.Left == 0)
                     return 1; //Pressed 
-                else if (state.Buttons.LeftShoulder == ButtonState.Pressed && prevState.Buttons.LeftShoulder == ButtonState.Pressed)
+                else if (state.Triggers.Left > 0)
                     return 2; //Held             
             }
             return 0;

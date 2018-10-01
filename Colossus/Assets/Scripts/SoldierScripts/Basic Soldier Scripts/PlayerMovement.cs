@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         #region Handles Running
         // Handles Running
-        if (state.Triggers.Left > 0)
+        if (state.Buttons.LeftStick == ButtonState.Pressed)
         {
             speed = RUN_SPEED;
         }
@@ -192,7 +192,7 @@ public class PlayerMovement : MonoBehaviour {
 
     
     /// <summary>
-    /// Method to handle jumping and jetpack
+    /// Method to handle jumping 
     /// </summary>
     private void Jump()
     {

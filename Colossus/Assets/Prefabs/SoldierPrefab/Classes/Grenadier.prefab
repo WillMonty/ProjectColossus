@@ -40633,6 +40633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a05244f9120dfc4585777020e410cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallSpawner: {fileID: 1422223108351162, guid: 9356d1f00986e7343ae930951285a076,
+    type: 2}
 --- !u!124 &124809898990969000
 Behaviour:
   m_ObjectHideFlags: 1

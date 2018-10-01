@@ -28,7 +28,7 @@ public class JetPack : MonoBehaviour {
     {
 
         
-        if (jetPackFuel > 0 && GetComponent<PlayerInput>().JumpState==2)
+        if (jetPackFuel > 0 && GetComponent<PlayerInput>().ActionState>0)
         {           
             FuelDown();
             GetComponent<PlayerMovement>().TimeFalling -= Time.deltaTime;

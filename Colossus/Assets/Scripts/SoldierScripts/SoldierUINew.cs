@@ -34,6 +34,7 @@ public class SoldierUINew : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+
         maxHealth = soldier1.GetComponent<PlayerData>().MaxHealth;
 
         s1CurrentHealth = soldier1.GetComponent<PlayerData>().Health;
@@ -42,7 +43,7 @@ public class SoldierUINew : MonoBehaviour {
         s2CurrentHealth = soldier2.GetComponent<PlayerData>().Health;
         s2Healthbar.fillAmount = s2CurrentHealth / maxHealth;
 
-        
+
 
         if (soldier1.soldierClass == SoldierClass.Assault)
         {
@@ -57,8 +58,8 @@ public class SoldierUINew : MonoBehaviour {
             s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
             s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
         }
-
     }
+
 
     // Update is called once per frame
     void Update ()
