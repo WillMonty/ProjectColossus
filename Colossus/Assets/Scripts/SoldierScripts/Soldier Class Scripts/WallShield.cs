@@ -45,7 +45,6 @@ public class WallShield : MonoBehaviour {
 
     IEnumerator StartCD()
     {
-        Debug.Log("Started");
         yield return new WaitForSeconds(COOL_DOWN);
         ready = true;
        

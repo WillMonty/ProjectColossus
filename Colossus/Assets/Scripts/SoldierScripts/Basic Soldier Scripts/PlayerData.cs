@@ -72,12 +72,17 @@ public class PlayerData : MonoBehaviour
         {
             case 1:
                 GameManagerScript.instance.soldier1 = GetComponent<PlayerData>();
+                tag = "soldier1";
                 break;
             case 2:
                 GameManagerScript.instance.soldier2 = GetComponent<PlayerData>();
+                tag = "soldier2";
                 break;
         }
 
+        //Sets render layer of models
+        
+        SetRenderCull();
 
     }
 
@@ -112,6 +117,37 @@ public class PlayerData : MonoBehaviour
             health -= 10;
         }
     }
+
+    //Because of our current model/animation system we need to 
+    //recusivly change render layers for the models 
+    //AND change the camera culling mask which uses 32 bits to represent differnt flags
+    //https://answers.unity.com/questions/8715/how-do-i-use-layermasks.html
+    #region HackyStuff
+    void SetRenderCull()
+    {
+        int layer = 8 + playerNumber;
+        int newMask = eyes.GetComponent<Camera>().cullingMask;
+
+        SetLayerRecursively(GetComponent<PlayerMovement>().StandingPose, layer);
+        SetLayerRecursively(GetComponent<PlayerMovement>().RunningAnimation, layer);
+
+        if (playerNumber == 2)
+            newMask += 512; //flag 9
+        else
+            newMask += 1024; //flag 10
+
+        eyes.GetComponent<Camera>().cullingMask = newMask;
+    }
+
+    //Recursive method thats sets a layer for the gameobject and all its children
+    void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        obj.layer = newLayer;
+        foreach (Transform child in obj.transform)
+            SetLayerRecursively(child.gameObject, newLayer);
+    }
+
+    #endregion
 
     /// <summary>
     /// Method for setting viewport based on player number
@@ -215,7 +251,6 @@ public class PlayerData : MonoBehaviour
 	{
 		
 		GameObject collisionObject = col.gameObject;
-		Debug.Log(collisionObject);
 		// If a player is hit with an object the robot throws
 		if (collisionObject.tag == "throwable")
 		{

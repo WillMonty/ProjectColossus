@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void LateUpdate ()
+	void Update ()
     {
         state = GetComponent<PlayerInput>().State;
         prevState = GetComponent<PlayerInput>().PrevState;

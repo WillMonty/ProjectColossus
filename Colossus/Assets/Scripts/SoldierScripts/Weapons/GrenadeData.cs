@@ -6,7 +6,6 @@ public class GrenadeData : MonoBehaviour,IDamage
 {
 
     public GameObject explosion;
-    public GameObject capsule;
     public GameObject ring1;
     public GameObject ring2;
     public Material ringMat;
@@ -44,31 +43,45 @@ public class GrenadeData : MonoBehaviour,IDamage
         
     }
 
+   
+    private void OnTriggerEnter(Collider other)
+    {
 
-
+        Debug.Log(other.gameObject);
+        if (!isProj && other.gameObject.GetComponent<IHealth>() != null)
+        {
+            
+            other.gameObject.GetComponent<IHealth>().DamageObject(damage);
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.gameObject.tag != "resistanceplayer" && collision.gameObject.tag != "explosion" && isProj)
+        if (collision.gameObject.tag != ("soldier"+ownerNumber) && collision.gameObject.tag != "explosion" && isProj)
         {
             GameObject expClone =Instantiate(explosion, transform.position, Quaternion.identity);
-            Destroy(expClone, 4);
+            Destroy(expClone, 3);
 
             isProj = false;
             StopAllCoroutines();
             ring1.GetComponent<MeshRenderer>().enabled = false;
             ring2.GetComponent<MeshRenderer>().enabled = false;
-            capsule.GetComponent<MeshRenderer>().enabled = false;
-            Destroy(body);
+
+            for (int i = 0; i < 3; i++)
+                Destroy(transform.GetChild(0).gameObject);
+           Destroy(body);
 
 
             GetComponent<SphereCollider>().enabled = true;
 
-            Destroy(gameObject, 1.5f);
+            Destroy(gameObject, 0.5f);
         }
+
+       
     }
 
+    
  
     IEnumerator Dim()
     {

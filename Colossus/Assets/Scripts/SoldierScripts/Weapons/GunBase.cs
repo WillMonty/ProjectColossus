@@ -3,22 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public interface IWeapon
-{
-    Weapons WeaponType { get; }
-    int PlayerNum { set; }
-    int BulletsInMag { get; }
-    int MagSize { get; }
-    float RightTrigger { set; }
-    bool ReloadButton { set; }
-}
-
-//Generic Interface for player projectiles
-public interface IDamage
-{
-    int Owner { get; set; }
-    float Damage { get; }
-}
 
 public enum Weapons
 {

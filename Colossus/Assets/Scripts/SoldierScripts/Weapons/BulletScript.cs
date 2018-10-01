@@ -84,7 +84,7 @@ public class BulletScript : MonoBehaviour, IDamage
 		//TODO: Factor in bullet owner eventually
 			
 		// Destroy the projectile
-		if (collision.gameObject.tag != "projectile" && collision.gameObject.tag != "resistancebullet" && collision.gameObject.tag != "resistanceplayer")
+		if (collision.gameObject.tag != "projectile" && collision.gameObject.tag != "resistancebullet" && collision.gameObject.tag != "soldier"+ownerNumber)
 		{
 			Destroy(gameObject);
 		}
