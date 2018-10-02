@@ -11,6 +11,7 @@ public interface IWeapon
     int MagSize { get; }
     float RightTrigger { set; }
     bool ReloadButton { set; }
+    float ReloadTime { get; }
 }
 
 //Generic Interface for player projectiles

@@ -15,7 +15,7 @@ public class DeployShield : MonoBehaviour
     {
         
         body = GetComponent<Rigidbody>();
-        body.AddForce(transform.forward * 50f);
+        body.AddForce(transform.forward * 15f);
         ogForward = transform.forward;
     }
 

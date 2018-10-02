@@ -129,20 +129,20 @@ public class SoldierUINew : MonoBehaviour {
 
     void UpdateCurrentMag()
     {
-        s1CurrentMag.text = soldier1.GetComponent<PlayerData>().GunBase.BulletsInMag.ToString();
+        s1CurrentMag.text = soldier1.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
 
-        s2CurrentMag.text = soldier2.GetComponent<PlayerData>().GunBase.BulletsInMag.ToString();
+        s2CurrentMag.text = soldier2.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
     }
 
     void UpdateMagMax()
     {
-        s1MagMax.text = "/" + soldier1.GetComponent<PlayerData>().GunBase.MagSize;
+        s1MagMax.text = "/" + soldier1.GetComponent<PlayerData>().WeaponData.MagSize;
 
-        s2MagMax.text = "/" + soldier2.GetComponent<PlayerData>().GunBase.MagSize;
+        s2MagMax.text = "/" + soldier2.GetComponent<PlayerData>().WeaponData.MagSize;
 
-        s1CurrentMag.text = soldier1.GetComponent<PlayerData>().GunBase.BulletsInMag.ToString();
+        s1CurrentMag.text = soldier1.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
 
-        s2CurrentMag.text = soldier2.GetComponent<PlayerData>().GunBase.BulletsInMag.ToString();
+        s2CurrentMag.text = soldier2.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
     }
 
     void StartReload(int playerNum)

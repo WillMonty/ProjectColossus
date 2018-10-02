@@ -36,7 +36,7 @@ public class WallShield : MonoBehaviour {
             Destroy(deployedWall);
         }
 
-        deployedWall = Instantiate(wallSpawner,  eyes.transform.position + gun.transform.forward, eyes.transform.rotation);
+        deployedWall = Instantiate(wallSpawner,  eyes.transform.position + gun.transform.forward/4f, eyes.transform.rotation);
 
         ready = false;
         StartCoroutine(StartCD());

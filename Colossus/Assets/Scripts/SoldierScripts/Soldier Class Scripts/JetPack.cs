@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JetPack : MonoBehaviour {
 
-    const float MAX_FUEL = 5;
+    const float MAX_FUEL = 3;
     public float MaxFuel
     {
         get { return MAX_FUEL; }

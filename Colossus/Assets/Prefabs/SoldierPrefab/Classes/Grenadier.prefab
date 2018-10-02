@@ -40591,7 +40591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c3148fc083186479b8ad2bd85ee3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  moveSpeed: 2
   lookSensitivityX: 1
   lookSensitivityY: 1
   StandingPose: {fileID: 1149580160553958}

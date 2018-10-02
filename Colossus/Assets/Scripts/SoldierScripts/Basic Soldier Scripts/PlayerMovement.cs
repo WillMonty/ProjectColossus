@@ -5,15 +5,15 @@ using XInputDotNetPure;
 
 public class PlayerMovement : MonoBehaviour {
 
-    const float WALK_SPEED = 5.0f;
-    const float RUN_SPEED = 8.0f;
+
     const float JUMP_FORCE = 6.0f;
-    const float GRAVITY_FORCE = -.5f;
+    const float GRAVITY_FORCE = -.35f;
 
     CharacterController player;
 
     // Player variables
-    public float speed = 2f;
+    public float moveSpeed;
+    float speed;
     public float lookSensitivityX = .001f;
     public float lookSensitivityY = .001f;
 
@@ -78,11 +78,11 @@ public class PlayerMovement : MonoBehaviour {
         // Handles Running
         if (state.Buttons.LeftStick == ButtonState.Pressed)
         {
-            speed = RUN_SPEED;
+            speed = moveSpeed * 1.3f;
         }
         else
         {
-            speed = WALK_SPEED;
+            speed = moveSpeed;
         }
         #endregion
 

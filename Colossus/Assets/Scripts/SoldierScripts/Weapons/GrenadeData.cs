@@ -32,7 +32,7 @@ public class GrenadeData : MonoBehaviour,IDamage
     {
         
         body = GetComponent<Rigidbody>();       
-        body.AddForce(transform.forward * 1000f);
+        body.AddForce(transform.forward * 500f);
         body.AddTorque(new Vector3(20f, 20f, 0));
 
         tempMat = new Material(ringMat);
@@ -61,6 +61,7 @@ public class GrenadeData : MonoBehaviour,IDamage
         if (collision.gameObject.tag != ("soldier"+ownerNumber) && collision.gameObject.tag != "explosion" && isProj)
         {
             GameObject expClone =Instantiate(explosion, transform.position, Quaternion.identity);
+            expClone.transform.localScale=expClone.transform.localScale * 0.25f;
             Destroy(expClone, 3);
 
             isProj = false;

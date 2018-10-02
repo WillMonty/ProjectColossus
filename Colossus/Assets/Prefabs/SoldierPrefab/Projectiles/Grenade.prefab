@@ -106,8 +106,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1758996538846184}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
-  m_LocalScale: {x: 0.25, y: 0.02, z: 0.25}
+  m_LocalPosition: {x: 0, y: 0, z: 0.025}
+  m_LocalScale: {x: 0.0625, y: 0.005, z: 0.0625}
   m_Children: []
   m_Father: {fileID: 4083591040656994}
   m_RootOrder: 1
@@ -120,7 +120,7 @@ Transform:
   m_GameObject: {fileID: 1343646144821186}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 4083591040656994}
   m_RootOrder: 0
@@ -132,8 +132,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1905830393566670}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.1}
-  m_LocalScale: {x: 0.25, y: 0.020000007, z: 0.25000012}
+  m_LocalPosition: {x: 0, y: 0, z: -0.025}
+  m_LocalScale: {x: 0.0625, y: 0.005, z: 0.0625}
   m_Children: []
   m_Father: {fileID: 4083591040656994}
   m_RootOrder: 2
@@ -275,7 +275,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &114686578413798976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -288,7 +288,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 2}
-  capsule: {fileID: 1343646144821186}
   ring1: {fileID: 1758996538846184}
   ring2: {fileID: 1905830393566670}
   ringMat: {fileID: 2100000, guid: 2375e2bc4184ba54a803f1c2daef379d, type: 2}
@@ -302,7 +301,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136164315617419126
 CapsuleCollider:

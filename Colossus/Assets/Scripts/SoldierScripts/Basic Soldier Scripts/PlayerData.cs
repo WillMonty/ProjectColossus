@@ -28,10 +28,10 @@ public class PlayerData : MonoBehaviour
     public GameObject eyes;
     public GameObject gun;
 
-    IWeapon gunBase;
-    public IWeapon GunBase
+    IWeapon weaponData;
+    public IWeapon WeaponData
     {
-        get { return gunBase; }
+        get { return weaponData; }
     }
     private GameObject[] spawnPoints;
 
@@ -63,8 +63,8 @@ public class PlayerData : MonoBehaviour
         health = 100.0f;
 
 
-        gunBase = gun.GetComponent<IWeapon>();
-        gunBase.PlayerNum = playerNumber;
+        weaponData = gun.GetComponent<IWeapon>();
+        weaponData.PlayerNum = playerNumber;
 
         SetCamera();
         StartCoroutine(LateStart(0.2f));
