@@ -74,6 +74,16 @@ public class GunBase : MonoBehaviour, IWeapon
         set { playerNum = value; }
     }
 
+    Vector3 aim;
+    public Vector3 SetAim
+    {
+        set
+        {
+            aim = value;
+        }
+    }
+
+
     // Use this for initialization
     protected virtual void Start ()
     {
@@ -137,8 +147,7 @@ public class GunBase : MonoBehaviour, IWeapon
         }
 	}
 
-
-
+   
     protected void Shoot()
     {
 		if(!source.isPlaying)
@@ -149,6 +158,7 @@ public class GunBase : MonoBehaviour, IWeapon
 
         // Instantiate the projectile and shoot it
         projClone=Instantiate(projectile, transform.position, gameObject.transform.parent.GetComponent<PlayerData>().eyes.transform.rotation);
+       // projClone.transform.forward = aim;
         projClone.GetComponent<IDamage>().Owner = playerNum;
         bulletsInMag--;
 
