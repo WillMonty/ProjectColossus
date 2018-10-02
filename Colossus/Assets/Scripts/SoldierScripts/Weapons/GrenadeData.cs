@@ -46,11 +46,8 @@ public class GrenadeData : MonoBehaviour,IDamage
    
     private void OnTriggerEnter(Collider other)
     {
-
-        Debug.Log(other.gameObject);
         if (!isProj && other.gameObject.GetComponent<IHealth>() != null)
-        {
-            
+        {           
             other.gameObject.GetComponent<IHealth>().DamageObject(damage);
         }
     }
@@ -76,7 +73,7 @@ public class GrenadeData : MonoBehaviour,IDamage
 
             GetComponent<SphereCollider>().enabled = true;
 
-            Destroy(gameObject, 0.5f);
+            Destroy(gameObject, 0.25f);
         }
 
        

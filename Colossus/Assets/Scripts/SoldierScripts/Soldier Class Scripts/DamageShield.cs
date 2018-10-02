@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageShield : MonoBehaviour, IHealth
 {
-    float health = 150;
+    float health = 200;
 
     public float Health
     {

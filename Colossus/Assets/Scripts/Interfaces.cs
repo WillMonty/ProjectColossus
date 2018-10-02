@@ -6,6 +6,7 @@ using UnityEngine;
 public interface IWeapon
 {
     Weapons WeaponType { get; }
+    Vector3 SetAim { set; }
     int PlayerNum { set; }
     int BulletsInMag { get; }
     int MagSize { get; }

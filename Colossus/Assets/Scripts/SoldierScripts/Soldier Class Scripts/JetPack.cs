@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class JetPack : MonoBehaviour {
 
-    const float MAX_FUEL = 3;
+    const float MAX_FUEL = 2.5f;
     public float MaxFuel
     {
         get { return MAX_FUEL; }
     }
-    const float JETPACK_FORCE = 1f;
+    const float JETPACK_FORCE = 1;
 
     private float jetPackFuel;
     public float JetPackFuel
