@@ -37,14 +37,19 @@ public class GunBase : MonoBehaviour, IWeapon
 
     // Specific balencing shooting variables
     protected float fireDelay;
-    protected int magSize;
 
+    protected int magSize;
     public int MagSize
     {
         get { return magSize; }
     }
 
+
     protected float reloadTime;
+    public float ReloadTime
+    {
+        get { return reloadTime; }
+    }
 
     // Variables to keep shooting from breaking and balanced
     protected bool justShot;
