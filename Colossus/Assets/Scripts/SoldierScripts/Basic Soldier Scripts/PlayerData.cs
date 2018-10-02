@@ -67,19 +67,7 @@ public class PlayerData : MonoBehaviour
         gunBase.PlayerNum = playerNumber;
 
         SetCamera();
-        //StartCoroutine(LateStart(0.2f));
-        switch (playerNumber)
-        {
-            case 1:
-                GameManagerScript.instance.soldier1 = GetComponent<PlayerData>();
-                tag = "soldier1";
-                break;
-            case 2:
-                GameManagerScript.instance.soldier2 = GetComponent<PlayerData>();
-                tag = "soldier2";
-                break;
-        }
-
+        StartCoroutine(LateStart(0.2f));
         //Sets render layer of models
         
         SetRenderCull();
@@ -95,9 +83,11 @@ public class PlayerData : MonoBehaviour
         {
             case 1:
                 GameManagerScript.instance.soldier1 = GetComponent<PlayerData>();
+				tag = "soldier1";
                 break;
             case 2:
                 GameManagerScript.instance.soldier2 = GetComponent<PlayerData>();
+				tag = "soldier2";
                 break;
         }
     }
