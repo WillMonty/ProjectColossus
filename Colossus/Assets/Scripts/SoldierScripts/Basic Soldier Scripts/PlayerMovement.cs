@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
     const float JUMP_FORCE = 3.0f;
-    const float GRAVITY_FORCE = -.35f;
+    const float GRAVITY_FORCE = -.2f;
 
     CharacterController player;
 

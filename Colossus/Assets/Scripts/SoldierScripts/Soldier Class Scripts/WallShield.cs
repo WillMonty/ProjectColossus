@@ -6,7 +6,7 @@ public class WallShield : MonoBehaviour {
 
     const float COOL_DOWN = 5f;
     public GameObject wallSpawner;
-    public bool ready=true;
+    bool ready=true;
     bool isDeployed;
     GameObject deployedWall;
     GameObject eyes;

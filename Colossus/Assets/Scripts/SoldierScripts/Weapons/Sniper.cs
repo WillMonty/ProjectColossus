@@ -9,4 +9,9 @@ public class Sniper : GunBase {
         weaponType = Weapons.Sniper;
         base.Start();
     }
+
+    protected override void Shoot()
+    {
+        
+    }
 }

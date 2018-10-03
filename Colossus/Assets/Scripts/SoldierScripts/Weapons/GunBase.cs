@@ -89,7 +89,7 @@ public class GunBase : MonoBehaviour, IWeapon
         if (weaponType == Weapons.AssaultRifle)
         {
             autoFire = true;
-            fireDelay = .05f;
+            fireDelay = .2f;
             magSize = 30;
             reloadTime = 2.0f;
         }
@@ -99,7 +99,7 @@ public class GunBase : MonoBehaviour, IWeapon
             autoFire = false;
             fireDelay = 1f;
             magSize = 6;
-            reloadTime = 4.0f;
+            reloadTime = 3.0f;
         }
 
         else if (weaponType == Weapons.Sniper)
@@ -107,7 +107,7 @@ public class GunBase : MonoBehaviour, IWeapon
             autoFire = false;
             fireDelay = 0f;
             magSize = 1;
-            reloadTime = 3.0f;
+            reloadTime = 2.0f;
         }
 
         bulletsInMag = magSize;
@@ -144,7 +144,7 @@ public class GunBase : MonoBehaviour, IWeapon
         }
 	}
    
-    protected void Shoot()
+    protected virtual void Shoot()
     {
 		if(!source.isPlaying)
 		{

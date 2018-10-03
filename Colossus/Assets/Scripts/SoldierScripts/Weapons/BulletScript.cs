@@ -7,7 +7,7 @@ public class BulletScript : MonoBehaviour, IDamage
 
     #region attributes
     // Attributes
-    public float bulletSpeed = 12.5f;
+    public float bulletSpeed = 5f;
     
     // Properties
     public Weapons gunOwnerType;
@@ -47,7 +47,7 @@ public class BulletScript : MonoBehaviour, IDamage
         switch (gunOwnerType)
         {
             case Weapons.AssaultRifle:
-                damage = 1;
+                damage = 2;
                 break;
         }
 	}

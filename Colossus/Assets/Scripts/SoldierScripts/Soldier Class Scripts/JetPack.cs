@@ -9,7 +9,7 @@ public class JetPack : MonoBehaviour {
     {
         get { return MAX_FUEL; }
     }
-    const float JETPACK_FORCE = 1;
+    const float JETPACK_FORCE = 0.1f;
 
     private float jetPackFuel;
     public float JetPackFuel

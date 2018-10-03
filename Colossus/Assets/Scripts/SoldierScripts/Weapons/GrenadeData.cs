@@ -14,7 +14,7 @@ public class GrenadeData : MonoBehaviour,IDamage
     float count;
     bool isProj = true;
     Rigidbody body;
-    float damage = 10f;
+    float damage = 20f;
     int ownerNumber;
 
     public float Damage
@@ -32,7 +32,7 @@ public class GrenadeData : MonoBehaviour,IDamage
     {
         
         body = GetComponent<Rigidbody>();       
-        body.AddForce(transform.forward * 500f);
+        body.AddForce(transform.forward * 1000f);
         body.AddTorque(new Vector3(20f, 20f, 0));
 
         tempMat = new Material(ringMat);
@@ -59,7 +59,7 @@ public class GrenadeData : MonoBehaviour,IDamage
         {
             GameObject expClone =Instantiate(explosion, transform.position, Quaternion.identity);
             expClone.transform.localScale=expClone.transform.localScale * 0.25f;
-            Destroy(expClone, 3);
+            Destroy(expClone, 2);
 
             isProj = false;
             StopAllCoroutines();
