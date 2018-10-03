@@ -31,6 +31,7 @@ public class SoldierUINew : MonoBehaviour {
 
     public GameObject s1Crosshair;
     public GameObject s1ReloadReticle;
+    public GameObject s1ReloadReticleBG;
     float s1ReloadDuration;
     float s1ReloadTime;
     bool s1Reloading;
@@ -40,6 +41,7 @@ public class SoldierUINew : MonoBehaviour {
 
     public GameObject s2Crosshair;
     public GameObject s2ReloadReticle;
+    public GameObject s2ReloadReticleBG;
     float s2ReloadDuration;
     float s2ReloadTime;
     bool s2Reloading;
@@ -86,11 +88,66 @@ public class SoldierUINew : MonoBehaviour {
 
         UpdateCurrentMag();
 
+
         if(s1MagMax.text == "test" || s2MagMax.text == "test")
         {
             UpdateMagMax();
         }
 
+
+        if(soldier1.GetComponent<PlayerData>().WeaponData.Reloading && !s1Reloading)
+        {
+            s1ReloadDuration = soldier1.GetComponent<PlayerData>().WeaponData.ReloadTime;
+            s1ReloadTime = s1ReloadDuration;
+            s1Reloading = true;
+
+            s1Crosshair.SetActive(false);
+            s1ReloadReticleBG.SetActive(true);
+        }
+
+        if (soldier2.GetComponent<PlayerData>().WeaponData.Reloading && !s2Reloading)
+        {
+            s2ReloadDuration = soldier2.GetComponent<PlayerData>().WeaponData.ReloadTime;
+            s2ReloadTime = s2ReloadDuration;
+            s2Reloading = true;
+
+            s2Crosshair.SetActive(false);
+            s2ReloadReticleBG.SetActive(true);
+        }
+
+        if (s1Reloading)
+        {
+            s1ReloadTime -= Time.deltaTime;
+            
+            if(s1ReloadTime < 0)
+            {
+                s1ReloadTime = 0;
+
+                s1Crosshair.SetActive(true);
+                s1ReloadReticleBG.SetActive(false);
+
+                s1Reloading = false;
+            }
+
+            s1ReloadReticle.GetComponent<Image>().fillAmount = s1ReloadTime / s1ReloadDuration;
+        }
+
+        if (s2Reloading)
+        {
+            s2ReloadTime -= Time.deltaTime;
+
+            if (s2ReloadTime < 0)
+            {
+                s2ReloadTime = 0;
+
+                s2Crosshair.SetActive(true);
+                s2ReloadReticleBG.SetActive(false);
+
+                s2Reloading = false;
+            }
+
+            s2ReloadReticle.GetComponent<Image>().fillAmount = s2ReloadTime / s2ReloadDuration;
+        }
     }
 
     void UpdateHealthbar()
@@ -143,18 +200,5 @@ public class SoldierUINew : MonoBehaviour {
         s1CurrentMag.text = soldier1.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
 
         s2CurrentMag.text = soldier2.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
-    }
-
-    void StartReload(int playerNum)
-    {
-        switch (playerNum)
-        {
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-        }
     }
 }

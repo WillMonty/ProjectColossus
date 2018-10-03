@@ -10,8 +10,10 @@ public interface IWeapon
     int BulletsInMag { get; }
     int MagSize { get; }
     float RightTrigger { set; }
+    float RightTriggerPrev { set; }
     bool ReloadButton { set; }
     float ReloadTime { get; }
+    bool Reloading { get; }
 }
 
 //Generic Interface for player projectiles

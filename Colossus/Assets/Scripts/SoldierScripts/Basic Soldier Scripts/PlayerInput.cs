@@ -96,6 +96,7 @@ public class PlayerInput : MonoBehaviour
 
         //Shooting button states
         GetComponent<PlayerData>().WeaponData.RightTrigger = state.Triggers.Right;
+        GetComponent<PlayerData>().WeaponData.RightTriggerPrev = prevState.Triggers.Right;
         GetComponent<PlayerData>().WeaponData.ReloadButton = (ButtonState.Pressed==state.Buttons.X);
         
     }
