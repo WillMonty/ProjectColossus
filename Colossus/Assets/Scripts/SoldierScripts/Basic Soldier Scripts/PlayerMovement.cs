@@ -6,7 +6,7 @@ using XInputDotNetPure;
 public class PlayerMovement : MonoBehaviour {
 
 
-    const float JUMP_FORCE = 6.0f;
+    const float JUMP_FORCE = 3.0f;
     const float GRAVITY_FORCE = -.35f;
 
     CharacterController player;
@@ -76,7 +76,11 @@ public class PlayerMovement : MonoBehaviour {
     {
         #region Handles Running
         // Handles Running
-        if (state.Buttons.LeftStick == ButtonState.Pressed)
+        if(state.Triggers.Right>0)
+        {
+            speed = moveSpeed *0.3f;
+        }
+        else if (state.Buttons.LeftStick == ButtonState.Pressed)
         {
             speed = moveSpeed * 1.3f;
         }
@@ -176,7 +180,6 @@ public class PlayerMovement : MonoBehaviour {
 
         // Applying the rotations to the player
         GetComponent<PlayerData>().eyes.transform.rotation = Quaternion.Euler(targetCamRot);
-        GetComponent<PlayerData>().gun.transform.rotation = Quaternion.Euler(targetCamRot);
         transform.rotation = Quaternion.Euler(targetBodyRot);
         #endregion
 

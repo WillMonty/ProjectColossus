@@ -24,7 +24,8 @@ public class DeployShield : MonoBehaviour
     {
         if (collision.gameObject.tag != "explosion")
         {
-            Destroy(body);                
+            Destroy(body);
+            Destroy(transform.GetChild(1).gameObject);
             shieldWall.SetActive(true);
             Vector3 rot = transform.eulerAngles;
             rot.x = rot.z = 0;

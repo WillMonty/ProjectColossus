@@ -10,7 +10,7 @@ public enum SoldierClass
     Skulker,
 }
 
-public class PlayerData : MonoBehaviour
+public class PlayerData : MonoBehaviour, IHealth
 {
     // Player Manager
     const int STARTING_LIVES = 2;
@@ -48,8 +48,11 @@ public class PlayerData : MonoBehaviour
     {
         get { return health; }
     }
-    
 
+    public void DamageObject(float dmg)
+    {
+        health -= dmg;
+    }
 
 
     // Use this for initialization
@@ -106,6 +109,8 @@ public class PlayerData : MonoBehaviour
         {
             health -= 10;
         }
+
+        CalcAim();
     }
 
     //Because of our current model/animation system we need to 
@@ -152,6 +157,12 @@ public class PlayerData : MonoBehaviour
         }
     }
 
+
+    void CalcAim()
+    {
+        //gun.transform.LookAt(eyes.transform.position + eyes.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f,0.5f,0)).direction);
+
+    }
     /// <summary>
     /// Method handling death for the player
     /// </summary>

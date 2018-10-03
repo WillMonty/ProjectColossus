@@ -13,7 +13,7 @@ public enum Weapons
 
 public class GunBase : MonoBehaviour, IWeapon
 {
-    
+    #region variables
     protected Weapons weaponType;
     public Weapons WeaponType
     {
@@ -53,7 +53,9 @@ public class GunBase : MonoBehaviour, IWeapon
 
     // Variables to keep shooting from breaking and balanced
     protected bool justShot;
+
     protected bool reloadingBool;
+    protected bool autoFire;
 
     // Variables that handle input
     float rightTrigger;
@@ -74,15 +76,8 @@ public class GunBase : MonoBehaviour, IWeapon
         set { playerNum = value; }
     }
 
-    Vector3 aim;
-    public Vector3 SetAim
-    {
-        set
-        {
-            aim = value;
-        }
-    }
 
+    #endregion
 
     // Use this for initialization
     protected virtual void Start ()
@@ -93,6 +88,7 @@ public class GunBase : MonoBehaviour, IWeapon
         
         if (weaponType == Weapons.AssaultRifle)
         {
+            autoFire = true;
             fireDelay = .05f;
             magSize = 30;
             reloadTime = 2.0f;
@@ -100,6 +96,7 @@ public class GunBase : MonoBehaviour, IWeapon
 
         else if (weaponType == Weapons.GrenadeLauncher)
         {
+            autoFire = false;
             fireDelay = 1f;
             magSize = 6;
             reloadTime = 4.0f;
@@ -107,6 +104,7 @@ public class GunBase : MonoBehaviour, IWeapon
 
         else if (weaponType == Weapons.Sniper)
         {
+            autoFire = false;
             fireDelay = 0f;
             magSize = 1;
             reloadTime = 3.0f;
@@ -126,7 +124,6 @@ public class GunBase : MonoBehaviour, IWeapon
             // Check for shooting
             if (rightTrigger > 0 && justShot == false && !reloadingBool)
             {
-
                 if (bulletsInMag > 0)
                 {
                     Shoot();
@@ -146,7 +143,6 @@ public class GunBase : MonoBehaviour, IWeapon
             }
         }
 	}
-
    
     protected void Shoot()
     {
@@ -157,16 +153,14 @@ public class GunBase : MonoBehaviour, IWeapon
 		}
 
         // Instantiate the projectile and shoot it
-        projClone=Instantiate(projectile, transform.position, gameObject.transform.parent.GetComponent<PlayerData>().eyes.transform.rotation);
-       // projClone.transform.forward = aim;
+        projClone=Instantiate(projectile, transform.position, transform.parent.rotation);
+        //projClone.transform.forward = transform.forward;
         projClone.GetComponent<IDamage>().Owner = playerNum;
         bulletsInMag--;
 
         justShot = true;
         StartCoroutine("ShootingBoolReset");
     }
-
-
 
     /// <summary>
     /// Used to reset the shooting variable.
@@ -178,8 +172,6 @@ public class GunBase : MonoBehaviour, IWeapon
 
         justShot = false;
     }
-
-
     
     protected virtual void Reload()
     {
