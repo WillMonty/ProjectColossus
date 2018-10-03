@@ -2,20 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BodyParent : MonoBehaviour {
+public class BodyParent : MonoBehaviour, IHealth {
 
 	public ColossusManager colossus;
+	public float health;
 	public GameObject hitPrefab;
 	public float damageMultiplier = 1f;
 
-	// Use this for initialization
-	void Start () {
-		
+	public float Health
+	{
+		get
+		{
+			return health;
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void DamageObject(float dmg)
+	{
+		health -= dmg;
+		//if(health <= 0) body part falls off if applicable
+		Instantiate(hitPrefab, gameObject.transform.position, Quaternion.identity);
+
+		//Apply damage to Colossus
+		colossus.Damage(dmg * damageMultiplier);
 	}
 
 	public void OnCollisionEnter(Collision collision)

@@ -28,13 +28,11 @@ public class GameManagerScript : MonoBehaviour
     public PlayerData soldier1 = null;
     public PlayerData soldier2 = null;
 
-    //public PlayerManager resistance1 = null;
-    //public PlayerManager resistance2 = null;
-
-
 	[Header("Game Pieces")]
 	public List<GameObject> gamePieces = new List<GameObject>(); //Pieces of the scene only shown/used InGame
 
+
+    public GameObject soldierUICanvas;
 
 	[Header("Pausing")]
     public GameObject pauseMenu;
@@ -98,6 +96,7 @@ public class GameManagerScript : MonoBehaviour
 				break;
 			case "MainGame":
 				currentGameState = GameState.Pregame;
+				//Method to spawn and sets player number of soldiers
 				break;	
 		}
 
@@ -125,6 +124,10 @@ public class GameManagerScript : MonoBehaviour
         PauseInputs();
         OOOOOOOF();
         currentGameState = GameState.InGame;
+        if (!soldierUICanvas.activeSelf)
+        {
+            EnableSoldierUI();
+        }
 	}
     #endregion
 
@@ -280,6 +283,11 @@ public class GameManagerScript : MonoBehaviour
 			currentGameState = GameState.MainMenu;
             SceneManager.LoadScene(0);
         }
+    }
+
+    public void EnableSoldierUI()
+    {
+        soldierUICanvas.SetActive(true);
     }
 
     public void ExitGame()

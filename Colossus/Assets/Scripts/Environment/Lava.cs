@@ -3,37 +3,24 @@ using System.Collections;
 
 public class Lava : MonoBehaviour
 {
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        switch (other.tag)
-        {
-            case "resistanceplayer":
-				//Kill player
-				other.gameObject.GetComponent<PlayerData>().Damage(100.0f);
-                break;
-            case "colossusplayer":
-                //Do nothing
-                break;
-            case "MainCamera":
-                //Do nothing
-				break;
-            default:
-				if(!other.attachedRigidbody.isKinematic)
-               		 GameObject.Destroy(other.gameObject);
-                break;
-        }
+		//Exception to not destroy anything on the colossus
+		if(other.tag == "colossusplayer" || other.tag == "MainCamera")
+		{
+			return;
+		}
+
+		//Destroy/Kill anything with IHealth
+		if(other.gameObject.GetComponent<IHealth>() != null)
+		{
+			IHealth healthInterface = other.gameObject.GetComponent<IHealth>();
+			healthInterface.DamageObject(healthInterface.Health);
+			return;
+		}
+
+		//Destroy any other physics based 
+		if(!other.attachedRigidbody.isKinematic)
+			GameObject.Destroy(other.gameObject);
     }
 }

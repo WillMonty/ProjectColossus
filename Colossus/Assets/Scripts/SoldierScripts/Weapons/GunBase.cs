@@ -54,14 +54,25 @@ public class GunBase : MonoBehaviour, IWeapon
     // Variables to keep shooting from breaking and balanced
     protected bool justShot;
 
-    protected bool reloadingBool;
+    protected bool reloading;
+    public bool Reloading
+    {
+        get { return reloading; }
+    }
+
     protected bool autoFire;
 
     // Variables that handle input
     float rightTrigger;
     public float RightTrigger
     {
-        set {  rightTrigger=value; }
+        set {  rightTrigger = value; }
+    }
+
+    float rightTriggerPrev;
+    public float RightTriggerPrev
+    {
+        set { rightTriggerPrev = value; }
     }
 
     bool reloadButton;
@@ -84,7 +95,7 @@ public class GunBase : MonoBehaviour, IWeapon
     {
         // Set bool variables initially
         justShot = false;
-        reloadingBool = false;
+        reloading = false;
         
         if (weaponType == Weapons.AssaultRifle)
         {
@@ -122,14 +133,14 @@ public class GunBase : MonoBehaviour, IWeapon
         {
 
             // Check for shooting
-            if (rightTrigger > 0 && justShot == false && !reloadingBool)
+            if (rightTrigger > 0 && justShot == false && !reloading)
             {
                 if (bulletsInMag > 0)
                 {
                     Shoot();
                 }
 
-                else
+                else if(rightTriggerPrev <= 0)
                 {
                     Reload();
                 }
@@ -137,7 +148,7 @@ public class GunBase : MonoBehaviour, IWeapon
             }
 
             // Check for reloading
-            if (!reloadingBool && reloadButton)
+            if (!reloading && reloadButton && bulletsInMag != magSize)
             {
                 Reload();
             }
@@ -146,11 +157,8 @@ public class GunBase : MonoBehaviour, IWeapon
    
     protected virtual void Shoot()
     {
-		if(!source.isPlaying)
-		{
-			source.clip = shootSound;
-			source.Play();
-		}
+		source.clip = shootSound;
+		source.Play();
 
         // Instantiate the projectile and shoot it
         projClone=Instantiate(projectile, transform.position, transform.parent.rotation);
@@ -175,9 +183,10 @@ public class GunBase : MonoBehaviour, IWeapon
     
     protected virtual void Reload()
     {
-        reloadingBool = true;
+        reloading = true;
 
-        bulletsInMag = 0;     
+        bulletsInMag = 0;
+        
         StartCoroutine("ReloadingBoolReset");
     }
 
@@ -189,7 +198,7 @@ public class GunBase : MonoBehaviour, IWeapon
     {
         yield return new WaitForSeconds(reloadTime);
         bulletsInMag = magSize;
-        reloadingBool = false;
+        reloading = false;
     }
 
 }

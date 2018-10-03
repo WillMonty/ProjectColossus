@@ -10,7 +10,9 @@ public class Shield : MonoBehaviour {
 	bool reflecting; //Reflecting currently on
 
 	public float reflectTime;
+	public float lagBeforeCharge;
 	float currReflect;
+	float currChargeLag;
 
 	public Slider sliderReflect;
 
@@ -64,6 +66,8 @@ public class Shield : MonoBehaviour {
 			return;
 		}
 
+		currChargeLag = 0.0f;
+
 		//Set material alpha
 		mat.color = new Color(1.0f, 1.0f, 1.0f, onAlpha);
 
@@ -74,7 +78,6 @@ public class Shield : MonoBehaviour {
 
 	void TurnOff()
 	{
-		
 		mat.color = new Color(1.0f, 1.0f, 1.0f, offAlpha);
 		reflecting = false;
 	}
@@ -90,13 +93,24 @@ public class Shield : MonoBehaviour {
 		}
 		else if(!playerActive && currReflect < reflectTime)
 		{
-			currReflect += Time.deltaTime;	
+			//Make sure it doesn't immediately start charging
+			if(currChargeLag >= lagBeforeCharge)
+			{
+				currReflect += Time.deltaTime;		
+			}
+			else
+			{
+				currChargeLag += Time.deltaTime;
+			}
 		}
-
-		if(currReflect < 0.0f) currReflect = 0.0f;
+			
 		if(currReflect > reflectTime) currReflect = reflectTime;
 
-		if(currReflect == 0.0f) TurnOff();
+		if(currReflect <= 0.0f)
+		{
+			currReflect = 0.0f;
+			TurnOff();
+		}
 
 		//Update UI
 		sliderReflect.value = 1 - (reflectTime - currReflect)/reflectTime;
@@ -124,9 +138,8 @@ public class Shield : MonoBehaviour {
 		if(shieldVelocity >= 1)
 			reflectionV *= shieldVelocity;
 
-		//Add owner of projectile?
-
 		createdProjectile.GetComponent<Rigidbody>().velocity = reflectionV;
+		createdProjectile.GetComponent<IDamage>().Owner = 0;
 
 		TrashCollector.AddRubbishToList(createdProjectile);
 

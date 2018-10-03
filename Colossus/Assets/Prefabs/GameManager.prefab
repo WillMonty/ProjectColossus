@@ -89,6 +89,7 @@ MonoBehaviour:
   gamePieces:
   - {fileID: 0}
   - {fileID: 0}
+  soldierUICanvas: {fileID: 0}
   pauseMenu: {fileID: 0}
   pauseMenuDefaultButton: {fileID: 0}
   currentPauseOwner: 3

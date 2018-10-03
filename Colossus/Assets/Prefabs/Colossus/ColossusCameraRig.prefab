@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 224802974872833624}
   - component: {fileID: 222050894482768932}
   - component: {fileID: 114236810289648790}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 223405901920957202}
   - component: {fileID: 114308618339269066}
   - component: {fileID: 114008393995935910}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: UIShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 223691758691414700}
   - component: {fileID: 114697271585385294}
   - component: {fileID: 114253453029352184}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: UIShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 224027096056037880}
   - component: {fileID: 222649833670442296}
   - component: {fileID: 114378036944662908}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +945,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224538479802784470}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1014,7 +1014,7 @@ GameObject:
   - component: {fileID: 223573758097182494}
   - component: {fileID: 114713303554117322}
   - component: {fileID: 114305719154676752}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: UILeftArm
   m_TagString: colossusplayer
   m_Icon: {fileID: 0}
@@ -1088,7 +1088,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224359883060649786}
   - component: {fileID: 114753382968007182}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1121,7 +1121,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224919400780084562}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1261,7 +1261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224604017632297034}
   - component: {fileID: 114105831601711122}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ReflectSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1378,7 +1378,7 @@ GameObject:
   - component: {fileID: 224876594843725106}
   - component: {fileID: 222469322116214078}
   - component: {fileID: 114445753009452876}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1552,7 +1552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224826604880623880}
   - component: {fileID: 114474962937974458}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ReflectSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1601,7 +1601,7 @@ GameObject:
   - component: {fileID: 224411374672396100}
   - component: {fileID: 222044122622826898}
   - component: {fileID: 114462356665518970}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2054,7 +2054,7 @@ GameObject:
   - component: {fileID: 224789007496824938}
   - component: {fileID: 222345153425180562}
   - component: {fileID: 114199007421310466}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2137,7 +2137,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224479725333197572}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2321,7 +2321,7 @@ GameObject:
   - component: {fileID: 224303227966785838}
   - component: {fileID: 222112960583229332}
   - component: {fileID: 114490683867525238}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2374,7 +2374,7 @@ GameObject:
   - component: {fileID: 23839829300535550}
   - component: {fileID: 135191077577147248}
   - component: {fileID: 114689169110115734}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Colossus_head1
   m_TagString: colossushead
   m_Icon: {fileID: 0}
@@ -3992,7 +3992,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 2048
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 1
@@ -4028,7 +4028,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294953983
+    m_Bits: 4294955007
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 1
@@ -4999,9 +4999,9 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1393632884995976}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -6597,9 +6597,9 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1253142234993538}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -8553,12 +8553,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerActive: 0
-  reflectTime: 3
+  reflectTime: 2
+  lagBeforeCharge: 0.5
   sliderReflect: {fileID: 114105831601711122}
   offAlpha: 1
   onAlpha: 0.5
-  hitPrefab: {fileID: 1924571714969746, guid: d149130b7347ddc47a02a62b1246d216, type: 2}
-  hitReflectPrefab: {fileID: 0}
+  hitPrefab: {fileID: 1924571714969746, guid: 2df6a1043e1e145478db2bb73a2df00f, type: 2}
+  hitReflectPrefab: {fileID: 1924571714969746, guid: d10380736965f0c41b7fcec80b3dee9d,
+    type: 2}
   reflectOnSound: {fileID: 0}
   noReflectSound: {fileID: 0}
 --- !u!114 &114253453029352184
@@ -8983,7 +8985,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerActive: 0
-  reflectTime: 3
+  reflectTime: 2
+  lagBeforeCharge: 0.5
   sliderReflect: {fileID: 114474962937974458}
   offAlpha: 1
   onAlpha: 0.5
