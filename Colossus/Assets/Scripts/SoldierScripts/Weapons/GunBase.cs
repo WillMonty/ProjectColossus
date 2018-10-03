@@ -157,11 +157,8 @@ public class GunBase : MonoBehaviour, IWeapon
    
     protected void Shoot()
     {
-		if(!source.isPlaying)
-		{
-			source.clip = shootSound;
-			source.Play();
-		}
+		source.clip = shootSound;
+		source.Play();
 
         // Instantiate the projectile and shoot it
         projClone=Instantiate(projectile, transform.position, transform.parent.rotation);

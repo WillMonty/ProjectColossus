@@ -28,10 +28,6 @@ public class GameManagerScript : MonoBehaviour
     public PlayerData soldier1 = null;
     public PlayerData soldier2 = null;
 
-    //public PlayerManager resistance1 = null;
-    //public PlayerManager resistance2 = null;
-
-
 	[Header("Game Pieces")]
 	public List<GameObject> gamePieces = new List<GameObject>(); //Pieces of the scene only shown/used InGame
 
@@ -100,6 +96,7 @@ public class GameManagerScript : MonoBehaviour
 				break;
 			case "MainGame":
 				currentGameState = GameState.Pregame;
+				//Method to spawn and sets player number of soldiers
 				break;	
 		}
 
