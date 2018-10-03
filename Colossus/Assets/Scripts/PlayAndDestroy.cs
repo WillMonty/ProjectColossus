@@ -37,8 +37,6 @@ public class PlayAndDestroy : MonoBehaviour {
 		else
 			audio.pitch -= changeAmt;
 
-		Debug.Log(audio.pitch);
-
 		audio.Play();
 	}
 }

@@ -175,11 +175,10 @@ public class HeadLaserAbility : ColossusAbility
 		if(hit.collider != null)
 		{
 			GameObject hitObj = hit.collider.gameObject;
-			switch(hitObj.tag)
+
+			if(hitObj.GetComponent<IHealth>() != null)
 			{
-				case "resistanceplayer":
-					hitObj.GetComponent<PlayerData>().Damage(damageAmt);
-					break;
+				hitObj.GetComponent<IHealth>().DamageObject(damageAmt);
 			}
 		}
 	}

@@ -14,12 +14,12 @@ public class Spawner_Throwable : MonoBehaviour {
 
     public Vector3 spawnForce;
 
-    private float spawnTimer = 0.0f;
-    private float spawnGoal;
+    float spawnTimer;
+    float spawnGoal;
 
     public float spawnRadius;
-    private Vector3 spawnRotation;
-    private Vector3 spawnLocation;
+    Vector3 spawnRotation;
+    Vector3 spawnLocation;
 
 	// Use this for initialization
 	void Start ()
@@ -35,10 +35,17 @@ public class Spawner_Throwable : MonoBehaviour {
         {
             spawnTimeVariation = 0;
         }
-		SpawnObject(); //Spawn an initial object
-        SelectNewSpawnTime();
+
+		//StartCoroutine(LateStart(0.2f));
 	}
-	
+
+	IEnumerator LateStart(float waitTime)
+	{
+		yield return new WaitForSeconds(waitTime);
+		SpawnObject(); //Spawn an initial object
+		SelectNewSpawnTime();
+	}
+
 	// Update is called once per frame
 	void Update ()
     {
@@ -48,26 +55,11 @@ public class Spawner_Throwable : MonoBehaviour {
         if (spawnTimer >= spawnGoal)
         {
             SpawnObject();
-            spawnTimer %= spawnGoal;
+            spawnTimer = 0.0f;
             SelectNewSpawnTime();
         }
 	}
-
-	/// <summary>
-	/// Quick shortcut to spawn common object
-	/// </summary>
-	private void SpawnCommon()
-	{
-		GameObject newCommon = Instantiate(
-			commonSpawnablePrefabs[Random.Range(0, commonSpawnablePrefabs.Count)],
-			spawnLocation,
-			Quaternion.Euler(spawnRotation)) as GameObject;
-		newCommon.name = "Common Rubbish";
-
-		newCommon.GetComponent<Rigidbody>().AddForce(transform.rotation * spawnForce);
-
-		TrashCollector.AddRubbishToList(newCommon);
-	}
+		
 
     // Spawn an object in the range of the collider
     private void SpawnObject()
@@ -86,52 +78,50 @@ public class Spawner_Throwable : MonoBehaviour {
 		{
 			if (rareSpawnablePrefabs.Count > 0)
 			{
-				newThrowable = Instantiate(
-					rareSpawnablePrefabs[Random.Range(0, rareSpawnablePrefabs.Count)],
-					spawnLocation,
-					Quaternion.Euler(spawnRotation)) as GameObject;
-				newThrowable.name = "Rare Rubbish";
-
-				// Spawn the object with an initial force
-				newThrowable.GetComponent<Rigidbody>().AddForce(transform.rotation * spawnForce);
-				TrashCollector.AddRubbishToList(newThrowable);
-
-				TrashCollector.AddRubbishToList(newThrowable);
+				SetupObject(rareSpawnablePrefabs);
 			}
 			else
 			{
-				SpawnCommon();
+				SetupObject(commonSpawnablePrefabs);
 			}
 		}
 		else if(spawnValue > 70)
 		{
 			if (uncommonSpawnablePrefabs.Count > 0)
 			{
-				newThrowable = Instantiate(
-					uncommonSpawnablePrefabs[Random.Range(0, uncommonSpawnablePrefabs.Count)],
-					spawnLocation,
-					Quaternion.Euler(spawnRotation)) as GameObject;
-				newThrowable.name = "Uncommon Rubbish";
-				newThrowable.GetComponent<Rigidbody>().AddForce(transform.rotation * spawnForce);
-
-				TrashCollector.AddRubbishToList(newThrowable);
+				SetupObject(uncommonSpawnablePrefabs);
 			}
 			else
 			{
-				SpawnCommon();
+				SetupObject(commonSpawnablePrefabs);
 			}
 		}
 		else
 		{
-			SpawnCommon();
+			SetupObject(commonSpawnablePrefabs);
 		}
-			
     }
+
+	/// <summary>
+	/// Helper method to setup the new throwable object from a passed list
+	/// </summary>
+	private void SetupObject(List<GameObject> objList)
+	{
+		GameObject newThrowable = Instantiate(
+			objList[Random.Range(0, objList.Count)],
+			spawnLocation,
+			Quaternion.Euler(Vector3.zero)) as GameObject;
+		
+		newThrowable.name = "Rubbish";
+		newThrowable.GetComponent<Rigidbody>().AddForce(transform.rotation * spawnForce);
+
+		TrashCollector.AddRubbishToList(newThrowable);
+	}
 
     // Choose a new time within random variation to spawn the next object
     private void SelectNewSpawnTime()
     {
-        spawnGoal = spawnTimeInterval + Random.Range(0.0f, spawnTimeVariation) * (Random.Range(0, 3) * 2 - 1);
+		spawnGoal = spawnTimeInterval + Random.Range(-1 * spawnTimeVariation, spawnTimeVariation);
     }
     
     // Show the force it spawns objects at, and show the spawn sphere

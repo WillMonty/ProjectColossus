@@ -56,7 +56,7 @@ public class BulletScript : MonoBehaviour, IDamage
 	void Update ()
     {
         BulletMove();
-        if ((transform.position - startPos).magnitude > 300)
+        if ((transform.position - startPos).magnitude > 100)
         {
 			Destroy(gameObject);
         }
@@ -80,9 +80,7 @@ public class BulletScript : MonoBehaviour, IDamage
     }
 
 	void OnCollisionEnter(Collision collision)
-	{
-		//TODO: Factor in bullet owner eventually
-			
+	{		
 		// Destroy the projectile
 		if (collision.gameObject.tag != "projectile" && collision.gameObject.tag != "resistancebullet" && collision.gameObject.tag != "soldier"+ownerNumber)
 		{
