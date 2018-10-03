@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224160806625388872}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224066033853853760}
   - component: {fileID: 114020166849837976}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ReflectSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 223653014211094956}
   - component: {fileID: 114431887309759384}
   - component: {fileID: 114991420996404740}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: UIShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 224799799791695996}
   - component: {fileID: 222852343926813556}
   - component: {fileID: 114899226581716014}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 224983154457565396}
   - component: {fileID: 222909454585547962}
   - component: {fileID: 114598751082209002}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerActive: 0
-  reflectTime: 3
+  reflectTime: 2
+  lagBeforeCharge: 0.5
   sliderReflect: {fileID: 114020166849837976}
   offAlpha: 1
   onAlpha: 0.5
