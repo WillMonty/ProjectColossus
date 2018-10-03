@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SoldierUINew : MonoBehaviour {
-
+    
     public PlayerData soldier1;
     public PlayerData soldier2;
     
@@ -61,7 +61,7 @@ public class SoldierUINew : MonoBehaviour {
 
         s1Reloading = false;
         s2Reloading = false;
-
+        
 
         if (soldier1.soldierClass == SoldierClass.Assault)
         {

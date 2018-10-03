@@ -138,17 +138,17 @@ Prefab:
     - target: {fileID: 224509935424661386, guid: d7a720baab1e282499bd2b0f0c17ccce,
         type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224509935424661386, guid: d7a720baab1e282499bd2b0f0c17ccce,
         type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224509935424661386, guid: d7a720baab1e282499bd2b0f0c17ccce,
         type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224509935424661386, guid: d7a720baab1e282499bd2b0f0c17ccce,
         type: 2}
@@ -220,6 +220,10 @@ Prefab:
       propertyPath: soldier2
       value: 
       objectReference: {fileID: 918247063}
+    - target: {fileID: 1537516300912974, guid: d7a720baab1e282499bd2b0f0c17ccce, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7a720baab1e282499bd2b0f0c17ccce, type: 2}
   m_IsPrefabParent: 0
@@ -234,11 +238,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4957829092319964, guid: 3330675f89359a8469ed7bc0de717438,
     type: 2}
   m_PrefabInternal: {fileID: 1290367248}
---- !u!1 &206774941 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1588828268956112, guid: cb223d5d1db60b448beb4191f8e52ed7,
-    type: 2}
-  m_PrefabInternal: {fileID: 632586209}
 --- !u!1 &318854793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,63 +1103,43 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4051042107168854, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4051042107168854, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4051042107168854, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4051042107168854, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4051042107168854, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4051042107168854, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4051042107168854, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4051042107168854, guid: fdd7556324937854b84c444cbafc7063, type: 2}
+    - target: {fileID: 4296994175362588, guid: fdd7556324937854b84c444cbafc7063, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114521530334328858, guid: fdd7556324937854b84c444cbafc7063,
+    - target: {fileID: 114851049906826984, guid: fdd7556324937854b84c444cbafc7063,
         type: 2}
-      propertyPath: soldier1
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114521530334328858, guid: fdd7556324937854b84c444cbafc7063,
-        type: 2}
-      propertyPath: soldier2
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114521530334328858, guid: fdd7556324937854b84c444cbafc7063,
-        type: 2}
-      propertyPath: soldierUI
+      propertyPath: soldierUICanvas
       value: 
       objectReference: {fileID: 1394774451}
-    - target: {fileID: 114521530334328858, guid: fdd7556324937854b84c444cbafc7063,
-        type: 2}
-      propertyPath: pauseMenu
-      value: 
-      objectReference: {fileID: 206774941}
-    - target: {fileID: 114521530334328858, guid: fdd7556324937854b84c444cbafc7063,
-        type: 2}
-      propertyPath: currentGameState
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fdd7556324937854b84c444cbafc7063, type: 2}
   m_IsPrefabParent: 0

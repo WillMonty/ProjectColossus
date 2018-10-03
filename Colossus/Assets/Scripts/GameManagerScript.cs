@@ -36,6 +36,8 @@ public class GameManagerScript : MonoBehaviour
 	public List<GameObject> gamePieces = new List<GameObject>(); //Pieces of the scene only shown/used InGame
 
 
+    public GameObject soldierUICanvas;
+
 	[Header("Pausing")]
     public GameObject pauseMenu;
     public GameObject pauseMenuDefaultButton;
@@ -125,6 +127,10 @@ public class GameManagerScript : MonoBehaviour
         PauseInputs();
         OOOOOOOF();
         currentGameState = GameState.InGame;
+        if (!soldierUICanvas.activeSelf)
+        {
+            EnableSoldierUI();
+        }
 	}
     #endregion
 
@@ -280,6 +286,11 @@ public class GameManagerScript : MonoBehaviour
 			currentGameState = GameState.MainMenu;
             SceneManager.LoadScene(0);
         }
+    }
+
+    public void EnableSoldierUI()
+    {
+        soldierUICanvas.SetActive(true);
     }
 
     public void ExitGame()
