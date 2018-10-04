@@ -1,42 +1,18 @@
 fileFormatVersion: 2
-guid: b355f1802633244498ccedf4bbc6ddcc
-timeCreated: 1524605826
+guid: 355d500b54d38be49a255308ee4ffd96
+timeCreated: 1538689650
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Remd_CAM1
-    100002: Room01:beam2_Room01:beam3_Room01:group3_Remd_CAM1
-    100004: Room01:beam4_Room01:group3_Remd_CAM1
-    100006: Room01:beam5_Room01:group3_Remd_CAM1
-    100008: Room01:group3_Room01:pCylinder2_Remd_CAM1
-    100010: //RootNode
-    400000: Remd_CAM1
-    400002: Room01:beam2_Room01:beam3_Room01:group3_Remd_CAM1
-    400004: Room01:beam4_Room01:group3_Remd_CAM1
-    400006: Room01:beam5_Room01:group3_Remd_CAM1
-    400008: Room01:group3_Room01:pCylinder2_Remd_CAM1
-    400010: //RootNode
-    2100000: Remd_CAM1Mat
-    2100002: Room01_beam2_Room01_beam3_Room01_group3_Remd_CAM1Mat
-    2100004: Room01_beam4_Room01_group3_Remd_CAM1Mat
-    2100006: Room01_beam5_Room01_group3_Remd_CAM1Mat
-    2100008: Room01_group3_Room01_pCylinder2_Remd_CAM1Mat
-    2300000: Remd_CAM1
-    2300002: Room01:beam2_Room01:beam3_Room01:group3_Remd_CAM1
-    2300004: Room01:beam4_Room01:group3_Remd_CAM1
-    2300006: Room01:beam5_Room01:group3_Remd_CAM1
-    2300008: Room01:group3_Room01:pCylinder2_Remd_CAM1
-    3300000: Remd_CAM1
-    3300002: Room01:beam2_Room01:beam3_Room01:group3_Remd_CAM1
-    3300004: Room01:beam4_Room01:group3_Remd_CAM1
-    3300006: Room01:beam5_Room01:group3_Remd_CAM1
-    3300008: Room01:group3_Room01:pCylinder2_Remd_CAM1
-    4300000: Remd_CAM1
-    4300002: Room01:beam2_Room01:beam3_Room01:group3_Remd_CAM1
-    4300004: Room01:beam4_Room01:group3_Remd_CAM1
-    4300006: Room01:beam5_Room01:group3_Remd_CAM1
-    4300008: Room01:group3_Room01:pCylinder2_Remd_CAM1
+    100000: //RootNode
+    100002: Room_02:group3
+    400000: //RootNode
+    400002: Room_02:group3
+    2100000: Room_02_group3Mat
+    2300000: Room_02:group3
+    3300000: Room_02:group3
+    4300000: Room_02:group3
   externalObjects: {}
   materials:
     importMaterials: 1
