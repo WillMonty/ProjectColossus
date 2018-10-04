@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class JetPack : MonoBehaviour {
 
-    const float MAX_FUEL = 2.5f;
+    const float MAX_FUEL = 1.5f;
     public float MaxFuel
     {
         get { return MAX_FUEL; }
     }
-    const float JETPACK_FORCE = 0.1f;
+    const float JETPACK_FORCE = 0.5f;
 
     private float jetPackFuel;
     public float JetPackFuel
@@ -30,14 +30,14 @@ public class JetPack : MonoBehaviour {
         
         if (jetPackFuel > 0 && GetComponent<PlayerInput>().ActionState>0)
         {           
-            FuelDown();
-            GetComponent<PlayerMovement>().TimeFalling -= Time.deltaTime;
-            GetComponent<PlayerMovement>().VerticalVelocity += JETPACK_FORCE;
+           FuelDown();
+            if (GetComponent<PlayerMovement>().VerticalVelocity<2f)
+                GetComponent<PlayerMovement>().VerticalVelocity += JETPACK_FORCE;
             
         }
         else if(jetPackFuel<MAX_FUEL)
         {
-            jetPackFuel += Time.deltaTime/4f;
+            jetPackFuel += Time.deltaTime/10f;
         }
     }
 

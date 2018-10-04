@@ -6,8 +6,8 @@ using XInputDotNetPure;
 public class PlayerMovement : MonoBehaviour {
 
 
-    const float JUMP_FORCE = 3.0f;
-    const float GRAVITY_FORCE = -.2f;
+    const float JUMP_FORCE = 3f;
+    const float GRAVITY_FORCE = 9.81f;
 
     CharacterController player;
 
@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour {
     GamePadState prevState;
 
     // Movement Behavior Variables
-    float verticalVelocity;
+    public float verticalVelocity;
     public float VerticalVelocity
     {
         get{ return verticalVelocity; }
@@ -62,9 +62,9 @@ public class PlayerMovement : MonoBehaviour {
         prevState = GetComponent<PlayerInput>().PrevState;
         if (GameManagerScript.instance.currentGameState == GameState.InGame && GetComponent<PlayerInput>().PlayerIndexSet)
         {
-
-            Move();
             Jump();
+            Move();
+           
 
         }
     }
@@ -190,6 +190,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // Apply the final movement to the player
         player.Move(movement * Time.deltaTime);
+        //verticalVelocity = 0f;
         #endregion
     }
 
@@ -199,31 +200,16 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     private void Jump()
     {
-
         if (player.isGrounded)
         {
-            if (GetComponent<PlayerInput>().JumpState==1)
-            {
-            
+            if (GetComponent<PlayerInput>().JumpState == 1)
                 verticalVelocity = JUMP_FORCE;
-                timeFalling = 0;
-            }
-            else if (GetComponent<PlayerInput>().JumpState == 0)
-            {
-                verticalVelocity += GRAVITY_FORCE;
-            }
-            
         }
-        else 
-        {
-            if (timeFalling < 0)
-            {
-                timeFalling = 0;
-            }
-            timeFalling += Time.deltaTime;
-            verticalVelocity += (GRAVITY_FORCE * timeFalling);
-        }
-        verticalVelocity = Mathf.Clamp(verticalVelocity, -30, 5);
+        else
+            verticalVelocity -= GRAVITY_FORCE * Time.deltaTime;
+
+
+        verticalVelocity = Mathf.Clamp(verticalVelocity, -5f, 5f);
     }
    
 }
