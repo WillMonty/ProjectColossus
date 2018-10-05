@@ -61,13 +61,6 @@ public class BulletScript : MonoBehaviour, IDamage
 			Destroy(gameObject);
         }
 	}
-		
-	void FixedUpdate()
-	{
-		//Update oldVelocity
-		oldVelocity = this.GetComponent<Rigidbody>().velocity;
-	}
-
 
     // Move method for bullets
     /// <summary>
@@ -76,7 +69,6 @@ public class BulletScript : MonoBehaviour, IDamage
     void BulletMove()
     {
         rb.velocity = transform.forward * bulletSpeed;
-        //Debug.Log("Move " + bulletSpeed);
     }
 
 	void OnCollisionEnter(Collision collision)
@@ -84,7 +76,10 @@ public class BulletScript : MonoBehaviour, IDamage
 		// Destroy the projectile
 		if (collision.gameObject.tag != "projectile" && collision.gameObject.tag != "resistancebullet" && collision.gameObject.tag != "soldier"+ownerNumber)
 		{
+			if(collision.gameObject.GetComponent<IHealth>() != null)
+				collision.gameObject.GetComponent<IHealth>().DamageObject(damage);
 			Destroy(gameObject);
+
 		}
 	}
 

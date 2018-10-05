@@ -27,7 +27,6 @@ public class ColossusManager : MonoBehaviour {
     public float lowerMapAmount;
     public GameObject resistanceContainer;
 
-
     [Header("Audio")]
     public AudioSource headSource;
     public AudioClip hopInSound;
@@ -59,7 +58,6 @@ public class ColossusManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
 		//Get controllers
 		leftController = this.GetComponent<SteamVR_ControllerManager>().left;
 		rightController = this.GetComponent<SteamVR_ControllerManager>().right;
