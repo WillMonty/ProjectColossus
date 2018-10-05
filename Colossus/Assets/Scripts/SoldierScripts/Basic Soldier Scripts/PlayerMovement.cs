@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour {
     const float GRAVITY_FORCE = 9.81f;
 
     CharacterController player;
-
-    // Player variables
+    Rigidbody body;
+    // Player variabless
     public float moveSpeed;
     float speed;
     public float lookSensitivityX = .001f;
@@ -48,11 +48,30 @@ public class PlayerMovement : MonoBehaviour {
     float rotX; // rotation by the X axis
     float rotY; // rotation by the Y axis
 
+
+    #region rigidbody movement
+
+    Vector3 velocity;
+    bool isGrounded;
+
+    float rayDist;
+    Ray moveRay1;
+    Ray moveRay2;
+    Ray moveRay3;
+    RaycastHit hitData;
+    Vector3 rayDir;
+
+    float totalMass;
+    Vector3 totalVelocity;
+    Vector3 bodyTotalVel;
+    Vector3 jumpForce = new Vector3(0, 1000f, 0);
+    #endregion
+
     // Use this for initialization
     void Start ()
     {
         player = GetComponent<CharacterController>();
-
+        body = GetComponent<Rigidbody>();
     }
 	
 	// Update is called once per frame
@@ -60,10 +79,20 @@ public class PlayerMovement : MonoBehaviour {
     {
         state = GetComponent<PlayerInput>().State;
         prevState = GetComponent<PlayerInput>().PrevState;
+
         if (GameManagerScript.instance.currentGameState == GameState.InGame && GetComponent<PlayerInput>().PlayerIndexSet)
         {
+            RotateCamera();
             Jump();
-            Move();
+            if (player.enabled)
+            {
+                
+                Move();
+            }
+            else
+            {
+                MoveBody();
+            }
            
 
         }
@@ -134,7 +163,50 @@ public class PlayerMovement : MonoBehaviour {
                 StandingPose.SetActive(true);
             }
         }
+        #endregion
+        
+       
 
+        #region Applying movement
+        // Create a vector movement
+        Vector3 movement = new Vector3(moveLR, verticalVelocity, moveFB);
+        movement = transform.rotation * movement;
+
+        // Apply the final movement to the player
+        player.Move(movement * Time.deltaTime);
+        //verticalVelocity = 0f;
+        #endregion
+    }
+
+
+    /// <summary>
+    /// Method to handle jumping 
+    /// </summary>
+    private void Jump()
+    {
+        if (player.enabled)
+        {
+            if (player.isGrounded)
+            {
+                if (GetComponent<PlayerInput>().JumpState == 1)
+                    verticalVelocity = JUMP_FORCE;
+            }
+            else
+                verticalVelocity -= GRAVITY_FORCE * Time.deltaTime;
+
+
+            verticalVelocity = Mathf.Clamp(verticalVelocity, -5f, 5f);
+            return;
+        }
+        if (GetComponent<PlayerInput>().JumpState == 1)
+        {
+            body.AddForce(jumpForce);
+            Debug.Log("Force Added");
+        }
+    }
+
+    private void RotateCamera()
+    {
         // Rotate the player
         // Look axis
         if (state.ThumbSticks.Right.X > .2 || state.ThumbSticks.Right.X < -.2)
@@ -177,39 +249,80 @@ public class PlayerMovement : MonoBehaviour {
             xAxisClamp = -90;
             targetCamRot.x = 270;
         }
+        targetCamRot.z = 0;
 
         // Applying the rotations to the player
         GetComponent<PlayerData>().eyes.transform.rotation = Quaternion.Euler(targetCamRot);
+        
         transform.rotation = Quaternion.Euler(targetBodyRot);
-        #endregion
-
-        #region Applying movement
-        // Create a vector movement
-        Vector3 movement = new Vector3(moveLR, verticalVelocity, moveFB);
-        movement = transform.rotation * movement;
-
-        // Apply the final movement to the player
-        player.Move(movement * Time.deltaTime);
-        //verticalVelocity = 0f;
-        #endregion
     }
 
-    
-    /// <summary>
-    /// Method to handle jumping 
-    /// </summary>
-    private void Jump()
+    private void MoveBody()
     {
-        if (player.isGrounded)
+        
+        velocity = Vector3.zero;
+        if (state.ThumbSticks.Left.Y > .2 || state.ThumbSticks.Left.Y < -.2)
         {
-            if (GetComponent<PlayerInput>().JumpState == 1)
-                verticalVelocity = JUMP_FORCE;
+            velocity += transform.forward*state.ThumbSticks.Left.Y * moveSpeed;
+
         }
-        else
-            verticalVelocity -= GRAVITY_FORCE * Time.deltaTime;
+        if (state.ThumbSticks.Left.X > .2 || state.ThumbSticks.Left.X < -.2)
+        {
+            velocity += transform.right * state.ThumbSticks.Left.X * moveSpeed;
+        }
+
+        ValidateVelocity();
+        transform.position+= velocity*Time.deltaTime;
+        //body.MovePosition(transform.position + velocity * Time.deltaTime);
+
+        transform.eulerAngles = new Vector3(0.0f, transform.eulerAngles.y, 0.0f);
 
 
-        verticalVelocity = Mathf.Clamp(verticalVelocity, -5f, 5f);
     }
-   
+
+    private void ValidateVelocity()
+    {
+        rayDir = velocity.normalized;
+        rayDist = 0.2f;
+
+        moveRay1.origin = transform.position + new Vector3(0, 0.2f, 0);
+        moveRay2.origin = transform.position + new Vector3(0, 0, 0);
+        moveRay3.origin = transform.position + new Vector3(0, -0.2f, 0);
+
+        moveRay1.direction = moveRay2.direction = moveRay3.direction = rayDir;
+
+        if (Physics.Raycast(moveRay1,out hitData,rayDist) || Physics.Raycast(moveRay2, out hitData, rayDist) || Physics.Raycast(moveRay3, out hitData, rayDist))
+        {
+            if (hitData.collider.gameObject.GetComponent<Rigidbody>())
+            {
+               // ResolveCollision(hitData.collider.gameObject.GetComponent<Rigidbody>());
+                return;
+
+            }
+
+            if (rayDir.x != 0) 
+                velocity.x = 0;
+
+            if (rayDir.z != 0)
+                velocity.z = 0;
+            
+        }
+    }
+
+    private void ResolveCollision(Rigidbody obstacle)
+    {
+        
+        if (obstacle.tag != "colossusplayer" && tag != "colossusarm" && tag != "colossushead" && tag != "projectile")
+        {
+            totalMass = body.mass + obstacle.mass;
+            bodyTotalVel = velocity + body.velocity;
+            totalVelocity = bodyTotalVel + obstacle.velocity;
+            totalVelocity *= 0.8f / 2f;
+
+
+            
+        }
+    }
+
+
 }

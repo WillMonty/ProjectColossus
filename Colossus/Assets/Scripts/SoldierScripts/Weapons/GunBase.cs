@@ -29,7 +29,7 @@ public class GunBase : MonoBehaviour, IWeapon
     public AudioClip shootSound;
 
     // current gun Tracking variables
-    int bulletsInMag;
+    protected int bulletsInMag;
     public int BulletsInMag
     {
         get { return bulletsInMag; }
@@ -148,7 +148,7 @@ public class GunBase : MonoBehaviour, IWeapon
             }
 
             // Check for reloading
-            if (!reloading && reloadButton && bulletsInMag != magSize)
+            if (!reloading && ((reloadButton && bulletsInMag != magSize) || bulletsInMag==0))
             {
                 Reload();
             }
