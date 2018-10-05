@@ -12,12 +12,11 @@ TagManager:
   - colossusplayer
   - spawnpoint
   - throwable
-  - colossusarms
-  - colossushead
   - PauseMenuUI
   - explosion
   - soldier1
   - soldier2
+  - colossusshield
   layers:
   - Default
   - TransparentFX

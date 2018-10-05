@@ -54,12 +54,18 @@ public class GrenadeData : MonoBehaviour,IDamage
 
     private void OnCollisionEnter(Collision collision)
     {
-
+		//Don't hit yourself or another explosion
         if (collision.gameObject.tag != ("soldier"+ownerNumber) && collision.gameObject.tag != "explosion" && isProj)
         {
-            GameObject expClone =Instantiate(explosion, transform.position, Quaternion.identity);
-            expClone.transform.localScale=expClone.transform.localScale * 0.25f;
-            Destroy(expClone, 2);
+			//Don't explode on colossus shield hit
+			if(collision.gameObject.tag != "colossusshield")
+			{
+				gameObject.tag = "explosion"; //Set prefab to explosion before it occurs
+				GameObject expClone =Instantiate(explosion, transform.position, Quaternion.identity);
+				expClone.transform.localScale=expClone.transform.localScale * 0.25f;
+				GetComponent<SphereCollider>().enabled = true;
+				Destroy(expClone, 2);	
+			}
 
             isProj = false;
             StopAllCoroutines();
@@ -69,9 +75,6 @@ public class GrenadeData : MonoBehaviour,IDamage
             for (int i = 0; i < 3; i++)
                 Destroy(transform.GetChild(0).gameObject);
            Destroy(body);
-
-
-            GetComponent<SphereCollider>().enabled = true;
 
             Destroy(gameObject, 0.25f);
         }

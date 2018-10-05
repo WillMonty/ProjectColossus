@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33391924569213662}
   - component: {fileID: 23393506881186514}
   - component: {fileID: 65012147231044116}
+  - component: {fileID: 114770840371843856}
   m_Layer: 0
   m_Name: left_hand_palm
   m_TagString: colossusplayer
@@ -112,7 +113,7 @@ GameObject:
   - component: {fileID: 114444704867188720}
   m_Layer: 0
   m_Name: right_bicep
-  m_TagString: colossusarms
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +132,7 @@ GameObject:
   - component: {fileID: 114897960856667078}
   m_Layer: 0
   m_Name: left_forearm
-  m_TagString: colossusarms
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -420,7 +421,7 @@ GameObject:
   - component: {fileID: 114537201061048098}
   m_Layer: 0
   m_Name: right_forearm
-  m_TagString: colossusarms
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -490,7 +491,7 @@ GameObject:
   - component: {fileID: 114965652380048496}
   m_Layer: 0
   m_Name: right_shoulder
-  m_TagString: colossusarms
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -524,7 +525,7 @@ GameObject:
   - component: {fileID: 23389964567227100}
   m_Layer: 0
   m_Name: right_elbow
-  m_TagString: colossusarms
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -608,7 +609,7 @@ GameObject:
   - component: {fileID: 114776539999834844}
   m_Layer: 0
   m_Name: neck
-  m_TagString: colossushead
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -812,7 +813,7 @@ GameObject:
   - component: {fileID: 82490477622657468}
   m_Layer: 0
   m_Name: RightShield
-  m_TagString: Untagged
+  m_TagString: colossusshield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -914,7 +915,7 @@ GameObject:
   - component: {fileID: 114837421860877814}
   m_Layer: 0
   m_Name: left_shoulder
-  m_TagString: colossusarms
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -930,9 +931,10 @@ GameObject:
   - component: {fileID: 33566661550264714}
   - component: {fileID: 23987863805634564}
   - component: {fileID: 64069913944533942}
+  - component: {fileID: 114155644715712414}
   m_Layer: 0
   m_Name: right_shoulder_pad1
-  m_TagString: colossusarms
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1106,6 +1108,7 @@ GameObject:
   - component: {fileID: 33444979987564020}
   - component: {fileID: 23287048998740938}
   - component: {fileID: 65919111103969320}
+  - component: {fileID: 114739041113791900}
   m_Layer: 0
   m_Name: right_hand_palm
   m_TagString: colossusplayer
@@ -1363,7 +1366,7 @@ GameObject:
   - component: {fileID: 23268202035804536}
   m_Layer: 0
   m_Name: Colossus_head shadows
-  m_TagString: colossushead
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1451,7 +1454,7 @@ GameObject:
   - component: {fileID: 82898926700318994}
   m_Layer: 0
   m_Name: LeftShield
-  m_TagString: Untagged
+  m_TagString: colossusshield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1521,7 +1524,7 @@ GameObject:
   - component: {fileID: 114495399504248604}
   m_Layer: 0
   m_Name: left_bicep
-  m_TagString: colossusarms
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1538,7 +1541,7 @@ GameObject:
   - component: {fileID: 23373140937086108}
   m_Layer: 0
   m_Name: left_elbow
-  m_TagString: colossusarms
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2287,9 +2290,10 @@ GameObject:
   - component: {fileID: 33252916349257456}
   - component: {fileID: 23136744610377174}
   - component: {fileID: 64573156680620236}
+  - component: {fileID: 114187350433271992}
   m_Layer: 0
   m_Name: left_shoulder_pad
-  m_TagString: colossusarms
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2376,7 +2380,7 @@ GameObject:
   - component: {fileID: 114689169110115734}
   m_Layer: 11
   m_Name: Colossus_head1
-  m_TagString: colossushead
+  m_TagString: colossusplayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3992,7 +3996,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 0
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 1
@@ -4028,7 +4032,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294955007
+    m_Bits: 4294952959
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 1
@@ -8407,6 +8411,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114155644715712414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1419299709837050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf781e5ee4fe944b9755078e6e10509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 114965652380048496}
 --- !u!114 &114171263522488736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8419,8 +8435,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colossus: {fileID: 114809903612954868}
+  health: 0
   hitPrefab: {fileID: 1924571714969746, guid: d149130b7347ddc47a02a62b1246d216, type: 2}
   damageMultiplier: 1
+--- !u!114 &114187350433271992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1938348206774716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf781e5ee4fe944b9755078e6e10509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 114837421860877814}
 --- !u!114 &114199007421310466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9342,6 +9371,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114739041113791900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526715591333572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf781e5ee4fe944b9755078e6e10509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 114965652380048496}
 --- !u!114 &114753382968007182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9422,6 +9463,18 @@ MonoBehaviour:
   verbose: 0
   createComponents: 1
   updateDynamically: 1
+--- !u!114 &114770840371843856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000131344819812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf781e5ee4fe944b9755078e6e10509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 114837421860877814}
 --- !u!114 &114776539999834844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9434,6 +9487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colossus: {fileID: 114809903612954868}
+  health: 500
   hitPrefab: {fileID: 1924571714969746, guid: d149130b7347ddc47a02a62b1246d216, type: 2}
   damageMultiplier: 1.25
 --- !u!114 &114809903612954868
@@ -9475,6 +9529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colossus: {fileID: 114809903612954868}
+  health: 500
   hitPrefab: {fileID: 1924571714969746, guid: d149130b7347ddc47a02a62b1246d216, type: 2}
   damageMultiplier: 1
 --- !u!114 &114864572367725186
@@ -9670,6 +9725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colossus: {fileID: 114809903612954868}
+  health: 500
   hitPrefab: {fileID: 1924571714969746, guid: d149130b7347ddc47a02a62b1246d216, type: 2}
   damageMultiplier: 1
 --- !u!114 &114982554490968716

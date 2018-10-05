@@ -18,9 +18,11 @@ public class GameManagerScript : MonoBehaviour
     // Static instance of the GameManager which allows it to be accessed from any script
     public static GameManagerScript instance = null;
 
-	public GameState currentGameState;
-
+	[Header("Debug")]
 	public bool forceStartGame;
+
+	[Header("State")]
+	public GameState currentGameState;
 
 	[Header("Players")]
     public ColossusManager colossus = null;
@@ -31,10 +33,8 @@ public class GameManagerScript : MonoBehaviour
 	[Header("Game Pieces")]
 	public List<GameObject> gamePieces = new List<GameObject>(); //Pieces of the scene only shown/used InGame
 
-
-    public GameObject soldierUICanvas;
-
-	[Header("Pausing")]
+	[Header("UI and Pausing")]
+	public GameObject soldierUICanvas;
     public GameObject pauseMenu;
     public GameObject pauseMenuDefaultButton;
 
@@ -110,7 +110,10 @@ public class GameManagerScript : MonoBehaviour
 		//Check for debug
 		if(forceStartGame)
 		{
-			colossus.ToggleColossus();
+			if(colossus != null)
+				colossus.ToggleColossus();	
+			else
+				currentGameState = GameState.InGame;
 		}
 
 	}
@@ -120,11 +123,11 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+		PauseInputs();
 		CheckWinCondition();
-        PauseInputs();
         OOOOOOOF();
-        currentGameState = GameState.InGame;
-        if (!soldierUICanvas.activeSelf)
+
+		if (!soldierUICanvas.activeSelf && currentGameState == GameState.InGame)
         {
             EnableSoldierUI();
         }

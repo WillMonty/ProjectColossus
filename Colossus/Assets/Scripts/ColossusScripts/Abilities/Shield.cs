@@ -125,16 +125,16 @@ public class Shield : MonoBehaviour {
 		GameObject projectile = collision.gameObject;
 
 		//Get reflection
-		Vector3 inV = projectile.GetComponent<BulletScript>().oldVelocity; //Do I need this?
-		Vector3 reflectionV = Vector3.Reflect(inV, collision.contacts[0].normal);
+		Vector3 reflectionV = Vector3.Reflect(-collision.impulse, collision.contacts[0].normal);
 
+		//Put the projectile a bit away from the shield
 		Vector3 spawnPos = collision.contacts[0].point + (reflectionV * 0.04f);
 
 		//Instantiate new projectile
 		GameObject createdProjectile = Instantiate(projectile, spawnPos, projectile.transform.localRotation);
 
+		//Factor in shield speed
 		float shieldVelocity = gameObject.GetComponent<Valve.VR.InteractionSystem.VelocityEstimator>().GetVelocityEstimate().magnitude;
-
 		if(shieldVelocity >= 1)
 			reflectionV *= shieldVelocity;
 
@@ -142,7 +142,6 @@ public class Shield : MonoBehaviour {
 		createdProjectile.GetComponent<IDamage>().Owner = 0;
 
 		TrashCollector.AddRubbishToList(createdProjectile);
-
 	}
 
 	void OnCollisionEnter(Collision collision)
