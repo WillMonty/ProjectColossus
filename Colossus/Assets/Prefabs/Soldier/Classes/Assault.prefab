@@ -24041,13 +24041,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1153689048784682}
-  m_LocalRotation: {x: 0.70157963, y: -0.71226525, z: -0.014162744, w: -0.016235206}
-  m_LocalPosition: {x: -0.13000241, y: 0.17699955, z: 0.006999982}
+  m_LocalRotation: {x: 0.7456982, y: -0.66570324, z: -0.021292085, w: -0.017889911}
+  m_LocalPosition: {x: -0.128, y: 0.1973, z: 0.036}
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_Children: []
   m_Father: {fileID: 4794929944223338}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 182.462, y: -0.18701172, z: 90.869995}
+  m_LocalEulerAnglesHint: {x: 183.155, y: 0.45498657, z: 83.49999}
 --- !u!4 &4151401626931972
 Transform:
   m_ObjectHideFlags: 1
@@ -42594,7 +42594,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -42744,7 +42744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1572466318819412, guid: d9c940578f2c2c54cb88f7ee0e633b5a, type: 2}
-  shootSound: {fileID: 8300000, guid: a00104a47f6fa4b449102e3225da544a, type: 3}
+  shootSound: {fileID: 8300000, guid: 7fc4a2a4bfd8a0c489ca792483449bf1, type: 3}
 --- !u!114 &114272574455636518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -42767,7 +42767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e0838c4d97dbb4ca9cbb741f77091b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 1
+  playerNumber: 2
   soldierClass: 0
   eyes: {fileID: 1605082517507248}
   gun: {fileID: 1431867008410684}
@@ -42919,7 +42919,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100010, guid: 8bfa232367e93d7418295c828da6b001, type: 3}
+  - {fileID: 2100000, guid: 37b3638259f0e214b88890c6da02654d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -43099,7 +43099,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100006, guid: 8bfa232367e93d7418295c828da6b001, type: 3}
+  - {fileID: 2100000, guid: 72f6a61e1c35b2e43a0ac50b7fb33bd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
