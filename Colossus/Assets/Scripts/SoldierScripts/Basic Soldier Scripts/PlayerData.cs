@@ -126,10 +126,21 @@ public class PlayerData : MonoBehaviour, IHealth
         SetLayerRecursively(GetComponent<PlayerMovement>().StandingPose, layer);
         SetLayerRecursively(GetComponent<PlayerMovement>().RunningAnimation, layer);
 
+        layer = 11 + playerNumber;
+
+        SetLayerRecursively(eyes.transform.GetChild(1).gameObject, layer);
+
         if (playerNumber == 2)
+        {
             newMask += 512; //flag 9
+            newMask += 8192; //flag 13
+        }
         else
-            newMask += 1024; //flag 10
+        {
+            newMask += 1024;//flag 10
+            newMask += 4096; //flag 12
+            
+        }
 
         eyes.GetComponent<Camera>().cullingMask = newMask;
     }
