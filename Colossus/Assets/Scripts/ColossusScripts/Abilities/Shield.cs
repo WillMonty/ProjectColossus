@@ -28,7 +28,7 @@ public class Shield : MonoBehaviour {
 	public GameObject hitPrefab;
 	public GameObject hitReflectPrefab;
 	public AudioClip reflectOnSound;
-	public AudioClip noReflectSound;
+	public AudioClip reflectOffSound;
 
 	AudioSource source;
 
@@ -73,13 +73,19 @@ public class Shield : MonoBehaviour {
 
 		reflecting = true;
 
-		//Play reflectOnSound. Loop it?
+		source.Stop();
+		source.clip = reflectOnSound;
+		source.Play();
 	}
 
 	void TurnOff()
 	{
 		mat.color = new Color(1.0f, 1.0f, 1.0f, offAlpha);
 		reflecting = false;
+
+		source.Stop();
+		source.clip = reflectOffSound;
+		source.Play();
 	}
 
 	/// <summary>
