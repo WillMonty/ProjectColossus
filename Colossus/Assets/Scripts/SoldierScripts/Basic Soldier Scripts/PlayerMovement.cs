@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
+
 public class PlayerMovement : MonoBehaviour {
 
 
@@ -11,7 +12,7 @@ public class PlayerMovement : MonoBehaviour {
 
     CharacterController player;
     Rigidbody body;
-    // Player variabless
+    // Player variables
     public float moveSpeed;
     float speed;
     public float lookSensitivityX = .001f;
@@ -38,9 +39,11 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     // Animation Stuff
-    public GameObject StandingPose;
-    public GameObject RunningAnimation;
+    bool jumped = false;
+    bool inAir;
+    int dir = 0;
 
+    public Animator animController; 
     // Movement Variables
     float moveFB; // Movement forward and backwards
     float moveLR; // Movement left and right
@@ -96,6 +99,60 @@ public class PlayerMovement : MonoBehaviour {
            
 
         }
+
+        if (animController != null)
+        {
+            SetAnim();
+
+        }
+    }
+
+    //Sets 8-Directional Animation state including idling
+    private void SetAnim()
+    {
+
+        //8 Directional movement
+        dir = 0;
+
+        if (moveFB > 0 && moveLR ==0 )
+            dir = 1;
+        else if (moveFB > 0 && moveLR > 0)
+            dir = 2;
+        else if (moveFB == 0 && moveLR > 0)
+            dir = 3;
+        else if (moveFB < 0 && moveLR > 0)
+            dir = 4;
+        else if (moveFB < 0 && moveLR == 0)
+            dir = 5;
+        else if (moveFB < 0 && moveLR < 0)
+            dir = 6;
+        else if (moveFB == 0 && moveLR < 0)
+            dir = 7;
+        else if (moveFB > 0 && moveLR < 0)
+            dir = 8;
+
+        animController.SetInteger("direction", dir);
+
+        //Jumping
+        if (jumped)
+        {
+            animController.SetTrigger("jumped");
+            animController.SetBool("inAir", true);
+            jumped = false;
+            inAir = true;
+        }
+
+        //Falling
+        if (!player.isGrounded && !inAir)
+            inAir = true;
+
+        if(inAir && player.isGrounded)
+        {
+            inAir = false;
+            animController.SetBool("inAir", false);
+        }
+
+
     }
 
     /// <summary>
@@ -122,50 +179,27 @@ public class PlayerMovement : MonoBehaviour {
         #region Getting Input
         // Movement variables/axis
 
+        
         if (state.ThumbSticks.Left.Y > .2 || state.ThumbSticks.Left.Y < -.2)
         {
             moveFB = state.ThumbSticks.Left.Y * speed;
 
-            // Turn on running animation and turn off standing pose
-            if (RunningAnimation.activeSelf == false)
-            {
-                RunningAnimation.SetActive(true);
-                StandingPose.SetActive(false);
-            }
         }
         else
-        {
             moveFB = 0;
-        }
-        //Debug.Log("Move FB: " + moveFB);
+
+
+        moveLR = 0;
         if (state.ThumbSticks.Left.X > .2 || state.ThumbSticks.Left.X < -.2)
         {
             moveLR = state.ThumbSticks.Left.X * speed;
 
-            // Turn on running animation and turn off standing pose
-            if (RunningAnimation.activeSelf == false)
-            {
-                RunningAnimation.SetActive(true);
-                StandingPose.SetActive(false);
-            }
         }
         else
-        {
             moveLR = 0;
-        }
-
-        if (moveLR == 0 && moveFB == 0)
-        {
-            // Turn on standing pose
-            if (RunningAnimation.activeSelf == true)
-            {
-                RunningAnimation.SetActive(false);
-                StandingPose.SetActive(true);
-            }
-        }
         #endregion
-        
-       
+
+
 
         #region Applying movement
         // Create a vector movement
@@ -189,7 +223,12 @@ public class PlayerMovement : MonoBehaviour {
             if (player.isGrounded)
             {
                 if (GetComponent<PlayerInput>().JumpState == 1)
+                {
                     verticalVelocity = JUMP_FORCE;
+                    jumped = true;
+                }
+
+              
             }
             else
                 verticalVelocity -= GRAVITY_FORCE * Time.deltaTime;
@@ -198,10 +237,12 @@ public class PlayerMovement : MonoBehaviour {
             verticalVelocity = Mathf.Clamp(verticalVelocity, -5f, 5f);
             return;
         }
+
+        
         if (GetComponent<PlayerInput>().JumpState == 1)
         {
             body.AddForce(jumpForce);
-            Debug.Log("Force Added");
+            jumped = true;
         }
     }
 
@@ -239,17 +280,16 @@ public class PlayerMovement : MonoBehaviour {
         targetBodyRot.y += rotX;
 
         // Clamping the look rotation
-        if (xAxisClamp > 90)
+        if (xAxisClamp > 60)
         {
-            xAxisClamp = 90;
-            targetCamRot.x = 90;
+            xAxisClamp = 60;
+            targetCamRot.x = 60;
         }
-        else if (xAxisClamp < -90)
+        else if (xAxisClamp < -60)
         {
-            xAxisClamp = -90;
-            targetCamRot.x = 270;
+            xAxisClamp = -60;
+            targetCamRot.x = 300;
         }
-        targetCamRot.z = 0;
 
         // Applying the rotations to the player
         GetComponent<PlayerData>().eyes.transform.rotation = Quaternion.Euler(targetCamRot);
@@ -257,6 +297,8 @@ public class PlayerMovement : MonoBehaviour {
         transform.rotation = Quaternion.Euler(targetBodyRot);
     }
 
+
+    // WIP RIGID BODY CONTROLLER STUFF
     private void MoveBody()
     {
         

@@ -27,6 +27,7 @@ public class PlayerData : MonoBehaviour, IHealth
     public SoldierClass soldierClass;
     public GameObject eyes;
     public GameObject gun;
+    public GameObject model;
 
     IWeapon weaponData;
     public IWeapon WeaponData
@@ -120,16 +121,18 @@ public class PlayerData : MonoBehaviour, IHealth
     #region HackyStuff
     void SetRenderCull()
     {
+       //Setting layers 
+       
         int layer = 8 + playerNumber;
-        int newMask = eyes.GetComponent<Camera>().cullingMask;
-
-        SetLayerRecursively(GetComponent<PlayerMovement>().StandingPose, layer);
-        SetLayerRecursively(GetComponent<PlayerMovement>().RunningAnimation, layer);
+        if (model!=null)
+            SetLayerRecursively(model, layer);
 
         layer = 11 + playerNumber;
 
         SetLayerRecursively(eyes.transform.GetChild(1).gameObject, layer);
 
+        //Setting cull mask for camera
+        int newMask = eyes.GetComponent<Camera>().cullingMask;
         if (playerNumber == 2)
         {
             newMask += 512; //flag 9
