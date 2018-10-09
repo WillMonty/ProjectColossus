@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Add new abilities and classes here
-public enum ColossusHandAbilities {Hand, Shield};
+public enum ColossusHandAbilities {Fist, Hand, Shield}; //Fist is default when no other abilities are chosen in the menu
 public enum ColossusHeadAbilities {None, Laser};
 public enum ResistanceClasses {Assault, Skulker, Grenadier};
 
