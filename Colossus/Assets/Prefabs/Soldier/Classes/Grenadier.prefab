@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 20978375854158234}
   - component: {fileID: 81769877789527230}
   - component: {fileID: 124497377515343908}
+  - component: {fileID: 114624970154055926}
   m_Layer: 0
   m_Name: Eyes
   m_TagString: MainCamera
@@ -4783,7 +4784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c3148fc083186479b8ad2bd85ee3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  maxSpeed: 1
   lookSensitivityX: 1
   lookSensitivityY: 1
   verticalVelocity: -0.3924
@@ -4810,7 +4811,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e0838c4d97dbb4ca9cbb741f77091b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
   playerNumber: 1
   soldierClass: 1
   eyes: {fileID: 1020913535556904}
@@ -4841,6 +4841,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 1848119819431530, guid: 60fb63b8c1f88f74c9b4cabb5fd37bc8, type: 2}
   shootSound: {fileID: 8300000, guid: b110723b0b99e8c4caf2e1277f25183b, type: 3}
+--- !u!114 &114624970154055926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1020913535556904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: fd12609cdb539f941a85cc98e826d1ed, type: 2}
 --- !u!114 &114774366285445712
 MonoBehaviour:
   m_ObjectHideFlags: 1

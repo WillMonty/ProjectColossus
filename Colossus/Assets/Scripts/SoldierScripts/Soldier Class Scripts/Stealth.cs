@@ -7,19 +7,22 @@ public class Stealth : MonoBehaviour {
 
     public Material stealthMat;
     public List<GameObject> models;
-    public List<Material> modelMats;
+    List<Material> modelMats;
 
     const float COOL_DOWN = 7f;
     const float DURATION = 10f;
 
-    float alpha;
+    float distortion=0;
     bool ready = true;
     bool active = false;
 
     
     // Use this for initialization
     void Start () {
-        alpha = stealthMat.color.a;
+
+
+       
+        modelMats = new List<Material>();
 	}
 	
 	// Update is called once per frame
@@ -32,12 +35,24 @@ public class Stealth : MonoBehaviour {
 
         if(active)
         {
-            
+            CheckInterrupt();
         }
+
+        if(distortion>0)
+        {
+            distortion -= Time.deltaTime/2.0f;
+            if (distortion < 0)
+                distortion = 0;
+            stealthMat.SetFloat("_Distortion", distortion);
+        }
+
+      
     }
 
     void Activate()
     {
+        distortion = 0;
+        stealthMat.SetFloat("_Distortion", 0f);
         active = true;
         ready = false;
         foreach (GameObject obj in models)
@@ -71,6 +86,16 @@ public class Stealth : MonoBehaviour {
         foreach (Transform child in obj.transform)
             ResetRecursively(child.gameObject);
     }
+
+    void CheckInterrupt()
+    {
+        if (GetComponent<PlayerData>().WeaponData.Shooting || GetComponent<PlayerData>().DamageTaken)
+        {
+            distortion = 1;
+            stealthMat.SetFloat("_Distortion", 1f);
+        }
+    }
+
 
     IEnumerator StartCD()
     {

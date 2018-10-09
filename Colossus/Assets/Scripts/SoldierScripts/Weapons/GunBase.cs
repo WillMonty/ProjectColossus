@@ -53,6 +53,10 @@ public class GunBase : MonoBehaviour, IWeapon
 
     // Variables to keep shooting from breaking and balanced
     protected bool justShot;
+    public bool Shooting
+    {
+        get { return justShot; }
+    }
 
     protected bool reloading;
     public bool Reloading

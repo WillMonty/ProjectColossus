@@ -1766,6 +1766,7 @@ GameObject:
   - component: {fileID: 20889828554094694}
   - component: {fileID: 81987565373667378}
   - component: {fileID: 124505405179119114}
+  - component: {fileID: 114822609629994268}
   m_Layer: 0
   m_Name: Eyes
   m_TagString: MainCamera
@@ -6246,7 +6247,6 @@ MonoBehaviour:
   models:
   - {fileID: 1406676378013418}
   - {fileID: 1888054211840266}
-  modelMats: []
 --- !u!114 &114509438899711898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6269,7 +6269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e0838c4d97dbb4ca9cbb741f77091b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
   playerNumber: 1
   soldierClass: 2
   eyes: {fileID: 1688744594399972}
@@ -6288,6 +6287,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spine: {fileID: 1643249375298702}
+--- !u!114 &114822609629994268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1688744594399972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: fd12609cdb539f941a85cc98e826d1ed, type: 2}
 --- !u!114 &114978540475508780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6299,7 +6310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c3148fc083186479b8ad2bd85ee3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  maxSpeed: 1
   lookSensitivityX: 1
   lookSensitivityY: 1
   verticalVelocity: 0

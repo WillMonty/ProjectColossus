@@ -14,8 +14,12 @@ public class PlayerMovement : MonoBehaviour {
     Rigidbody body;
 
     // Player variables
-    public float moveSpeed;
+    public float maxSpeed;
     float speed;
+    public float MoveSpeed
+    {
+        get { return speed; }
+    }
     public float lookSensitivityX = .001f;
     public float lookSensitivityY = .001f;
 
@@ -218,15 +222,15 @@ public class PlayerMovement : MonoBehaviour {
         // Handles Running
         if(state.Triggers.Right>0)
         {
-            speed = moveSpeed *0.3f;
+            speed = maxSpeed *0.3f;
         }
         else if (state.Buttons.LeftStick == ButtonState.Pressed)
         {
-            speed = moveSpeed * 1.3f;
+            speed = maxSpeed * 1.3f;
         }
         else
         {
-            speed = moveSpeed;
+            speed = maxSpeed;
         }
         #endregion
 
@@ -290,12 +294,12 @@ public class PlayerMovement : MonoBehaviour {
         velocity = Vector3.zero;
         if (state.ThumbSticks.Left.Y > .2 || state.ThumbSticks.Left.Y < -.2)
         {
-            velocity += transform.forward*state.ThumbSticks.Left.Y * moveSpeed;
+            velocity += transform.forward*state.ThumbSticks.Left.Y * maxSpeed;
 
         }
         if (state.ThumbSticks.Left.X > .2 || state.ThumbSticks.Left.X < -.2)
         {
-            velocity += transform.right * state.ThumbSticks.Left.X * moveSpeed;
+            velocity += transform.right * state.ThumbSticks.Left.X * maxSpeed;
         }
 
         ValidateVelocity();

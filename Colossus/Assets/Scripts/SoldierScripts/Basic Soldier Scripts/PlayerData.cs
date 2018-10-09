@@ -21,9 +21,11 @@ public class PlayerData : MonoBehaviour, IHealth
 
     // Basic Player Management variables
     private int lives;
-    public  float health;
+    private float health;
+    private float healthPrev;
     bool justDied=false;
     Vector3 prevPos;
+    
 
     public int playerNumber;
     public SoldierClass soldierClass;
@@ -56,8 +58,17 @@ public class PlayerData : MonoBehaviour, IHealth
     public void DamageObject(float dmg)
     {
         health -= dmg;
+
     }
 
+    public bool DamageTaken
+    {
+        get { if (health > healthPrev)
+                return true;
+            else
+                return false;
+        }
+    }
 
     // Use this for initialization
     void Start()
@@ -104,6 +115,7 @@ public class PlayerData : MonoBehaviour, IHealth
     void Update()
     {
         
+        
         if (justDied)
             SpawnRagdoll();
 
@@ -118,6 +130,11 @@ public class PlayerData : MonoBehaviour, IHealth
         {
             health -= 10;
         }
+
+
+
+
+        healthPrev = health;
         
     }
 
@@ -216,6 +233,7 @@ public class PlayerData : MonoBehaviour, IHealth
     public void Damage(float damageFloat)
     {
         health -= damageFloat;
+
     }
     
     /// <summary>

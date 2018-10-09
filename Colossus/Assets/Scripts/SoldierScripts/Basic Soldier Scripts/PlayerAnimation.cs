@@ -36,13 +36,14 @@ public class PlayerAnimation : MonoBehaviour
         if(weaponState==null)
         {
             weaponState = GetComponent<PlayerData>().WeaponData;
-            controllerExternal.SetFloat("reloadSpeed", weaponState.ReloadTime / 3f);
-            controllerInternal.SetFloat("reloadSpeed", weaponState.ReloadTime / 3f);
+            controllerExternal.SetFloat("reloadSpeed", 3f /weaponState.ReloadTime);
+            controllerInternal.SetFloat("reloadSpeed", 3f/ weaponState.ReloadTime);
         }
 
         AnimRun();
         AnimJump();
         AnimFall();
+        AnimShoot();
         AnimReload();
         AimGunExternal();
 	}
@@ -51,7 +52,7 @@ public class PlayerAnimation : MonoBehaviour
     void AnimRun()
     {
         controllerExternal.SetInteger("direction",  playerMovement.AnimDir);
-
+        controllerExternal.SetFloat("runSpeed",playerMovement.MoveSpeed/playerMovement.maxSpeed);
     }
 
     //Aim gun on external model
@@ -84,6 +85,13 @@ public class PlayerAnimation : MonoBehaviour
     void AnimFall()
     {
        controllerExternal.SetBool("inAir", playerMovement.InAir);
+    }
+
+    void AnimShoot()
+    {
+        controllerInternal.SetBool("shooting", weaponState.Shooting);
+
+
     }
 
     //Reloading
