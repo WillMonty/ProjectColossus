@@ -191,7 +191,47 @@ ModelImporter:
     13700014: Masks
     13700016: Shoes
     13700018: Tops
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bodymat
+    second: {fileID: 2100000, guid: 97cd83f60718d3047aa460b7f82ec898, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bottommat
+    second: {fileID: 2100000, guid: 8a7268aa031d41549b318a205ad01f42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyewearmat
+    second: {fileID: 2100000, guid: ac91ca01a3e5c9c4089b94bea3dac80e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glovemat
+    second: {fileID: 2100000, guid: 6c4a6091ef66552418fab94fcd1db41f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hatmat
+    second: {fileID: 2100000, guid: 9b133cbb6fa8f1245b523c2b245b4529, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Maskmat
+    second: {fileID: 2100000, guid: 4ce6c761233608143b78a9d9a3ee92fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoesmat
+    second: {fileID: 2100000, guid: b05f1df8b6c271948acda4427d075d4e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Topmat
+    second: {fileID: 2100000, guid: 72f6a61e1c35b2e43a0ac50b7fb33bd3, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

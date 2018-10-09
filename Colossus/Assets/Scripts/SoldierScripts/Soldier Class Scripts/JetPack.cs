@@ -33,7 +33,10 @@ public class JetPack : MonoBehaviour {
            FuelDown();
             if (GetComponent<PlayerMovement>().VerticalVelocity<2f)
                 GetComponent<PlayerMovement>().VerticalVelocity += JETPACK_FORCE;
-            
+
+            GetComponent<PlayerMovement>().InAir = true;
+
+
         }
         else if(jetPackFuel<MAX_FUEL)
         {

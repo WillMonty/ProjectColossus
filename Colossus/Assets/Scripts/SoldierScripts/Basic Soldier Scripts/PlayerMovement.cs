@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour {
     public float verticalVelocity;
     public float VerticalVelocity
     {
-        get{ return verticalVelocity; }
+        get { return verticalVelocity; }
         set { verticalVelocity = value; }
     }
 
@@ -41,9 +41,15 @@ public class PlayerMovement : MonoBehaviour {
     // Animation Stuff
     bool jumped = false;
     bool inAir;
+    public bool InAir
+    {
+        set { inAir = value; }
+        get { return inAir; }
+          
+     }
     int dir = 0;
 
-    public Animator animController; 
+    Animator animController; 
     // Movement Variables
     float moveFB; // Movement forward and backwards
     float moveLR; // Movement left and right
@@ -75,6 +81,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         player = GetComponent<CharacterController>();
         body = GetComponent<Rigidbody>();
+        animController = GetComponent<PlayerData>().model.GetComponent<Animator>();
     }
 	
 	// Update is called once per frame

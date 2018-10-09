@@ -116,9 +116,7 @@ public class SoldierUINew : MonoBehaviour {
         }
 
         if (s1Reloading)
-        {
-            s1ReloadTime -= Time.deltaTime;
-            
+        {                     
             if(s1ReloadTime < 0)
             {
                 s1ReloadTime = 0;
@@ -128,14 +126,12 @@ public class SoldierUINew : MonoBehaviour {
 
                 s1Reloading = false;
             }
-
             s1ReloadReticle.GetComponent<Image>().fillAmount = s1ReloadTime / s1ReloadDuration;
+            s1ReloadTime -= Time.deltaTime;
         }
 
         if (s2Reloading)
-        {
-            s2ReloadTime -= Time.deltaTime;
-
+        {          
             if (s2ReloadTime < 0)
             {
                 s2ReloadTime = 0;
@@ -145,8 +141,8 @@ public class SoldierUINew : MonoBehaviour {
 
                 s2Reloading = false;
             }
-
             s2ReloadReticle.GetComponent<Image>().fillAmount = s2ReloadTime / s2ReloadDuration;
+            s2ReloadTime -= Time.deltaTime;
         }
     }
 

@@ -10,7 +10,7 @@ public class Stealth : MonoBehaviour {
     public List<Material> modelMats;
 
     const float COOL_DOWN = 7f;
-    const float DURATION = 500f;
+    const float DURATION = 10f;
 
     float alpha;
     bool ready = true;
@@ -48,7 +48,7 @@ public class Stealth : MonoBehaviour {
 
     void ReduceRecursively(GameObject obj)
     {
-        if(obj.GetComponent<Renderer>())
+        if(obj.GetComponent<Renderer>() !=null)
         {
             modelMats.Add(obj.GetComponent<Renderer>().material);
             obj.GetComponent<Renderer>().material = stealthMat;

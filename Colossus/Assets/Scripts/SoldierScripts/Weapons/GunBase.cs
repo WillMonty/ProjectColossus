@@ -146,14 +146,16 @@ public class GunBase : MonoBehaviour, IWeapon
                 }
 
             }
-
-            // Check for reloading
-            if (!reloading && ((reloadButton && bulletsInMag != magSize) || bulletsInMag==0))
+            //Check for reloading
+            else if (!reloading && ((reloadButton && bulletsInMag != magSize) || bulletsInMag == 0) && justShot == false)
             {
                 Reload();
             }
+
+
         }
-	}
+
+    }
    
     protected virtual void Shoot()
     {
@@ -162,7 +164,7 @@ public class GunBase : MonoBehaviour, IWeapon
 
         // Instantiate the projectile and shoot it
         projClone=Instantiate(projectile, transform.position, transform.parent.rotation);
-        //projClone.transform.forward = transform.forward;
+
         projClone.GetComponent<IDamage>().Owner = playerNum;
         bulletsInMag--;
 
@@ -183,6 +185,8 @@ public class GunBase : MonoBehaviour, IWeapon
     
     protected virtual void Reload()
     {
+
+
         reloading = true;
 
         bulletsInMag = 0;
