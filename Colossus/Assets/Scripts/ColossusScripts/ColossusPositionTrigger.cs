@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class ColossusPositionTrigger : MonoBehaviour {
 
-    bool headsetInTrigger;
+    bool colossusInTrigger;
 
     AudioSource source;
     [Header("Audio")]
     public AudioClip inBoundsSound;
     public AudioClip outBoundsSound;
 
-    public bool HeadsetInTrigger
+	public bool ColossusInTrigger
     {
         get
         {
-            return headsetInTrigger;
+            return colossusInTrigger;
         }
     }
 
@@ -29,24 +29,30 @@ public class ColossusPositionTrigger : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        source.Stop();
-        source.clip = inBoundsSound;
-        source.Play();
+		if (other.name == "ColossusPosition")
+		{
+			colossusInTrigger = true;
+			source.Stop();
+			source.clip = inBoundsSound;
+			source.Play();	
+		}
     }
 
-    private void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other)
     {
-        if (other.name == "Camera (eye)") headsetInTrigger = true;
+		if (other.name == "ColossusPosition") colossusInTrigger = true;
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
-        if (other.name == "Camera (eye)") headsetInTrigger = false;
-
-        source.Stop();
-        source.clip = outBoundsSound;
-        source.Play();
+		if (other.name == "ColossusPosition")
+		{
+			colossusInTrigger = false;
+			source.Stop();
+			source.clip = outBoundsSound;
+			source.Play();
+		}
     }
 }

@@ -114,14 +114,23 @@ public class ColossusManager : MonoBehaviour {
 		}
 
 		//Arm abilities
+		ColossusHandAbilities leftHand = AbilityManagerScript.instance.leftHandColossus;
+		ColossusHandAbilities rightHand = AbilityManagerScript.instance.rightHandColossus;
+
+		//Fists
+		if(leftHand == ColossusHandAbilities.Fist || rightHand == ColossusHandAbilities.Fist)
+		{
+			chosenAbilities.Add(this.GetComponent<FistsAbility>());	
+		}
+
 		//Hands
-		if(AbilityManagerScript.instance.leftHandColossus == ColossusHandAbilities.Hand || AbilityManagerScript.instance.rightHandColossus == ColossusHandAbilities.Hand)
+		if(leftHand == ColossusHandAbilities.Hand || rightHand == ColossusHandAbilities.Hand)
 		{
 			chosenAbilities.Add(this.GetComponent<HandsAbility>());	
 		}
 
 		//Shield
-		if(AbilityManagerScript.instance.leftHandColossus == ColossusHandAbilities.Shield || AbilityManagerScript.instance.rightHandColossus == ColossusHandAbilities.Shield)
+		if(leftHand == ColossusHandAbilities.Shield || rightHand == ColossusHandAbilities.Shield)
 		{
 			chosenAbilities.Add(this.GetComponent<ShieldsAbility>());	
 		}
@@ -142,9 +151,8 @@ public class ColossusManager : MonoBehaviour {
     /// </summary>
     private void CheckHopIn()
     {
-        //Check if the headset is in the collider
-		bool headsetIn = pregameIndicator.GetComponent<ColossusPositionTrigger>().HeadsetInTrigger;
-        if(headsetIn)
+        //Check if the colossus is in the pillar trigger
+		if(pregameIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger)
         {
             //Make the indicators green
             leftIndicator.GetComponent<MeshRenderer>().material = inPositionMat;
