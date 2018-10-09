@@ -5348,12 +5348,12 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294953471
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 1
   m_TargetEye: 0
-  m_HDR: 0
-  m_AllowMSAA: 1
+  m_HDR: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -6245,8 +6245,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stealthMat: {fileID: 2100000, guid: 4bbab09d2a5fab440a9ee3b7c695e39e, type: 2}
   models:
-  - {fileID: 1406676378013418}
-  - {fileID: 1888054211840266}
+  - {fileID: 1341385217960358}
+  - {fileID: 1115102855302902}
+  - {fileID: 1389433610160624}
+  - {fileID: 1891074160738866}
+  - {fileID: 1116554277643570}
+  - {fileID: 1983777545504700}
+  - {fileID: 1262984267696612}
+  - {fileID: 1718506957680920}
+  - {fileID: 1082501572674660}
+  - {fileID: 1041766349673626}
+  - {fileID: 1448650421008034}
+  - {fileID: 1730017375265810}
 --- !u!114 &114509438899711898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6298,7 +6308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: fd12609cdb539f941a85cc98e826d1ed, type: 2}
+  profile: {fileID: 11400000, guid: 7d5fbce8501e1cc418c0d74825de76e8, type: 2}
 --- !u!114 &114978540475508780
 MonoBehaviour:
   m_ObjectHideFlags: 1
