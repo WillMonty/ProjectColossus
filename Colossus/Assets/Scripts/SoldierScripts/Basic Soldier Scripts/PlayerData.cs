@@ -21,13 +21,16 @@ public class PlayerData : MonoBehaviour, IHealth
 
     // Basic Player Management variables
     private int lives;
-    private float health;
+    public  float health;
+    bool justDied=false;
+    Vector3 prevPos;
 
     public int playerNumber;
     public SoldierClass soldierClass;
     public GameObject eyes;
     public GameObject gun;
     public GameObject model;
+    public GameObject ragdoll;
 
     IWeapon weaponData;
     public IWeapon WeaponData
@@ -100,6 +103,11 @@ public class PlayerData : MonoBehaviour, IHealth
     // Update is called once per frame
     void Update()
     {
+        
+        if (justDied)
+            SpawnRagdoll();
+
+        prevPos = transform.position;
         // Check for death first in the update loop
         if (health <= 0)
         {
@@ -110,15 +118,12 @@ public class PlayerData : MonoBehaviour, IHealth
         {
             health -= 10;
         }
-
-        CalcAim();
+        
     }
 
-    //Because of our current model/animation system we need to 
-    //recusivly change render layers for the models 
-    //AND change the camera culling mask which uses 32 bits to represent differnt flags
+
     //https://answers.unity.com/questions/8715/how-do-i-use-layermasks.html
-    #region HackyStuff
+    #region SetRender&Layers
     void SetRenderCull()
     {
        //Setting layers 
@@ -171,20 +176,19 @@ public class PlayerData : MonoBehaviour, IHealth
         }
     }
 
-
-    void CalcAim()
-    {
-        //gun.transform.LookAt(eyes.transform.position + eyes.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f,0.5f,0)).direction);
-
-    }
-    /// <summary>
+    /// <summary>   
     /// Method handling death for the player
     /// </summary>
     void Death()
     {
-		// Reset the player's Stats
-		ResetPlayerValues();
+        // Reset the player's Stats
+        justDied = true;
+     
+      
+        ResetPlayerValues();
 		transform.position = GameManagerScript.instance.deathbox.transform.position;
+
+        
 
         // Check how many lives the player has first
         if (lives > 1)
@@ -195,10 +199,10 @@ public class PlayerData : MonoBehaviour, IHealth
 
             Vector3 spawnLocation = Vector3.zero;
 
-			spawnLocation = spawnPoints[spawnPoint].transform.position;
+			//spawnLocation = spawnPoints[spawnPoint].transform.position;
 
             // Call respawn after a player died (currently set to 0,0,0)
-			StartCoroutine(Respawn(spawnLocation));
+			//StartCoroutine(Respawn(spawnLocation));
         }
 
 		// Lower the life count
@@ -237,8 +241,6 @@ public class PlayerData : MonoBehaviour, IHealth
 
 
 
-
-
     /// <summary>
     /// Method to respawn the player
     /// </summary>
@@ -260,6 +262,32 @@ public class PlayerData : MonoBehaviour, IHealth
     {
         health = MAX_HEALTH;
        
+    }
+
+    void SpawnRagdoll()
+    {
+        Physics.IgnoreLayerCollision(15, 15, true);
+        prevPos.y -= 0.2f;
+        GameObject ragdollClone = Instantiate(ragdoll, prevPos, transform.rotation, transform.parent);
+        justDied = false;
+        SetRagDollPos(model.transform.GetChild(0),ragdollClone.transform.GetChild(0));
+    }
+
+    void SetRagDollPos(Transform main, Transform rgPart)    
+    {
+        rgPart.localPosition = main.localPosition;
+        rgPart.localRotation= main.localRotation;
+
+        for(int i=0; i < rgPart.childCount; i++)
+        {
+            Transform mainChild = main.GetChild(i);
+            Transform rgChild = rgPart.GetChild(i);
+
+            if(mainChild!=null && rgChild != null)
+                SetRagDollPos(mainChild, rgChild);
+
+        }
+
     }
 
 	void OnTriggerEnter(Collider col)

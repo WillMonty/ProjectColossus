@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour {
 
     CharacterController player;
     Rigidbody body;
+
     // Player variables
     public float moveSpeed;
     float speed;
@@ -31,25 +32,6 @@ public class PlayerMovement : MonoBehaviour {
         set { verticalVelocity = value; }
     }
 
-    float timeFalling;
-    public float TimeFalling
-    {
-        get { return timeFalling; }
-        set { timeFalling = value; }
-    }
-
-    // Animation Stuff
-    bool jumped = false;
-    bool inAir;
-    public bool InAir
-    {
-        set { inAir = value; }
-        get { return inAir; }
-          
-     }
-    int dir = 0;
-
-    Animator animController; 
     // Movement Variables
     float moveFB; // Movement forward and backwards
     float moveLR; // Movement left and right
@@ -58,7 +40,31 @@ public class PlayerMovement : MonoBehaviour {
     float rotY; // rotation by the Y axis
 
 
-    #region rigidbody movement
+    // Animation Stuff
+    bool jumped = false;
+    public bool Jumped
+    {
+        get { return jumped; }
+
+    }
+
+    bool inAir;
+    public bool InAir
+    {
+        set { inAir = value; }
+        get { return inAir; }
+
+    }
+
+    int dir = 0;
+    public int AnimDir
+    {
+
+        get { return dir; }
+
+    }
+
+    #region rigidbody movement WIP
 
     Vector3 velocity;
     bool isGrounded;
@@ -81,12 +87,12 @@ public class PlayerMovement : MonoBehaviour {
     {
         player = GetComponent<CharacterController>();
         body = GetComponent<Rigidbody>();
-        animController = GetComponent<PlayerData>().model.GetComponent<Animator>();
+
     }
 	
 	// Update is called once per frame
 	void Update ()
-    {
+    {      
         state = GetComponent<PlayerInput>().State;
         prevState = GetComponent<PlayerInput>().PrevState;
 
@@ -103,153 +109,8 @@ public class PlayerMovement : MonoBehaviour {
             {
                 MoveBody();
             }
-           
-
-        }
-
-        if (animController != null)
-        {
-            SetAnim();
-
-        }
-    }
-
-    //Sets 8-Directional Animation state including idling
-    private void SetAnim()
-    {
-
-        //8 Directional movement
-        dir = 0;
-
-        if (moveFB > 0 && moveLR ==0 )
-            dir = 1;
-        else if (moveFB > 0 && moveLR > 0)
-            dir = 2;
-        else if (moveFB == 0 && moveLR > 0)
-            dir = 3;
-        else if (moveFB < 0 && moveLR > 0)
-            dir = 4;
-        else if (moveFB < 0 && moveLR == 0)
-            dir = 5;
-        else if (moveFB < 0 && moveLR < 0)
-            dir = 6;
-        else if (moveFB == 0 && moveLR < 0)
-            dir = 7;
-        else if (moveFB > 0 && moveLR < 0)
-            dir = 8;
-
-        animController.SetInteger("direction", dir);
-
-        //Jumping
-        if (jumped)
-        {
-            animController.SetTrigger("jumped");
-            animController.SetBool("inAir", true);
-            jumped = false;
-            inAir = true;
-        }
-
-        //Falling
-        if (!player.isGrounded && !inAir)
-            inAir = true;
-
-        if(inAir && player.isGrounded)
-        {
-            inAir = false;
-            animController.SetBool("inAir", false);
-        }
-
-
-    }
-
-    /// <summary>
-    /// Handles all movement calls
-    /// </summary>
-    private void Move()
-    {
-        #region Handles Running
-        // Handles Running
-        if(state.Triggers.Right>0)
-        {
-            speed = moveSpeed *0.3f;
-        }
-        else if (state.Buttons.LeftStick == ButtonState.Pressed)
-        {
-            speed = moveSpeed * 1.3f;
-        }
-        else
-        {
-            speed = moveSpeed;
-        }
-        #endregion
-
-        #region Getting Input
-        // Movement variables/axis
-
-        
-        if (state.ThumbSticks.Left.Y > .2 || state.ThumbSticks.Left.Y < -.2)
-        {
-            moveFB = state.ThumbSticks.Left.Y * speed;
-
-        }
-        else
-            moveFB = 0;
-
-
-        moveLR = 0;
-        if (state.ThumbSticks.Left.X > .2 || state.ThumbSticks.Left.X < -.2)
-        {
-            moveLR = state.ThumbSticks.Left.X * speed;
-
-        }
-        else
-            moveLR = 0;
-        #endregion
-
-
-
-        #region Applying movement
-        // Create a vector movement
-        Vector3 movement = new Vector3(moveLR, verticalVelocity, moveFB);
-        movement = transform.rotation * movement;
-
-        // Apply the final movement to the player
-        player.Move(movement * Time.deltaTime);
-        //verticalVelocity = 0f;
-        #endregion
-    }
-
-
-    /// <summary>
-    /// Method to handle jumping 
-    /// </summary>
-    private void Jump()
-    {
-        if (player.enabled)
-        {
-            if (player.isGrounded)
-            {
-                if (GetComponent<PlayerInput>().JumpState == 1)
-                {
-                    verticalVelocity = JUMP_FORCE;
-                    jumped = true;
-                }
-
-              
-            }
-            else
-                verticalVelocity -= GRAVITY_FORCE * Time.deltaTime;
-
-
-            verticalVelocity = Mathf.Clamp(verticalVelocity, -5f, 5f);
-            return;
-        }
-
-        
-        if (GetComponent<PlayerInput>().JumpState == 1)
-        {
-            body.AddForce(jumpForce);
-            jumped = true;
+          
+          
         }
     }
 
@@ -300,8 +161,125 @@ public class PlayerMovement : MonoBehaviour {
 
         // Applying the rotations to the player
         GetComponent<PlayerData>().eyes.transform.rotation = Quaternion.Euler(targetCamRot);
-        
+
         transform.rotation = Quaternion.Euler(targetBodyRot);
+    }
+
+    /// <summary>
+    /// Method to handle jumping 
+    /// </summary>
+    private void Jump()
+    {
+        jumped = false;
+
+        if (player.isGrounded && inAir)
+            inAir = false;
+
+        if (player.enabled)
+        {
+            if (player.isGrounded)
+            {
+                if (GetComponent<PlayerInput>().JumpState == 1)
+                {
+                    verticalVelocity = JUMP_FORCE;
+                    jumped = true;
+                    inAir = true;
+                }
+
+
+            }
+            else
+                verticalVelocity -= GRAVITY_FORCE * Time.deltaTime;
+
+
+            verticalVelocity = Mathf.Clamp(verticalVelocity, -5f, 5f);
+            return;
+        }
+
+
+        if (GetComponent<PlayerInput>().JumpState == 1)
+        {
+            body.AddForce(jumpForce);
+            jumped = true;
+        }
+
+        if (!player.isGrounded && !inAir)
+            inAir = true;
+
+        
+    }
+
+    /// <summary>
+    /// Handles all movement calls
+    /// </summary>
+    private void Move()
+    {
+        #region Handles Running
+        // Handles Running
+        if(state.Triggers.Right>0)
+        {
+            speed = moveSpeed *0.3f;
+        }
+        else if (state.Buttons.LeftStick == ButtonState.Pressed)
+        {
+            speed = moveSpeed * 1.3f;
+        }
+        else
+        {
+            speed = moveSpeed;
+        }
+        #endregion
+
+        #region Getting Input
+        // Movement variables/axis
+        dir = 0;
+
+        if (state.ThumbSticks.Left.Y > .2 || state.ThumbSticks.Left.Y < -.2)
+        {
+            moveFB = state.ThumbSticks.Left.Y * speed;
+
+        }
+        else
+            moveFB = 0;
+
+
+
+        if (state.ThumbSticks.Left.X > .2 || state.ThumbSticks.Left.X < -.2)
+        {
+            moveLR = state.ThumbSticks.Left.X * speed;
+
+        }
+        else
+            moveLR = 0;
+
+        //8 Directional movement for animation    
+        if (moveFB > 0 && moveLR == 0)
+            dir = 1;
+        else if (moveFB > 0 && moveLR > 0)
+            dir = 2;
+        else if (moveFB == 0 && moveLR > 0)
+            dir = 3;
+        else if (moveFB < 0 && moveLR > 0)
+            dir = 4;
+        else if (moveFB < 0 && moveLR == 0)
+            dir = 5;
+        else if (moveFB < 0 && moveLR < 0)
+            dir = 6;
+        else if (moveFB == 0 && moveLR < 0)
+            dir = 7;
+        else if (moveFB > 0 && moveLR < 0)
+            dir = 8;
+        #endregion
+
+        #region Applying movement
+        // Create a vector movement
+        Vector3 movement = new Vector3(moveLR, verticalVelocity, moveFB);
+        movement = transform.rotation * movement;
+
+        // Apply the final movement to the player
+        player.Move(movement * Time.deltaTime);
+        //verticalVelocity = 0f;
+        #endregion
     }
 
 

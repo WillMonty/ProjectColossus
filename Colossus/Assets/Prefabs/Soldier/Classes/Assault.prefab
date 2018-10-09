@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 114358249367366222}
   - component: {fileID: 114026812274445518}
   - component: {fileID: 114448129284797174}
+  - component: {fileID: 114392462491454516}
   - component: {fileID: 114272574455636518}
   - component: {fileID: 143931880024207580}
   - component: {fileID: 23587002953421350}
@@ -1088,7 +1089,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4319584249500436}
   - component: {fileID: 95063679000997754}
-  - component: {fileID: 114916317905662608}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -4882,11 +4882,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e0838c4d97dbb4ca9cbb741f77091b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
   playerNumber: 1
   soldierClass: 0
   eyes: {fileID: 1605082517507248}
   gun: {fileID: 1431867008410684}
   model: {fileID: 1486198256672784}
+  ragdoll: {fileID: 1935828396227740, guid: 09e2a69091298714aaef52702a47b503, type: 2}
+--- !u!114 &114392462491454516
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1071774053901822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12371d622cb13d04fae1d273202c5cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 1772125493006278}
 --- !u!114 &114448129284797174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4898,19 +4912,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569f7316d9a4a034bb6d448ec407bf05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114916317905662608
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1486198256672784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6a9dafe8c20bf94cb2d97ec1f045097, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spine: {fileID: 1772125493006278}
-  eyes: {fileID: 1605082517507248}
 --- !u!124 &124406664748010198
 Behaviour:
   m_ObjectHideFlags: 1
