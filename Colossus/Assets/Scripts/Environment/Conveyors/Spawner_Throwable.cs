@@ -115,7 +115,7 @@ public class Spawner_Throwable : MonoBehaviour {
 		newThrowable.name = "Rubbish";
 		newThrowable.GetComponent<Rigidbody>().AddForce(transform.rotation * spawnForce);
 
-		TrashCollector.AddRubbishToList(newThrowable);
+		EnvironmentManagerScript.AddRubbishToList(newThrowable);
 	}
 
     // Choose a new time within random variation to spawn the next object

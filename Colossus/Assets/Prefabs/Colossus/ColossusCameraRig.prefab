@@ -2186,9 +2186,9 @@ GameObject:
   - component: {fileID: 20678563983027900}
   - component: {fileID: 124694040049006544}
   - component: {fileID: 82938316321286606}
-  - component: {fileID: 135689986642702624}
   - component: {fileID: 54467244679345852}
-  - component: {fileID: 114420478731259022}
+  - component: {fileID: 114129394499306900}
+  - component: {fileID: 114112168995671950}
   m_Layer: 0
   m_Name: Camera (eye)
   m_TagString: MainCamera
@@ -4929,7 +4929,7 @@ Camera:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1541039505096830}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
@@ -4939,24 +4939,24 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 1
-  field of view: 60
-  orthographic: 1
+  field of view: 75
+  orthographic: 0
   orthographic size: 1
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 0
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 1
   m_TargetEye: 3
-  m_HDR: 0
-  m_AllowMSAA: 1
+  m_HDR: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 0
+  m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!20 &20678563983027900
@@ -4984,12 +4984,12 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294952959
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 1
   m_TargetEye: 3
-  m_HDR: 0
-  m_AllowMSAA: 1
+  m_HDR: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -10697,6 +10697,32 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114112168995671950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1771497892384648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: a19af9f7393919e4cbe6d1911ca178fd, type: 2}
+--- !u!114 &114129394499306900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1771497892384648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bca9ccf900ccc84c887d783321d27e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _head: {fileID: 4628276100285072}
+  _ears: {fileID: 4984231329449930}
+  wireframe: 0
 --- !u!114 &114155644715712414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11057,20 +11083,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114420478731259022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1771497892384648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bca9ccf900ccc84c887d783321d27e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _head: {fileID: 4628276100285072}
-  _ears: {fileID: 4984231329449930}
-  wireframe: 0
 --- !u!114 &114423394212277184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11787,8 +11799,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae7b9bf6d28f2234097ccfee114fd2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outOfBoundsDamage: 0.6
   headset: {fileID: 1541039505096830}
-  pregameIndicator: {fileID: 0}
+  positionIndicator: {fileID: 0}
   resultsCanvas: {fileID: 1007251804405174}
   map: {fileID: 0}
   lowerMapAmount: 2.5
@@ -11797,6 +11810,7 @@ MonoBehaviour:
   hopInSound: {fileID: 8300000, guid: 39c06ad0d6e1be348910af00db0b931b, type: 3}
   damageSound: {fileID: 8300000, guid: 7d8cc7957e0597d439f71f8b8ca46d9f, type: 3}
   deathSound: {fileID: 8300000, guid: cfaf067b82022fb4b80d64b6e16eedd5, type: 3}
+  alarmSound: {fileID: 8300000, guid: 48e4f9c4e36fb73458270c6640123b53, type: 3}
   armHealthbar: {fileID: 114753382968007182}
   headHealthbar: {fileID: 114083269919350812}
   leftIndicator: {fileID: 1895226997797494}
@@ -12059,18 +12073,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.08
   m_Center: {x: -0.000000007450581, y: 0.057986744, z: 0.003}
---- !u!135 &135689986642702624
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1771497892384648}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.06
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!222 &222044122622826898
 CanvasRenderer:
   m_ObjectHideFlags: 1

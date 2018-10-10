@@ -30,9 +30,6 @@ public class GameManagerScript : MonoBehaviour
     public PlayerData soldier1 = null;
     public PlayerData soldier2 = null;
 
-	[Header("Game Pieces")]
-	public List<GameObject> gamePieces = new List<GameObject>(); //Pieces of the scene only shown/used InGame
-
 	[Header("UI and Pausing")]
 	public GameObject soldierUICanvas;
     public GameObject pauseMenu;
@@ -137,7 +134,6 @@ public class GameManagerScript : MonoBehaviour
 	//General function to set up the game's pieces and state
 	public void StartGame()
 	{
-		GamePiecesSwitch();
 		currentGameState = GameState.InGame;
 	}
 
@@ -204,20 +200,6 @@ public class GameManagerScript : MonoBehaviour
 
         Time.timeScale = 1;
     }
-
-	/// <summary>
-	/// Turns objects present in the gamePieces array on or off
-	/// </summary>
-	public void GamePiecesSwitch()
-	{
-		for(int i = 0; i < gamePieces.Count; i++)
-		{
-			if(gamePieces[i] != null)
-			{
-				gamePieces[i].SetActive(!gamePieces[i].gameObject.activeSelf);
-			}
-		}
-	}
 
     /// <summary>
     /// Check to see who wins the game

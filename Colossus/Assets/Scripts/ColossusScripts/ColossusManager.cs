@@ -3,26 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ColossusManager : MonoBehaviour {
+public class ColossusManager : MonoBehaviour, IHealth {
 
     #region Robot Attributes
     const float STARTING_HEALTH = 1500.0f;
-    private bool playerInBot; //Is the player currently in the colossus and ready to play?
-    private float health;
-	private bool gameEnded;
+    float health;
+	public float outOfBoundsDamage;
 
-    // Components needed for the toggling of the colossus
-    [Header("Colossus Components")]
-    private GameObject leftController;
-    private GameObject rightController;
-    public GameObject headset;
-    public GameObject pregameIndicator; //Gameobjects showing the player where to go to start the game
-	public GameObject resultsCanvas;
-
-	//Ability scripts
+	//Abilities being used
 	List<ColossusAbility> chosenAbilities;
 
-    [Header("Map")]
+    // Components needed for the toggling of the colossus
+    GameObject leftController;
+    GameObject rightController;
+	[Header("Colossus Components")]
+    public GameObject headset;
+    public GameObject positionIndicator; //Gameobjects showing the player where to go to start the game
+	public GameObject resultsCanvas;
+
+    [Header("Environment")]
     public GameObject map;
     public float lowerMapAmount;
     public GameObject resistanceContainer;
@@ -31,7 +30,8 @@ public class ColossusManager : MonoBehaviour {
     public AudioSource headSource;
     public AudioClip hopInSound;
     public AudioClip damageSound;
-	public AudioClip deathSound;	
+	public AudioClip deathSound;
+	public AudioClip alarmSound;
 
     [Header("UI")]
     public Slider armHealthbar;
@@ -84,26 +84,32 @@ public class ColossusManager : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (!playerInBot) CheckHopIn(); //Check if the player is jumping in the bot
+		GameState currentGameState = GameManagerScript.instance.currentGameState;
+		if (currentGameState == GameState.InGame)
+		{
+			CheckInBounds();
+			return;
+		}
 
-		if(GameManagerScript.instance.currentGameState == GameState.ResistanceWin)
+		CheckHopIn(); //Check if the player is jumping in the bot to start the game	
+
+		if(currentGameState == GameState.ResistanceWin)
 		{
 			resultsCanvas.SetActive(true);
 			resultsCanvas.transform.GetChild(2).gameObject.SetActive(true);
 			KillColossus();
 		}
 
-		if(GameManagerScript.instance.currentGameState == GameState.ResistanceLose)
+		if(currentGameState == GameState.ResistanceLose)
 		{
 			resultsCanvas.SetActive(true);
 			resultsCanvas.transform.GetChild(1).gameObject.SetActive(true);
-			KillColossus();
 		}
     }
     #endregion
 
     #region Helper Methods
-	private void GetChosenAbilities()
+	void GetChosenAbilities()
 	{
 		//Get head abilities
 		switch(AbilityManagerScript.instance.headColossus)
@@ -137,9 +143,9 @@ public class ColossusManager : MonoBehaviour {
 	}
 
     // Damage helper method
-    public void Damage(float damageFloat)
+    public void DamageObject(float damage)
     {
-        health -= damageFloat;
+        health -= damage;
 		float healthPct = (STARTING_HEALTH - health)/STARTING_HEALTH;
 		armHealthbar.value = healthPct;
 		headHealthbar.value = healthPct;
@@ -149,10 +155,10 @@ public class ColossusManager : MonoBehaviour {
     /// <summary>
     /// Helper method to check if the player is "hopping into" the colossus
     /// </summary>
-    private void CheckHopIn()
+    void CheckHopIn()
     {
         //Check if the colossus is in the pillar trigger
-		if(pregameIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger)
+		if(positionIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger)
         {
             //Make the indicators green
             leftIndicator.GetComponent<MeshRenderer>().material = inPositionMat;
@@ -172,6 +178,31 @@ public class ColossusManager : MonoBehaviour {
         }
     }
 
+	/// <summary>
+	/// Checks to see if the player is off the pillar or not during the game
+	/// </summary>
+	void CheckInBounds()
+	{
+		if(positionIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger)
+		{
+			headSource.Stop();
+			headSource.loop = false;
+		}
+		else
+		{
+			DamageObject(outOfBoundsDamage);
+			if(!headSource.isPlaying)
+			{
+				if(GameManagerScript.instance.forceStartGame) //Don't play the sound when debugging
+					return;
+				
+				headSource.clip = alarmSound;
+				headSource.loop = true;
+				headSource.Play();
+			}
+		}
+	}
+
     /// <summary>
     /// Method to toggle the player into the colossus
     /// </summary>
@@ -180,8 +211,9 @@ public class ColossusManager : MonoBehaviour {
         //Turn off indicators
         leftIndicator.SetActive(false);
         rightIndicator.SetActive(false);
+		positionIndicator.transform.GetChild(0).gameObject.SetActive(false); //Turn off green position cube
 
-		//Turn off hands
+		//Turn off starter hands
 		this.GetComponent<HandsAbility>().Disable();
 
         //Enable Colossus abilities
@@ -189,11 +221,9 @@ public class ColossusManager : MonoBehaviour {
 		{
 			chosenAbilities[i].Enable();
 		}
-
-		playerInBot = true;
+			
 		armHealthbar.gameObject.SetActive(true);
         headHealthbar.gameObject.SetActive(true);
-		pregameIndicator.SetActive(false);
 
         LowerMap();
 
@@ -207,8 +237,6 @@ public class ColossusManager : MonoBehaviour {
         }
     }
 
-    #endregion
-
     void LowerMap()
     {
         float playerY = headset.transform.position.y - lowerMapAmount;
@@ -221,18 +249,15 @@ public class ColossusManager : MonoBehaviour {
 
 	void KillColossus()
 	{
-		if(!gameEnded)
+		foreach(ColossusAbility ability in chosenAbilities)
 		{
-			foreach(ColossusAbility ability in chosenAbilities)
-			{
-				ability.Disable();
-			}
-
-			headSource.Stop();
-			headSource.clip = deathSound;
-			headSource.Play();
+			ability.Disable();
 		}
 
-		gameEnded = true;
+		headSource.Stop();
+		headSource.clip = deathSound;
+		headSource.Play();
 	}
+
+	#endregion
 }

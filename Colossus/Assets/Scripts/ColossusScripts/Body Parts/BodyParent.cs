@@ -24,7 +24,7 @@ public class BodyParent : MonoBehaviour, IHealth {
 		Instantiate(hitPrefab, gameObject.transform.position, Quaternion.identity);
 
 		//Apply damage to Colossus
-		colossus.Damage(dmg * damageMultiplier);
+		colossus.DamageObject(dmg * damageMultiplier);
 	}
 
 	public void OnCollisionEnter(Collision collision)
@@ -33,7 +33,7 @@ public class BodyParent : MonoBehaviour, IHealth {
 		if(collision.gameObject.GetComponent<IDamage>() != null)
 		{
 			//Apply damage to Colossus
-			colossus.Damage(collision.gameObject.GetComponent<IDamage>().Damage * damageMultiplier);
+			colossus.DamageObject(collision.gameObject.GetComponent<IDamage>().Damage * damageMultiplier);
 
 			//Make audio object
 			Instantiate(hitPrefab, collision.contacts[0].point, Quaternion.identity);

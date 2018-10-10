@@ -3,19 +3,20 @@ using System.Collections;
 
 public class Lava : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+	public float damagePerTick;
+
+    void OnTriggerEnter(Collider other)
     {
-		//Exception to not destroy anything on the colossus
+		//Exception to not hurt anything on the colossus
 		if(other.tag == "colossusplayer" || other.tag == "MainCamera")
 		{
 			return;
 		}
 
-		//Destroy/Kill anything with IHealth
+		//Hurt anything with IHealth
 		if(other.gameObject.GetComponent<IHealth>() != null)
 		{
-			IHealth healthInterface = other.gameObject.GetComponent<IHealth>();
-			healthInterface.DamageObject(healthInterface.Health);
+			other.gameObject.GetComponent<IHealth>().DamageObject(damagePerTick);
 			return;
 		}
 
@@ -23,4 +24,19 @@ public class Lava : MonoBehaviour
 		if(!other.attachedRigidbody.isKinematic)
 			GameObject.Destroy(other.gameObject);
     }
+
+	void OnTriggerStay(Collider other)
+	{
+		//Exception to not hurt anything on the colossus
+		if(other.tag == "colossusplayer" || other.tag == "MainCamera")
+		{
+			return;
+		}
+
+		//Hurt anything with IHealth
+		if(other.gameObject.GetComponent<IHealth>() != null)
+		{
+			other.gameObject.GetComponent<IHealth>().DamageObject(damagePerTick);
+		}
+	}
 }

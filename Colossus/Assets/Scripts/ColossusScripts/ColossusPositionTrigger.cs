@@ -23,26 +23,24 @@ public class ColossusPositionTrigger : MonoBehaviour {
     void Start () {
         source = gameObject.GetComponent<AudioSource>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     void OnTriggerEnter(Collider other)
     {
 		if (other.name == "ColossusPosition")
 		{
 			colossusInTrigger = true;
-			source.Stop();
-			source.clip = inBoundsSound;
-			source.Play();	
-		}
-    }
 
-    void OnTriggerStay(Collider other)
-    {
-		if (other.name == "ColossusPosition") colossusInTrigger = true;
+			//Don't play in/out sounds if the game is going
+			if(GameManagerScript.instance.currentGameState != GameState.InGame)
+			{
+				if(GameManagerScript.instance.forceStartGame) //Stops first frame sound firing when debugging
+					return;
+				
+				source.Stop();
+				source.clip = inBoundsSound;
+				source.Play();			
+			}
+		}
     }
 
     void OnTriggerExit(Collider other)
@@ -50,9 +48,16 @@ public class ColossusPositionTrigger : MonoBehaviour {
 		if (other.name == "ColossusPosition")
 		{
 			colossusInTrigger = false;
-			source.Stop();
-			source.clip = outBoundsSound;
-			source.Play();
+
+			if(GameManagerScript.instance.currentGameState != GameState.InGame)
+			{
+				if(GameManagerScript.instance.forceStartGame)
+					return;
+
+				source.Stop();
+				source.clip = outBoundsSound;
+				source.Play();			
+			}
 		}
     }
 }
