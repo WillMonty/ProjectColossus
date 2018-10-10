@@ -16,9 +16,13 @@ public class PlayerMovement : MonoBehaviour {
     // Player variables
     public float maxSpeed;
     float speed;
+    Vector3 movement;
     public float MoveSpeed
     {
-        get { return speed; }
+        get {
+            movement.y = 0f;
+            return movement.magnitude;
+        }
     }
     public float lookSensitivityX = .001f;
     public float lookSensitivityY = .001f;
@@ -246,8 +250,6 @@ public class PlayerMovement : MonoBehaviour {
         else
             moveFB = 0;
 
-
-
         if (state.ThumbSticks.Left.X > .2 || state.ThumbSticks.Left.X < -.2)
         {
             moveLR = state.ThumbSticks.Left.X * speed;
@@ -255,6 +257,8 @@ public class PlayerMovement : MonoBehaviour {
         }
         else
             moveLR = 0;
+
+
 
         //8 Directional movement for animation    
         if (moveFB > 0 && moveLR == 0)
@@ -277,12 +281,13 @@ public class PlayerMovement : MonoBehaviour {
 
         #region Applying movement
         // Create a vector movement
-        Vector3 movement = new Vector3(moveLR, verticalVelocity, moveFB);
-        movement = transform.rotation * movement;
+        movement = Vector3.zero;
+        movement = transform.rotation * new Vector3(moveLR, verticalVelocity, moveFB);
+
 
         // Apply the final movement to the player
         player.Move(movement * Time.deltaTime);
-        //verticalVelocity = 0f;
+
         #endregion
     }
 

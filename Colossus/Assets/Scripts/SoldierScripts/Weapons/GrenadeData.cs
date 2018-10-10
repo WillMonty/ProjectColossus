@@ -17,15 +17,22 @@ public class GrenadeData : MonoBehaviour,IDamage
     float damage = 20f;
     int ownerNumber;
 
-    public float Damage
-    {
-        get { return damage; }
-    }
-
     public int Owner
     {
-        get { return ownerNumber; }
-        set { ownerNumber = value; }
+        get
+        {
+            return ownerNumber;
+        }
+
+        set
+        {
+            ownerNumber = value;
+        }
+    }
+
+    public float Damage
+    {
+        get{ return damage; }
     }
 
     void Start ()
@@ -46,9 +53,19 @@ public class GrenadeData : MonoBehaviour,IDamage
    
     private void OnTriggerEnter(Collider other)
     {
-        if (!isProj && other.gameObject.GetComponent<IHealth>() != null)
-        {           
-            other.gameObject.GetComponent<IHealth>().DamageObject(damage);
+        if (!isProj)
+        {
+            if (other.gameObject.GetComponent<IHealth>() != null)
+            {
+                other.gameObject.GetComponent<IHealth>().DamageObject(damage);
+               
+            }
+           
+            if (other.gameObject.GetComponent<Rigidbody>()!=null)
+            {
+                Debug.Log(other.gameObject);
+                other.gameObject.GetComponent<Rigidbody>().AddExplosionForce(100f, transform.position, 0.75f, 2f, ForceMode.Impulse);
+            }
         }
     }
 

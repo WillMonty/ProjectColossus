@@ -22,6 +22,9 @@ public class GunBase : MonoBehaviour, IWeapon
 
     // Bullet prefab that will be shot
     public GameObject projectile;
+    public GameObject rifleExternal;
+    public GameObject rifleInternal;
+
     GameObject projClone;
 
     //Audio Source
@@ -171,6 +174,10 @@ public class GunBase : MonoBehaviour, IWeapon
 
         projClone.GetComponent<IDamage>().Owner = playerNum;
         bulletsInMag--;
+
+        //Muzzle Flash
+        rifleExternal.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play();
+        rifleInternal.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play();
 
         justShot = true;
         StartCoroutine("ShootingBoolReset");

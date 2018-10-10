@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class JetPack : MonoBehaviour {
 
+    public GameObject smokeTrail;
+
     const float MAX_FUEL = 1.5f;
     public float MaxFuel
     {
@@ -29,17 +31,23 @@ public class JetPack : MonoBehaviour {
 
         
         if (jetPackFuel > 0 && GetComponent<PlayerInput>().ActionState>0)
-        {           
-           FuelDown();
+        {
+            
+            if(GetComponent<PlayerInput>().ActionState == 1)
+                smokeTrail.GetComponent<ParticleSystem>().Play();
+
+            FuelDown();
             if (GetComponent<PlayerMovement>().VerticalVelocity<2f)
                 GetComponent<PlayerMovement>().VerticalVelocity += JETPACK_FORCE;
 
             GetComponent<PlayerMovement>().InAir = true;
+            
 
 
         }
         else if(jetPackFuel<MAX_FUEL)
         {
+            smokeTrail.GetComponent<ParticleSystem>().Stop();
             jetPackFuel += Time.deltaTime/10f;
         }
     }
