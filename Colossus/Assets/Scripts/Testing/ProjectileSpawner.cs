@@ -35,7 +35,7 @@ public class ProjectileSpawner : MonoBehaviour {
 	void SetupShot(GameObject newBullet)
 	{
 		newBullet.GetComponent<BulletScript>().bulletSpeed = shotSpeed;
-		TrashCollector.AddRubbishToList(newBullet);
+        EnvironmentManagerScript.AddRubbishToList(newBullet);
 	}
 
 	// Show the force and direction it spawns bullets

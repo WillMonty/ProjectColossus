@@ -147,7 +147,7 @@ public class Shield : MonoBehaviour {
 		createdProjectile.GetComponent<Rigidbody>().velocity = reflectionV;
 		createdProjectile.GetComponent<IDamage>().Owner = 0;
 
-		TrashCollector.AddRubbishToList(createdProjectile);
+		EnvironmentManagerScript.AddRubbishToList(createdProjectile);
 	}
 
 	void OnCollisionEnter(Collision collision)
