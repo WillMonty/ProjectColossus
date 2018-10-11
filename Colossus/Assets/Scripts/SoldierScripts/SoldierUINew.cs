@@ -46,56 +46,81 @@ public class SoldierUINew : MonoBehaviour {
     float s2ReloadTime;
     bool s2Reloading;
 
+    bool isActive=false;
+
     // Use this for initialization
     void Start ()
     {
-        s1MaxHealth = soldier1.GetComponent<PlayerData>().MaxHealth;
-        s2MaxHealth = soldier2.GetComponent<PlayerData>().MaxHealth;
-
-
-        s1CurrentHealth = soldier1.GetComponent<PlayerData>().Health;
-        s1Healthbar.fillAmount = s1CurrentHealth / s1MaxHealth;
-
-        s2CurrentHealth = soldier2.GetComponent<PlayerData>().Health;
-        s2Healthbar.fillAmount = s2CurrentHealth / s2MaxHealth;
-
-        s1Reloading = false;
-        s2Reloading = false;
         
-
-        if (soldier1.soldierClass == SoldierClass.Assault)
-        {
-            maxFuel = soldier1.GetComponent<JetPack>().MaxFuel;
-            s1CurrentFuel = soldier1.GetComponent<JetPack>().JetPackFuel;
-            s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
-        }
-
-        if (soldier2.soldierClass == SoldierClass.Assault)
-        {
-            maxFuel = soldier2.GetComponent<JetPack>().MaxFuel;
-            s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
-            s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
-        }
     }
 
 
     // Update is called once per frame
     void Update ()
     {
-        UpdateHealthbar();
-
-        UpdateFuelbar();
-
-        UpdateCurrentMag();
-
-
-        if(s1MagMax.text == "test" || s2MagMax.text == "test")
+        if (isActive)
         {
-            UpdateMagMax();
+            UpdateHealthbar();
+
+            UpdateFuelbar();
+
+            UpdateCurrentMag();
+
+
+            if (s1MagMax.text == "test" || s2MagMax.text == "test")
+            {
+                UpdateMagMax();
+            }
+
+
+            UpdateReloading();
         }
+        else
+            Activate();
+    }
+
+    void Activate()
+    {
+        soldier1 = GameManagerScript.instance.soldier1;
+        soldier2 = GameManagerScript.instance.soldier2;
+        if (soldier1 != null && soldier2!=null)
+        {
+
+            isActive = true;
+
+            s1MaxHealth = soldier1.GetComponent<PlayerData>().MaxHealth;
+            s2MaxHealth = soldier2.GetComponent<PlayerData>().MaxHealth;
 
 
-        if(soldier1.GetComponent<PlayerData>().WeaponData.Reloading && !s1Reloading)
+            s1CurrentHealth = soldier1.GetComponent<PlayerData>().Health;
+            s1Healthbar.fillAmount = s1CurrentHealth / s1MaxHealth;
+
+            s2CurrentHealth = soldier2.GetComponent<PlayerData>().Health;
+            s2Healthbar.fillAmount = s2CurrentHealth / s2MaxHealth;
+
+            s1Reloading = false;
+            s2Reloading = false;
+
+
+            if (soldier1.soldierClass == SoldierClass.Assault)
+            {
+                maxFuel = soldier1.GetComponent<JetPack>().MaxFuel;
+                s1CurrentFuel = soldier1.GetComponent<JetPack>().JetPackFuel;
+                s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
+            }
+
+            if (soldier2.soldierClass == SoldierClass.Assault)
+            {
+                maxFuel = soldier2.GetComponent<JetPack>().MaxFuel;
+                s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
+                s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
+            }
+        }
+    }
+
+    void UpdateReloading()
+    {
+        if (soldier1.GetComponent<PlayerData>().WeaponData.Reloading && !s1Reloading)
         {
             s1ReloadDuration = soldier1.GetComponent<PlayerData>().WeaponData.ReloadTime;
             s1ReloadTime = s1ReloadDuration;
@@ -116,8 +141,8 @@ public class SoldierUINew : MonoBehaviour {
         }
 
         if (s1Reloading)
-        {                     
-            if(s1ReloadTime < 0)
+        {
+            if (s1ReloadTime < 0)
             {
                 s1ReloadTime = 0;
 
@@ -131,7 +156,7 @@ public class SoldierUINew : MonoBehaviour {
         }
 
         if (s2Reloading)
-        {          
+        {
             if (s2ReloadTime < 0)
             {
                 s2ReloadTime = 0;

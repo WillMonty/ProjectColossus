@@ -27,10 +27,15 @@ public class GameManagerScript : MonoBehaviour
 	[Header("Players")]
     public ColossusManager colossus = null;
 
+    public SoldierClass player1Class;
+    public SoldierClass player2Class;
+
     public PlayerData soldier1 = null;
     public PlayerData soldier2 = null;
 
-	[Header("UI and Pausing")]
+
+
+    [Header("UI and Pausing")]
 	public GameObject soldierUICanvas;
     public GameObject pauseMenu;
     public GameObject pauseMenuDefaultButton;
@@ -93,8 +98,9 @@ public class GameManagerScript : MonoBehaviour
 				break;
 			case "MainGame":
 				currentGameState = GameState.Pregame;
-				//Method to spawn and sets player number of soldiers
-				break;	
+                SpawnSoldiers();
+
+                break;	
 		}
 
 		StartCoroutine(LateStart(0.2f));
@@ -110,7 +116,12 @@ public class GameManagerScript : MonoBehaviour
 			if(colossus != null)
 				colossus.ToggleColossus();	
 			else
-				currentGameState = GameState.InGame;
+            {
+
+                SpawnSoldiers();
+                currentGameState = GameState.InGame;
+            }
+				
 		}
 
 	}
@@ -231,31 +242,49 @@ public class GameManagerScript : MonoBehaviour
     }
     #endregion
 
-    
-    public void SetSoldier1Class(int indexIn)
-    {
-        switch(indexIn)
-        {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-        }
-    }
 
-    public void SetSoldier2Class(int indexIn)
+    public void SpawnSoldiers()
     {
-        switch (indexIn)
+        CreateSoldier(1, player1Class);
+        soldier1.playerNumber = 1;
+
+        CreateSoldier(2, player2Class);
+        soldier2.playerNumber = 2;
+
+    }
+    
+    public void CreateSoldier(int pNum, SoldierClass sClass)
+    {
+        GameObject soldierClone = null;
+        GameObject classPrefab = null;
+        Vector3 spawnPos;
+
+        switch (sClass)
         {
-            case 0:
+            case SoldierClass.Assault:
+                classPrefab = Resources.Load<GameObject>("Soldier/Classes/Assault");
                 break;
-            case 1:
+            case SoldierClass.Grenadier:
+                classPrefab = Resources.Load<GameObject>("Soldier/Classes/Grenadier");
                 break;
-            case 2:
+            case SoldierClass.Skulker:
+                classPrefab = Resources.Load<GameObject>("Soldier/Classes/Skulker");
                 break;
         }
+
+
+        if (pNum == 1)
+            spawnPos = GameObject.FindGameObjectWithTag("s1spawn").transform.position;
+        else
+            spawnPos = GameObject.FindGameObjectWithTag("s2spawn").transform.position;
+
+
+        soldierClone = Instantiate(classPrefab, spawnPos, Quaternion.identity, GameObject.FindGameObjectWithTag("scalecontainer").transform);
+
+        if(pNum==1)
+            soldier1 = soldierClone.GetComponent<PlayerData>();
+        else
+            soldier2 = soldierClone.GetComponent<PlayerData>();
     }
 
     /// <summary>

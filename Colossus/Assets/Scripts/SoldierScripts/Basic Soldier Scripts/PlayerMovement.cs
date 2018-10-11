@@ -72,6 +72,14 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
+    int turnDir = 0;
+    public int TurnDir
+    {
+
+        get { return turnDir; }
+
+    }
+
     #region rigidbody movement WIP
 
     Vector3 velocity;
@@ -142,6 +150,12 @@ public class PlayerMovement : MonoBehaviour {
         {
             rotY = 0;
         }
+
+        turnDir = 0;
+        if (rotX > 0)
+            turnDir = 1;
+        else if (rotX < 0)
+            turnDir = -1;
 
         // Adding an xAxis
         xAxisClamp += rotY;

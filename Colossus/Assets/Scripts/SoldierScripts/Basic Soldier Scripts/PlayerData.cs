@@ -85,7 +85,7 @@ public class PlayerData : MonoBehaviour, IHealth
         weaponData.PlayerNum = playerNumber;
 
         SetCamera();
-        StartCoroutine(LateStart(0.2f));
+        StartCoroutine(LateStart(1f));
         //Sets render layer of models
         
         SetRenderCull();
@@ -100,14 +100,16 @@ public class PlayerData : MonoBehaviour, IHealth
         switch (playerNumber)
         {
             case 1:
-                GameManagerScript.instance.soldier1 = GetComponent<PlayerData>();
-				tag = "soldier1";
+
+                tag = "soldier1";
                 break;
             case 2:
-                GameManagerScript.instance.soldier2 = GetComponent<PlayerData>();
-				tag = "soldier2";
+
+                tag = "soldier2";
                 break;
         }
+        weaponData.PlayerNum = playerNumber;
+        SetCamera();
     }
 
 

@@ -17,6 +17,7 @@ public class PlayerAnimation : MonoBehaviour
     Vector3 rotGun;
     int dir;
     bool reloading = false;
+    bool isActive = false;
     // Use this for initialization
     void Start ()
     {
@@ -33,21 +34,33 @@ public class PlayerAnimation : MonoBehaviour
 	// Update is called once per frame
 	void LateUpdate ()
     {
-        if(weaponState==null)
+        weaponState = GetComponent<PlayerData>().WeaponData;
+        if (weaponState!=null)
         {
-            weaponState = GetComponent<PlayerData>().WeaponData;
+            
             controllerExternal.SetFloat("reloadSpeed", 3f /weaponState.ReloadTime);
             controllerInternal.SetFloat("reloadSpeed", 3f/ weaponState.ReloadTime);
+            isActive = true;
         }
 
-        AnimRun();
-        AnimJump();
-        AnimFall();
-        AnimShoot();
-        AnimReload();
-        AimGunExternal();
+        if (isActive)
+        {
+            // AnimTurn();
+            AnimRun();
+            AnimJump();
+            AnimFall();
+            AnimShoot();
+            AnimReload();
+            AimGunExternal();
+        }
 	}
     
+    //Turning animations, WIP
+    void AnimTurn()
+    {
+        controllerExternal.SetInteger("turn", playerMovement.TurnDir);
+    }
+
     //8 direction animation based on direction int. 1-8 are directions and 0 is idle
     void AnimRun()
     {
