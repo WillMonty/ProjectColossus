@@ -2588,7 +2588,7 @@ GameObject:
   - component: {fileID: 871869311}
   m_Layer: 0
   m_Name: InitialSpawn1
-  m_TagString: s1spawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4658,7 +4658,7 @@ GameObject:
   - component: {fileID: 1724788944}
   m_Layer: 0
   m_Name: InitialSpawn2
-  m_TagString: s2spawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

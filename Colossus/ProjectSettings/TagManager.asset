@@ -17,8 +17,6 @@ TagManager:
   - soldier1
   - soldier2
   - colossusshield
-  - s1spawn
-  - s2spawn
   - scalecontainer
   layers:
   - Default
