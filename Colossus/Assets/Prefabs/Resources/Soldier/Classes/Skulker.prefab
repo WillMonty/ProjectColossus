@@ -4223,7 +4223,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1507440030471614}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.8, y: 3.07, z: 9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6230,6 +6230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 0}
+  rifleExternal: {fileID: 0}
+  rifleInternal: {fileID: 0}
   shootSound: {fileID: 0}
   trailMat: {fileID: 2100000, guid: 57db6b7750b08934aa0369b3e2999f68, type: 2}
 --- !u!114 &114312693461263886

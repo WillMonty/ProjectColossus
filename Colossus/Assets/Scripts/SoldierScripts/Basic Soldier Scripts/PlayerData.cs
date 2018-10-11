@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum SoldierClass
-{
-    Assault,
-    Grenadier,
-    Skulker,
-}
-
 public class PlayerData : MonoBehaviour, IHealth
 {
     // Player Manager

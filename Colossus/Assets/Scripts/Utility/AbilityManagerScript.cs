@@ -5,7 +5,7 @@ using UnityEngine;
 //Add new abilities and classes here
 public enum ColossusHandAbilities {Fist, Hand, Shield}; //Fist is default when no other abilities are chosen in the menu
 public enum ColossusHeadAbilities {None, Laser};
-public enum ResistanceClasses {Assault, Skulker, Grenadier};
+public enum SoldierClass {Assault, Grenadier, Skulker};
 
 public class AbilityManagerScript : MonoBehaviour {
 
@@ -17,9 +17,9 @@ public class AbilityManagerScript : MonoBehaviour {
 	public ColossusHandAbilities rightHandColossus;
 	public ColossusHeadAbilities headColossus;
 
-	[Header("Resistance Classes")]
-	public ResistanceClasses resistance1;
-	public ResistanceClasses resistance2;
+	[Header("Soldier Classes")]
+	public SoldierClass soldier1;
+	public SoldierClass soldier2;
 
 
 	void Awake ()
@@ -33,6 +33,7 @@ public class AbilityManagerScript : MonoBehaviour {
 		// Check for an instance, if it does exist, than set to this
 		if (instance == null)
 		{
+			Debug.Log("set instance");
 			instance = this;
 		}
 		else if(instance!=this)

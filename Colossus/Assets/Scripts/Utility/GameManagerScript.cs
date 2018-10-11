@@ -27,9 +27,6 @@ public class GameManagerScript : MonoBehaviour
 	[Header("Players")]
     public ColossusManager colossus = null;
 
-    public SoldierClass player1Class;
-    public SoldierClass player2Class;
-
     public PlayerData soldier1 = null;
     public PlayerData soldier2 = null;
 
@@ -98,8 +95,6 @@ public class GameManagerScript : MonoBehaviour
 				break;
 			case "MainGame":
 				currentGameState = GameState.Pregame;
-                SpawnSoldiers();
-
                 break;	
 		}
 
@@ -110,18 +105,17 @@ public class GameManagerScript : MonoBehaviour
 	{
 		yield return new WaitForSeconds(waitTime);
 
+		SpawnSoldiers();
+
 		//Check for debug
 		if(forceStartGame)
 		{
 			if(colossus != null)
 				colossus.ToggleColossus();	
 			else
-            {
-
-                SpawnSoldiers();
+			{
                 currentGameState = GameState.InGame;
             }
-				
 		}
 
 	}
@@ -245,10 +239,11 @@ public class GameManagerScript : MonoBehaviour
 
     public void SpawnSoldiers()
     {
-        CreateSoldier(1, player1Class);
+		Debug.Log(AbilityManagerScript.instance);
+		CreateSoldier(1, AbilityManagerScript.instance.soldier1);
         soldier1.playerNumber = 1;
 
-        CreateSoldier(2, player2Class);
+		CreateSoldier(2, AbilityManagerScript.instance.soldier2);
         soldier2.playerNumber = 2;
 
     }
@@ -274,12 +269,12 @@ public class GameManagerScript : MonoBehaviour
 
 
         if (pNum == 1)
-            spawnPos = GameObject.FindGameObjectWithTag("s1spawn").transform.position;
+            spawnPos = GameObject.Find("InitialSpawn1").transform.position;
         else
-            spawnPos = GameObject.FindGameObjectWithTag("s2spawn").transform.position;
+			spawnPos = GameObject.Find("InitialSpawn2").transform.position;
 
 
-        soldierClone = Instantiate(classPrefab, spawnPos, Quaternion.identity, GameObject.FindGameObjectWithTag("scalecontainer").transform);
+		soldierClone = Instantiate(classPrefab, spawnPos, Quaternion.Euler(0f, 180f, 0f), GameObject.Find("ResistanceContainer").transform);
 
         if(pNum==1)
             soldier1 = soldierClone.GetComponent<PlayerData>();
