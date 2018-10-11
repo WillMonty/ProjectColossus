@@ -17,7 +17,8 @@ TagManager:
   - soldier1
   - soldier2
   - colossusshield
-  - scalecontainer
+  - s1spawn
+  - s2spawn
   layers:
   - Default
   - TransparentFX

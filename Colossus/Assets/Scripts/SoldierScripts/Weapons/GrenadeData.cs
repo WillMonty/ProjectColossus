@@ -63,7 +63,6 @@ public class GrenadeData : MonoBehaviour,IDamage
            
             if (other.gameObject.GetComponent<Rigidbody>()!=null)
             {
-                Debug.Log(other.gameObject);
                 other.gameObject.GetComponent<Rigidbody>().AddExplosionForce(100f, transform.position, 0.75f, 2f, ForceMode.Impulse);
             }
         }

@@ -2528,7 +2528,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4319584249500436}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4023452087445010
 Transform:
@@ -2554,7 +2554,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4319584249500436}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4033877136338834
 Transform:
@@ -2682,7 +2682,7 @@ Transform:
   - {fileID: 4847622811589582}
   - {fileID: 4383941480069254}
   m_Father: {fileID: 4319584249500436}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4087462887575882
 Transform:
@@ -2890,7 +2890,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4319584249500436}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4177638677433534
 Transform:
@@ -3170,7 +3170,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4319584249500436}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4289404395151386
 Transform:
@@ -3275,6 +3275,7 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4086455390820268}
   - {fileID: 4870523120493848}
   - {fileID: 4915527597428730}
   - {fileID: 4833702907762666}
@@ -3283,7 +3284,6 @@ Transform:
   - {fileID: 4176092826424318}
   - {fileID: 4282842592557028}
   - {fileID: 4030116234773586}
-  - {fileID: 4086455390820268}
   - {fileID: 4023452087445010}
   - {fileID: 4962041200088864}
   - {fileID: 4604926868477662}
@@ -4026,7 +4026,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4319584249500436}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4724895764458622
 Transform:
@@ -4265,7 +4265,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4319584249500436}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4838322364897418
 Transform:
@@ -4363,7 +4363,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4319584249500436}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4871019737240948
 Transform:
@@ -4530,7 +4530,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4319584249500436}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4921370882375756
 Transform:
@@ -5142,7 +5142,7 @@ MonoBehaviour:
   projectile: {fileID: 1572466318819412, guid: d9c940578f2c2c54cb88f7ee0e633b5a, type: 2}
   rifleExternal: {fileID: 1028699729539782}
   rifleInternal: {fileID: 1955655797952940}
-  shootSound: {fileID: 8300000, guid: 7fc4a2a4bfd8a0c489ca792483449bf1, type: 3}
+  shootSound: {fileID: 8300000, guid: 9466f57ba8f663844b740811c149e0fa, type: 3}
 --- !u!114 &114272574455636518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5166,6 +5166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e0838c4d97dbb4ca9cbb741f77091b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
   playerNumber: 1
   soldierClass: 0
   eyes: {fileID: 1605082517507248}
@@ -6077,7 +6078,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 1662388497
+  randomSeed: 1238660757
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -8573,7 +8574,7 @@ ParticleSystem:
     rangeCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -8614,7 +8615,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -15262,7 +15263,7 @@ ParticleSystem:
     rangeCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -15303,7 +15304,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2

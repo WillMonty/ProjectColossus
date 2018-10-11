@@ -78,6 +78,7 @@ public class BulletScript : MonoBehaviour, IDamage
 		{
 			if(collision.gameObject.GetComponent<IHealth>() != null)
 				collision.gameObject.GetComponent<IHealth>().DamageObject(damage);
+
 			Destroy(gameObject);
 
 		}

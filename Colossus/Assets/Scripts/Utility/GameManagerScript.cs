@@ -52,14 +52,14 @@ public class GameManagerScript : MonoBehaviour
     GamePadState state2;
     GamePadState prevState2;
 
-	public GameObject deathbox;
-
-    
+    private GameObject[] spawnPoints;
+    GameObject deathCam1;
+    GameObject deathCam2;
 
     #endregion
 
     #region Awake/Start
-	void Awake ()
+    void Awake ()
 	{
 		DontDestroyOnLoad(this);
 	}
@@ -104,9 +104,7 @@ public class GameManagerScript : MonoBehaviour
 	IEnumerator LateStart(float waitTime)
 	{
 		yield return new WaitForSeconds(waitTime);
-
-		SpawnSoldiers();
-
+	
 		//Check for debug
 		if(forceStartGame)
 		{
@@ -118,7 +116,17 @@ public class GameManagerScript : MonoBehaviour
             }
 		}
 
-	}
+        if (currentGameState == GameState.InGame || currentGameState == GameState.Pregame)
+        {
+            SpawnSoldiers();
+            spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
+            deathCam1 = GameObject.Find("DeathCam1");
+            deathCam2 = GameObject.Find("DeathCam2");
+            deathCam1.SetActive(false);
+            deathCam2.SetActive(false);
+        }
+
+    }
     #endregion
 
     #region Update
@@ -237,7 +245,7 @@ public class GameManagerScript : MonoBehaviour
     #endregion
 
 
-    public void SpawnSoldiers()
+    void SpawnSoldiers()
     {
 		Debug.Log(AbilityManagerScript.instance);
 		CreateSoldier(1, AbilityManagerScript.instance.soldier1);
@@ -248,7 +256,7 @@ public class GameManagerScript : MonoBehaviour
 
     }
     
-    public void CreateSoldier(int pNum, SoldierClass sClass)
+    void CreateSoldier(int pNum, SoldierClass sClass)
     {
         GameObject soldierClone = null;
         GameObject classPrefab = null;
@@ -285,7 +293,7 @@ public class GameManagerScript : MonoBehaviour
     /// <summary>
     /// Emergency Restart for the game
     /// </summary>
-    public void OOOOOOOF()
+    void OOOOOOOF()
     {
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
@@ -294,14 +302,56 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    public void EnableSoldierUI()
+    //Disable a soldier, activate it's deathcam and repawn if necessary
+    public void KillSoldier(int pNum)
+    {
+        PlayerData soldierClone;
+        if (pNum == 1)
+        {
+            soldierClone = soldier1;
+            deathCam1.SetActive(true);
+        }
+        else
+        {
+            soldierClone = soldier2;
+            deathCam2.SetActive(true);
+        }
+
+        soldierClone.gameObject.SetActive(false);
+        
+
+
+        if (soldierClone.Lives > 0)
+            StartCoroutine(RespawnSoldier(5, soldierClone));
+    
+
+    }
+
+    void EnableSoldierUI()
     {
         soldierUICanvas.SetActive(true);
     }
 
-    public void ExitGame()
+    void ExitGame()
     {
         // Last thing: Load the main menu
         SceneManager.LoadScene(0);
+    }
+
+    IEnumerator RespawnSoldier(float time, PlayerData soldierClone)
+    {
+        yield return new WaitForSeconds(time);
+
+        //Activate soldier, deactivate deathcam
+        soldierClone.gameObject.SetActive(true);
+
+        if (soldierClone.playerNumber == 1)
+            deathCam1.SetActive(false);
+        else
+            deathCam2.SetActive(false);
+
+        //Set soldier position to random spawnpoint
+        soldierClone.transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+
     }
 }

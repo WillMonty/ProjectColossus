@@ -14,10 +14,8 @@ public class PlayerData : MonoBehaviour, IHealth
 
     // Basic Player Management variables
     private int lives;
-    private float health;
+    public float health;
     private float healthPrev;
-    bool justDied=false;
-    Vector3 prevPos;
     
 
     public int playerNumber;
@@ -32,7 +30,13 @@ public class PlayerData : MonoBehaviour, IHealth
     {
         get { return weaponData; }
     }
-    private GameObject[] spawnPoints;
+   
+
+    bool alive = true;
+    public bool Alive
+    {
+        get { return alive; }
+    }
 
     public int Lives
     {
@@ -51,6 +55,11 @@ public class PlayerData : MonoBehaviour, IHealth
     public void DamageObject(float dmg)
     {
         health -= dmg;
+        if (health <= 0)
+        {
+            Death();
+        }
+
 
     }
 
@@ -67,7 +76,7 @@ public class PlayerData : MonoBehaviour, IHealth
     void Start()
     {
 
-		spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
+	
         // Start initializes 3 lives at start, can be changed later
 
         lives = STARTING_LIVES;
@@ -108,13 +117,8 @@ public class PlayerData : MonoBehaviour, IHealth
 
     // Update is called once per frame
     void Update()
-    {
-        
-        
-        if (justDied)
-            SpawnRagdoll();
+    {       
 
-        prevPos = transform.position;
         // Check for death first in the update loop
         if (health <= 0)
         {
@@ -125,10 +129,6 @@ public class PlayerData : MonoBehaviour, IHealth
         {
             health -= 10;
         }
-
-
-
-
         healthPrev = health;
         
     }
@@ -193,32 +193,21 @@ public class PlayerData : MonoBehaviour, IHealth
     /// </summary>
     void Death()
     {
+
         // Reset the player's Stats
-        justDied = true;
-     
-      
+
+        SpawnRagdoll(transform.position);
+        
         ResetPlayerValues();
-		transform.position = GameManagerScript.instance.deathbox.transform.position;
+
+        // Lower the life count
+        lives--;
+
+        GameManagerScript.instance.KillSoldier(playerNumber);
+       
 
         
-
-        // Check how many lives the player has first
-        if (lives > 1)
-        {
-
-            // Choose one of the spawn locations at random
-            int spawnPoint = Random.Range(0, 6);
-
-            Vector3 spawnLocation = Vector3.zero;
-
-			//spawnLocation = spawnPoints[spawnPoint].transform.position;
-
-            // Call respawn after a player died (currently set to 0,0,0)
-			//StartCoroutine(Respawn(spawnLocation));
-        }
-
-		// Lower the life count
-		lives--;
+        
     }
 
     /// <summary>
@@ -228,45 +217,14 @@ public class PlayerData : MonoBehaviour, IHealth
     public void Damage(float damageFloat)
     {
         health -= damageFloat;
-
-    }
-    
-    /// <summary>
-    /// Heal the player
-    /// </summary>
-    /// <param name="damageFloat"></param>
-    public bool Heal(float healFloat)
-    {
-        bool used = false;
-
-        if (health < MAX_HEALTH)
+        if (health <= 0)
         {
-            health += healFloat;
-            used = true;
+            Death();
         }
 
-        if (health > MAX_HEALTH)
-        {
-            health = MAX_HEALTH;
-        }
-        return used;
+
     }
 
-
-
-    /// <summary>
-    /// Method to respawn the player
-    /// </summary>
-    /// <param name="spawnlocation"></param>
-    /// <returns></returns>
-	IEnumerator Respawn(Vector3 spawnlocation)
-    {
-        // Check how many lives the player has first
-        yield return new WaitForSeconds(RESPAWN_TIME);
-
-        // Place the player in new spawn position
-        gameObject.transform.position = spawnlocation;
-    }
 
     /// <summary>
     /// Method to reset player values
@@ -277,13 +235,16 @@ public class PlayerData : MonoBehaviour, IHealth
        
     }
 
-    void SpawnRagdoll()
+    void SpawnRagdoll(Vector3 pos)
     {
-        Physics.IgnoreLayerCollision(15, 15, true);
-        prevPos.y -= 0.2f;
-        GameObject ragdollClone = Instantiate(ragdoll, prevPos, transform.rotation, transform.parent);
-        justDied = false;
+
+   
+        GameObject ragdollClone = Instantiate(ragdoll, pos, transform.rotation,transform.parent);
+
+  
+
         SetRagDollPos(model.transform.GetChild(0),ragdollClone.transform.GetChild(0));
+
     }
 
     void SetRagDollPos(Transform main, Transform rgPart)    
@@ -303,7 +264,13 @@ public class PlayerData : MonoBehaviour, IHealth
 
     }
 
-	void OnTriggerEnter(Collider col)
+    private void OnEnable()
+    {
+
+        alive = true;
+    }
+
+    void OnTriggerEnter(Collider col)
 	{
 		
 		GameObject collisionObject = col.gameObject;

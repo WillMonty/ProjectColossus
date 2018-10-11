@@ -131,6 +131,9 @@ public class GunBase : MonoBehaviour, IWeapon
         bulletsInMag = magSize;
 
 		source = GetComponent<AudioSource>();
+
+      
+
     }
 
     // Update is called once per frame
