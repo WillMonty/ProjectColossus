@@ -307,19 +307,14 @@ public class GameManagerScript : MonoBehaviour
     {
         PlayerData soldierClone;
         if (pNum == 1)
-        {
             soldierClone = soldier1;
-            deathCam1.SetActive(true);
-        }
         else
-        {
             soldierClone = soldier2;
-            deathCam2.SetActive(true);
-        }
+
 
         soldierClone.gameObject.SetActive(false);
-        
 
+        SetDeathCam();
 
         if (soldierClone.Lives > 0)
             StartCoroutine(RespawnSoldier(5, soldierClone));
@@ -336,22 +331,54 @@ public class GameManagerScript : MonoBehaviour
     {
         // Last thing: Load the main menu
         SceneManager.LoadScene(0);
-    }
+    }   
 
     IEnumerator RespawnSoldier(float time, PlayerData soldierClone)
     {
         yield return new WaitForSeconds(time);
 
+        
+
         //Activate soldier, deactivate deathcam
         soldierClone.gameObject.SetActive(true);
+        soldierClone.Alive = true;
 
-        if (soldierClone.playerNumber == 1)
-            deathCam1.SetActive(false);
-        else
-            deathCam2.SetActive(false);
-
+        SetDeathCam();
         //Set soldier position to random spawnpoint
         soldierClone.transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+
+    }
+
+    void SetDeathCam()
+    {
+        Rect temp;
+        
+
+        if(soldier1.Alive)
+            deathCam1.SetActive(false);
+        else
+            deathCam1.SetActive(true);
+
+        if (soldier2.Alive)
+            deathCam2.SetActive(false);
+        else
+            deathCam2.SetActive(true);
+
+        if (!soldier1.Alive && !soldier2.Alive)
+        {
+            deathCam2.SetActive(false);
+            temp = deathCam1.GetComponent<Camera>().rect;
+            temp.width = 1.0f;
+            deathCam1.GetComponent<Camera>().rect = temp;
+        }
+        else
+        {
+            temp = deathCam1.GetComponent<Camera>().rect;
+            temp.width = 0.5f;
+            deathCam1.GetComponent<Camera>().rect = temp;
+
+        }
+
 
     }
 }

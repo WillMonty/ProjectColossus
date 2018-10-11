@@ -36,6 +36,7 @@ public class PlayerData : MonoBehaviour, IHealth
     public bool Alive
     {
         get { return alive; }
+        set { alive = value; }
     }
 
     public int Lives
@@ -202,6 +203,7 @@ public class PlayerData : MonoBehaviour, IHealth
 
         // Lower the life count
         lives--;
+        alive = false;
 
         GameManagerScript.instance.KillSoldier(playerNumber);
        
