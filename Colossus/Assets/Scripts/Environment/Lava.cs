@@ -21,7 +21,7 @@ public class Lava : MonoBehaviour
 		}
 
 		//Destroy any other physics based 
-		if(!other.attachedRigidbody.isKinematic)
+		if(other.gameObject.tag == "throwable" || other.gameObject.tag == "ragdoll")
 			GameObject.Destroy(other.gameObject);
     }
 
