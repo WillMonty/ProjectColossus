@@ -2289,8 +2289,8 @@ GameObject:
   - component: {fileID: 114618819357180078}
   - component: {fileID: 114391821000490258}
   - component: {fileID: 114774366285445712}
-  - component: {fileID: 143624829299408650}
   - component: {fileID: 23432355377694700}
+  - component: {fileID: 54578120471637738}
   m_Layer: 0
   m_Name: Grenadier
   m_TagString: Untagged
@@ -4335,7 +4335,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1986587543821694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.79, y: 0.66, z: -0.21}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4268123442951382}
@@ -4680,6 +4680,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1570974141720584}
   m_Mesh: {fileID: 4300000, guid: 09ff0b59887fdbe48870bbe122bb5ee1, type: 3}
+--- !u!54 &54578120471637738
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1986587543821694}
+  serializedVersion: 2
+  m_Mass: 100
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!81 &81769877789527230
 AudioListener:
   m_ObjectHideFlags: 1
@@ -4846,10 +4861,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c3148fc083186479b8ad2bd85ee3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookSensitivityX: 2
+  lookSensitivityY: 2
+  verticalVelocity: 0
   maxSpeed: 1
-  lookSensitivityX: 1
-  lookSensitivityY: 1
-  verticalVelocity: -0.3924
+  targetVelocity: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  velocityDelta: {x: 0, y: 0, z: 0}
+  isGrounded: 0
 --- !u!114 &114391821000490258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4873,6 +4892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e0838c4d97dbb4ca9cbb741f77091b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
   playerNumber: 1
   soldierClass: 1
   eyes: {fileID: 1020913535556904}
@@ -5619,23 +5639,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.013460729, y: -0.46008372, z: 0.01182143}
     m_Extent: {x: 0.11664775, y: 0.97504926, z: 0.10136846}
   m_DirtyAABB: 0
---- !u!143 &143624829299408650
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1986587543821694}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1.85
-  m_Radius: 0.26
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.0001
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.12, z: 0}
 --- !u!198 &198587951637360356
 ParticleSystem:
   m_ObjectHideFlags: 1

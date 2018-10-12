@@ -26,6 +26,8 @@ public class PlayerInput : MonoBehaviour
         get { return prevState; }
     }
 
+
+
     //A button state for jumping.
     public int JumpState
     {
@@ -67,8 +69,9 @@ public class PlayerInput : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+
 
         GamePadState testState = GamePad.GetState(playerIndex);
         
@@ -93,7 +96,6 @@ public class PlayerInput : MonoBehaviour
             //Debug.Log(string.Format("GamePad at {0} disconnected", playerIndex));
             playerIndexSet = false;
         }
-
         //Shooting button states
         GetComponent<PlayerData>().WeaponData.RightTrigger = state.Triggers.Right;
         GetComponent<PlayerData>().WeaponData.RightTriggerPrev = prevState.Triggers.Right;

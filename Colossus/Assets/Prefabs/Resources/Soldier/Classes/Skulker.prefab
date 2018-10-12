@@ -1305,8 +1305,8 @@ GameObject:
   - component: {fileID: 114509438899711898}
   - component: {fileID: 114706729948986454}
   - component: {fileID: 114312693461263886}
-  - component: {fileID: 143497584825068274}
   - component: {fileID: 23679058871055774}
+  - component: {fileID: 54744689183987046}
   m_Layer: 0
   m_Name: Skulker
   m_TagString: Untagged
@@ -4224,7 +4224,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1507440030471614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8, y: 3.07, z: 9.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4177964663994788}
@@ -6063,6 +6063,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1873352082935810}
   m_Mesh: {fileID: 4300004, guid: e0b8681e54640254588d20eebcfead3b, type: 3}
+--- !u!54 &54744689183987046
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1507440030471614}
+  serializedVersion: 2
+  m_Mass: 100
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!81 &81987565373667378
 AudioListener:
   m_ObjectHideFlags: 1
@@ -6232,7 +6247,7 @@ MonoBehaviour:
   projectile: {fileID: 0}
   rifleExternal: {fileID: 0}
   rifleInternal: {fileID: 0}
-  shootSound: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: 1d8826491f479494d803e3c3572e0177, type: 3}
   trailMat: {fileID: 2100000, guid: 57db6b7750b08934aa0369b3e2999f68, type: 2}
 --- !u!114 &114312693461263886
 MonoBehaviour:
@@ -6281,6 +6296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e0838c4d97dbb4ca9cbb741f77091b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
   playerNumber: 1
   soldierClass: 2
   eyes: {fileID: 1688744594399972}
@@ -6322,10 +6338,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c3148fc083186479b8ad2bd85ee3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 1
-  lookSensitivityX: 1
-  lookSensitivityY: 1
+  lookSensitivityX: 2
+  lookSensitivityY: 2
   verticalVelocity: 0
+  maxSpeed: 1
+  targetVelocity: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  velocityDelta: {x: 0, y: 0, z: 0}
+  isGrounded: 0
 --- !u!120 &120880390982332398
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -7145,20 +7165,3 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00029060245, y: 0.25582302, z: -0.041868553}
     m_Extent: {x: 0.79424596, y: 0.3800469, z: 0.28248566}
   m_DirtyAABB: 0
---- !u!143 &143497584825068274
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1507440030471614}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1.85
-  m_Radius: 0.26
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.0001
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.12, z: 0}

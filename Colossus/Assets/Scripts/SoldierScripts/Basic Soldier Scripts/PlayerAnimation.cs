@@ -66,7 +66,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         controllerExternal.SetInteger("direction",  playerMovement.AnimDir);
         controllerExternal.SetFloat("runSpeed",playerMovement.MoveSpeed/playerMovement.maxSpeed);
-        //Debug.Log(playerMovement.MoveSpeed);
+
     }
 
     //Aim gun on external model
@@ -98,7 +98,7 @@ public class PlayerAnimation : MonoBehaviour
     //Set bool in controller
     void AnimFall()
     {
-       controllerExternal.SetBool("inAir", playerMovement.InAir);
+       controllerExternal.SetBool("inAir", !playerMovement.IsGrounded);
     }
 
     void AnimShoot()
