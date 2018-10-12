@@ -46,23 +46,38 @@ public class SoldierUINew : MonoBehaviour {
     float s2ReloadTime;
     bool s2Reloading;
 
-    bool isActive=false;
+    float damageAlphaTimerMax;
 
-    // Use this for initialization
+    public Image s1DamageInd;
+    float s1DamageAlphaTimer;
+
+    public Image s2DamageInd;
+    float s2DamageAlphaTimer;
+
+    bool isActive = false;
+    
+
+    /// <summary>
+    /// 
+    /// </summary>
     void Start ()
     {
-        
+        damageAlphaTimerMax = 1.1f;
+
+        s1DamageInd.color = new Color(1f, 1f, 1f, 0f);
     }
 
 
-    // Update is called once per frame
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     void Update ()
     {
         if (isActive)
         {
             UpdateHealthbar();
 
-            UpdateFuelbar();
+            UpdateAbilitybar();
 
             UpdateCurrentMag();
 
@@ -74,15 +89,22 @@ public class SoldierUINew : MonoBehaviour {
 
 
             UpdateReloading();
+
+            UpdateDamageInd();
         }
         else
             Activate();
     }
 
+
+    /// <summary>
+    /// activates the soldier UI and gets the different soldier references
+    /// </summary>
     void Activate()
     {
         soldier1 = GameManagerScript.instance.soldier1;
         soldier2 = GameManagerScript.instance.soldier2;
+
         if (soldier1 != null && soldier2!=null)
         {
 
@@ -118,59 +140,79 @@ public class SoldierUINew : MonoBehaviour {
         }
     }
 
+
+    /// <summary>
+    /// Updates the reloading reticle for the players
+    /// </summary>
     void UpdateReloading()
     {
         if (soldier1.GetComponent<PlayerData>().WeaponData.Reloading && !s1Reloading)
         {
             s1ReloadDuration = soldier1.GetComponent<PlayerData>().WeaponData.ReloadTime;
-            s1ReloadTime = s1ReloadDuration;
+            s1ReloadTime = 0;
             s1Reloading = true;
 
             s1Crosshair.SetActive(false);
             s1ReloadReticleBG.SetActive(true);
+
+            s1ReloadReticle.GetComponent<Image>().fillAmount = 0;
         }
 
         if (soldier2.GetComponent<PlayerData>().WeaponData.Reloading && !s2Reloading)
         {
             s2ReloadDuration = soldier2.GetComponent<PlayerData>().WeaponData.ReloadTime;
-            s2ReloadTime = s2ReloadDuration;
+            s2ReloadTime = 0;
             s2Reloading = true;
 
             s2Crosshair.SetActive(false);
             s2ReloadReticleBG.SetActive(true);
+
+            s2ReloadReticle.GetComponent<Image>().fillAmount = 0;
         }
 
         if (s1Reloading)
         {
-            if (s1ReloadTime < 0)
+            if (s1ReloadTime > s1ReloadDuration)
             {
-                s1ReloadTime = 0;
-
-                s1Crosshair.SetActive(true);
-                s1ReloadReticleBG.SetActive(false);
-
+                s1ReloadTime = s1ReloadDuration;
+                
                 s1Reloading = false;
             }
+            
+            s1ReloadTime += Time.deltaTime;
+
             s1ReloadReticle.GetComponent<Image>().fillAmount = s1ReloadTime / s1ReloadDuration;
-            s1ReloadTime -= Time.deltaTime;
+        }
+        else
+        {
+            s1Crosshair.SetActive(true);
+            s1ReloadReticleBG.SetActive(false);
         }
 
         if (s2Reloading)
         {
-            if (s2ReloadTime < 0)
+            if (s2ReloadTime > s2ReloadDuration)
             {
-                s2ReloadTime = 0;
-
-                s2Crosshair.SetActive(true);
-                s2ReloadReticleBG.SetActive(false);
+                s2ReloadTime = s2ReloadDuration;
 
                 s2Reloading = false;
             }
+
+            s2ReloadTime += Time.deltaTime;
+
             s2ReloadReticle.GetComponent<Image>().fillAmount = s2ReloadTime / s2ReloadDuration;
-            s2ReloadTime -= Time.deltaTime;
+        }
+        else
+        {
+            s2Crosshair.SetActive(true);
+            s2ReloadReticleBG.SetActive(false);
         }
     }
 
+
+    /// <summary>
+    /// updates the healthbars for both players if they take damage
+    /// </summary>
     void UpdateHealthbar()
     {
         if (s1CurrentHealth != soldier1.GetComponent<PlayerData>().Health)
@@ -178,6 +220,8 @@ public class SoldierUINew : MonoBehaviour {
             s1CurrentHealth = soldier1.GetComponent<PlayerData>().Health;
 
             s1Healthbar.fillAmount = s1CurrentHealth / s1MaxHealth;
+
+            PlayerDamaged(1);
         }
 
         if (s2CurrentHealth != soldier2.GetComponent<PlayerData>().Health)
@@ -185,10 +229,16 @@ public class SoldierUINew : MonoBehaviour {
             s2CurrentHealth = soldier2.GetComponent<PlayerData>().Health;
 
             s2Healthbar.fillAmount = s2CurrentHealth / s2MaxHealth;
+
+            PlayerDamaged(2);
         }
     }
 
-    void UpdateFuelbar()
+
+    /// <summary>
+    /// updates the ability for the soldiers
+    /// </summary>
+    void UpdateAbilitybar()
     {
         if(soldier1.soldierClass == SoldierClass.Assault && s1CurrentFuel != soldier1.GetComponent<JetPack>().JetPackFuel)
         {
@@ -205,12 +255,17 @@ public class SoldierUINew : MonoBehaviour {
         }
     }
 
+
+    /// <summary>
+    /// updates the magazine for both players
+    /// </summary>
     void UpdateCurrentMag()
     {
         s1CurrentMag.text = soldier1.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
 
         s2CurrentMag.text = soldier2.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
     }
+
 
     void UpdateMagMax()
     {
@@ -221,5 +276,69 @@ public class SoldierUINew : MonoBehaviour {
         s1CurrentMag.text = soldier1.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
 
         s2CurrentMag.text = soldier2.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
+    }
+
+
+    /// <summary>
+    /// indicates that the player has taken damage
+    /// </summary>
+    /// <param name="playerNum"></param>
+    void PlayerDamaged(int playerNum)
+    {
+        Debug.Log("player " + playerNum + " is damaged");
+
+        switch(playerNum)
+        {
+            case 1:
+                s1DamageAlphaTimer = damageAlphaTimerMax;
+
+                var tempColor1 = s1DamageInd.color;
+
+                tempColor1.a = 1f;
+
+                s1DamageInd.color = tempColor1;
+
+                break;
+            case 2:
+
+                s2DamageAlphaTimer = damageAlphaTimerMax;
+
+                var tempColor2 = s2DamageInd.color;
+
+                tempColor2.a = 1f;
+
+                s2DamageInd.color = tempColor2;
+
+                break;
+        }
+    }
+
+
+    /// <summary>
+    /// updates the damage indicator
+    /// </summary>
+    void UpdateDamageInd()
+    {
+        if(s1DamageAlphaTimer > 0)
+        {
+            s1DamageAlphaTimer -= Time.deltaTime;
+
+            var tempColor = s1DamageInd.color;
+
+            tempColor.a = s1DamageAlphaTimer / damageAlphaTimerMax;
+
+            s1DamageInd.color = tempColor;
+        }
+        
+        if(s2DamageAlphaTimer > 0)
+        {
+            s2DamageAlphaTimer -= Time.deltaTime;
+
+            var tempColor = s2DamageInd.color;
+
+            tempColor.a = s2DamageAlphaTimer / damageAlphaTimerMax;
+
+            s2DamageInd.color = tempColor;
+        }
     }
 }

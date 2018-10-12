@@ -157,7 +157,7 @@ public class GunBase : MonoBehaviour, IWeapon
 
             }
             //Check for reloading
-            else if (!reloading && ((reloadButton && bulletsInMag != magSize) || bulletsInMag == 0) && justShot == false)
+            else if (!reloading && ((reloadButton && bulletsInMag != magSize) /*|| bulletsInMag == 0*/) && justShot == false)
             {
                 Reload();
             }

@@ -60,8 +60,6 @@ public class PlayerData : MonoBehaviour, IHealth
         {
             Death();
         }
-
-
     }
 
     public bool DamageTaken
