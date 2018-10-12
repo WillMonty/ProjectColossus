@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour {
                          
             MoveBody();
             //Gravity
-            body.AddForce(gravityForce * body.mass);
+            body.AddForce(gravityForce,ForceMode.Acceleration);
         }
         else
             body.isKinematic = true;

@@ -115,7 +115,7 @@ public class PlayerData : MonoBehaviour, IHealth
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {       
 
         // Check for death first in the update loop

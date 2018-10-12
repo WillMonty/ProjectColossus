@@ -31,7 +31,9 @@ public class PlayerAnimation : MonoBehaviour
         
     }
 	
-	// Update is called once per frame
+   
+
+
 	void LateUpdate ()
     {
         weaponState = GetComponent<PlayerData>().WeaponData;

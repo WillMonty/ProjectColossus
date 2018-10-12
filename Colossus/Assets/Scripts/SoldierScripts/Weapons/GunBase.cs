@@ -137,7 +137,7 @@ public class GunBase : MonoBehaviour, IWeapon
     }
 
     // Update is called once per frame
-    protected virtual void Update ()
+    protected virtual void FixedUpdate ()
     {
         if (GameManagerScript.instance.currentGameState == GameState.InGame)
         {

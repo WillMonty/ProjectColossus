@@ -24,6 +24,10 @@ public class Sniper : GunBase {
 
     protected override void Shoot()
     {
+
+        source.clip = shootSound;
+        source.Play();
+
         trail.material.color = trailColor;
 
         shot.origin = transform.position;

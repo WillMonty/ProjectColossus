@@ -71,7 +71,7 @@ public class SoldierUINew : MonoBehaviour {
     /// <summary>
     /// Update is called once per frame
     /// </summary>
-    void Update ()
+    void FixedUpdate ()
     {
         if (isActive)
         {

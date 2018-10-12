@@ -26,7 +26,7 @@ public class JetPack : MonoBehaviour {
     }
 
      // Update is called once per frame
-    void Update ()
+    void FixedUpdate ()
     {
 
         
@@ -40,7 +40,7 @@ public class JetPack : MonoBehaviour {
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 2.4f, 0), ForceMode.Acceleration);
 
 
-           
+            Debug.Log(GetComponent<Rigidbody>().velocity);
             
 
 
