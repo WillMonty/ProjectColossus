@@ -71,7 +71,7 @@ public class SoldierUINew : MonoBehaviour {
     /// <summary>
     /// Update is called once per frame
     /// </summary>
-    void FixedUpdate ()
+    void Update ()
     {
         if (isActive)
         {
@@ -179,7 +179,7 @@ public class SoldierUINew : MonoBehaviour {
                 s1Reloading = false;
             }
             
-            s1ReloadTime += Time.deltaTime;
+			s1ReloadTime += Time.deltaTime;
 
             s1ReloadReticle.GetComponent<Image>().fillAmount = s1ReloadTime / s1ReloadDuration;
         }
@@ -198,7 +198,7 @@ public class SoldierUINew : MonoBehaviour {
                 s2Reloading = false;
             }
 
-            s2ReloadTime += Time.deltaTime;
+			s2ReloadTime += Time.deltaTime;
 
             s2ReloadReticle.GetComponent<Image>().fillAmount = s2ReloadTime / s2ReloadDuration;
         }

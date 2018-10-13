@@ -26,7 +26,7 @@ public class Stealth : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
         if (GetComponent<PlayerInput>().ActionState == 1 && ready)
         {

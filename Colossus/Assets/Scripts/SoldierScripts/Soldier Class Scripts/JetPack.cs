@@ -37,8 +37,8 @@ public class JetPack : MonoBehaviour {
                 smokeTrail.GetComponent<ParticleSystem>().Play();
 
             FuelDown();
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, 0.2f, 0), ForceMode.VelocityChange);          
-         
+			GetComponent<Rigidbody>().AddForce(0,9f,0,ForceMode.Acceleration);     
+				
 
         }
         else if(jetPackFuel<MAX_FUEL)

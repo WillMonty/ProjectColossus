@@ -85,7 +85,6 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 raySpawn;
 
 
-
     #endregion
 
     // Use this for initialization
@@ -119,9 +118,12 @@ public class PlayerMovement : MonoBehaviour {
             MoveBody();
             //Gravity
             body.AddForce(gravityForce,ForceMode.Acceleration);
+
+	
         }
         else
             body.isKinematic = true;
+
     }
 
     private void RotateCamera()
