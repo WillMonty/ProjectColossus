@@ -114,10 +114,6 @@ public class PlayerMovement : MonoBehaviour {
             {
                 JumpBody();
             }
-            else
-            {
-                speed *= 0.7f;
-            }
 
                          
             MoveBody();
@@ -210,7 +206,9 @@ public class PlayerMovement : MonoBehaviour {
         //Get current body velocity and calculate required velocity to achive the change
         velocity = body.velocity;
         velocityDelta = targetVelocity - velocity;
-    
+      
+        
+
         velocityDelta.y = 0;
 
         //Add the calculated velocity as a velocity change force to the rigidbody
@@ -247,7 +245,7 @@ public class PlayerMovement : MonoBehaviour {
         if (GetComponent<PlayerInput>().JumpState == 1)
         {
             jumped = true;
-            body.AddForce(new Vector3(0, 150, 0), ForceMode.Acceleration);
+            body.AddForce(new Vector3(0, 2.5f, 0), ForceMode.VelocityChange);
         }
     }
     public bool CheckGrounded()
