@@ -24,7 +24,7 @@ public class EnvironmentManagerScript : MonoBehaviour {
 		{
 			instance = this;
 		}
-		else if(instance! = this) // If a new Gamemanger is loaded and it isn't the one that is loaded already than delete it
+		else if(instance != this) // If a new Gamemanger is loaded and it isn't the one that is loaded already than delete it
 		{
 			if (FindObjectsOfType(GetType()).Length > 1)
 				Destroy(gameObject);
