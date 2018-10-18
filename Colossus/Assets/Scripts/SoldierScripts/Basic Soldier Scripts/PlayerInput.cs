@@ -39,6 +39,7 @@ public class PlayerInput : MonoBehaviour
                 else if (state.Buttons.A == ButtonState.Pressed && prevState.Buttons.A == ButtonState.Pressed)
                     return 2; //Held             
             }
+
             return 0;
         }
     }
@@ -55,10 +56,78 @@ public class PlayerInput : MonoBehaviour
                 else if (state.Triggers.Left > 0)
                     return 2; //Held             
             }
+
             return 0;
         }
     }
 
+    //Up DPad State
+    public int Up
+    {
+        get
+        {
+            if(playerIndexSet)
+            {
+                if (state.DPad.Up == ButtonState.Pressed && prevState.DPad.Up == ButtonState.Released)
+                    return 1; //Pressed
+                else if (state.DPad.Up == ButtonState.Pressed)
+                    return 2; //Held
+            }
+
+            return 0;
+        }
+    }
+
+    //Down DPad State
+    public int Down
+    {
+        get
+        {
+            if (playerIndexSet)
+            {
+                if (state.DPad.Down == ButtonState.Pressed && prevState.DPad.Down == ButtonState.Released)
+                    return 1; //Pressed
+                else if (state.DPad.Down == ButtonState.Pressed)
+                    return 2; //Held
+            }
+
+            return 0;
+        }
+    }
+
+    //Right DPad State
+    public int Right
+    {
+        get
+        {
+            if (playerIndexSet)
+            {
+                if (state.DPad.Right == ButtonState.Pressed && prevState.DPad.Right == ButtonState.Released)
+                    return 1; //Pressed
+                else if (state.DPad.Right == ButtonState.Pressed)
+                    return 2; //Held
+            }
+
+            return 0;
+        }
+    }
+
+    //Left DPad State
+    public int Left
+    {
+        get
+        {
+            if (playerIndexSet)
+            {
+                if (state.DPad.Left == ButtonState.Pressed && prevState.DPad.Left == ButtonState.Released)
+                    return 1; //Pressed
+                else if (state.DPad.Left == ButtonState.Pressed)
+                    return 2; //Held
+            }
+
+            return 0;
+        }
+    }
 
 
     // Use this for initialization
@@ -71,8 +140,6 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-
         GamePadState testState = GamePad.GetState(playerIndex);
         
         if (!playerIndexSet || !prevState.IsConnected)
@@ -88,8 +155,7 @@ public class PlayerInput : MonoBehaviour
         if (testState.IsConnected)
         {
             prevState = state;
-            state = GamePad.GetState(playerIndex);
-                                  
+            state = GamePad.GetState(playerIndex);            
         }
         else
         {
@@ -102,8 +168,4 @@ public class PlayerInput : MonoBehaviour
         GetComponent<PlayerData>().WeaponData.ReloadButton = (ButtonState.Pressed==state.Buttons.X);
         
     }
-   
-
-
-
 }

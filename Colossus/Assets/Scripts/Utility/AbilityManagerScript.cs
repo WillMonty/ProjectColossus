@@ -46,4 +46,17 @@ public class AbilityManagerScript : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void SetSoldierClass(int soldierNum, SoldierClass newClass)
+    {
+        switch(soldierNum)
+        {
+            case 1:
+                soldier1 = newClass;
+                break;
+            case 2:
+                soldier2 = newClass;
+                break;
+        }
+    }
 }

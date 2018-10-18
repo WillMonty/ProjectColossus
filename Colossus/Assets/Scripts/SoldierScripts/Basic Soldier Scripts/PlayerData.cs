@@ -74,8 +74,6 @@ public class PlayerData : MonoBehaviour, IHealth
     // Use this for initialization
     void Start()
     {
-
-	
         // Start initializes 3 lives at start, can be changed later
 
         lives = STARTING_LIVES;
@@ -109,6 +107,7 @@ public class PlayerData : MonoBehaviour, IHealth
                 tag = "soldier2";
                 break;
         }
+
         weaponData.PlayerNum = playerNumber;
         SetCamera();
     }
@@ -128,8 +127,8 @@ public class PlayerData : MonoBehaviour, IHealth
         {
             health -= 10;
         }
+
         healthPrev = health;
-        
     }
 
 
@@ -192,7 +191,6 @@ public class PlayerData : MonoBehaviour, IHealth
     /// </summary>
     void Death()
     {
-
         // Reset the player's Stats
 
         SpawnRagdoll(transform.position);
@@ -204,10 +202,6 @@ public class PlayerData : MonoBehaviour, IHealth
         alive = false;
 
         GameManagerScript.instance.KillSoldier(playerNumber);
-       
-
-        
-        
     }
 
     /// <summary>
@@ -221,8 +215,6 @@ public class PlayerData : MonoBehaviour, IHealth
         {
             Death();
         }
-
-
     }
 
 
@@ -232,19 +224,13 @@ public class PlayerData : MonoBehaviour, IHealth
     void ResetPlayerValues()
     {
         health = MAX_HEALTH;
-       
     }
 
     void SpawnRagdoll(Vector3 pos)
     {
-
-   
         GameObject ragdollClone = Instantiate(ragdoll, pos, transform.rotation,transform.parent);
-
-  
-
+        
         SetRagDollPos(model.transform.GetChild(0),ragdollClone.transform.GetChild(0));
-
     }
 
     void SetRagDollPos(Transform main, Transform rgPart)    
@@ -259,20 +245,16 @@ public class PlayerData : MonoBehaviour, IHealth
 
             if(mainChild!=null && rgChild != null)
                 SetRagDollPos(mainChild, rgChild);
-
         }
-
     }
 
     private void OnEnable()
     {
-
         alive = true;
     }
 
     void OnTriggerEnter(Collider col)
 	{
-		
 		GameObject collisionObject = col.gameObject;
 		// If a player is hit with an object the robot throws
 		if (collisionObject.tag == "throwable")
@@ -283,7 +265,6 @@ public class PlayerData : MonoBehaviour, IHealth
 				float movingObjectDamage = collisionObject.GetComponent<Rigidbody>().velocity.magnitude;
 
 				Damage(movingObjectDamage);
-
 			}
 			else if(collisionObject.GetComponent<Rigidbody>().isKinematic)
 			{

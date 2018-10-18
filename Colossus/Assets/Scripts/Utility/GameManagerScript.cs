@@ -43,7 +43,7 @@ public class GameManagerScript : MonoBehaviour
         { 2, PauseOwner.Player2 }
     };
 
-	//Pause Inputs
+	//Player Inputs
     GamePadState state1;
     GamePadState prevState1;
     GamePadState state2;
@@ -150,7 +150,7 @@ public class GameManagerScript : MonoBehaviour
 	{
 		currentGameState = GameState.InGame;
 		EnvironmentManagerScript.instance.GamePiecesSwitch();
-	}
+    }
 
 
     #region Pause and Play Game
@@ -247,7 +247,7 @@ public class GameManagerScript : MonoBehaviour
     #endregion
 
 
-    void SpawnSoldiers()
+    public void SpawnSoldiers()
     {
 		CreateSoldier(1, AbilityManagerScript.instance.soldier1);
         soldier1.playerNumber = 1;
