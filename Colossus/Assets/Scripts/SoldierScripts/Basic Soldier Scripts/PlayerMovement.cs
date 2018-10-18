@@ -5,9 +5,7 @@ using XInputDotNetPure;
 
 
 public class PlayerMovement : MonoBehaviour {
-
-
-
+    
     const float GRAVITY = 7f;
 
     CharacterController player;
@@ -130,7 +128,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         // Rotate the player
         // Look axis
-        if (state.ThumbSticks.Right.X > .2 || state.ThumbSticks.Right.X < -.2)
+        if (state.ThumbSticks.Right.X > .1 || state.ThumbSticks.Right.X < -.1)
         {
             rotX = state.ThumbSticks.Right.X * lookSensitivityX;
         }
@@ -138,7 +136,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             rotX = 0;
         }
-        if (state.ThumbSticks.Right.Y > .2 || state.ThumbSticks.Right.Y < -.2)
+        if (state.ThumbSticks.Right.Y > .1 || state.ThumbSticks.Right.Y < -.1)
         {
             rotY = -state.ThumbSticks.Right.Y * lookSensitivityY;
         }
