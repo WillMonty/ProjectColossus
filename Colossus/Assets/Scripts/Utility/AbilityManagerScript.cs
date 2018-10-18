@@ -33,7 +33,6 @@ public class AbilityManagerScript : MonoBehaviour {
 		// Check for an instance, if it does exist, than set to this
 		if (instance == null)
 		{
-			Debug.Log("set instance");
 			instance = this;
 		}
 		else if(instance!=this)

@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 23066079063105620}
   - component: {fileID: 65447829319145816}
   - component: {fileID: 114444704867188720}
+  - component: {fileID: 54210395941255436}
   m_Layer: 0
   m_Name: right_bicep
   m_TagString: colossusplayer
@@ -149,6 +150,7 @@ GameObject:
   - component: {fileID: 23443856475889502}
   - component: {fileID: 65429206250960402}
   - component: {fileID: 114897960856667078}
+  - component: {fileID: 54859946599120082}
   m_Layer: 0
   m_Name: left_forearm
   m_TagString: colossusplayer
@@ -167,6 +169,7 @@ GameObject:
   - component: {fileID: 33212069946302752}
   - component: {fileID: 23080983672473410}
   - component: {fileID: 65464289705926668}
+  - component: {fileID: 54294639065260988}
   m_Layer: 0
   m_Name: torso
   m_TagString: colossusplayer
@@ -489,6 +492,7 @@ GameObject:
   - component: {fileID: 23069708175130320}
   - component: {fileID: 65801806433844826}
   - component: {fileID: 114537201061048098}
+  - component: {fileID: 54759298414152256}
   m_Layer: 0
   m_Name: right_forearm
   m_TagString: colossusplayer
@@ -559,6 +563,7 @@ GameObject:
   - component: {fileID: 33150304764293542}
   - component: {fileID: 23744810637667332}
   - component: {fileID: 114965652380048496}
+  - component: {fileID: 54203088458124506}
   m_Layer: 0
   m_Name: right_shoulder
   m_TagString: colossusplayer
@@ -628,6 +633,7 @@ GameObject:
   - component: {fileID: 33266904829493520}
   - component: {fileID: 23329995317747410}
   - component: {fileID: 114778622573916354}
+  - component: {fileID: 54309647408360374}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: colossusplayer
@@ -696,6 +702,7 @@ GameObject:
   - component: {fileID: 23145852823454254}
   - component: {fileID: 114776539999834844}
   - component: {fileID: 65329981219498644}
+  - component: {fileID: 54198137959001100}
   m_Layer: 0
   m_Name: neck
   m_TagString: colossusplayer
@@ -951,7 +958,8 @@ GameObject:
   - component: {fileID: 114241897500036978}
   - component: {fileID: 114640266820151818}
   - component: {fileID: 82490477622657468}
-  m_Layer: 0
+  - component: {fileID: 54921141678491848}
+  m_Layer: 14
   m_Name: RightShield
   m_TagString: colossusshield
   m_Icon: {fileID: 0}
@@ -1104,6 +1112,7 @@ GameObject:
   - component: {fileID: 33092348916953500}
   - component: {fileID: 23635453057737074}
   - component: {fileID: 114837421860877814}
+  - component: {fileID: 54768459265761400}
   m_Layer: 0
   m_Name: left_shoulder
   m_TagString: colossusplayer
@@ -1544,6 +1553,7 @@ GameObject:
   - component: {fileID: 65547500387419766}
   - component: {fileID: 65916780320977668}
   - component: {fileID: 114171263522488736}
+  - component: {fileID: 54015323507640894}
   m_Layer: 0
   m_Name: upper_torso
   m_TagString: colossusplayer
@@ -1833,7 +1843,8 @@ GameObject:
   - component: {fileID: 114506397160974708}
   - component: {fileID: 114207922062320798}
   - component: {fileID: 82898926700318994}
-  m_Layer: 0
+  - component: {fileID: 54039568492612066}
+  m_Layer: 14
   m_Name: LeftShield
   m_TagString: colossusshield
   m_Icon: {fileID: 0}
@@ -1903,6 +1914,7 @@ GameObject:
   - component: {fileID: 23421919642041620}
   - component: {fileID: 65301365551457242}
   - component: {fileID: 114495399504248604}
+  - component: {fileID: 54949683015769784}
   m_Layer: 0
   m_Name: left_bicep
   m_TagString: colossusplayer
@@ -2456,6 +2468,7 @@ GameObject:
   - component: {fileID: 33886526531649702}
   - component: {fileID: 23677534949818600}
   - component: {fileID: 65995733657647264}
+  - component: {fileID: 54252920453360716}
   m_Layer: 0
   m_Name: lower_body
   m_TagString: colossusplayer
@@ -2877,6 +2890,7 @@ GameObject:
   - component: {fileID: 23839829300535550}
   - component: {fileID: 135191077577147248}
   - component: {fileID: 114689169110115734}
+  - component: {fileID: 54376970149226264}
   m_Layer: 11
   m_Name: Colossus_head1
   m_TagString: colossusplayer
@@ -2896,6 +2910,7 @@ GameObject:
   - component: {fileID: 23318632985587068}
   - component: {fileID: 65919111103969320}
   - component: {fileID: 114595771847476744}
+  - component: {fileID: 54328840469350806}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: colossusplayer
@@ -9874,6 +9889,66 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1924789478341270}
   m_Mesh: {fileID: 4300018, guid: e32f1f40acaa4bb4681a79c794be78df, type: 3}
+--- !u!54 &54015323507640894
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1560524280372282}
+  serializedVersion: 2
+  m_Mass: 1250
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54039568492612066
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646473073346752}
+  serializedVersion: 2
+  m_Mass: 800
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54198137959001100
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1249233496182060}
+  serializedVersion: 2
+  m_Mass: 70
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54203088458124506
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1169756280320452}
+  serializedVersion: 2
+  m_Mass: 150
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!54 &54209583560091420
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -9881,7 +9956,97 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000131344819812}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 500
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54210395941255436
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1025029963989022}
+  serializedVersion: 2
+  m_Mass: 300
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54252920453360716
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1850879691064876}
+  serializedVersion: 2
+  m_Mass: 700
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54294639065260988
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1028781529429454}
+  serializedVersion: 2
+  m_Mass: 400
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54309647408360374
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1220459855256942}
+  serializedVersion: 2
+  m_Mass: 500
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54328840469350806
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1984975909158400}
+  serializedVersion: 2
+  m_Mass: 500
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54376970149226264
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978637245841142}
+  serializedVersion: 2
+  m_Mass: 750
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -9911,7 +10076,22 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1526715591333572}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 500
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54759298414152256
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1147302929240834}
+  serializedVersion: 2
+  m_Mass: 300
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -9927,6 +10107,66 @@ Rigidbody:
   m_GameObject: {fileID: 1472679771490436}
   serializedVersion: 2
   m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54768459265761400
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1413119032281684}
+  serializedVersion: 2
+  m_Mass: 150
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54859946599120082
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027158547326680}
+  serializedVersion: 2
+  m_Mass: 300
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54921141678491848
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1354764489143360}
+  serializedVersion: 2
+  m_Mass: 800
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54949683015769784
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1668978260952000}
+  serializedVersion: 2
+  m_Mass: 300
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0

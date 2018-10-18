@@ -62,7 +62,7 @@ public class Shield : MonoBehaviour {
 	{
 		if(currReflect <= 0.0f)
 		{
-			//Play noReflectSound if it isnt playing
+			//Play noReflectSound
 			return;
 		}
 
@@ -83,9 +83,18 @@ public class Shield : MonoBehaviour {
 		mat.color = new Color(1.0f, 1.0f, 1.0f, offAlpha);
 		reflecting = false;
 
-		source.Stop();
-		source.clip = reflectOffSound;
-		source.Play();
+		if(!source.isPlaying)
+		{
+			if(currReflect > 0.0f)
+			{
+				source.clip = reflectOffSound;
+				source.Play();
+			}
+			else
+			{
+				//Play noReflectSound
+			}
+		}
 	}
 
 	/// <summary>

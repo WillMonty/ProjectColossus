@@ -18,6 +18,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
     GameObject rightController;
 	[Header("Colossus Components")]
     public GameObject headset;
+	public RootMotion.FinalIK.VRIK ikColossus;
     public GameObject positionIndicator; //Gameobjects showing the player where to go to start the game
 	public GameObject resultsCanvas;
 
@@ -28,10 +29,10 @@ public class ColossusManager : MonoBehaviour, IHealth {
 
     [Header("Audio")]
     public AudioSource headSource;
+	public AudioSource alarmSource;
     public AudioClip hopInSound;
     public AudioClip damageSound;
 	public AudioClip deathSound;
-	public AudioClip alarmSound;
 
     [Header("UI")]
     public Slider armHealthbar;
@@ -42,6 +43,8 @@ public class ColossusManager : MonoBehaviour, IHealth {
     public GameObject rightIndicator;
     public Material inPositionMat;
     public Material outPositionMat;
+
+	bool fixedIK;
 
     #endregion
 
@@ -104,6 +107,14 @@ public class ColossusManager : MonoBehaviour, IHealth {
 		{
 			resultsCanvas.SetActive(true);
 			resultsCanvas.transform.GetChild(1).gameObject.SetActive(true);
+		}
+
+		//IK arm fix?
+		if(!fixedIK && leftController.GetComponent<SteamVR_TrackedController>().menuPressed)
+		{
+			fixedIK = true;
+			Debug.Log("Trying IK");
+			ikColossus.GetIKSolver().Initiate(ikColossus.GetIKSolver().GetRoot());
 		}
     }
     #endregion
@@ -185,8 +196,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
 	{
 		if(positionIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger)
 		{
-			headSource.Stop();
-			headSource.loop = false;
+			alarmSource.Stop();
 		}
 		else
 		{
@@ -196,9 +206,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
 				if(GameManagerScript.instance.forceStartGame) //Don't play the sound when debugging
 					return;
 				
-				headSource.clip = alarmSound;
-				headSource.loop = true;
-				headSource.Play();
+				alarmSource.Play();
 			}
 		}
 	}
