@@ -197,11 +197,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &65323315 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1588828268956112, guid: cb223d5d1db60b448beb4191f8e52ed7,
-    type: 2}
-  m_PrefabInternal: {fileID: 632586209}
 --- !u!224 &65323319 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224853382970500418, guid: cb223d5d1db60b448beb4191f8e52ed7,
@@ -320,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 7d5fbce8501e1cc418c0d74825de76e8, type: 2}
+  profile: {fileID: 0}
 --- !u!81 &552865415
 AudioListener:
   m_ObjectHideFlags: 0
@@ -470,7 +465,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1637461782150572, guid: c0d17c44f02b5b74f8ace3fffc043d27, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0d17c44f02b5b74f8ace3fffc043d27, type: 2}
@@ -505,9 +500,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d97dd221a3ff9a4a820a821fcd5e037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHandColossus: 1
+  leftHandColossus: 0
   rightHandColossus: 0
-  headColossus: 1
+  headColossus: 0
   soldier1: 0
   soldier2: 0
 --- !u!114 &588380222
@@ -522,15 +517,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d8d9709491137408017c1c3b00e0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceStartGame: 0
-  currentGameState: 2
+  forceStartGame: 1
+  currentGameState: 3
   colossus: {fileID: 0}
   soldier1: {fileID: 0}
   soldier2: {fileID: 0}
   soldierUICanvas: {fileID: 1394774451}
-  pauseMenu: {fileID: 65323315}
+  pauseMenu: {fileID: 0}
   pauseMenuDefaultButton: {fileID: 0}
-  currentPauseOwner: 3
+  currentPauseOwner: 0
 --- !u!4 &588380223
 Transform:
   m_ObjectHideFlags: 0
@@ -800,7 +795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 7d5fbce8501e1cc418c0d74825de76e8, type: 2}
+  profile: {fileID: 0}
 --- !u!224 &980940726 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224970474111816774, guid: c0d17c44f02b5b74f8ace3fffc043d27,
@@ -1077,7 +1072,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1537516300912974, guid: d7a720baab1e282499bd2b0f0c17ccce, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7a720baab1e282499bd2b0f0c17ccce, type: 2}
