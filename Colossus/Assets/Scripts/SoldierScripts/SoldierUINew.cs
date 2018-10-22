@@ -172,7 +172,7 @@ public class SoldierUINew : MonoBehaviour {
 
         if (s1Reloading)
         {
-            if (s1ReloadTime > s1ReloadDuration)
+            if (s1ReloadTime >= s1ReloadDuration)
             {
                 s1ReloadTime = s1ReloadDuration;
                 
@@ -191,7 +191,7 @@ public class SoldierUINew : MonoBehaviour {
 
         if (s2Reloading)
         {
-            if (s2ReloadTime > s2ReloadDuration)
+            if (s2ReloadTime >= s2ReloadDuration)
             {
                 s2ReloadTime = s2ReloadDuration;
 
