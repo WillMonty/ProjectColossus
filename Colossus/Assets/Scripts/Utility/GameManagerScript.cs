@@ -20,6 +20,7 @@ public class GameManagerScript : MonoBehaviour
 
 	[Header("Debug")]
 	public bool forceStartGame;
+	public bool onlyVR;
 
 	[Header("State")]
 	public GameState currentGameState;
@@ -115,9 +116,9 @@ public class GameManagerScript : MonoBehaviour
 		}
 
 
-		if (currentGameState == GameState.Pregame || currentGameState == GameState.InGame)
+		if ((currentGameState == GameState.Pregame || currentGameState == GameState.InGame) && !onlyVR)
         {
-			//Set up main game scene objects
+			//Set up resistance objects
             spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
             deathCam1 = GameObject.Find("DeathCam1");
             deathCam2 = GameObject.Find("DeathCam2");
@@ -226,6 +227,7 @@ public class GameManagerScript : MonoBehaviour
             if (instance.currentGameState == GameState.InGame && colossus.Health <= 0)
             {
                 instance.currentGameState = GameState.ResistanceWin;
+				//EnvironmentManagerScript.instance.
                 StartCoroutine(ReturnToMainMenu(7f));
             }
             else if (instance.currentGameState == GameState.InGame && soldier1.Lives <= 0 && soldier2.Lives <= 0)
@@ -296,6 +298,12 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     void OOOOOOOF()
     {
+		//Input based debug
+		if(Input.GetKeyDown(KeyCode.Slash))
+		{
+			colossus.DamageObject(99999f);
+		}
+
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
 			currentGameState = GameState.MainMenu;
@@ -303,7 +311,7 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    //Disable a soldier, activate it's deathcam and repawn if necessary
+    //Disable a soldier, activate it's deathcam and respawn if necessary
     public void KillSoldier(int pNum)
     {
         PlayerData soldierClone;
@@ -319,8 +327,6 @@ public class GameManagerScript : MonoBehaviour
 
         if (soldierClone.Lives > 0)
             StartCoroutine(RespawnSoldier(5, soldierClone));
-    
-
     }
 
     void EnableSoldierUI()
