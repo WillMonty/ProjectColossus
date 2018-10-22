@@ -33,7 +33,6 @@ public class AbilityManagerScript : MonoBehaviour {
 		// Check for an instance, if it does exist, than set to this
 		if (instance == null)
 		{
-			Debug.Log("set instance");
 			instance = this;
 		}
 		else if(instance!=this)
@@ -47,4 +46,17 @@ public class AbilityManagerScript : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void SetSoldierClass(int soldierNum, SoldierClass newClass)
+    {
+        switch(soldierNum)
+        {
+            case 1:
+                soldier1 = newClass;
+                break;
+            case 2:
+                soldier2 = newClass;
+                break;
+        }
+    }
 }

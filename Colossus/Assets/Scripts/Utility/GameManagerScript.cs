@@ -26,11 +26,8 @@ public class GameManagerScript : MonoBehaviour
 
 	[Header("Players")]
     public ColossusManager colossus = null;
-
     public PlayerData soldier1 = null;
     public PlayerData soldier2 = null;
-
-
 
     [Header("UI and Pausing")]
 	public GameObject soldierUICanvas;
@@ -46,12 +43,13 @@ public class GameManagerScript : MonoBehaviour
         { 2, PauseOwner.Player2 }
     };
 
+	//Player Inputs
     GamePadState state1;
     GamePadState prevState1;
-
     GamePadState state2;
     GamePadState prevState2;
 
+	//Soldier properties
     private GameObject[] spawnPoints;
     GameObject deathCam1;
     GameObject deathCam2;
@@ -98,7 +96,7 @@ public class GameManagerScript : MonoBehaviour
                 break;	
 		}
 
-		StartCoroutine(LateStart(0.2f));
+		StartCoroutine(LateStart(0.3f));
     }
 
 	IEnumerator LateStart(float waitTime)
@@ -112,18 +110,21 @@ public class GameManagerScript : MonoBehaviour
 				colossus.ToggleColossus();	
 			else
 			{
-                currentGameState = GameState.InGame;
+				StartGame();
             }
 		}
 
-        if (currentGameState == GameState.InGame || currentGameState == GameState.Pregame)
+
+		if (currentGameState == GameState.Pregame || currentGameState == GameState.InGame)
         {
-            SpawnSoldiers();
+			//Set up main game scene objects
             spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
             deathCam1 = GameObject.Find("DeathCam1");
             deathCam2 = GameObject.Find("DeathCam2");
             deathCam1.SetActive(false);
             deathCam2.SetActive(false);
+
+			SpawnSoldiers();
         }
 
     }
@@ -148,7 +149,8 @@ public class GameManagerScript : MonoBehaviour
 	public void StartGame()
 	{
 		currentGameState = GameState.InGame;
-	}
+		EnvironmentManagerScript.instance.GamePiecesSwitch();
+    }
 
 
     #region Pause and Play Game
@@ -245,9 +247,8 @@ public class GameManagerScript : MonoBehaviour
     #endregion
 
 
-    void SpawnSoldiers()
+    public void SpawnSoldiers()
     {
-		Debug.Log(AbilityManagerScript.instance);
 		CreateSoldier(1, AbilityManagerScript.instance.soldier1);
         soldier1.playerNumber = 1;
 
