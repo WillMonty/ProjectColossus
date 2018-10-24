@@ -39,7 +39,7 @@ public class MoveObjectTrigger : MonoBehaviour {
                 if (other.transform.parent.GetComponent<Rigidbody>() != null)
                 {
                     //Debug.Log(other.name);
-                    other.transform.parent.GetComponent<Rigidbody>().AddForce(transform.rotation * movementForce);
+                    other.transform.parent.GetComponent<Rigidbody>().AddForce(transform.rotation * movementForce, ForceMode.Acceleration);
                     //other.transform.parent.GetComponent<Rigidbody>().vel(transform.rotation * movementForce);
                 }
             }

@@ -30,7 +30,7 @@ public class GunBase : MonoBehaviour, IWeapon
     //Audio Source
     protected AudioSource source;
     public AudioClip shootSound;
-
+    public AudioClip reloadSound;
     // current gun Tracking variables
     protected int bulletsInMag;
     public int BulletsInMag
@@ -199,6 +199,9 @@ public class GunBase : MonoBehaviour, IWeapon
     
     protected virtual void Reload()
     {
+        source.Stop();
+        source.clip = reloadSound;
+        source.Play();
 
 
         reloading = true;

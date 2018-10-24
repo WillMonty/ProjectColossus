@@ -4924,7 +4924,8 @@ MonoBehaviour:
   projectile: {fileID: 1848119819431530, guid: 60fb63b8c1f88f74c9b4cabb5fd37bc8, type: 2}
   rifleExternal: {fileID: 1008252312446348}
   rifleInternal: {fileID: 1570974141720584}
-  shootSound: {fileID: 8300000, guid: b110723b0b99e8c4caf2e1277f25183b, type: 3}
+  shootSound: {fileID: 8300000, guid: 4f3750eaa43089342b191b0b543eb1b7, type: 3}
+  reloadSound: {fileID: 8300000, guid: d3563e7ca825e9c42ad4ee6668ba0577, type: 3}
 --- !u!114 &114624970154055926
 MonoBehaviour:
   m_ObjectHideFlags: 1
