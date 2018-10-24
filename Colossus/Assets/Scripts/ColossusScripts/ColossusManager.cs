@@ -19,13 +19,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
 	[Header("Colossus Components")]
     public GameObject headset;
 	public RootMotion.FinalIK.VRIK ikColossus;
-    public GameObject positionIndicator; //Gameobjects showing the player where to go to start the game
 	public GameObject resultsCanvas;
-
-    [Header("Environment")]
-    public GameObject map;
-    public float lowerMapAmount;
-    public GameObject resistanceContainer;
 
     [Header("Audio")]
     public AudioSource headSource;
@@ -39,10 +33,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
     public Slider headHealthbar;
 
     [Header("Colossus Positioning")]
-    public GameObject leftIndicator;
-    public GameObject rightIndicator;
-    public Material inPositionMat;
-    public Material outPositionMat;
+	public GameObject positionIndicator; //Gameobject tracking the colossus body position
 
 	bool fixedIK;
 
@@ -171,9 +162,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
         //Check if the colossus is in the pillar trigger
 		if(positionIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger)
         {
-            //Make the indicators green
-            leftIndicator.GetComponent<MeshRenderer>().material = inPositionMat;
-            rightIndicator.GetComponent<MeshRenderer>().material = inPositionMat;
+			//Check on canvas?
 
             //Check if either trigger is pressed to hop in
             bool leftTriggerPressed = leftController.GetComponent<SteamVR_TrackedController>().triggerPressed;
@@ -183,9 +172,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
         }
         else
         {
-            //Make the indicators red
-            leftIndicator.GetComponent<MeshRenderer>().material = outPositionMat;
-            rightIndicator.GetComponent<MeshRenderer>().material = outPositionMat;
+			//X on canvas?
         }
     }
 
@@ -194,7 +181,8 @@ public class ColossusManager : MonoBehaviour, IHealth {
 	/// </summary>
 	void CheckInBounds()
 	{
-		if(positionIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger)
+		//Don't bother with bounds if debugging
+		if(positionIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger || GameManagerScript.instance.forceStartGame)
 		{
 			alarmSource.Stop();
 		}
@@ -216,9 +204,6 @@ public class ColossusManager : MonoBehaviour, IHealth {
     /// </summary>
     public void ToggleColossus()
     {
-        //Turn off indicators
-        leftIndicator.SetActive(false);
-        rightIndicator.SetActive(false);
 		positionIndicator.transform.GetChild(0).gameObject.SetActive(false); //Turn off green position cube
 
 		//Turn off starter hands
@@ -233,7 +218,8 @@ public class ColossusManager : MonoBehaviour, IHealth {
 		armHealthbar.gameObject.SetActive(true);
         headHealthbar.gameObject.SetActive(true);
 
-        LowerMap();
+		//Drop the map to accomadate player height
+		EnvironmentManagerScript.instance.LowerMap(headset.transform.position.y);
 
 		GameManagerScript.instance.StartGame();
 
@@ -243,16 +229,6 @@ public class ColossusManager : MonoBehaviour, IHealth {
             headSource.clip = hopInSound;
             headSource.Play();
         }
-    }
-
-    void LowerMap()
-    {
-        float playerY = headset.transform.position.y - lowerMapAmount;
-        map.transform.position = new Vector3(map.transform.position.x, playerY, map.transform.position.z);
-
-		//Don't bother if there aren't resistance in the scene
-		if(resistanceContainer != null)
-        	resistanceContainer.transform.position = new Vector3(resistanceContainer.transform.position.x, playerY + resistanceContainer.transform.position.y, resistanceContainer.transform.position.z);
     }
 
 	void KillColossus()
