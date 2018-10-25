@@ -34,6 +34,8 @@ public class GameManagerScript : MonoBehaviour
 	public GameObject soldierUICanvas;
     public GameObject soldierSelectMenu;
     public GameObject pauseMenu;
+    public GameObject[] pauseMenuButtons;
+    public int pauseMenuSelectedButton = 0;
     public GameObject soldierCountdownUI;
     public GameObject soldierCoutdownTimer;
 
@@ -45,14 +47,159 @@ public class GameManagerScript : MonoBehaviour
         { 1, PauseOwner.Player1},
         { 2, PauseOwner.Player2 }
     };
+    public Color normalColor;
+    public Color highlightedColor;
 
-	//Player Inputs
+    //Player Inputs
     GamePadState state1;
     GamePadState prevState1;
     GamePadState state2;
     GamePadState prevState2;
+    
+    #region Player 1 Inputs
 
-	//Soldier properties
+    //Up DPad State
+    int p1Up
+    {
+        get
+        {
+            if (state1.DPad.Up == ButtonState.Pressed && prevState1.DPad.Up == ButtonState.Released)
+                return 1; //Pressed
+                          /*else if (state1.DPad.Up == ButtonState.Pressed)
+                              return 2; //Held */
+
+            return 0;
+        }
+    }
+
+    //Down DPad State
+    int p1Down
+    {
+        get
+        {
+            if (state1.DPad.Down == ButtonState.Pressed && prevState1.DPad.Down == ButtonState.Released)
+                return 1; //Pressed
+                          /*else if (state1.DPad.Down == ButtonState.Pressed)
+                              return 2; //Held */
+
+            return 0;
+        }
+    }
+
+    //Right DPad State
+    int p1Right
+    {
+        get
+        {
+            if (state1.DPad.Right == ButtonState.Pressed && prevState1.DPad.Right == ButtonState.Released)
+                return 1; //Pressed
+            /*else if (state1.DPad.Right == ButtonState.Pressed)
+                return 2; //Held*/
+
+            return 0;
+        }
+    }
+
+    //Left DPad State
+    int p1Left
+    {
+        get
+        {
+            if (state1.DPad.Left == ButtonState.Pressed && prevState1.DPad.Left == ButtonState.Released)
+                return 1; //Pressed
+            /*else if (state1.DPad.Left == ButtonState.Pressed)
+                return 2; //Held*/
+
+            return 0;
+        }
+    }
+
+
+    int p1A
+    {
+        get
+        {
+            if (state1.Buttons.A == ButtonState.Pressed && prevState1.Buttons.A == ButtonState.Released)
+                return 1;
+
+            return 0;
+        }
+    }
+
+    #endregion
+
+    #region Player 2 Inputs
+
+    //Up DPad State
+    public int p2Up
+    {
+        get
+        {
+            if (state2.DPad.Up == ButtonState.Pressed && prevState2.DPad.Up == ButtonState.Released)
+                return 1; //Pressed
+                          /*else if (state2.DPad.Up == ButtonState.Pressed)
+                              return 2; //Held */
+
+            return 0;
+        }
+    }
+
+    //Down DPad State
+    public int p2Down
+    {
+        get
+        {
+            if (state2.DPad.Down == ButtonState.Pressed && prevState2.DPad.Down == ButtonState.Released)
+                return 1; //Pressed
+                          /*else if (state2.DPad.Down == ButtonState.Pressed)
+                              return 2; //Held */
+
+            return 0;
+        }
+    }
+
+    //Right DPad State
+    public int p2Right
+    {
+        get
+        {
+            if (state2.DPad.Right == ButtonState.Pressed && prevState2.DPad.Right == ButtonState.Released)
+                return 1; //Pressed
+            /*else if (state2.DPad.Right == ButtonState.Pressed)
+                return 2; //Held*/
+
+            return 0;
+        }
+    }
+
+    //Left DPad State
+    public int p2Left
+    {
+        get
+        {
+            if (state2.DPad.Left == ButtonState.Pressed && prevState2.DPad.Left == ButtonState.Released)
+                return 1; //Pressed
+            /*else if (state2.DPad.Left == ButtonState.Pressed)
+                return 2; //Held*/
+
+            return 0;
+        }
+    }
+
+    int p2A
+    {
+        get
+        {
+            if (state2.Buttons.A == ButtonState.Pressed && prevState2.Buttons.A == ButtonState.Released)
+                return 1;
+
+            return 0;
+        }
+    }
+
+    #endregion
+
+    //Soldier properties
     private GameObject[] spawnPoints;
     GameObject deathCam1;
     GameObject deathCam2;
@@ -142,11 +289,12 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-		PauseInputs();
+		Inputs();
 		CheckWinCondition();
         OOOOOOOF();
 
         Countdown();
+        Pause();
 
 		if (!soldierUICanvas.activeSelf && currentGameState == GameState.InGame)
         {
@@ -185,7 +333,7 @@ public class GameManagerScript : MonoBehaviour
 
     #region Pause and Play Game
 
-    void PauseInputs()
+    void Inputs()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -222,8 +370,6 @@ public class GameManagerScript : MonoBehaviour
                 && playerNumToPauseOwner[playerNum] == currentPauseOwner)
         {
             ResumeGame();
-
-            currentPauseOwner = PauseOwner.None;
         }
     }
 
@@ -234,6 +380,10 @@ public class GameManagerScript : MonoBehaviour
         
         currentGameState = GameState.Paused;
 
+        pauseMenuButtons[0].GetComponent<Image>().color = highlightedColor;
+
+        pauseMenuSelectedButton = 0;
+
         Time.timeScale = 0;
     }
 
@@ -242,6 +392,10 @@ public class GameManagerScript : MonoBehaviour
         pauseMenu.SetActive(false);
 
         currentGameState = GameState.InGame;
+
+        currentPauseOwner = PauseOwner.None;
+
+        pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = normalColor;
 
         Time.timeScale = 1;
     }
@@ -437,6 +591,63 @@ public class GameManagerScript : MonoBehaviour
                 soldierCountdownUI.SetActive(false);
                 currentGameState = GameState.InGame;
                 gameCountdownTimer = gameCountdownTimerDefault;
+            }
+        }
+    }
+
+    void Pause()
+    {
+        if(currentGameState == GameState.Paused)
+        {
+            if(currentPauseOwner == PauseOwner.Player1)
+            {
+                if(p1Down == 1)
+                {
+                    int prevButton = pauseMenuSelectedButton;
+
+                    pauseMenuSelectedButton = (pauseMenuSelectedButton + 1) % pauseMenuButtons.Length;
+
+                    pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
+                    pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
+                }
+                else if(p1Up == 1)
+                {
+                    int prevButton = pauseMenuSelectedButton;
+
+                    pauseMenuSelectedButton = (pauseMenuSelectedButton + pauseMenuButtons.Length - 1) % pauseMenuButtons.Length;
+
+                    pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
+                    pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
+                }
+                else if(p1A == 1)
+                {
+                    pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Button>().onClick.Invoke();
+                }
+            }
+            else if(currentPauseOwner == PauseOwner.Player2)
+            {
+                if (p2Down == 1)
+                {
+                    int prevButton = pauseMenuSelectedButton;
+
+                    pauseMenuSelectedButton = (pauseMenuSelectedButton + 1) % pauseMenuButtons.Length;
+
+                    pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
+                    pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
+                }
+                else if (p2Up == 1)
+                {
+                    int prevButton = pauseMenuSelectedButton;
+
+                    pauseMenuSelectedButton = (pauseMenuSelectedButton + pauseMenuButtons.Length - 1) % pauseMenuButtons.Length;
+
+                    pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
+                    pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
+                }
+                else if (p2A == 1)
+                {
+                    pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Button>().onClick.Invoke();
+                }
             }
         }
     }

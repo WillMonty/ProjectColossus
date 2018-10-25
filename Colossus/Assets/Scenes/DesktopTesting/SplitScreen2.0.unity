@@ -202,6 +202,11 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224853382970500418, guid: cb223d5d1db60b448beb4191f8e52ed7,
     type: 2}
   m_PrefabInternal: {fileID: 632586209}
+--- !u!1 &80164959 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1078660968487430, guid: cb223d5d1db60b448beb4191f8e52ed7,
+    type: 2}
+  m_PrefabInternal: {fileID: 632586209}
 --- !u!1 &320084780 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1637461782150572, guid: c0d17c44f02b5b74f8ace3fffc043d27,
@@ -508,7 +513,7 @@ MonoBehaviour:
   leftHandColossus: 0
   rightHandColossus: 0
   headColossus: 0
-  soldier1: 2
+  soldier1: 0
   soldier2: 0
 --- !u!114 &588380222
 MonoBehaviour:
@@ -531,9 +536,15 @@ MonoBehaviour:
   soldierUICanvas: {fileID: 1394774451}
   soldierSelectMenu: {fileID: 320084780}
   pauseMenu: {fileID: 915570370}
+  pauseMenuButtons:
+  - {fileID: 1056449661}
+  - {fileID: 80164959}
+  pauseMenuSelectedButton: 0
   soldierCountdownUI: {fileID: 1954721918}
   soldierCoutdownTimer: {fileID: 1074288879}
   currentPauseOwner: 3
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  highlightedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
 --- !u!4 &588380223
 Transform:
   m_ObjectHideFlags: 0
@@ -555,11 +566,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1822600936}
     m_Modifications:
-    - target: {fileID: 114541289850678296, guid: cb223d5d1db60b448beb4191f8e52ed7,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 224853382970500418, guid: cb223d5d1db60b448beb4191f8e52ed7,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -650,35 +656,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1588828268956112, guid: cb223d5d1db60b448beb4191f8e52ed7, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114541289850678296, guid: cb223d5d1db60b448beb4191f8e52ed7,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114541289850678296, guid: cb223d5d1db60b448beb4191f8e52ed7,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114541289850678296, guid: cb223d5d1db60b448beb4191f8e52ed7,
+    - target: {fileID: 114152088624303632, guid: cb223d5d1db60b448beb4191f8e52ed7,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114541289850678296, guid: cb223d5d1db60b448beb4191f8e52ed7,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ResumeGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 114541289850678296, guid: cb223d5d1db60b448beb4191f8e52ed7,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 588380222}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb223d5d1db60b448beb4191f8e52ed7, type: 2}
   m_IsPrefabParent: 0
@@ -819,6 +801,11 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224970474111816774, guid: c0d17c44f02b5b74f8ace3fffc043d27,
     type: 2}
   m_PrefabInternal: {fileID: 576041755}
+--- !u!1 &1056449661 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1814861071830548, guid: cb223d5d1db60b448beb4191f8e52ed7,
+    type: 2}
+  m_PrefabInternal: {fileID: 632586209}
 --- !u!1 &1074288879 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1548849706702762, guid: d7a720baab1e282499bd2b0f0c17ccce,

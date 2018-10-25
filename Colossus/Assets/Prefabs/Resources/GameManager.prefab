@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4296994175362588}
   - component: {fileID: 114851049906826984}
-  - component: {fileID: 114619753186806450}
   - component: {fileID: 114035787991922386}
   m_Layer: 0
   m_Name: GameManager
@@ -53,23 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d97dd221a3ff9a4a820a821fcd5e037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHandColossus: 1
+  leftHandColossus: 0
   rightHandColossus: 0
-  headColossus: 1
-  resistance1: 0
-  resistance2: 2
---- !u!114 &114619753186806450
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1594123541598610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 253bd74bfa96a9e49ac47b776d0a6c0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxRubbishCount: 50
+  headColossus: 0
+  soldier1: 2
+  soldier2: 0
 --- !u!114 &114851049906826984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,17 +68,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d8d9709491137408017c1c3b00e0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceStartGame: 1
-  currentGameState: 5
+  forceStartGame: 0
+  onlyVR: 0
+  currentGameState: 2
   colossus: {fileID: 0}
   soldier1: {fileID: 0}
   soldier2: {fileID: 0}
-  gamePieces:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   soldierUICanvas: {fileID: 0}
+  soldierSelectMenu: {fileID: 0}
   pauseMenu: {fileID: 0}
-  pauseMenuDefaultButton: {fileID: 0}
+  pauseMenuButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  pauseMenuSelectedButton: 0
+  soldierCountdownUI: {fileID: 0}
+  soldierCoutdownTimer: {fileID: 0}
   currentPauseOwner: 3
-  deathbox: {fileID: 0}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  highlightedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}

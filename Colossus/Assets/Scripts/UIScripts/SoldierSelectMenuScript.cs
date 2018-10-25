@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using XInputDotNetPure;
 
+
 public class SoldierSelectMenuScript : MonoBehaviour {
 
     public GameObject SoldierSelectUI;
@@ -245,7 +246,7 @@ public class SoldierSelectMenuScript : MonoBehaviour {
             {
                 int prevButton = p1SelectedButton;
 
-                p1SelectedButton = (p1SelectedButton + 1) % 4;
+                p1SelectedButton = (p1SelectedButton + 1) % p1Buttons.Length;
 
                 p1Buttons[p1SelectedButton].GetComponent<Image>().color = highlightedColor;
                 p1Buttons[prevButton].GetComponent<Image>().color = normalColor;
@@ -254,7 +255,7 @@ public class SoldierSelectMenuScript : MonoBehaviour {
             {
                 int prevButton = p1SelectedButton;
 
-                p1SelectedButton = (p1SelectedButton + 3) % 4;
+                p1SelectedButton = (p1SelectedButton + p1Buttons.Length - 1) % p1Buttons.Length;
 
                 p1Buttons[p1SelectedButton].GetComponent<Image>().color = highlightedColor;
                 p1Buttons[prevButton].GetComponent<Image>().color = normalColor;
@@ -268,7 +269,7 @@ public class SoldierSelectMenuScript : MonoBehaviour {
             {
                 int prevButton = p2SelectedButton;
 
-                p2SelectedButton = (p2SelectedButton + 1) % 4;
+                p2SelectedButton = (p2SelectedButton + 1) % p2Buttons.Length;
 
                 p2Buttons[p2SelectedButton].GetComponent<Image>().color = highlightedColor;
                 p2Buttons[prevButton].GetComponent<Image>().color = normalColor;
@@ -277,7 +278,7 @@ public class SoldierSelectMenuScript : MonoBehaviour {
             {
                 int prevButton = p2SelectedButton;
 
-                p2SelectedButton = (p2SelectedButton + 3) % 4;
+                p2SelectedButton = (p2SelectedButton + p2Buttons.Length - 1) % p2Buttons.Length;
 
                 p2Buttons[p2SelectedButton].GetComponent<Image>().color = highlightedColor;
                 p2Buttons[prevButton].GetComponent<Image>().color = normalColor;
