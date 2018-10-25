@@ -202,6 +202,11 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224853382970500418, guid: cb223d5d1db60b448beb4191f8e52ed7,
     type: 2}
   m_PrefabInternal: {fileID: 632586209}
+--- !u!1 &320084780 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1637461782150572, guid: c0d17c44f02b5b74f8ace3fffc043d27,
+    type: 2}
+  m_PrefabInternal: {fileID: 576041755}
 --- !u!1 &451629738
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,15 +522,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d8d9709491137408017c1c3b00e0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceStartGame: 1
-  currentGameState: 3
+  forceStartGame: 0
+  onlyVR: 0
+  currentGameState: 2
   colossus: {fileID: 0}
   soldier1: {fileID: 0}
   soldier2: {fileID: 0}
   soldierUICanvas: {fileID: 1394774451}
-  pauseMenu: {fileID: 0}
-  pauseMenuDefaultButton: {fileID: 0}
-  currentPauseOwner: 0
+  soldierSelectMenu: {fileID: 320084780}
+  pauseMenu: {fileID: 915570370}
+  soldierCountdownUI: {fileID: 1954721918}
+  soldierCoutdownTimer: {fileID: 1074288879}
+  currentPauseOwner: 3
 --- !u!4 &588380223
 Transform:
   m_ObjectHideFlags: 0
@@ -707,6 +715,11 @@ Transform:
   m_Father: {fileID: 1674813801}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &915570370 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1588828268956112, guid: cb223d5d1db60b448beb4191f8e52ed7,
+    type: 2}
+  m_PrefabInternal: {fileID: 632586209}
 --- !u!1 &949628843
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,6 +819,11 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224970474111816774, guid: c0d17c44f02b5b74f8ace3fffc043d27,
     type: 2}
   m_PrefabInternal: {fileID: 576041755}
+--- !u!1 &1074288879 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1548849706702762, guid: d7a720baab1e282499bd2b0f0c17ccce,
+    type: 2}
+  m_PrefabInternal: {fileID: 1349932058}
 --- !u!1 &1080056827
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,8 +851,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519b8b39bfb87d043933a6be4bcc0945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  lowerMapAmount: 0
+  resistanceContainer: {fileID: 0}
   gamePieces: []
   maxRubbishCount: 20000000
+  sourceAnnouncer: {fileID: 0}
+  announcerClips: []
 --- !u!4 &1080056829
 Transform:
   m_ObjectHideFlags: 0
@@ -1128,10 +1151,6 @@ Prefab:
     - target: {fileID: 1537516300912974, guid: d7a720baab1e282499bd2b0f0c17ccce, type: 2}
       propertyPath: m_Name
       value: Soldier HUD
-      objectReference: {fileID: 0}
-    - target: {fileID: 1537516300912974, guid: d7a720baab1e282499bd2b0f0c17ccce, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7a720baab1e282499bd2b0f0c17ccce, type: 2}
@@ -1453,6 +1472,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1954721918 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1380033497604050, guid: d7a720baab1e282499bd2b0f0c17ccce,
+    type: 2}
+  m_PrefabInternal: {fileID: 1349932058}
 --- !u!1 &2143328183
 GameObject:
   m_ObjectHideFlags: 0

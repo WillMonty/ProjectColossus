@@ -8,7 +8,7 @@ using XInputDotNetPure;
 
 
 // GameState Enum
-public enum GameState { MainMenu, Instructions, CharacterSelect, InGame, Paused, Pregame, ResistanceWin, ResistanceLose };
+public enum GameState { MainMenu, Instructions, CharacterSelect, GameCountdown, InGame, Paused, Pregame, ResistanceWin, ResistanceLose };
 
 
 public class GameManagerScript : MonoBehaviour
@@ -32,11 +32,13 @@ public class GameManagerScript : MonoBehaviour
 
     [Header("UI and Pausing")]
 	public GameObject soldierUICanvas;
+    public GameObject soldierSelectMenu;
     public GameObject pauseMenu;
-    public GameObject pauseMenuDefaultButton;
+    public GameObject soldierCountdownUI;
+    public GameObject soldierCoutdownTimer;
 
     public enum PauseOwner { Player1, Player2, Colossus, None}
-    public PauseOwner currentPauseOwner;
+    public PauseOwner currentPauseOwner = PauseOwner.None;
     private Dictionary<int, PauseOwner> playerNumToPauseOwner = new Dictionary<int, PauseOwner>()
     {
         { 0, PauseOwner.Colossus },
@@ -54,6 +56,9 @@ public class GameManagerScript : MonoBehaviour
     private GameObject[] spawnPoints;
     GameObject deathCam1;
     GameObject deathCam2;
+
+    float gameCountdownTimer;
+    float gameCountdownTimerDefault = 3;
 
     #endregion
 
@@ -96,8 +101,10 @@ public class GameManagerScript : MonoBehaviour
 				currentGameState = GameState.Pregame;
                 break;	
 		}
+        
+        gameCountdownTimer = gameCountdownTimerDefault;
 
-		StartCoroutine(LateStart(0.3f));
+        StartCoroutine(LateStart(0.3f));
     }
 
 	IEnumerator LateStart(float waitTime)
@@ -139,11 +146,23 @@ public class GameManagerScript : MonoBehaviour
 		CheckWinCondition();
         OOOOOOOF();
 
+        Countdown();
+
 		if (!soldierUICanvas.activeSelf && currentGameState == GameState.InGame)
         {
-            EnableSoldierUI();
+            soldierUICanvas.SetActive(true);
         }
-	}
+
+        if(!soldierSelectMenu.activeSelf && currentGameState == GameState.CharacterSelect)
+        {
+            soldierSelectMenu.SetActive(true);
+        }
+
+        if (soldierSelectMenu.activeSelf && currentGameState != GameState.CharacterSelect)
+        {
+            soldierSelectMenu.SetActive(false);
+        }
+    }
     #endregion
 
 	//General function to set up the game's pieces and state
@@ -151,6 +170,16 @@ public class GameManagerScript : MonoBehaviour
 	{
 		currentGameState = GameState.InGame;
 		EnvironmentManagerScript.instance.GamePiecesSwitch();
+    }
+
+    //called from character select menu
+    public void BeginGame()
+    {
+        currentGameState = GameState.GameCountdown;
+
+        soldierCountdownUI.SetActive(true);
+
+        EnvironmentManagerScript.instance.GamePiecesSwitch();
     }
 
 
@@ -182,19 +211,19 @@ public class GameManagerScript : MonoBehaviour
 
     public void TogglePause(int playerNum)
     {
-        if (instance.currentGameState == GameState.InGame)
+        if (currentGameState == GameState.InGame)
         {
             PauseGame();
 
-            instance.currentPauseOwner = playerNumToPauseOwner[playerNum];
+            currentPauseOwner = playerNumToPauseOwner[playerNum];
         }
 
-        else if(instance.currentGameState == GameState.Paused 
-                && playerNumToPauseOwner[playerNum] == instance.currentPauseOwner)
+        else if(currentGameState == GameState.Paused 
+                && playerNumToPauseOwner[playerNum] == currentPauseOwner)
         {
             ResumeGame();
 
-            instance.currentPauseOwner = PauseOwner.None;
+            currentPauseOwner = PauseOwner.None;
         }
     }
 
@@ -203,7 +232,7 @@ public class GameManagerScript : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         
-        instance.currentGameState = GameState.Paused;
+        currentGameState = GameState.Paused;
 
         Time.timeScale = 0;
     }
@@ -212,7 +241,7 @@ public class GameManagerScript : MonoBehaviour
     {
         pauseMenu.SetActive(false);
 
-        instance.currentGameState = GameState.InGame;
+        currentGameState = GameState.InGame;
 
         Time.timeScale = 1;
     }
@@ -224,15 +253,15 @@ public class GameManagerScript : MonoBehaviour
     {
         if(colossus != null && soldier1 != null && soldier2 != null)
         {
-            if (instance.currentGameState == GameState.InGame && colossus.Health <= 0)
+            if (currentGameState == GameState.InGame && colossus.Health <= 0)
             {
-                instance.currentGameState = GameState.ResistanceWin;
+                currentGameState = GameState.ResistanceWin;
 				//EnvironmentManagerScript.instance.
                 StartCoroutine(ReturnToMainMenu(7f));
             }
-            else if (instance.currentGameState == GameState.InGame && soldier1.Lives <= 0 && soldier2.Lives <= 0)
+            else if (currentGameState == GameState.InGame && soldier1.Lives <= 0 && soldier2.Lives <= 0)
             {
-                instance.currentGameState = GameState.ResistanceLose;
+                currentGameState = GameState.ResistanceLose;
                 StartCoroutine(ReturnToMainMenu(7f));
             }
         }
@@ -329,11 +358,6 @@ public class GameManagerScript : MonoBehaviour
             StartCoroutine(RespawnSoldier(5, soldierClone));
     }
 
-    void EnableSoldierUI()
-    {
-        soldierUICanvas.SetActive(true);
-    }
-
     void ExitGame()
     {
         // Last thing: Load the main menu
@@ -383,9 +407,37 @@ public class GameManagerScript : MonoBehaviour
             temp = deathCam1.GetComponent<Camera>().rect;
             temp.width = 0.5f;
             deathCam1.GetComponent<Camera>().rect = temp;
-
         }
+    }
 
+    void Countdown()
+    {
+        if(currentGameState == GameState.GameCountdown)
+        {
+            if(!soldierCountdownUI.activeSelf)
+            {
+                soldierCountdownUI.SetActive(true);
+            }
 
+            gameCountdownTimer -= Time.deltaTime;
+
+            if(gameCountdownTimer > 0)
+            {
+                soldierCoutdownTimer.GetComponent<Text>().text = Mathf.Ceil(gameCountdownTimer).ToString();
+
+                Color timerColor = soldierCoutdownTimer.GetComponent<Text>().color;
+
+                timerColor.a = gameCountdownTimer % 1f;
+
+                soldierCoutdownTimer.GetComponent<Text>().color = timerColor;
+            }
+
+            if(gameCountdownTimer <= 0)
+            {
+                soldierCountdownUI.SetActive(false);
+                currentGameState = GameState.InGame;
+                gameCountdownTimer = gameCountdownTimerDefault;
+            }
+        }
     }
 }

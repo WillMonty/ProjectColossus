@@ -38,6 +38,7 @@ public class SoldierSelectMenuScript : MonoBehaviour {
 
     public bool p1Ready = false;
     public bool p2Ready = false;
+    public bool colReady = true; //implement this later
 
     #region Player 1 Inputs
 
@@ -330,7 +331,8 @@ public class SoldierSelectMenuScript : MonoBehaviour {
     {
         if( ((p1Connected == p1Ready) || !p1Connected) 
             && ((p2Connected == p2Ready) || !p2Connected)
-            && (p1Connected || p2Connected))
+            && (p1Connected || p2Connected)
+            && colReady)
         {
             Debug.Log("ready");
 
@@ -339,7 +341,7 @@ public class SoldierSelectMenuScript : MonoBehaviour {
 
             SoldierSelectUI.SetActive(false);
 
-            GameManagerScript.instance.StartGame();
+            GameManagerScript.instance.BeginGame();
 
             GameManagerScript.instance.SpawnSoldiers();
         }
