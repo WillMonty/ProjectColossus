@@ -53,8 +53,8 @@ public class ColossusManager : MonoBehaviour, IHealth {
     void Start()
     {
 		//Get controllers
-		leftController = this.GetComponent<SteamVR_ControllerManager>().left;
-		rightController = this.GetComponent<SteamVR_ControllerManager>().right;
+		leftController = GetComponent<SteamVR_ControllerManager>().left;
+		rightController = GetComponent<SteamVR_ControllerManager>().right;
 
 		//Set up abilities
 		chosenAbilities = new List<ColossusAbility>();
@@ -68,8 +68,11 @@ public class ColossusManager : MonoBehaviour, IHealth {
     IEnumerator LateStart(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+
         //Sets the instance after the game manager has actually initialized
         GameManagerScript.instance.colossus = this;
+
+		RefreshTrackedControllers();
     }
 
     #endregion
@@ -197,6 +200,12 @@ public class ColossusManager : MonoBehaviour, IHealth {
 				alarmSource.Play();
 			}
 		}
+	}
+
+	public void RefreshTrackedControllers()
+	{
+		ColossusAbility.leftControllerTracked = GetComponent<SteamVR_ControllerManager>().left.GetComponent<SteamVR_TrackedController>();
+		ColossusAbility.rightControllerTracked = GetComponent<SteamVR_ControllerManager>().right.GetComponent<SteamVR_TrackedController>();
 	}
 
     /// <summary>

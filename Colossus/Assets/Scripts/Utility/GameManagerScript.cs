@@ -296,6 +296,9 @@ public class GameManagerScript : MonoBehaviour
         Countdown();
         Pause();
 
+		if(onlyVR)
+			return;
+
 		if (!soldierUICanvas.activeSelf && currentGameState == GameState.InGame)
         {
             soldierUICanvas.SetActive(true);

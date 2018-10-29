@@ -270,6 +270,12 @@ public class SteamVR_ControllerManager : MonoBehaviour
 			}
 		}
 
+		//Refresh controllers for colossus if possible
+		if(GameManagerScript.instance != null)
+		{
+			GameManagerScript.instance.colossus.RefreshTrackedControllers();
+		}
+
 		// Reset the rest.
 		while (objectIndex < objects.Length)
 		{
