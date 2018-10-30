@@ -230,14 +230,17 @@ public class ColossusManager : MonoBehaviour, IHealth {
 		//Drop the map to accomadate player height
 		EnvironmentManagerScript.instance.LowerMap(headset.transform.position.y);
 
-		GameManagerScript.instance.StartGame();
-
         //Non-debug only
 		if (!GameManagerScript.instance.forceStartGame)
         {
+			GameManagerScript.instance.StartCountdown();
             headSource.clip = hopInSound;
             headSource.Play();
         }
+		else
+		{
+			GameManagerScript.instance.StartGame();
+		}
     }
 
 	void KillColossus()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using XInputDotNetPure;
 
 
@@ -335,16 +336,18 @@ public class SoldierSelectMenuScript : MonoBehaviour {
             && (p1Connected || p2Connected)
             && colReady)
         {
-            Debug.Log("ready");
-
             AbilityManagerScript.instance.SetSoldierClass(1, p1SelectedClass);
             AbilityManagerScript.instance.SetSoldierClass(2, p2SelectedClass);
 
             SoldierSelectUI.SetActive(false);
 
-            GameManagerScript.instance.BeginGame();
+            //GameManagerScript.instance.BeginGame();
 
-            GameManagerScript.instance.SpawnSoldiers();
+            //GameManagerScript.instance.SpawnSoldiers();
+
+			// Change the current GameState
+			GameManagerScript.instance.currentGameState = GameState.Pregame;
+			SceneManager.LoadScene(1);
         }
     }
 }

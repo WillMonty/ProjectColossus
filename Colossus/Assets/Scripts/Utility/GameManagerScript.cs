@@ -237,17 +237,6 @@ public class GameManagerScript : MonoBehaviour
 				Destroy(gameObject);
         }
         #endregion
-
-		//Set game state
-		string currScene = SceneManager.GetActiveScene().name;
-		switch(currScene){
-			case "MainMenu":
-				currentGameState = GameState.MainMenu;
-				break;
-			case "MainGame":
-				currentGameState = GameState.Pregame;
-                break;	
-		}
         
         gameCountdownTimer = gameCountdownTimerDefault;
 
@@ -256,6 +245,7 @@ public class GameManagerScript : MonoBehaviour
 
 	IEnumerator LateStart(float waitTime)
 	{
+		Debug.Log("LateStart " + currentGameState);
 		yield return new WaitForSeconds(waitTime);
 	
 		//Check for debug
@@ -268,20 +258,6 @@ public class GameManagerScript : MonoBehaviour
 				StartGame();
             }
 		}
-
-
-		if ((currentGameState == GameState.Pregame || currentGameState == GameState.InGame) && !onlyVR)
-        {
-			//Set up resistance objects
-            spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
-            deathCam1 = GameObject.Find("DeathCam1");
-            deathCam2 = GameObject.Find("DeathCam2");
-            deathCam1.SetActive(false);
-            deathCam2.SetActive(false);
-
-			SpawnSoldiers();
-        }
-
     }
     #endregion
 
@@ -295,24 +271,6 @@ public class GameManagerScript : MonoBehaviour
 
         Countdown();
         Pause();
-
-		if(onlyVR)
-			return;
-
-		if (!soldierUICanvas.activeSelf && currentGameState == GameState.InGame)
-        {
-            soldierUICanvas.SetActive(true);
-        }
-
-        if(!soldierSelectMenu.activeSelf && currentGameState == GameState.CharacterSelect)
-        {
-            soldierSelectMenu.SetActive(true);
-        }
-
-        if (soldierSelectMenu.activeSelf && currentGameState != GameState.CharacterSelect)
-        {
-            soldierSelectMenu.SetActive(false);
-        }
     }
     #endregion
 
@@ -320,14 +278,20 @@ public class GameManagerScript : MonoBehaviour
 	public void StartGame()
 	{
 		currentGameState = GameState.InGame;
-		EnvironmentManagerScript.instance.GamePiecesSwitch();
+
+		if(forceStartGame)
+		{
+			if(!onlyVR) ResistanceSetup();
+			EnvironmentManagerScript.instance.GamePiecesSwitch();
+		}
     }
 
     //called from character select menu
-    public void BeginGame()
+    public void StartCountdown()
     {
-        currentGameState = GameState.GameCountdown;
+		ResistanceSetup();
 
+        currentGameState = GameState.GameCountdown;
         soldierCountdownUI.SetActive(true);
 
         EnvironmentManagerScript.instance.GamePiecesSwitch();
@@ -434,6 +398,20 @@ public class GameManagerScript : MonoBehaviour
     }
     #endregion
 
+	void ResistanceSetup()
+	{
+		//Set up resistance objects
+		spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
+		soldierUICanvas = GameObject.Find("Soldier UI");
+		soldierCountdownUI = GameObject.Find("CountdownBackground");
+		soldierCoutdownTimer = GameObject.Find("Timer");
+		deathCam1 = GameObject.Find("DeathCam1");
+		deathCam2 = GameObject.Find("DeathCam2");
+		deathCam1.SetActive(false);
+		deathCam2.SetActive(false);
+		SpawnSoldiers();
+	}
+
 
     public void SpawnSoldiers()
     {
@@ -442,7 +420,6 @@ public class GameManagerScript : MonoBehaviour
 
 		CreateSoldier(2, AbilityManagerScript.instance.soldier2);
         soldier2.playerNumber = 2;
-
     }
     
     void CreateSoldier(int pNum, SoldierClass sClass)
