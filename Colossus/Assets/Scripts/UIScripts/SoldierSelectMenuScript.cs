@@ -243,6 +243,8 @@ public class SoldierSelectMenuScript : MonoBehaviour {
                 }
             }
 
+
+            //player 1
             if(p1Down == 1 && !p1Ready)
             {
                 int prevButton = p1SelectedButton;
@@ -266,6 +268,8 @@ public class SoldierSelectMenuScript : MonoBehaviour {
                 p1Buttons[p1SelectedButton].GetComponent<Button>().onClick.Invoke();
             }
 
+
+            //player 2
             if (p2Down == 1 && !p2Ready)
             {
                 int prevButton = p2SelectedButton;
@@ -286,7 +290,7 @@ public class SoldierSelectMenuScript : MonoBehaviour {
             }
             else if (p2A == 1)
             {
-                p2Buttons[p1SelectedButton].GetComponent<Button>().onClick.Invoke();
+                p2Buttons[p2SelectedButton].GetComponent<Button>().onClick.Invoke();
             }
 
             StartGame();
