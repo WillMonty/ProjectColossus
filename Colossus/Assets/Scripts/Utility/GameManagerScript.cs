@@ -82,6 +82,8 @@ public class GameManagerScript : MonoBehaviour
 
     void Start ()
     {
+        ControllerInput.SetUpControllers();
+
 		//Activate normal monitor
 		if(Display.displays.Length > 1)
 		{
@@ -130,19 +132,26 @@ public class GameManagerScript : MonoBehaviour
     #endregion
 
     // Update is called once per frame
-    void Update ()
+    void FixedUpdate ()
     {
-		Inputs();
         OOOOOOOF();
 
-		if(currentGameState == GameState.Paused)
-			Pause();
+        if (currentGameState == GameState.Paused)
+        {
+            CheckInputs();
+
+            Pause();
+        }
 
 		if(currentGameState == GameState.Countdown)
         	Countdown();
-		
-		if(currentGameState == GameState.InGame)
-			CheckWinCondition();
+
+        if (currentGameState == GameState.InGame)
+        {
+            CheckWinCondition();
+
+            CheckInputs();
+        }
     }
 
 	#region State Handling
@@ -348,155 +357,13 @@ public class GameManagerScript : MonoBehaviour
 	#endregion
 
 	#region Pause and Play Game
-	#region Player 1 Inputs
-
-	//Up DPad State
-	int p1Up
-	{
-		get
-		{
-			if (state1.DPad.Up == ButtonState.Pressed && prevState1.DPad.Up == ButtonState.Released)
-				return 1; //Pressed
-			/*else if (state1.DPad.Up == ButtonState.Pressed)
-                              return 2; //Held */
-
-			return 0;
-		}
-	}
-
-	//Down DPad State
-	int p1Down
-	{
-		get
-		{
-			if (state1.DPad.Down == ButtonState.Pressed && prevState1.DPad.Down == ButtonState.Released)
-				return 1; //Pressed
-			/*else if (state1.DPad.Down == ButtonState.Pressed)
-                              return 2; //Held */
-
-			return 0;
-		}
-	}
-
-	//Right DPad State
-	int p1Right
-	{
-		get
-		{
-			if (state1.DPad.Right == ButtonState.Pressed && prevState1.DPad.Right == ButtonState.Released)
-				return 1; //Pressed
-			/*else if (state1.DPad.Right == ButtonState.Pressed)
-                return 2; //Held*/
-
-			return 0;
-		}
-	}
-
-	//Left DPad State
-	int p1Left
-	{
-		get
-		{
-			if (state1.DPad.Left == ButtonState.Pressed && prevState1.DPad.Left == ButtonState.Released)
-				return 1; //Pressed
-			/*else if (state1.DPad.Left == ButtonState.Pressed)
-                return 2; //Held*/
-
-			return 0;
-		}
-	}
-
-
-	int p1A
-	{
-		get
-		{
-			if (state1.Buttons.A == ButtonState.Pressed && prevState1.Buttons.A == ButtonState.Released)
-				return 1;
-
-			return 0;
-		}
-	}
-
-	#endregion
-
-	#region Player 2 Inputs
-
-	//Up DPad State
-	public int p2Up
-	{
-		get
-		{
-			if (state2.DPad.Up == ButtonState.Pressed && prevState2.DPad.Up == ButtonState.Released)
-				return 1; //Pressed
-			/*else if (state2.DPad.Up == ButtonState.Pressed)
-                              return 2; //Held */
-
-			return 0;
-		}
-	}
-
-	//Down DPad State
-	public int p2Down
-	{
-		get
-		{
-			if (state2.DPad.Down == ButtonState.Pressed && prevState2.DPad.Down == ButtonState.Released)
-				return 1; //Pressed
-			/*else if (state2.DPad.Down == ButtonState.Pressed)
-                              return 2; //Held */
-
-			return 0;
-		}
-	}
-
-	//Right DPad State
-	public int p2Right
-	{
-		get
-		{
-			if (state2.DPad.Right == ButtonState.Pressed && prevState2.DPad.Right == ButtonState.Released)
-				return 1; //Pressed
-			/*else if (state2.DPad.Right == ButtonState.Pressed)
-                return 2; //Held*/
-
-			return 0;
-		}
-	}
-
-	//Left DPad State
-	public int p2Left
-	{
-		get
-		{
-			if (state2.DPad.Left == ButtonState.Pressed && prevState2.DPad.Left == ButtonState.Released)
-				return 1; //Pressed
-			/*else if (state2.DPad.Left == ButtonState.Pressed)
-                return 2; //Held*/
-
-			return 0;
-		}
-	}
-
-	int p2A
-	{
-		get
-		{
-			if (state2.Buttons.A == ButtonState.Pressed && prevState2.Buttons.A == ButtonState.Released)
-				return 1;
-
-			return 0;
-		}
-	}
-
-	#endregion
-
+    
 
 	void Pause()
 	{
 		if(currentPauseOwner == PauseOwner.Player1)
 		{
-			if(p1Down == 1)
+			if(ControllerInput.controllers[0].Down == 1)
 			{
 				int prevButton = pauseMenuSelectedButton;
 
@@ -505,7 +372,7 @@ public class GameManagerScript : MonoBehaviour
 				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
 				pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
 			}
-			else if(p1Up == 1)
+			else if(ControllerInput.controllers[0].Up == 1)
 			{
 				int prevButton = pauseMenuSelectedButton;
 
@@ -514,14 +381,14 @@ public class GameManagerScript : MonoBehaviour
 				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
 				pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
 			}
-			else if(p1A == 1)
+			else if(ControllerInput.controllers[0].A == 1)
 			{
 				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Button>().onClick.Invoke();
 			}
 		}
 		else if(currentPauseOwner == PauseOwner.Player2)
 		{
-			if (p2Down == 1)
+			if (ControllerInput.controllers[1].Down == 1)
 			{
 				int prevButton = pauseMenuSelectedButton;
 
@@ -530,7 +397,7 @@ public class GameManagerScript : MonoBehaviour
 				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
 				pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
 			}
-			else if (p2Up == 1)
+			else if (ControllerInput.controllers[1].Up == 1)
 			{
 				int prevButton = pauseMenuSelectedButton;
 
@@ -539,32 +406,28 @@ public class GameManagerScript : MonoBehaviour
 				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
 				pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
 			}
-			else if (p2A == 1)
+			else if (ControllerInput.controllers[1].A == 1)
 			{
 				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Button>().onClick.Invoke();
 			}
 		}
 	}
 
-	void Inputs()
+	void CheckInputs()
 	{
+        ControllerInput.UpdateControllers();
+
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			TogglePause(0);
 		}
-
-		prevState1 = state1;
-		state1 = GamePad.GetState((PlayerIndex)(0));
-
-		prevState2 = state2;
-		state2 = GamePad.GetState((PlayerIndex)(1));
-
-		if(state1.Buttons.Start == ButtonState.Pressed && prevState1.Buttons.Start == ButtonState.Released)
+        
+		if(ControllerInput.controllers[0].Start == 1)
 		{
 			TogglePause(1);
 		}
 
-		if(state2.Buttons.Start == ButtonState.Pressed && prevState2.Buttons.Start == ButtonState.Released)
+		if(ControllerInput.controllers[1].Start == 1)
 		{
 			TogglePause(2);
 		}

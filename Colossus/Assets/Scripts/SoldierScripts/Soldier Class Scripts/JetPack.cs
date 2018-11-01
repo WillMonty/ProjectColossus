@@ -28,9 +28,7 @@ public class JetPack : MonoBehaviour {
      // Update is called once per frame
     void FixedUpdate ()
     {
-
-        
-        if (jetPackFuel > 0 && GetComponent<PlayerInput>().ActionState>0)
+        if (jetPackFuel > 0 && GetComponent<PlayerInput>().ActionState > 0)
         {
             
             if(GetComponent<PlayerInput>().ActionState == 1)

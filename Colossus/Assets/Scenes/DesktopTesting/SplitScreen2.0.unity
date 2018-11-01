@@ -473,10 +473,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1637461782150572, guid: c0d17c44f02b5b74f8ace3fffc043d27, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0d17c44f02b5b74f8ace3fffc043d27, type: 2}
   m_IsPrefabParent: 0
@@ -527,7 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d8d9709491137408017c1c3b00e0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceStartGame: 0
+  forceStartGame: 1
   onlyVR: 0
   currentGameState: 2
   colossus: {fileID: 0}

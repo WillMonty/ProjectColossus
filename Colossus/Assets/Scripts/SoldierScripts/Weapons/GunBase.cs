@@ -157,7 +157,7 @@ public class GunBase : MonoBehaviour, IWeapon
 
             }
             //Check for reloading
-            else if (!reloading && ((reloadButton && bulletsInMag != magSize) /*|| bulletsInMag == 0*/) && justShot == false)
+            else if (!reloading && ((reloadButton && bulletsInMag != magSize)) && justShot == false)
             {
                 Reload();
             }
@@ -173,7 +173,7 @@ public class GunBase : MonoBehaviour, IWeapon
 		source.Play();
 
         // Instantiate the projectile and shoot it
-        projClone=Instantiate(projectile, transform.position, transform.parent.rotation);
+        projClone = Instantiate(projectile, transform.position, transform.parent.rotation);
 
         projClone.GetComponent<IDamage>().Owner = playerNum;
         bulletsInMag--;
