@@ -37,7 +37,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject[] pauseMenuButtons;
     public int pauseMenuSelectedButton = 0;
     public GameObject soldierCountdownUI;
-    public GameObject soldierCoutdownTimer;
+    public GameObject soldierCountdownTimer;
 
     public enum PauseOwner { Player1, Player2, Colossus, None}
     public PauseOwner currentPauseOwner = PauseOwner.None;
@@ -75,7 +75,7 @@ public class GameManagerScript : MonoBehaviour
 		spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
 		soldierUICanvas = GameObject.Find("/ResistanceContainer/Soldier UI");
 		soldierCountdownUI = GameObject.Find("/ResistanceContainer/Soldier UI/CountdownBackground");
-		soldierCoutdownTimer = GameObject.Find("/ResistanceContainer/Soldier UI/CountdownBackground/TimerBackground/Timer");
+		soldierCountdownTimer = GameObject.Find("/ResistanceContainer/Soldier UI/CountdownBackground/TimerBackground/Timer");
 		deathCam1 = GameObject.Find("/ResistanceContainer/DeathCams/DeathCam1");
 		deathCam2 = GameObject.Find("/ResistanceContainer/DeathCams/DeathCam2");
 	}
@@ -139,7 +139,6 @@ public class GameManagerScript : MonoBehaviour
         if (currentGameState == GameState.Paused)
         {
             CheckInputs();
-
             Pause();
         }
 
@@ -149,7 +148,6 @@ public class GameManagerScript : MonoBehaviour
         if (currentGameState == GameState.InGame)
         {
             CheckWinCondition();
-
             CheckInputs();
         }
     }
@@ -164,8 +162,6 @@ public class GameManagerScript : MonoBehaviour
 		deathCam1.SetActive(false);
 		deathCam2.SetActive(false);
 
-        soldierCountdownUI.SetActive(true);
-
         EnvironmentManagerScript.instance.GamePiecesSwitch();
 
 		currentGameState = GameState.Countdown;
@@ -176,24 +172,30 @@ public class GameManagerScript : MonoBehaviour
 		if(!soldierCountdownUI.activeSelf)
 		{
 			soldierCountdownUI.SetActive(true);
+			colossus.wallCanvas.SetCanvas("Countdown");
 		}
 
 		gameCountdownTimer -= Time.deltaTime;
 
+		GameObject colossusTimer = colossus.wallCanvas.timer;
+
 		if(gameCountdownTimer > 0)
 		{
-			soldierCoutdownTimer.GetComponent<Text>().text = Mathf.Ceil(gameCountdownTimer).ToString();
+			soldierCountdownTimer.GetComponent<Text>().text = Mathf.Ceil(gameCountdownTimer).ToString();
+			colossusTimer.GetComponent<Text>().text = Mathf.Ceil(gameCountdownTimer).ToString();
 
-			Color timerColor = soldierCoutdownTimer.GetComponent<Text>().color;
+			Color timerColor = Color.black;
 
 			timerColor.a = gameCountdownTimer % 1f;
 
-			soldierCoutdownTimer.GetComponent<Text>().color = timerColor;
+			soldierCountdownTimer.GetComponent<Text>().color = timerColor;
+			colossusTimer.GetComponent<Text>().color = timerColor;
 		}
 
 		if(gameCountdownTimer <= 0)
 		{
 			soldierCountdownUI.SetActive(false);
+			colossus.wallCanvas.Clear();
 			currentGameState = GameState.InGame;
 			gameCountdownTimer = gameCountdownTimerDefault;
 		}
@@ -209,7 +211,7 @@ public class GameManagerScript : MonoBehaviour
             if (colossus.Health <= 0)
             {
                 currentGameState = GameState.ResistanceWin;
-				//EnvironmentManagerScript.instance.
+				colossus.KillColossus();
                 StartCoroutine(ReturnToMainMenu(7f));
             }
             else if (soldier1.Lives <= 0 && soldier2.Lives <= 0)

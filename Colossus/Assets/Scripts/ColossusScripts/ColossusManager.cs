@@ -22,6 +22,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
 	public GameObject resultsCanvas;
 
     [Header("Audio")]
+	public bool noSound;
     public AudioSource headSource;
 	public AudioSource alarmSource;
     public AudioClip hopInSound;
@@ -29,6 +30,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
 	public AudioClip deathSound;
 
     [Header("UI")]
+	public ColossusCanvas wallCanvas;
     public Slider armHealthbar;
     public Slider headHealthbar;
 
@@ -82,25 +84,31 @@ public class ColossusManager : MonoBehaviour, IHealth {
     void Update ()
     {
 		GameState currentGameState = GameManagerScript.instance.currentGameState;
+		if(currentGameState == GameState.Pregame)
+		{
+			CheckHopIn(); //Check if the player is jumping in the bot to start the game		
+		}
+
 		if (currentGameState == GameState.InGame)
 		{
 			CheckInBounds();
-			return;
 		}
-
-		CheckHopIn(); //Check if the player is jumping in the bot to start the game	
 
 		if(currentGameState == GameState.ResistanceWin)
 		{
-			resultsCanvas.SetActive(true);
-			resultsCanvas.transform.GetChild(2).gameObject.SetActive(true);
-			KillColossus();
+			wallCanvas.SetCanvas("Lose");
 		}
 
 		if(currentGameState == GameState.ResistanceLose)
 		{
-			resultsCanvas.SetActive(true);
-			resultsCanvas.transform.GetChild(1).gameObject.SetActive(true);
+			wallCanvas.SetCanvas("Win");
+		}
+
+		//Stop colossus audio if desired
+		if(noSound)
+		{
+			headSource.Stop();
+			alarmSource.Stop();
 		}
 
 		//IK arm fix?
@@ -165,17 +173,21 @@ public class ColossusManager : MonoBehaviour, IHealth {
         //Check if the colossus is in the pillar trigger
 		if(positionIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger)
         {
-			//Check on canvas?
+			wallCanvas.SetCanvas("Inbounds");
 
             //Check if either trigger is pressed to hop in
             bool leftTriggerPressed = leftController.GetComponent<SteamVR_TrackedController>().triggerPressed;
             bool rightTriggerPressed = rightController.GetComponent<SteamVR_TrackedController>().triggerPressed;
 
-            if (leftTriggerPressed || rightTriggerPressed) ToggleColossus();
+            if (leftTriggerPressed || rightTriggerPressed)
+			{
+				wallCanvas.Clear();
+				ToggleColossus();	
+			}
         }
         else
         {
-			//X on canvas?
+			wallCanvas.SetCanvas("Outbounds");
         }
     }
 
@@ -192,11 +204,10 @@ public class ColossusManager : MonoBehaviour, IHealth {
 		else
 		{
 			DamageObject(outOfBoundsDamage);
-			if(!headSource.isPlaying)
+			if(!alarmSource.isPlaying)
 			{
 				if(GameManagerScript.instance.forceStartGame) //Don't play the sound when debugging
 					return;
-				
 				alarmSource.Play();
 			}
 		}
@@ -239,7 +250,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
         }
     }
 
-	void KillColossus()
+	public void KillColossus()
 	{
 		foreach(ColossusAbility ability in chosenAbilities)
 		{

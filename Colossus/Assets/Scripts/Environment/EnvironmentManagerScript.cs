@@ -117,7 +117,7 @@ public class EnvironmentManagerScript : MonoBehaviour {
 		}
 		else
 		{
-			Debug.LogError("No announcer clip with that name");
+			Debug.LogError("No announcer clip named " + name);
 		}
 	}
 }

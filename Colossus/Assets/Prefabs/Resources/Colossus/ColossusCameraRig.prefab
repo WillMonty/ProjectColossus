@@ -10536,7 +10536,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -11980,21 +11980,16 @@ MonoBehaviour:
   headset: {fileID: 1541039505096830}
   ikColossus: {fileID: 114646247283838336}
   resultsCanvas: {fileID: 1007251804405174}
-  map: {fileID: 0}
-  lowerMapAmount: 2.5
-  resistanceContainer: {fileID: 0}
+  noSound: 0
   headSource: {fileID: 82938316321286606}
   alarmSource: {fileID: 82183994772883782}
   hopInSound: {fileID: 8300000, guid: 39c06ad0d6e1be348910af00db0b931b, type: 3}
   damageSound: {fileID: 8300000, guid: 7d8cc7957e0597d439f71f8b8ca46d9f, type: 3}
   deathSound: {fileID: 8300000, guid: cfaf067b82022fb4b80d64b6e16eedd5, type: 3}
+  wallCanvas: {fileID: 0}
   armHealthbar: {fileID: 114753382968007182}
   headHealthbar: {fileID: 114083269919350812}
   positionIndicator: {fileID: 0}
-  leftIndicator: {fileID: 0}
-  rightIndicator: {fileID: 0}
-  inPositionMat: {fileID: 2100000, guid: 000bf922200a0254d9d2d77fd47349c6, type: 2}
-  outPositionMat: {fileID: 2100000, guid: 439bd034438bff140ab4e215dc1d2834, type: 2}
 --- !u!114 &114837421860877814
 MonoBehaviour:
   m_ObjectHideFlags: 1
