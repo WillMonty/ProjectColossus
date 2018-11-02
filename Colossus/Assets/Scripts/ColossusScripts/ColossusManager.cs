@@ -19,7 +19,6 @@ public class ColossusManager : MonoBehaviour, IHealth {
 	[Header("Colossus Components")]
     public GameObject headset;
 	public RootMotion.FinalIK.VRIK ikColossus;
-	public GameObject resultsCanvas;
 
     [Header("Audio")]
 	public bool noSound;
