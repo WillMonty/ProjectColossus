@@ -11860,6 +11860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outOfBoundsDamage: 0.6
   headset: {fileID: 1541039505096830}
+  body: {fileID: 1659972043436820}
   ikColossus: {fileID: 114646247283838336}
   noSound: 0
   headSource: {fileID: 82938316321286606}

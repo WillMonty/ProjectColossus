@@ -217,6 +217,7 @@ public class GameManagerScript : MonoBehaviour
             else if (soldier1.Lives <= 0 && soldier2.Lives <= 0)
             {
                 currentGameState = GameState.ResistanceLose;
+				EnvironmentManagerScript.instance.PlayAnnouncer("ResistanceEliminated");
                 StartCoroutine(ReturnToMainMenu(7f));
             }
         }
@@ -239,7 +240,7 @@ public class GameManagerScript : MonoBehaviour
 		//Input based debug
 		if(Input.GetKeyDown(KeyCode.Slash))
 		{
-			colossus.DamageObject(99999f);
+			colossus.DamageObject(999999f);
 		}
 
 		if (Input.GetKeyDown(KeyCode.BackQuote))
@@ -311,6 +312,8 @@ public class GameManagerScript : MonoBehaviour
 
 		if (soldierClone.Lives > 0)
 			StartCoroutine(RespawnSoldier(5, soldierClone));
+		else
+			EnvironmentManagerScript.instance.PlayAnnouncer("OneSoldierRemaining");
 	}
 
 	IEnumerator RespawnSoldier(float time, PlayerData soldierClone)

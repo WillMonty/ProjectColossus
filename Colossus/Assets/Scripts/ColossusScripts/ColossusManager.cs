@@ -14,10 +14,9 @@ public class ColossusManager : MonoBehaviour, IHealth {
 	List<ColossusAbility> chosenAbilities;
 
     // Components needed for the toggling of the colossus
-    GameObject leftController;
-    GameObject rightController;
 	[Header("Colossus Components")]
     public GameObject headset;
+	public GameObject body;
 	public RootMotion.FinalIK.VRIK ikColossus;
 
     [Header("Audio")]
@@ -53,10 +52,6 @@ public class ColossusManager : MonoBehaviour, IHealth {
     // Use this for initialization
     void Start()
     {
-		//Get controllers
-		leftController = GetComponent<SteamVR_ControllerManager>().left;
-		rightController = GetComponent<SteamVR_ControllerManager>().right;
-
 		//Set up abilities
 		chosenAbilities = new List<ColossusAbility>();
 		GetChosenAbilities();
@@ -74,6 +69,8 @@ public class ColossusManager : MonoBehaviour, IHealth {
         GameManagerScript.instance.colossus = this;
 
 		RefreshTrackedControllers();
+
+		body.SetActive(true); //Enable ik late
     }
 
     #endregion
@@ -110,13 +107,13 @@ public class ColossusManager : MonoBehaviour, IHealth {
 			alarmSource.Stop();
 		}
 
-		//IK arm fix?
+/*		//IK arm fix?
 		if(!fixedIK && leftController.GetComponent<SteamVR_TrackedController>().menuPressed)
 		{
 			fixedIK = true;
 			Debug.Log("Trying IK");
 			ikColossus.GetIKSolver().Initiate(ikColossus.GetIKSolver().GetRoot());
-		}
+		}*/
     }
     #endregion
 
@@ -162,6 +159,11 @@ public class ColossusManager : MonoBehaviour, IHealth {
 		armHealthbar.value = healthPct;
 		headHealthbar.value = healthPct;
 
+		if(healthPct < 0.1f)
+		{
+			EnvironmentManagerScript.instance.PlayAnnouncer("ColossusCriticalHealth");
+		}
+
     }
 
     /// <summary>
@@ -175,8 +177,8 @@ public class ColossusManager : MonoBehaviour, IHealth {
 			wallCanvas.SetCanvas("Inbounds");
 
             //Check if either trigger is pressed to hop in
-            bool leftTriggerPressed = leftController.GetComponent<SteamVR_TrackedController>().triggerPressed;
-            bool rightTriggerPressed = rightController.GetComponent<SteamVR_TrackedController>().triggerPressed;
+			bool leftTriggerPressed = ColossusAbility.leftControllerTracked.triggerPressed;
+			bool rightTriggerPressed = ColossusAbility.rightControllerTracked.triggerPressed;
 
             if (leftTriggerPressed || rightTriggerPressed)
 			{
@@ -240,6 +242,8 @@ public class ColossusManager : MonoBehaviour, IHealth {
 		//Drop the map to accomadate player height
 		EnvironmentManagerScript.instance.LowerMap(headset.transform.position.y);
 
+		wallCanvas.Clear();
+
         //Start game
 		if (!GameManagerScript.instance.forceStartGame)
         {
@@ -247,6 +251,8 @@ public class ColossusManager : MonoBehaviour, IHealth {
 			headSource.clip = hopInSound;
 			headSource.Play();
         }
+
+
     }
 
 	public void KillColossus()
@@ -259,6 +265,14 @@ public class ColossusManager : MonoBehaviour, IHealth {
 		headSource.Stop();
 		headSource.clip = deathSound;
 		headSource.Play();
+		StartCoroutine(AnnounceDeath());
+	}
+
+	private IEnumerator AnnounceDeath()
+	{
+		yield return new WaitForSeconds(3f);
+
+		EnvironmentManagerScript.instance.PlayAnnouncer("ColossusDestroyed");
 	}
 
 	#endregion
