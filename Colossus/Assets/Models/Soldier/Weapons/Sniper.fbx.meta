@@ -68,7 +68,17 @@ ModelImporter:
     4300012: scopeHolder2
     4300014: scopeHolder1
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrel
+    second: {fileID: 2100000, guid: 57db6b7750b08934aa0369b3e2999f68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: 2885ed4198d3ff34496f84359a5fbca4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
