@@ -49,6 +49,7 @@ public class Spawner_Throwable : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+		Debug.DrawLine(transform.position, transform.position + transform.forward * 10);
         spawnTimer += Time.deltaTime;
 
         // Once time is ready, spawn a random object, reset the timer, and get a new spawn time
@@ -110,7 +111,7 @@ public class Spawner_Throwable : MonoBehaviour {
 		GameObject newThrowable = Instantiate(
 			objList[Random.Range(0, objList.Count)],
 			spawnLocation,
-			Quaternion.Euler(Vector3.zero)) as GameObject;
+			transform.rotation) as GameObject;
 		
 		newThrowable.name = "Rubbish";
 		newThrowable.GetComponent<Rigidbody>().AddForce(transform.rotation * spawnForce);
@@ -127,9 +128,6 @@ public class Spawner_Throwable : MonoBehaviour {
     // Show the force it spawns objects at, and show the spawn sphere
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        //Gizmos.DrawLine(transform.position, transform.position + transform.rotation * spawnForce);
-
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, spawnRadius);
     }

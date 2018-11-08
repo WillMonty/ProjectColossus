@@ -8,7 +8,7 @@ using XInputDotNetPure;
 
 
 // GameState Enum
-public enum GameState { MainMenu, Instructions, CharacterSelect, GameCountdown, InGame, Paused, Pregame, ResistanceWin, ResistanceLose };
+public enum GameState { MainMenu, Instructions, CharacterSelect, Countdown, InGame, Paused, Pregame, ResistanceWin, ResistanceLose };
 
 
 public class GameManagerScript : MonoBehaviour
@@ -37,7 +37,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject[] pauseMenuButtons;
     public int pauseMenuSelectedButton = 0;
     public GameObject soldierCountdownUI;
-    public GameObject soldierCoutdownTimer;
+    public GameObject soldierCountdownTimer;
 
     public enum PauseOwner { Player1, Player2, Colossus, None}
     public PauseOwner currentPauseOwner = PauseOwner.None;
@@ -56,149 +56,6 @@ public class GameManagerScript : MonoBehaviour
     GamePadState state2;
     GamePadState prevState2;
     
-    #region Player 1 Inputs
-
-    //Up DPad State
-    int p1Up
-    {
-        get
-        {
-            if (state1.DPad.Up == ButtonState.Pressed && prevState1.DPad.Up == ButtonState.Released)
-                return 1; //Pressed
-                          /*else if (state1.DPad.Up == ButtonState.Pressed)
-                              return 2; //Held */
-
-            return 0;
-        }
-    }
-
-    //Down DPad State
-    int p1Down
-    {
-        get
-        {
-            if (state1.DPad.Down == ButtonState.Pressed && prevState1.DPad.Down == ButtonState.Released)
-                return 1; //Pressed
-                          /*else if (state1.DPad.Down == ButtonState.Pressed)
-                              return 2; //Held */
-
-            return 0;
-        }
-    }
-
-    //Right DPad State
-    int p1Right
-    {
-        get
-        {
-            if (state1.DPad.Right == ButtonState.Pressed && prevState1.DPad.Right == ButtonState.Released)
-                return 1; //Pressed
-            /*else if (state1.DPad.Right == ButtonState.Pressed)
-                return 2; //Held*/
-
-            return 0;
-        }
-    }
-
-    //Left DPad State
-    int p1Left
-    {
-        get
-        {
-            if (state1.DPad.Left == ButtonState.Pressed && prevState1.DPad.Left == ButtonState.Released)
-                return 1; //Pressed
-            /*else if (state1.DPad.Left == ButtonState.Pressed)
-                return 2; //Held*/
-
-            return 0;
-        }
-    }
-
-
-    int p1A
-    {
-        get
-        {
-            if (state1.Buttons.A == ButtonState.Pressed && prevState1.Buttons.A == ButtonState.Released)
-                return 1;
-
-            return 0;
-        }
-    }
-
-    #endregion
-
-    #region Player 2 Inputs
-
-    //Up DPad State
-    public int p2Up
-    {
-        get
-        {
-            if (state2.DPad.Up == ButtonState.Pressed && prevState2.DPad.Up == ButtonState.Released)
-                return 1; //Pressed
-                          /*else if (state2.DPad.Up == ButtonState.Pressed)
-                              return 2; //Held */
-
-            return 0;
-        }
-    }
-
-    //Down DPad State
-    public int p2Down
-    {
-        get
-        {
-            if (state2.DPad.Down == ButtonState.Pressed && prevState2.DPad.Down == ButtonState.Released)
-                return 1; //Pressed
-                          /*else if (state2.DPad.Down == ButtonState.Pressed)
-                              return 2; //Held */
-
-            return 0;
-        }
-    }
-
-    //Right DPad State
-    public int p2Right
-    {
-        get
-        {
-            if (state2.DPad.Right == ButtonState.Pressed && prevState2.DPad.Right == ButtonState.Released)
-                return 1; //Pressed
-            /*else if (state2.DPad.Right == ButtonState.Pressed)
-                return 2; //Held*/
-
-            return 0;
-        }
-    }
-
-    //Left DPad State
-    public int p2Left
-    {
-        get
-        {
-            if (state2.DPad.Left == ButtonState.Pressed && prevState2.DPad.Left == ButtonState.Released)
-                return 1; //Pressed
-            /*else if (state2.DPad.Left == ButtonState.Pressed)
-                return 2; //Held*/
-
-            return 0;
-        }
-    }
-
-    int p2A
-    {
-        get
-        {
-            if (state2.Buttons.A == ButtonState.Pressed && prevState2.Buttons.A == ButtonState.Released)
-                return 1;
-
-            return 0;
-        }
-    }
-
-    #endregion
-
     //Soldier properties
     private GameObject[] spawnPoints;
     GameObject deathCam1;
@@ -213,10 +70,20 @@ public class GameManagerScript : MonoBehaviour
     void Awake ()
 	{
 		DontDestroyOnLoad(this);
+
+		//Set up resistance objects
+		spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
+		soldierUICanvas = GameObject.Find("/ResistanceContainer/Soldier UI");
+		soldierCountdownUI = GameObject.Find("/ResistanceContainer/Soldier UI/CountdownBackground");
+		soldierCountdownTimer = GameObject.Find("/ResistanceContainer/Soldier UI/CountdownBackground/TimerBackground/Timer");
+		deathCam1 = GameObject.Find("/ResistanceContainer/DeathCams/DeathCam1");
+		deathCam2 = GameObject.Find("/ResistanceContainer/DeathCams/DeathCam2");
 	}
 
     void Start ()
     {
+        ControllerInput.SetUpControllers();
+
 		//Activate normal monitor
 		if(Display.displays.Length > 1)
 		{
@@ -237,17 +104,6 @@ public class GameManagerScript : MonoBehaviour
 				Destroy(gameObject);
         }
         #endregion
-
-		//Set game state
-		string currScene = SceneManager.GetActiveScene().name;
-		switch(currScene){
-			case "MainMenu":
-				currentGameState = GameState.MainMenu;
-				break;
-			case "MainGame":
-				currentGameState = GameState.Pregame;
-                break;	
-		}
         
         gameCountdownTimer = gameCountdownTimerDefault;
 
@@ -262,143 +118,88 @@ public class GameManagerScript : MonoBehaviour
 		if(forceStartGame)
 		{
 			if(colossus != null)
-				colossus.ToggleColossus();	
-			else
-			{
-				StartGame();
-            }
+				colossus.ToggleColossus();
+
+			if(!onlyVR) SoldierSetup();
+			
+			currentGameState = GameState.InGame;
+
+			EnvironmentManagerScript.instance.GamePiecesSwitch();
 		}
 
-
-		if ((currentGameState == GameState.Pregame || currentGameState == GameState.InGame) && !onlyVR)
-        {
-			//Set up resistance objects
-            spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
-            deathCam1 = GameObject.Find("DeathCam1");
-            deathCam2 = GameObject.Find("DeathCam2");
-            deathCam1.SetActive(false);
-            deathCam2.SetActive(false);
-
-			SpawnSoldiers();
-        }
-
+		//colossus.ToggleColossus();
     }
     #endregion
 
-    #region Update
     // Update is called once per frame
-    void Update ()
+    void FixedUpdate ()
     {
-		Inputs();
-		CheckWinCondition();
         OOOOOOOF();
 
-        Countdown();
-        Pause();
-
-		if (!soldierUICanvas.activeSelf && currentGameState == GameState.InGame)
+        if (currentGameState == GameState.Paused)
         {
-            soldierUICanvas.SetActive(true);
+            CheckInputs();
+            Pause();
         }
 
-        if(!soldierSelectMenu.activeSelf && currentGameState == GameState.CharacterSelect)
-        {
-            soldierSelectMenu.SetActive(true);
-        }
+		if(currentGameState == GameState.Countdown)
+        	Countdown();
 
-        if (soldierSelectMenu.activeSelf && currentGameState != GameState.CharacterSelect)
-        {
-            soldierSelectMenu.SetActive(false);
-        }
-    }
-    #endregion
-
-	//General function to set up the game's pieces and state
-	public void StartGame()
-	{
-		currentGameState = GameState.InGame;
-		EnvironmentManagerScript.instance.GamePiecesSwitch();
-    }
-
-    //called from character select menu
-    public void BeginGame()
-    {
-        currentGameState = GameState.GameCountdown;
-
-        soldierCountdownUI.SetActive(true);
-
-        EnvironmentManagerScript.instance.GamePiecesSwitch();
-    }
-
-
-    #region Pause and Play Game
-
-    void Inputs()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePause(0);
-        }
-
-        prevState1 = state1;
-        state1 = GamePad.GetState((PlayerIndex)(0));
-
-        prevState2 = state2;
-        state2 = GamePad.GetState((PlayerIndex)(1));
-
-        if(state1.Buttons.Start == ButtonState.Pressed && prevState1.Buttons.Start == ButtonState.Released)
-        {
-            TogglePause(1);
-        }
-
-        if(state2.Buttons.Start == ButtonState.Pressed && prevState2.Buttons.Start == ButtonState.Released)
-        {
-            TogglePause(2);
-        }
-    }
-
-    public void TogglePause(int playerNum)
-    {
         if (currentGameState == GameState.InGame)
         {
-            PauseGame();
-
-            currentPauseOwner = playerNumToPauseOwner[playerNum];
-        }
-
-        else if(currentGameState == GameState.Paused 
-                && playerNumToPauseOwner[playerNum] == currentPauseOwner)
-        {
-            ResumeGame();
+            CheckWinCondition();
+            CheckInputs();
         }
     }
 
-    // Game Management Pausing and Resuming Methods
-    void PauseGame()
+	#region State Handling
+
+    //called from character select menu
+    public void StartCountdown()
     {
-        pauseMenu.SetActive(true);
-        
-        currentGameState = GameState.Paused;
+		SoldierSetup();
 
-        pauseMenuButtons[0].GetComponent<Image>().color = highlightedColor;
+		deathCam1.SetActive(false);
+		deathCam2.SetActive(false);
 
-        pauseMenuSelectedButton = 0;
+        EnvironmentManagerScript.instance.GamePiecesSwitch();
 
-        Time.timeScale = 0;
+		currentGameState = GameState.Countdown;
     }
 
-    public void ResumeGame()
-    {
-        pauseMenu.SetActive(false);
+	void Countdown()
+	{
+		if(!soldierCountdownUI.activeSelf)
+		{
+			soldierCountdownUI.SetActive(true);
+			colossus.wallCanvas.SetCanvas("Countdown");
+		}
 
-        currentGameState = GameState.InGame;
+		gameCountdownTimer -= Time.deltaTime;
 
-        currentPauseOwner = PauseOwner.None;
+		GameObject colossusTimer = colossus.wallCanvas.timer;
 
-        pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = normalColor;
+		if(gameCountdownTimer > 0)
+		{
+			soldierCountdownTimer.GetComponent<Text>().text = Mathf.Ceil(gameCountdownTimer).ToString();
+			colossusTimer.GetComponent<Text>().text = Mathf.Ceil(gameCountdownTimer).ToString();
 
-        Time.timeScale = 1;
-    }
+			Color timerColor = Color.black;
+
+			timerColor.a = gameCountdownTimer % 1f;
+
+			soldierCountdownTimer.GetComponent<Text>().color = timerColor;
+			colossusTimer.GetComponent<Text>().color = timerColor;
+		}
+
+		if(gameCountdownTimer <= 0)
+		{
+			soldierCountdownUI.SetActive(false);
+			colossus.wallCanvas.Clear();
+			currentGameState = GameState.InGame;
+			gameCountdownTimer = gameCountdownTimerDefault;
+		}
+	}
 
     /// <summary>
     /// Check to see who wins the game
@@ -407,15 +208,16 @@ public class GameManagerScript : MonoBehaviour
     {
         if(colossus != null && soldier1 != null && soldier2 != null)
         {
-            if (currentGameState == GameState.InGame && colossus.Health <= 0)
+            if (colossus.Health <= 0)
             {
                 currentGameState = GameState.ResistanceWin;
-				//EnvironmentManagerScript.instance.
+				colossus.KillColossus();
                 StartCoroutine(ReturnToMainMenu(7f));
             }
-            else if (currentGameState == GameState.InGame && soldier1.Lives <= 0 && soldier2.Lives <= 0)
+            else if (soldier1.Lives <= 0 && soldier2.Lives <= 0)
             {
                 currentGameState = GameState.ResistanceLose;
+				EnvironmentManagerScript.instance.PlayAnnouncer("ResistanceEliminated");
                 StartCoroutine(ReturnToMainMenu(7f));
             }
         }
@@ -429,18 +231,36 @@ public class GameManagerScript : MonoBehaviour
         // Last thing: Load the main menu
         SceneManager.LoadScene(0);
     }
-    #endregion
 
+	/// <summary>
+	/// Emergency Restart for the game
+	/// </summary>
+	void OOOOOOOF()
+	{
+		//Input based debug
+		if(Input.GetKeyDown(KeyCode.Slash))
+		{
+			colossus.DamageObject(999999f);
+		}
 
-    public void SpawnSoldiers()
-    {
+		if (Input.GetKeyDown(KeyCode.BackQuote))
+		{
+			currentGameState = GameState.MainMenu;
+			SceneManager.LoadScene(0);
+		}
+	}
+
+	#endregion
+
+	#region Soldier Handling
+	void SoldierSetup()
+	{
 		CreateSoldier(1, AbilityManagerScript.instance.soldier1);
-        soldier1.playerNumber = 1;
+		soldier1.playerNumber = 1;
 
 		CreateSoldier(2, AbilityManagerScript.instance.soldier2);
-        soldier2.playerNumber = 2;
-
-    }
+		soldier2.playerNumber = 2;
+	}
     
     void CreateSoldier(int pNum, SoldierClass sClass)
     {
@@ -470,185 +290,196 @@ public class GameManagerScript : MonoBehaviour
 
 		soldierClone = Instantiate(classPrefab, spawnPos, Quaternion.Euler(0f, 180f, 0f), GameObject.Find("ResistanceContainer").transform);
 
-        if(pNum==1)
+        if(pNum == 1)
             soldier1 = soldierClone.GetComponent<PlayerData>();
         else
             soldier2 = soldierClone.GetComponent<PlayerData>();
     }
 
-    /// <summary>
-    /// Emergency Restart for the game
-    /// </summary>
-    void OOOOOOOF()
-    {
-		//Input based debug
-		if(Input.GetKeyDown(KeyCode.Slash))
+	//Disable a soldier, activate it's deathcam and respawn if necessary
+	public void KillSoldier(int pNum)
+	{
+		PlayerData soldierClone;
+		if (pNum == 1)
+			soldierClone = soldier1;
+		else
+			soldierClone = soldier2;
+
+
+		soldierClone.gameObject.SetActive(false);
+
+		SetDeathCam();
+
+		if (soldierClone.Lives > 0)
+			StartCoroutine(RespawnSoldier(5, soldierClone));
+		else
+			EnvironmentManagerScript.instance.PlayAnnouncer("OneSoldierRemaining");
+	}
+
+	IEnumerator RespawnSoldier(float time, PlayerData soldierClone)
+	{
+		yield return new WaitForSeconds(time);
+
+		//Activate soldier, deactivate deathcam
+		soldierClone.gameObject.SetActive(true);
+		soldierClone.Alive = true;
+
+		SetDeathCam();
+		//Set soldier position to random spawnpoint
+		soldierClone.transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+
+	}
+
+	void SetDeathCam()
+	{
+		Rect temp;
+
+		if(soldier1.Alive)
+			deathCam1.SetActive(false);
+		else
+			deathCam1.SetActive(true);
+
+		if (soldier2.Alive)
+			deathCam2.SetActive(false);
+		else
+			deathCam2.SetActive(true);
+
+		if (!soldier1.Alive && !soldier2.Alive)
 		{
-			colossus.DamageObject(99999f);
+			deathCam2.SetActive(false);
+			temp = deathCam1.GetComponent<Camera>().rect;
+			temp.width = 1.0f;
+			deathCam1.GetComponent<Camera>().rect = temp;
+		}
+		else
+		{
+			temp = deathCam1.GetComponent<Camera>().rect;
+			temp.width = 0.5f;
+			deathCam1.GetComponent<Camera>().rect = temp;
+		}
+	}
+
+	#endregion
+
+	#region Pause and Play Game
+    
+
+	void Pause()
+	{
+		if(currentPauseOwner == PauseOwner.Player1)
+		{
+			if(ControllerInput.controllers[0].Down == 1)
+			{
+				int prevButton = pauseMenuSelectedButton;
+
+				pauseMenuSelectedButton = (pauseMenuSelectedButton + 1) % pauseMenuButtons.Length;
+
+				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
+				pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
+			}
+			else if(ControllerInput.controllers[0].Up == 1)
+			{
+				int prevButton = pauseMenuSelectedButton;
+
+				pauseMenuSelectedButton = (pauseMenuSelectedButton + pauseMenuButtons.Length - 1) % pauseMenuButtons.Length;
+
+				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
+				pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
+			}
+			else if(ControllerInput.controllers[0].A == 1)
+			{
+				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Button>().onClick.Invoke();
+			}
+		}
+		else if(currentPauseOwner == PauseOwner.Player2)
+		{
+			if (ControllerInput.controllers[1].Down == 1)
+			{
+				int prevButton = pauseMenuSelectedButton;
+
+				pauseMenuSelectedButton = (pauseMenuSelectedButton + 1) % pauseMenuButtons.Length;
+
+				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
+				pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
+			}
+			else if (ControllerInput.controllers[1].Up == 1)
+			{
+				int prevButton = pauseMenuSelectedButton;
+
+				pauseMenuSelectedButton = (pauseMenuSelectedButton + pauseMenuButtons.Length - 1) % pauseMenuButtons.Length;
+
+				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
+				pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
+			}
+			else if (ControllerInput.controllers[1].A == 1)
+			{
+				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Button>().onClick.Invoke();
+			}
+		}
+	}
+
+	void CheckInputs()
+	{
+        ControllerInput.UpdateControllers();
+
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			TogglePause(0);
+		}
+        
+		if(ControllerInput.controllers[0].Start == 1)
+		{
+			TogglePause(1);
 		}
 
-        if (Input.GetKeyDown(KeyCode.BackQuote))
-        {
-			currentGameState = GameState.MainMenu;
-            SceneManager.LoadScene(0);
-        }
-    }
+		if(ControllerInput.controllers[1].Start == 1)
+		{
+			TogglePause(2);
+		}
+	}
 
-    //Disable a soldier, activate it's deathcam and respawn if necessary
-    public void KillSoldier(int pNum)
-    {
-        PlayerData soldierClone;
-        if (pNum == 1)
-            soldierClone = soldier1;
-        else
-            soldierClone = soldier2;
+	public void TogglePause(int playerNum)
+	{
+		if (currentGameState == GameState.InGame)
+		{
+			PauseGame();
 
+			currentPauseOwner = playerNumToPauseOwner[playerNum];
+		}
 
-        soldierClone.gameObject.SetActive(false);
+		else if(currentGameState == GameState.Paused 
+			&& playerNumToPauseOwner[playerNum] == currentPauseOwner)
+		{
+			ResumeGame();
+		}
+	}
 
-        SetDeathCam();
+	// Game Management Pausing and Resuming Methods
+	void PauseGame()
+	{
+		pauseMenu.SetActive(true);
 
-        if (soldierClone.Lives > 0)
-            StartCoroutine(RespawnSoldier(5, soldierClone));
-    }
+		currentGameState = GameState.Paused;
 
-    void ExitGame()
-    {
-        // Last thing: Load the main menu
-        SceneManager.LoadScene(0);
-    }   
+		pauseMenuButtons[0].GetComponent<Image>().color = highlightedColor;
 
-    IEnumerator RespawnSoldier(float time, PlayerData soldierClone)
-    {
-        yield return new WaitForSeconds(time);
+		pauseMenuSelectedButton = 0;
 
-        
+		Time.timeScale = 0;
+	}
 
-        //Activate soldier, deactivate deathcam
-        soldierClone.gameObject.SetActive(true);
-        soldierClone.Alive = true;
+	public void ResumeGame()
+	{
+		pauseMenu.SetActive(false);
 
-        SetDeathCam();
-        //Set soldier position to random spawnpoint
-        soldierClone.transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+		currentGameState = GameState.InGame;
 
-    }
+		currentPauseOwner = PauseOwner.None;
 
-    void SetDeathCam()
-    {
-        Rect temp;
-        
+		pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = normalColor;
 
-        if(soldier1.Alive)
-            deathCam1.SetActive(false);
-        else
-            deathCam1.SetActive(true);
+		Time.timeScale = 1;
+	}
 
-        if (soldier2.Alive)
-            deathCam2.SetActive(false);
-        else
-            deathCam2.SetActive(true);
-
-        if (!soldier1.Alive && !soldier2.Alive)
-        {
-            deathCam2.SetActive(false);
-            temp = deathCam1.GetComponent<Camera>().rect;
-            temp.width = 1.0f;
-            deathCam1.GetComponent<Camera>().rect = temp;
-        }
-        else
-        {
-            temp = deathCam1.GetComponent<Camera>().rect;
-            temp.width = 0.5f;
-            deathCam1.GetComponent<Camera>().rect = temp;
-        }
-    }
-
-    void Countdown()
-    {
-        if(currentGameState == GameState.GameCountdown)
-        {
-            if(!soldierCountdownUI.activeSelf)
-            {
-                soldierCountdownUI.SetActive(true);
-            }
-
-            gameCountdownTimer -= Time.deltaTime;
-
-            if(gameCountdownTimer > 0)
-            {
-                soldierCoutdownTimer.GetComponent<Text>().text = Mathf.Ceil(gameCountdownTimer).ToString();
-
-                Color timerColor = soldierCoutdownTimer.GetComponent<Text>().color;
-
-                timerColor.a = gameCountdownTimer % 1f;
-
-                soldierCoutdownTimer.GetComponent<Text>().color = timerColor;
-            }
-
-            if(gameCountdownTimer <= 0)
-            {
-                soldierCountdownUI.SetActive(false);
-                currentGameState = GameState.InGame;
-                gameCountdownTimer = gameCountdownTimerDefault;
-            }
-        }
-    }
-
-    void Pause()
-    {
-        if(currentGameState == GameState.Paused)
-        {
-            if(currentPauseOwner == PauseOwner.Player1)
-            {
-                if(p1Down == 1)
-                {
-                    int prevButton = pauseMenuSelectedButton;
-
-                    pauseMenuSelectedButton = (pauseMenuSelectedButton + 1) % pauseMenuButtons.Length;
-
-                    pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
-                    pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
-                }
-                else if(p1Up == 1)
-                {
-                    int prevButton = pauseMenuSelectedButton;
-
-                    pauseMenuSelectedButton = (pauseMenuSelectedButton + pauseMenuButtons.Length - 1) % pauseMenuButtons.Length;
-
-                    pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
-                    pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
-                }
-                else if(p1A == 1)
-                {
-                    pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Button>().onClick.Invoke();
-                }
-            }
-            else if(currentPauseOwner == PauseOwner.Player2)
-            {
-                if (p2Down == 1)
-                {
-                    int prevButton = pauseMenuSelectedButton;
-
-                    pauseMenuSelectedButton = (pauseMenuSelectedButton + 1) % pauseMenuButtons.Length;
-
-                    pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
-                    pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
-                }
-                else if (p2Up == 1)
-                {
-                    int prevButton = pauseMenuSelectedButton;
-
-                    pauseMenuSelectedButton = (pauseMenuSelectedButton + pauseMenuButtons.Length - 1) % pauseMenuButtons.Length;
-
-                    pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
-                    pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
-                }
-                else if (p2A == 1)
-                {
-                    pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Button>().onClick.Invoke();
-                }
-            }
-        }
-    }
+	#endregion  
 }

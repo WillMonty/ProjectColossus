@@ -45,12 +45,6 @@ public class HeadLaserAbility : ColossusAbility
 	[Header("UI")]
 	public GameObject laserUI;
 
-    // Use this for initialization
-    void Start()
-    {
-		SetupTrackedControllers();
-    }
-
 	public override void Enable()
 	{
 		abilityEnabled = true;

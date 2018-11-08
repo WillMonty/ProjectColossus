@@ -285,8 +285,6 @@ public class SoldierUINew : MonoBehaviour {
     /// <param name="playerNum"></param>
     void PlayerDamaged(int playerNum)
     {
-        Debug.Log("player " + playerNum + " is damaged");
-
         switch(playerNum)
         {
             case 1:

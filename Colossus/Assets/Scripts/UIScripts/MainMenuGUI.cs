@@ -8,7 +8,8 @@ public class MainMenuGUI : MonoBehaviour {
     // GUI attributes
     #region Attributes
     // Holds a reference to the instructions screen canvas
-    public GameObject InstructionScreen;
+    public GameObject instructionScreen;
+	public GameObject characterSelectScreen;
     public List<GameObject> instructionPages;
     int instructionsPage;
 
@@ -27,26 +28,20 @@ public class MainMenuGUI : MonoBehaviour {
     #region Update
     void Update()
     {
-		/*for(int i = 0; i < Input.GetJoystickNames().Length; i++){
-			Debug.Log(Input.GetJoystickNames()[i]);	
-		}*/
         InstructionsManagement();
     }
     #endregion
 
 
     #region Button Inputs
-    /// <summary>
-    /// Method for starting the game
-    /// </summary>
-    public void StartGame()
-    {
-        // Change the current GameState
-        GameManagerScript.instance.currentGameState = GameState.Pregame;
+	public void PlayButton()
+	{
+		// Change the current GameState
+		GameManagerScript.instance.currentGameState = GameState.CharacterSelect;
 
-        // Last thing: Load the game scene
-        SceneManager.LoadScene(1);
-    }
+		characterSelectScreen.SetActive(true);
+		gameObject.SetActive(false);
+	}
 
     /// <summary>
     /// Method for opening the instructions screen
@@ -54,10 +49,10 @@ public class MainMenuGUI : MonoBehaviour {
     public void InstructionsOpen()
     {
         // Set the instructions screen to true
-        if (InstructionScreen.activeSelf == false && GameManagerScript.instance.currentGameState == GameState.MainMenu)
+        if (instructionScreen.activeSelf == false && GameManagerScript.instance.currentGameState == GameState.MainMenu)
         {
             GameManagerScript.instance.currentGameState = GameState.Instructions;
-            InstructionScreen.SetActive(true);
+            instructionScreen.SetActive(true);
             instructionsPage = 0;
             instructionPages[instructionsPage].SetActive(true);
         }
@@ -67,7 +62,7 @@ public class MainMenuGUI : MonoBehaviour {
     {
         GameManagerScript.instance.currentGameState = GameState.MainMenu;
         instructionPages[instructionsPage].SetActive(false);
-        InstructionScreen.SetActive(false);
+        instructionScreen.SetActive(false);
         instructionsPage = 0;
     }
 

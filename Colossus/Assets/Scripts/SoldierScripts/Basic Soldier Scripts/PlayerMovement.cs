@@ -23,8 +23,11 @@ public class PlayerMovement : MonoBehaviour {
 
     float xAxisClamp;
 
-    GamePadState state;
-    GamePadState prevState;
+    int playerIndex;
+
+
+    //GamePadState state;
+    //GamePadState prevState;
 
     // Movement Behavior Variables
     public float verticalVelocity;
@@ -45,23 +48,18 @@ public class PlayerMovement : MonoBehaviour {
     public bool Jumped
     {
         get { return jumped; }
-
     }
 
     int dir = 0;
     public int AnimDir
     {
-
         get { return dir; }
-
     }
 
     int turnDir = 0;
     public int TurnDir
     {
-
         get { return turnDir; }
-
     }
 
     #region rigidbody movement WIP
@@ -92,17 +90,18 @@ public class PlayerMovement : MonoBehaviour {
         body = GetComponent<Rigidbody>();
         downDist = GetComponent<Collider>().bounds.extents.y + 0.02f;
         sideDist = GetComponent<Collider>().bounds.extents.x;
+
+        playerIndex = GetComponent<PlayerData>().playerNumber - 1;
     }
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {      
-        state = GetComponent<PlayerInput>().State;
-        prevState = GetComponent<PlayerInput>().PrevState;
         isGrounded = CheckGrounded();
         body.isKinematic = false;
 
-        if (GameManagerScript.instance.currentGameState == GameState.InGame && GetComponent<PlayerInput>().PlayerIndexSet)
+        if (GameManagerScript.instance.currentGameState == GameState.InGame 
+            && GetComponent<PlayerInput>().PlayerIndexSet)
         {
             speed = maxSpeed;
 
@@ -128,17 +127,20 @@ public class PlayerMovement : MonoBehaviour {
     {
         // Rotate the player
         // Look axis
-        if (state.ThumbSticks.Right.X > .1 || state.ThumbSticks.Right.X < -.1)
+        if (ControllerInput.controllers[playerIndex].RightStickX > .1
+            || ControllerInput.controllers[playerIndex].RightStickX < -.1)
         {
-            rotX = state.ThumbSticks.Right.X * lookSensitivityX;
+            rotX = ControllerInput.controllers[playerIndex].RightStickX * lookSensitivityX;
         }
         else
         {
             rotX = 0;
         }
-        if (state.ThumbSticks.Right.Y > .1 || state.ThumbSticks.Right.Y < -.1)
+
+        if (ControllerInput.controllers[playerIndex].RightStickY > .1
+            || ControllerInput.controllers[playerIndex].RightStickY < -.1)
         {
-            rotY = -state.ThumbSticks.Right.Y * lookSensitivityY;
+            rotY = -ControllerInput.controllers[playerIndex].RightStickY * lookSensitivityY;
         }
         else
         {
@@ -190,17 +192,19 @@ public class PlayerMovement : MonoBehaviour {
     {
         //Calculate the velocity we want to move in
         targetVelocity = Vector3.zero;
-        if (state.ThumbSticks.Left.Y > .2 || state.ThumbSticks.Left.Y < -.2)
+        if (ControllerInput.controllers[playerIndex].LeftStickY > .2 
+            || ControllerInput.controllers[playerIndex].LeftStickY < -.2)
         {
-            targetVelocity += transform.forward*state.ThumbSticks.Left.Y * speed;
+            targetVelocity += transform.forward * ControllerInput.controllers[playerIndex].LeftStickY * speed;
 
         }
-        if (state.ThumbSticks.Left.X > .2 || state.ThumbSticks.Left.X < -.2)
+
+        if (ControllerInput.controllers[playerIndex].LeftStickX > .2
+            || ControllerInput.controllers[playerIndex].LeftStickX < -.2)
         {
-            targetVelocity += transform.right * state.ThumbSticks.Left.X * speed;
+            targetVelocity += transform.right * ControllerInput.controllers[playerIndex].LeftStickX * speed;
         }
 
-        
         
 
         //Get current body velocity and calculate required velocity to achive the change
@@ -218,21 +222,29 @@ public class PlayerMovement : MonoBehaviour {
 
         //8 Directional movement for animation    
         dir = 0;
-        if (state.ThumbSticks.Left.Y > 0 && state.ThumbSticks.Left.X == 0)
+        if (ControllerInput.controllers[playerIndex].LeftStickY > 0 
+            && ControllerInput.controllers[playerIndex].LeftStickX == 0)
             dir = 1;
-        else if (state.ThumbSticks.Left.Y > 0 && state.ThumbSticks.Left.X > 0)
+        else if (ControllerInput.controllers[playerIndex].LeftStickY > 0 
+            && ControllerInput.controllers[playerIndex].LeftStickX > 0)
             dir = 2;
-        else if (state.ThumbSticks.Left.Y == 0 && state.ThumbSticks.Left.X > 0)
+        else if (ControllerInput.controllers[playerIndex].LeftStickY == 0 
+            && ControllerInput.controllers[playerIndex].LeftStickX > 0)
             dir = 3;
-        else if (state.ThumbSticks.Left.Y < 0 && state.ThumbSticks.Left.X > 0)
+        else if (ControllerInput.controllers[playerIndex].LeftStickY < 0 
+            && ControllerInput.controllers[playerIndex].LeftStickX > 0)
             dir = 4;
-        else if (state.ThumbSticks.Left.Y < 0 && state.ThumbSticks.Left.X == 0)
+        else if (ControllerInput.controllers[playerIndex].LeftStickY < 0 
+            && ControllerInput.controllers[playerIndex].LeftStickX == 0)
             dir = 5;
-        else if (state.ThumbSticks.Left.Y < 0 && state.ThumbSticks.Left.X < 0)
+        else if (ControllerInput.controllers[playerIndex].LeftStickY < 0 
+            && ControllerInput.controllers[playerIndex].LeftStickX < 0)
             dir = 6;
-        else if (state.ThumbSticks.Left.Y == 0 && state.ThumbSticks.Left.X < 0)
+        else if (ControllerInput.controllers[playerIndex].LeftStickY == 0 
+            && ControllerInput.controllers[playerIndex].LeftStickX < 0)
             dir = 7;
-        else if (state.ThumbSticks.Left.Y > 0 && state.ThumbSticks.Left.X < 0)
+        else if (ControllerInput.controllers[playerIndex].LeftStickY > 0 
+            && ControllerInput.controllers[playerIndex].LeftStickX < 0)
             dir = 8;
     }
 

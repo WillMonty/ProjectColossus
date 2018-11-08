@@ -7,11 +7,6 @@ public class ShieldsAbility : ColossusAbility {
 	public GameObject leftShield;
 	public GameObject rightShield;
 
-	void Start () 
-	{
-		SetupTrackedControllers();
-	}
-
 	public override void Enable()
 	{
 		abilityEnabled = true;

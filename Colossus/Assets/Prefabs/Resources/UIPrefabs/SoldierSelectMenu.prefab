@@ -1292,6 +1292,7 @@ MonoBehaviour:
   SoldierSelectUI: {fileID: 1637461782150572}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   highlightedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  readyColor: {r: 1, g: 0.3019608, b: 0.3019608, a: 1}
   p1SelectedClass: 0
   p2SelectedClass: 0
   p1ClassName: {fileID: 1085104766825976}
@@ -1308,11 +1309,9 @@ MonoBehaviour:
   - {fileID: 1455823706593288}
   p1SelectedButton: 0
   p2SelectedButton: 0
-  p1Connected: 0
-  p2Connected: 0
   p1Ready: 0
   p2Ready: 0
-  colReady: 1
+  colReady: 0
 --- !u!114 &114634684845079210
 MonoBehaviour:
   m_ObjectHideFlags: 1

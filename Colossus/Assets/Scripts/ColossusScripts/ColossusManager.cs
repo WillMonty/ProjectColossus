@@ -14,14 +14,13 @@ public class ColossusManager : MonoBehaviour, IHealth {
 	List<ColossusAbility> chosenAbilities;
 
     // Components needed for the toggling of the colossus
-    GameObject leftController;
-    GameObject rightController;
 	[Header("Colossus Components")]
     public GameObject headset;
+	public GameObject body;
 	public RootMotion.FinalIK.VRIK ikColossus;
-	public GameObject resultsCanvas;
 
     [Header("Audio")]
+	public bool noSound;
     public AudioSource headSource;
 	public AudioSource alarmSource;
     public AudioClip hopInSound;
@@ -29,6 +28,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
 	public AudioClip deathSound;
 
     [Header("UI")]
+	public ColossusCanvas wallCanvas;
     public Slider armHealthbar;
     public Slider headHealthbar;
 
@@ -52,10 +52,6 @@ public class ColossusManager : MonoBehaviour, IHealth {
     // Use this for initialization
     void Start()
     {
-		//Get controllers
-		leftController = this.GetComponent<SteamVR_ControllerManager>().left;
-		rightController = this.GetComponent<SteamVR_ControllerManager>().right;
-
 		//Set up abilities
 		chosenAbilities = new List<ColossusAbility>();
 		GetChosenAbilities();
@@ -68,8 +64,13 @@ public class ColossusManager : MonoBehaviour, IHealth {
     IEnumerator LateStart(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+
         //Sets the instance after the game manager has actually initialized
         GameManagerScript.instance.colossus = this;
+
+		RefreshTrackedControllers();
+
+		body.SetActive(true); //Enable ik late
     }
 
     #endregion
@@ -79,34 +80,40 @@ public class ColossusManager : MonoBehaviour, IHealth {
     void Update ()
     {
 		GameState currentGameState = GameManagerScript.instance.currentGameState;
+		if(currentGameState == GameState.Pregame)
+		{
+			CheckHopIn(); //Check if the player is jumping in the bot to start the game		
+		}
+
 		if (currentGameState == GameState.InGame)
 		{
 			CheckInBounds();
-			return;
 		}
-
-		CheckHopIn(); //Check if the player is jumping in the bot to start the game	
 
 		if(currentGameState == GameState.ResistanceWin)
 		{
-			resultsCanvas.SetActive(true);
-			resultsCanvas.transform.GetChild(2).gameObject.SetActive(true);
-			KillColossus();
+			wallCanvas.SetCanvas("Lose");
 		}
 
 		if(currentGameState == GameState.ResistanceLose)
 		{
-			resultsCanvas.SetActive(true);
-			resultsCanvas.transform.GetChild(1).gameObject.SetActive(true);
+			wallCanvas.SetCanvas("Win");
 		}
 
-		//IK arm fix?
+		//Stop colossus audio if desired
+		if(noSound)
+		{
+			headSource.Stop();
+			alarmSource.Stop();
+		}
+
+/*		//IK arm fix?
 		if(!fixedIK && leftController.GetComponent<SteamVR_TrackedController>().menuPressed)
 		{
 			fixedIK = true;
 			Debug.Log("Trying IK");
 			ikColossus.GetIKSolver().Initiate(ikColossus.GetIKSolver().GetRoot());
-		}
+		}*/
     }
     #endregion
 
@@ -152,6 +159,11 @@ public class ColossusManager : MonoBehaviour, IHealth {
 		armHealthbar.value = healthPct;
 		headHealthbar.value = healthPct;
 
+		if(healthPct < 0.1f)
+		{
+			EnvironmentManagerScript.instance.PlayAnnouncer("ColossusCriticalHealth");
+		}
+
     }
 
     /// <summary>
@@ -162,17 +174,21 @@ public class ColossusManager : MonoBehaviour, IHealth {
         //Check if the colossus is in the pillar trigger
 		if(positionIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger)
         {
-			//Check on canvas?
+			wallCanvas.SetCanvas("Inbounds");
 
             //Check if either trigger is pressed to hop in
-            bool leftTriggerPressed = leftController.GetComponent<SteamVR_TrackedController>().triggerPressed;
-            bool rightTriggerPressed = rightController.GetComponent<SteamVR_TrackedController>().triggerPressed;
+			bool leftTriggerPressed = ColossusAbility.leftControllerTracked.triggerPressed;
+			bool rightTriggerPressed = ColossusAbility.rightControllerTracked.triggerPressed;
 
-            if (leftTriggerPressed || rightTriggerPressed) ToggleColossus();
+            if (leftTriggerPressed || rightTriggerPressed)
+			{
+				wallCanvas.Clear();
+				ToggleColossus();	
+			}
         }
         else
         {
-			//X on canvas?
+			wallCanvas.SetCanvas("Outbounds");
         }
     }
 
@@ -189,14 +205,19 @@ public class ColossusManager : MonoBehaviour, IHealth {
 		else
 		{
 			DamageObject(outOfBoundsDamage);
-			if(!headSource.isPlaying)
+			if(!alarmSource.isPlaying)
 			{
 				if(GameManagerScript.instance.forceStartGame) //Don't play the sound when debugging
 					return;
-				
 				alarmSource.Play();
 			}
 		}
+	}
+
+	public void RefreshTrackedControllers()
+	{
+		ColossusAbility.leftControllerTracked = GetComponent<SteamVR_ControllerManager>().left.GetComponent<SteamVR_TrackedController>();
+		ColossusAbility.rightControllerTracked = GetComponent<SteamVR_ControllerManager>().right.GetComponent<SteamVR_TrackedController>();
 	}
 
     /// <summary>
@@ -221,17 +242,20 @@ public class ColossusManager : MonoBehaviour, IHealth {
 		//Drop the map to accomadate player height
 		EnvironmentManagerScript.instance.LowerMap(headset.transform.position.y);
 
-		GameManagerScript.instance.StartGame();
+		wallCanvas.Clear();
 
-        //Non-debug only
+        //Start game
 		if (!GameManagerScript.instance.forceStartGame)
         {
-            headSource.clip = hopInSound;
-            headSource.Play();
+			GameManagerScript.instance.StartCountdown();
+			headSource.clip = hopInSound;
+			headSource.Play();
         }
+
+
     }
 
-	void KillColossus()
+	public void KillColossus()
 	{
 		foreach(ColossusAbility ability in chosenAbilities)
 		{
@@ -241,6 +265,14 @@ public class ColossusManager : MonoBehaviour, IHealth {
 		headSource.Stop();
 		headSource.clip = deathSound;
 		headSource.Play();
+		StartCoroutine(AnnounceDeath());
+	}
+
+	private IEnumerator AnnounceDeath()
+	{
+		yield return new WaitForSeconds(3f);
+
+		EnvironmentManagerScript.instance.PlayAnnouncer("ColossusDestroyed");
 	}
 
 	#endregion
