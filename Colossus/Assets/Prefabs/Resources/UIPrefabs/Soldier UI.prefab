@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 222225896249090798}
   - component: {fileID: 114384851786710070}
   m_Layer: 5
-  m_Name: S2FuelbarBackground
+  m_Name: S2AbilitybarBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 222664089505227782}
   - component: {fileID: 114276735626307058}
   m_Layer: 5
-  m_Name: S2FuelBar
+  m_Name: S2AbilityBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 222107269197889084}
   - component: {fileID: 114626946865909792}
   m_Layer: 5
-  m_Name: S1FuelBar
+  m_Name: S1AbilityBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 222236721652392646}
   - component: {fileID: 114413856914928456}
   m_Layer: 5
-  m_Name: S1FuelbarBackground
+  m_Name: S1AbilitybarBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -617,10 +617,8 @@ MonoBehaviour:
   s2CurrentHealth: 0
   s2Healthbar: {fileID: 114716294582696330}
   maxFuel: 0
-  s1CurrentFuel: 0
-  s1Fuelbar: {fileID: 114626946865909792}
-  s2CurrentFuel: 0
-  s2Fuelbar: {fileID: 114276735626307058}
+  s1AbilityBar: {fileID: 114626946865909792}
+  s2AbilityBar: {fileID: 114276735626307058}
   s1CurrentMag: {fileID: 114277567649149728}
   s1MagMax: {fileID: 114227004338093476}
   s1Crosshair: {fileID: 1780063835750546}

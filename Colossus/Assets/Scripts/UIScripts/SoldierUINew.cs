@@ -20,11 +20,15 @@ public class SoldierUINew : MonoBehaviour {
 
     public float maxFuel;
 
-    public float s1CurrentFuel;
-    public Image s1Fuelbar;
+    float s1Ability;
+    float s1AbilityMax;
+    bool s1Active;
+    public Image s1AbilityBar;
 
-    public float s2CurrentFuel;
-    public Image s2Fuelbar;
+    float s2Ability;
+    float s2AbilityMax;
+    bool s2Active;
+    public Image s2AbilityBar;
 
     public Text s1CurrentMag;
     public Text s1MagMax;
@@ -65,6 +69,9 @@ public class SoldierUINew : MonoBehaviour {
         damageAlphaTimerMax = 1.1f;
 
         s1DamageInd.color = new Color(1f, 1f, 1f, 0f);
+
+        s1Active = false;
+        s2Active = false;
     }
 
 
@@ -123,19 +130,48 @@ public class SoldierUINew : MonoBehaviour {
             s1Reloading = false;
             s2Reloading = false;
 
-
-            if (soldier1.soldierClass == SoldierClass.Assault)
+            switch(soldier1.soldierClass)
             {
-                maxFuel = soldier1.GetComponent<JetPack>().MaxFuel;
-                s1CurrentFuel = soldier1.GetComponent<JetPack>().JetPackFuel;
-                s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
+                case SoldierClass.Assault:
+                    s1Ability = soldier1.GetComponent<JetPack>().JetPackFuel;
+                    s1AbilityMax = soldier1.GetComponent<JetPack>().MaxFuel;
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+
+                    break;
+                case SoldierClass.Grenadier:
+                    s1Ability = soldier1.GetComponent<WallShield>().cooldown;
+                    s1AbilityMax = soldier1.GetComponent<WallShield>().cooldown;
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+
+                    break;
+                case SoldierClass.Skulker:
+                    s1Ability = soldier1.GetComponent<Stealth>().cooldown;
+                    s1AbilityMax = soldier1.GetComponent<Stealth>().cooldown;
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+
+                    break;
             }
 
-            if (soldier2.soldierClass == SoldierClass.Assault)
+            switch (soldier2.soldierClass)
             {
-                maxFuel = soldier2.GetComponent<JetPack>().MaxFuel;
-                s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
-                s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
+                case SoldierClass.Assault:
+                    s2Ability = soldier2.GetComponent<JetPack>().JetPackFuel;
+                    s2AbilityMax = soldier2.GetComponent<JetPack>().MaxFuel;
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+
+                    break;
+                case SoldierClass.Grenadier:
+                    s2Ability = soldier2.GetComponent<WallShield>().cooldown;
+                    s2AbilityMax = soldier2.GetComponent<WallShield>().cooldown;
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+
+                    break;
+                case SoldierClass.Skulker:
+                    s2Ability = soldier2.GetComponent<Stealth>().cooldown;
+                    s2AbilityMax = soldier2.GetComponent<Stealth>().cooldown;
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+
+                    break;
             }
         }
     }
@@ -240,18 +276,176 @@ public class SoldierUINew : MonoBehaviour {
     /// </summary>
     void UpdateAbilitybar()
     {
-        if(soldier1.soldierClass == SoldierClass.Assault && s1CurrentFuel != soldier1.GetComponent<JetPack>().JetPackFuel)
+        switch (soldier1.soldierClass)
         {
-            s1CurrentFuel = soldier1.GetComponent<JetPack>().JetPackFuel;
+            case SoldierClass.Assault:
 
-            s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
+                if(s1Ability != soldier1.GetComponent<JetPack>().JetPackFuel)
+                {
+                    s1Ability = soldier1.GetComponent<JetPack>().JetPackFuel;
+
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+                }
+
+                break;
+
+            case SoldierClass.Grenadier:
+
+                if(soldier1.GetComponent<WallShield>().state == AbilityState.Cooldown && !s1Active)
+                {
+                    s1Ability = 0;
+
+                    s1Active = true;
+                }
+
+                if(soldier1.GetComponent<WallShield>().state == AbilityState.Cooldown && s1Active)
+                {
+                    if(s1Ability == s1AbilityMax)
+                    {
+                        s1Active = false;
+
+                        break;
+                    }
+
+                    s1Ability += Time.deltaTime;
+
+                    if(s1Ability > s1AbilityMax)
+                    {
+                        s1Ability = s1AbilityMax;
+                    }
+
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+                }
+
+                if(soldier1.GetComponent<WallShield>().state == AbilityState.None)
+                {
+                    s1Ability = s1AbilityMax;
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+                }
+
+                break;
+
+            case SoldierClass.Skulker:
+
+                if (soldier1.GetComponent<Stealth>().state == AbilityState.Cooldown && !s1Active)
+                {
+                    s1Ability = 0;
+
+                    s1Active = true;
+                }
+
+                if (soldier1.GetComponent<Stealth>().state == AbilityState.Cooldown && s1Active)
+                {
+                    if (s1Ability == s1AbilityMax)
+                    {
+                        s1Active = false;
+
+                        break;
+                    }
+
+                    s1Ability += Time.deltaTime;
+
+                    if (s1Ability > s1AbilityMax)
+                    {
+                        s1Ability = s1AbilityMax;
+                    }
+
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+                }
+
+                if (soldier1.GetComponent<Stealth>().state == AbilityState.None)
+                {
+                    s1Ability = s1AbilityMax;
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+                }
+
+                break;
         }
 
-        if (soldier2.soldierClass == SoldierClass.Assault && s2CurrentFuel != soldier2.GetComponent<JetPack>().JetPackFuel)
+        switch (soldier2.soldierClass)
         {
-            s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
+            case SoldierClass.Assault:
 
-            s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
+                if(s2Ability != soldier2.GetComponent<JetPack>().JetPackFuel)
+                {
+                    s2Ability = soldier2.GetComponent<JetPack>().JetPackFuel;
+
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+                }
+
+                break;
+
+            case SoldierClass.Grenadier:
+                
+                if (soldier2.GetComponent<WallShield>().state == AbilityState.Cooldown && !s2Active)
+                {
+                    s2Ability = 0;
+
+                    s2Active = true;
+                }
+
+                if (soldier2.GetComponent<WallShield>().state == AbilityState.Cooldown && s2Active)
+                {
+                    if (s2Ability == s2AbilityMax)
+                    {
+                        s2Active = false;
+
+                        break;
+                    }
+
+                    s2Ability += Time.deltaTime;
+
+                    if (s2Ability > s2AbilityMax)
+                    {
+                        s2Ability = s2AbilityMax;
+                    }
+
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+                }
+
+                if (soldier2.GetComponent<WallShield>().state == AbilityState.None)
+                {
+                    s2Ability = s2AbilityMax;
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+                }
+                
+                break;
+
+            case SoldierClass.Skulker:
+
+                if (soldier2.GetComponent<Stealth>().state == AbilityState.Cooldown && !s2Active)
+                {
+                    s2Ability = 0;
+
+                    s2Active = true;
+                }
+
+                if (soldier2.GetComponent<Stealth>().state == AbilityState.Cooldown && s2Active)
+                {
+                    if (s2Ability == s2AbilityMax)
+                    {
+                        s2Active = false;
+
+                        break;
+                    }
+
+                    s2Ability += Time.deltaTime;
+
+                    if (s2Ability > s2AbilityMax)
+                    {
+                        s2Ability = s2AbilityMax;
+                    }
+
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+                }
+
+                if (soldier2.GetComponent<Stealth>().state == AbilityState.None)
+                {
+                    s2Ability = s2AbilityMax;
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+                }
+
+                break;
         }
     }
 

@@ -135,7 +135,9 @@ public class GameManagerScript : MonoBehaviour
     void FixedUpdate ()
     {
         OOOOOOOF();
-
+        
+        ControllerInput.UpdateControllers();
+        
         if (currentGameState == GameState.Paused)
         {
             CheckInputs();
@@ -420,8 +422,6 @@ public class GameManagerScript : MonoBehaviour
 
 	void CheckInputs()
 	{
-        ControllerInput.UpdateControllers();
-
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			TogglePause(0);

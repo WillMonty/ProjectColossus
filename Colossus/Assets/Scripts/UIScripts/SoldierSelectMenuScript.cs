@@ -49,15 +49,12 @@ public class SoldierSelectMenuScript : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
 		if(GameManagerScript.instance.currentGameState == GameState.CharacterSelect)
         {
-            ControllerInput.UpdateControllers();
-            
-
             //player 1
-            if(ControllerInput.controllers[0].Down == 1 && !p1Ready)
+            if (ControllerInput.controllers[0].Down == 1 && !p1Ready)
             {
                 int prevButton = p1SelectedButton;
 
