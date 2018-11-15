@@ -225,15 +225,6 @@ Prefab:
       propertyPath: characterSelectScreen
       value: 
       objectReference: {fileID: 419731726}
-    - target: {fileID: 224973662638029454, guid: 3258bf19629fe4d42b3797f1c3163afd,
-        type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4819753687437166, guid: 3258bf19629fe4d42b3797f1c3163afd, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3258bf19629fe4d42b3797f1c3163afd, type: 2}
   m_IsPrefabParent: 0

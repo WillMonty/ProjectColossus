@@ -52,11 +52,6 @@ public class SoldierSelectMenuScript : MonoBehaviour {
     {
 		if(GameManagerScript.instance.currentGameState == GameState.CharacterSelect)
         {
-            if(ControllerInput.controllers[0].LeftStickRight == 1)
-            {
-
-            }
-
             //player 1
             if ((ControllerInput.controllers[0].Down == 1 
                 || ControllerInput.controllers[0].LeftStickDown == 1)
