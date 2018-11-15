@@ -9,19 +9,21 @@ public class Controller
 
     //Player Inputs
     GamePadState state = new GamePadState();
-    GamePadState prevState = new GamePadState();
+    GamePadState statePrev = new GamePadState();
     
     public bool connected = false;
     public bool connectedPrev = false;
 
     #region Inputs
-
-    //Up DPad State
+    
+    /// <summary>
+    /// Up DPad State
+    /// </summary>
     public int Up
     {
         get
         {
-            if (state.DPad.Up == ButtonState.Pressed && prevState.DPad.Up == ButtonState.Released)
+            if (state.DPad.Up == ButtonState.Pressed && statePrev.DPad.Up == ButtonState.Released)
                 return 1; //Pressed
             else if (state.DPad.Up == ButtonState.Pressed)
                 return 2; //Held 
@@ -29,13 +31,15 @@ public class Controller
             return 0;
         }
     }
-
-    //Down DPad State
+    
+    /// <summary>
+    /// Down DPad State
+    /// </summary>
     public int Down
     {
         get
         {
-            if (state.DPad.Down == ButtonState.Pressed && prevState.DPad.Down == ButtonState.Released)
+            if (state.DPad.Down == ButtonState.Pressed && statePrev.DPad.Down == ButtonState.Released)
                 return 1;   //Pressed
             else if (state.DPad.Down == ButtonState.Pressed)
                 return 2;   //Held 
@@ -43,13 +47,15 @@ public class Controller
             return 0;
         }
     }
-
-    //Right DPad State
+    
+    /// <summary>
+    /// Right DPad State
+    /// </summary>
     public int Right
     {
         get
         {
-            if (state.DPad.Right == ButtonState.Pressed && prevState.DPad.Right == ButtonState.Released)
+            if (state.DPad.Right == ButtonState.Pressed && statePrev.DPad.Right == ButtonState.Released)
                 return 1;   //Pressed
             else if (state.DPad.Right == ButtonState.Pressed)
                 return 2;   //Held
@@ -57,13 +63,15 @@ public class Controller
             return 0;
         }
     }
-
-    //Left DPad State
+    
+    /// <summary>
+    /// Left DPad State
+    /// </summary>
     public int Left
     {
         get
         {
-            if (state.DPad.Left == ButtonState.Pressed && prevState.DPad.Left == ButtonState.Released)
+            if (state.DPad.Left == ButtonState.Pressed && statePrev.DPad.Left == ButtonState.Released)
                 return 1;   //Pressed
             else if (state.DPad.Left == ButtonState.Pressed)
                 return 2;   //Held
@@ -71,13 +79,15 @@ public class Controller
             return 0;
         }
     }
-
-
+    
+    /// <summary>
+    /// A Button State
+    /// </summary>
     public int A
     {
         get
         {
-            if (state.Buttons.A == ButtonState.Pressed && prevState.Buttons.A == ButtonState.Released)
+            if (state.Buttons.A == ButtonState.Pressed && statePrev.Buttons.A == ButtonState.Released)
                 return 1;   //Pressed
             else if (state.Buttons.A == ButtonState.Pressed)
                 return 2;   //Held
@@ -85,12 +95,15 @@ public class Controller
             return 0;
         }
     }
-
+    
+    /// <summary>
+    /// B Button State
+    /// </summary>
     public int B
     {
         get
         {
-            if (state.Buttons.B == ButtonState.Pressed && prevState.Buttons.B == ButtonState.Released)
+            if (state.Buttons.B == ButtonState.Pressed && statePrev.Buttons.B == ButtonState.Released)
                 return 1;   //Pressed
             else if (state.Buttons.B == ButtonState.Pressed)
                 return 2;
@@ -98,12 +111,15 @@ public class Controller
             return 0;
         }
     }
-
+    
+    /// <summary>
+    /// X Button State
+    /// </summary>
     public int X
     {
         get
         {
-            if (state.Buttons.X == ButtonState.Pressed && prevState.Buttons.X == ButtonState.Released)
+            if (state.Buttons.X == ButtonState.Pressed && statePrev.Buttons.X == ButtonState.Released)
                 return 1;   //Pressed
             else if (state.Buttons.X == ButtonState.Pressed)
                 return 2;
@@ -111,12 +127,15 @@ public class Controller
             return 0;
         }
     }
-
+    
+    /// <summary>
+    /// Y Button State
+    /// </summary>
     public int Y
     {
         get
         {
-            if (state.Buttons.Y == ButtonState.Pressed && prevState.Buttons.Y == ButtonState.Released)
+            if (state.Buttons.Y == ButtonState.Pressed && statePrev.Buttons.Y == ButtonState.Released)
                 return 1;   //Pressed
             else if (state.Buttons.Y == ButtonState.Pressed)
                 return 2;
@@ -124,12 +143,15 @@ public class Controller
             return 0;
         }
     }
-
+    
+    /// <summary>
+    /// Start Button State
+    /// </summary>
     public int Start
     {
         get
         {
-            if (state.Buttons.Start == ButtonState.Pressed && prevState.Buttons.Start == ButtonState.Released)
+            if (state.Buttons.Start == ButtonState.Pressed && statePrev.Buttons.Start == ButtonState.Released)
                 return 1;   //Pressed
             else if (state.Buttons.Start == ButtonState.Pressed)
                 return 2;
@@ -138,11 +160,14 @@ public class Controller
         }
     }
 
+    /// <summary>
+    /// Back Button State
+    /// </summary>
     public int Back
     {
         get
         {
-            if (state.Buttons.Back == ButtonState.Pressed && prevState.Buttons.Back == ButtonState.Released)
+            if (state.Buttons.Back == ButtonState.Pressed && statePrev.Buttons.Back == ButtonState.Released)
                 return 1;   //Pressed
             else if (state.Buttons.Back == ButtonState.Pressed)
                 return 2;
@@ -151,11 +176,14 @@ public class Controller
         }
     }
 
+    /// <summary>
+    /// Right Shoulder Button State
+    /// </summary>
     public int RightShoulder
     {
         get
         {
-            if (state.Buttons.RightShoulder == ButtonState.Pressed && prevState.Buttons.RightShoulder == ButtonState.Released)
+            if (state.Buttons.RightShoulder == ButtonState.Pressed && statePrev.Buttons.RightShoulder == ButtonState.Released)
                 return 1;   //Pressed
             else if (state.Buttons.RightShoulder == ButtonState.Pressed)
                 return 2;
@@ -164,11 +192,14 @@ public class Controller
         }
     }
 
+    /// <summary>
+    /// Left Shoulder Button State
+    /// </summary>
     public int LeftShoulder
     {
         get
         {
-            if (state.Buttons.LeftShoulder == ButtonState.Pressed && prevState.Buttons.LeftShoulder == ButtonState.Released)
+            if (state.Buttons.LeftShoulder == ButtonState.Pressed && statePrev.Buttons.LeftShoulder == ButtonState.Released)
                 return 1;   //Pressed
             else if (state.Buttons.LeftShoulder == ButtonState.Pressed)
                 return 2;
@@ -177,6 +208,9 @@ public class Controller
         }
     }
 
+    /// <summary>
+    /// Right Trigger State
+    /// </summary>
     public float RightTrigger
     {
         get
@@ -185,14 +219,20 @@ public class Controller
         }
     }
 
+    /// <summary>
+    /// Previous Right Trigger State
+    /// </summary>
     public float RightTriggerPrev
     {
         get
         {
-            return prevState.Triggers.Right;
+            return statePrev.Triggers.Right;
         }
     }
 
+    /// <summary>
+    /// Left Trigger State
+    /// </summary>
     public float LeftTrigger
     {
         get
@@ -201,14 +241,20 @@ public class Controller
         }
     }
 
+    /// <summary>
+    /// Previous Left Trigger State
+    /// </summary>
     public float LeftTriggerPrev
     {
         get
         {
-            return prevState.Triggers.Left;
+            return statePrev.Triggers.Left;
         }
     }
 
+    /// <summary>
+    /// Right Stick X-axis State
+    /// </summary>
     public float RightStickX
     {
         get
@@ -217,6 +263,21 @@ public class Controller
         }
     }
 
+    /// <summary>
+    /// Previous Right Stick X-axis State
+    /// </summary>
+    public float RightStickXPrev
+    {
+        get
+        {
+            return statePrev.ThumbSticks.Right.X;
+        }
+    }
+    
+
+    /// <summary>
+    /// Right Stick Y-axis State
+    /// </summary>
     public float RightStickY
     {
         get
@@ -225,6 +286,20 @@ public class Controller
         }
     }
 
+    /// <summary>
+    /// Previous Right Stick Y-axis State
+    /// </summary>
+    public float RightStickYPrev
+    {
+        get
+        {
+            return statePrev.ThumbSticks.Right.Y;
+        }
+    }
+
+    /// <summary>
+    /// Left Stick X-axis State
+    /// </summary>
     public float LeftStickX
     {
         get
@@ -233,11 +308,101 @@ public class Controller
         }
     }
 
+    /// <summary>
+    /// Previous Left Stick X-axis State
+    /// </summary>
+    public float LeftStickXPrev
+    {
+        get
+        {
+            return statePrev.ThumbSticks.Left.X;
+        }
+    }
+    
+    /// <summary>
+    /// Left Stick Y-axis State
+    /// </summary>
     public float LeftStickY
     {
         get
         {
             return state.ThumbSticks.Left.Y;
+        }
+    }
+
+    /// <summary>
+    /// Left Stick Y-axis State
+    /// </summary>
+    public float LeftStickYPrev
+    {
+        get
+        {
+            return statePrev.ThumbSticks.Left.Y;
+        }
+    }
+
+
+    /// <summary>
+    /// Left Stick Up State
+    /// </summary>
+    public int LeftStickUp
+    {
+        get
+        {
+            if (state.ThumbSticks.Left.Y >= .1 && statePrev.ThumbSticks.Left.Y < .1)
+                return 1;
+            if (state.ThumbSticks.Left.Y >= .1)
+                return 2;
+
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// Left Stick Down State
+    /// </summary>
+    public int LeftStickDown
+    {
+        get
+        {
+            if (state.ThumbSticks.Left.Y <= -.1 && statePrev.ThumbSticks.Left.Y > -.1)
+                return 1;
+            if (state.ThumbSticks.Left.Y <= -.1)
+                return 2;
+
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// Left Stick Right State
+    /// </summary>
+    public int LeftStickRight
+    {
+        get
+        {
+            if (state.ThumbSticks.Left.X >= .1 && statePrev.ThumbSticks.Left.X < .1)
+                return 1;
+            if (state.ThumbSticks.Left.X >= .1)
+                return 2;
+
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// Left Stick Left State
+    /// </summary>
+    public int LeftStickLeft
+    {
+        get
+        {
+            if (state.ThumbSticks.Left.X <= -.1 && statePrev.ThumbSticks.Left.X > -.1)
+                return 1;
+            if (state.ThumbSticks.Left.X <= -.1)
+                return 2;
+
+            return 0;
         }
     }
 
@@ -251,7 +416,7 @@ public class Controller
     public void ResetStates()
     {
         state = GamePad.GetState(index);
-        prevState = new GamePadState();
+        statePrev = new GamePadState();
         connected = state.IsConnected;
     }
 
@@ -264,7 +429,7 @@ public class Controller
         
         if (connected)
         {
-            prevState = state;
+            statePrev = state;
             state = testState;
         }
     }

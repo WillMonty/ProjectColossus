@@ -370,7 +370,8 @@ public class GameManagerScript : MonoBehaviour
 	{
 		if(currentPauseOwner == PauseOwner.Player1)
 		{
-			if(ControllerInput.controllers[0].Down == 1)
+			if(ControllerInput.controllers[0].Down == 1
+                || ControllerInput.controllers[0].LeftStickDown == 1)
 			{
 				int prevButton = pauseMenuSelectedButton;
 
@@ -379,7 +380,8 @@ public class GameManagerScript : MonoBehaviour
 				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
 				pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
 			}
-			else if(ControllerInput.controllers[0].Up == 1)
+			else if(ControllerInput.controllers[0].Up == 1
+                || ControllerInput.controllers[0].LeftStickUp == 1)
 			{
 				int prevButton = pauseMenuSelectedButton;
 
@@ -395,7 +397,8 @@ public class GameManagerScript : MonoBehaviour
 		}
 		else if(currentPauseOwner == PauseOwner.Player2)
 		{
-			if (ControllerInput.controllers[1].Down == 1)
+			if (ControllerInput.controllers[1].Down == 1
+                || ControllerInput.controllers[1].LeftStickDown == 1)
 			{
 				int prevButton = pauseMenuSelectedButton;
 
@@ -404,7 +407,8 @@ public class GameManagerScript : MonoBehaviour
 				pauseMenuButtons[pauseMenuSelectedButton].GetComponent<Image>().color = highlightedColor;
 				pauseMenuButtons[prevButton].GetComponent<Image>().color = normalColor;
 			}
-			else if (ControllerInput.controllers[1].Up == 1)
+			else if (ControllerInput.controllers[1].Up == 1
+                || ControllerInput.controllers[1].LeftStickUp == 1)
 			{
 				int prevButton = pauseMenuSelectedButton;
 

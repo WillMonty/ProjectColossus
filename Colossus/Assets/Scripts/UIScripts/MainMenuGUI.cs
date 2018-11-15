@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenuGUI : MonoBehaviour {
@@ -13,24 +14,30 @@ public class MainMenuGUI : MonoBehaviour {
     public List<GameObject> instructionPages;
     int instructionsPage;
 
-    // String holding the player 1 controls for the main menu
-    private string moveXAxis = "J1MoveX";
-    private string moveYAxis = "J1MoveY";
-    private string horizontalAxis = "J1Horizontal";
-    private string verticalAxis = "J1Vertical";
-    private string aButton = "J1A";
-    private string bButton = "J1B";
-    private string yButton = "J1Y";
-    private string triggerLeft = "J1TriggerLeft";
-    private string runButton = "J1LeftStickClick";
+    public Color normalColor;
+    public Color highlightedColor;
+
+    int selectedButton = 0;
+    public GameObject[] buttons;
+
     #endregion
 
-    #region Update
-    void Update()
+    private void Start()
     {
+        buttons[selectedButton].transform.GetChild(0).GetComponent<Text>().color = highlightedColor;
+    }
+
+    void FixedUpdate()
+    {
+        if (GameManagerScript.instance.currentGameState == GameState.MainMenu
+            || GameManagerScript.instance.currentGameState == GameState.Instructions)
+        {
+            ControllerInput.UpdateControllers();
+        }
+
+        InputManagement();
         InstructionsManagement();
     }
-    #endregion
 
 
     #region Button Inputs
@@ -91,7 +98,9 @@ public class MainMenuGUI : MonoBehaviour {
     {
         if (GameManagerScript.instance.currentGameState == GameState.Instructions)
         {
-            if (Input.GetButtonDown(aButton))
+            if (/*Input.GetButtonDown(aButton)*/
+                ControllerInput.controllers[0].A == 1
+                || ControllerInput.controllers[1].A == 1)
             {
                 // turn off current page
                 for (int i = 0; i < instructionPages.Count; i++)
@@ -107,9 +116,73 @@ public class MainMenuGUI : MonoBehaviour {
                 instructionsPage %= instructionPages.Count;
                 instructionPages[instructionsPage].SetActive(true);
             }
-            if (Input.GetButtonDown(bButton))
+            if (/*Input.GetButtonDown(bButton)*/
+                ControllerInput.controllers[0].B == 1
+                || ControllerInput.controllers[1].B == 1)
             {
                 InstructionsClose();
+            }
+        }
+    }
+
+    void InputManagement()
+    {
+        if(GameManagerScript.instance.currentGameState == GameState.MainMenu)
+        {
+            //player 1
+            if ((ControllerInput.controllers[0].Down == 1
+                || ControllerInput.controllers[0].LeftStickDown == 1))
+            {
+                int prevButton = selectedButton;
+
+                selectedButton = (selectedButton + 1) % buttons.Length;
+
+                buttons[selectedButton].transform.GetChild(0).GetComponent<Text>().color = highlightedColor;
+                buttons[prevButton].transform.GetChild(0).GetComponent<Text>().color = normalColor;
+            }
+
+            else if ((ControllerInput.controllers[0].Up == 1
+                    || ControllerInput.controllers[0].LeftStickUp == 1))
+            {
+                int prevButton = selectedButton;
+
+                selectedButton = (selectedButton + buttons.Length - 1) % buttons.Length;
+
+                buttons[selectedButton].transform.GetChild(0).GetComponent<Text>().color = highlightedColor;
+                buttons[prevButton].transform.GetChild(0).GetComponent<Text>().color = normalColor;
+            }
+
+            if (ControllerInput.controllers[0].A == 1)
+            {
+                buttons[selectedButton].GetComponent<Button>().onClick.Invoke();
+            }
+
+
+            //player 2
+            if ((ControllerInput.controllers[1].Down == 1
+                || ControllerInput.controllers[1].LeftStickDown == 1))
+            {
+                int prevButton = selectedButton;
+
+                selectedButton = (selectedButton + 1) % buttons.Length;
+
+                buttons[selectedButton].transform.GetChild(0).GetComponent<Text>().color = highlightedColor;
+                buttons[prevButton].transform.GetChild(0).GetComponent<Text>().color = normalColor;
+            }
+            else if ((ControllerInput.controllers[1].Up == 1
+                    || ControllerInput.controllers[1].LeftStickUp == 1))
+            {
+                int prevButton = selectedButton;
+
+                selectedButton = (selectedButton + buttons.Length - 1) % buttons.Length;
+
+                buttons[selectedButton].transform.GetChild(0).GetComponent<Text>().color = highlightedColor;
+                buttons[prevButton].transform.GetChild(0).GetComponent<Text>().color = normalColor;
+            }
+
+            if (ControllerInput.controllers[1].A == 1)
+            {
+                buttons[selectedButton].GetComponent<Button>().onClick.Invoke();
             }
         }
     }
