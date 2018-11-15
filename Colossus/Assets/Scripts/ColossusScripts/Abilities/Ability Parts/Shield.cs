@@ -5,30 +5,18 @@ using UnityEngine.UI;
 
 public class Shield : MonoBehaviour {
 
+	public ShieldsAbility abilityControl;
+
 	public bool playerActive; //Is the player trying to activate the reflect?
 	bool prevPlayerActive;
 	bool reflecting; //Reflecting currently on
 
-	public float reflectTime;
-	public float lagBeforeCharge;
-	float currReflect;
-	float currChargeLag;
+	Material mat;
 
 	public Slider sliderReflect;
 
-	[Header("Material Settings")]
-	private Material mat;
-
-	[Range(0.0f,1.0f)]
-	public float offAlpha;
-	[Range(0.0f,1.0f)]
-	public float onAlpha;
-
-	[Header("Audio Objects")]
-	public GameObject hitPrefab;
-	public GameObject hitReflectPrefab;
-	public AudioClip reflectOnSound;
-	public AudioClip reflectOffSound;
+	float currReflect;
+	float currChargeLag;
 
 	AudioSource source;
 
@@ -39,7 +27,7 @@ public class Shield : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		currReflect = reflectTime;
+		currReflect = abilityControl.reflectTime;
 		mat = gameObject.GetComponent<Renderer>().material;
 		source = gameObject.GetComponent<AudioSource>();
 	}
@@ -69,25 +57,25 @@ public class Shield : MonoBehaviour {
 		currChargeLag = 0.0f;
 
 		//Set material alpha
-		mat.color = new Color(1.0f, 1.0f, 1.0f, onAlpha);
+		mat.color = new Color(1.0f, 1.0f, 1.0f, abilityControl.onAlpha);
 
 		reflecting = true;
 
 		source.Stop();
-		source.clip = reflectOnSound;
+		source.clip = abilityControl.reflectOnSound;
 		source.Play();
 	}
 
 	void TurnOff()
 	{
-		mat.color = new Color(1.0f, 1.0f, 1.0f, offAlpha);
+		mat.color = new Color(1.0f, 1.0f, 1.0f, abilityControl.offAlpha);
 		reflecting = false;
 
 		if(!source.isPlaying)
 		{
 			if(currReflect > 0.0f)
 			{
-				source.clip = reflectOffSound;
+				source.clip = abilityControl.reflectOffSound;
 				source.Play();
 			}
 			else
@@ -106,10 +94,10 @@ public class Shield : MonoBehaviour {
 		{
 			currReflect -= Time.deltaTime;
 		}
-		else if(!playerActive && currReflect < reflectTime)
+		else if(!playerActive && currReflect < abilityControl.reflectTime)
 		{
 			//Make sure it doesn't immediately start charging
-			if(currChargeLag >= lagBeforeCharge)
+			if(currChargeLag >= abilityControl.lagBeforeCharge)
 			{
 				currReflect += Time.deltaTime;		
 			}
@@ -119,7 +107,7 @@ public class Shield : MonoBehaviour {
 			}
 		}
 			
-		if(currReflect > reflectTime) currReflect = reflectTime;
+		if(currReflect > abilityControl.reflectTime) currReflect = abilityControl.reflectTime;
 
 		if(currReflect <= 0.0f)
 		{
@@ -128,7 +116,7 @@ public class Shield : MonoBehaviour {
 		}
 
 		//Update UI
-		sliderReflect.value = 1 - (reflectTime - currReflect)/reflectTime;
+		sliderReflect.value = 1 - (abilityControl.reflectTime - currReflect)/abilityControl.reflectTime;
 	}
 
 	/// <summary>
@@ -167,11 +155,11 @@ public class Shield : MonoBehaviour {
 			if(reflecting)
 			{
 				Reflect(collision);
-				Instantiate(hitReflectPrefab, collision.contacts[0].point, Quaternion.identity);
+				Instantiate(abilityControl.hitReflectPrefab, collision.contacts[0].point, Quaternion.identity);
 			}
 			else
 			{
-				Instantiate(hitPrefab, collision.contacts[0].point, Quaternion.identity);
+				Instantiate(abilityControl.hitPrefab, collision.contacts[0].point, Quaternion.identity);
 			}
 		}
 	}

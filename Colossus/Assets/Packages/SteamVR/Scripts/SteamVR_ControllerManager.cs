@@ -270,13 +270,6 @@ public class SteamVR_ControllerManager : MonoBehaviour
 			}
 		}
 
-		//Refresh controllers for colossus if possible
-		/*if(GameManagerScript.instance.currentGameState == GameState.InGame && GameManagerScript.instance.colossus != null)
-		{
-			GameManagerScript.instance.colossus.RefreshTrackedControllers();
-		}*/
-
-		// Reset the rest.
 		while (objectIndex < objects.Length)
 		{
 			SetTrackedDeviceIndex(objectIndex++, OpenVR.k_unTrackedDeviceIndexInvalid);

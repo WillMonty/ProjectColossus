@@ -7,6 +7,23 @@ public class ShieldsAbility : ColossusAbility {
 	public GameObject leftShield;
 	public GameObject rightShield;
 
+	[Header("Balancing")]
+	public float reflectTime;
+	public float lagBeforeCharge;
+
+	[Header("Material Settings")]
+
+	[Range(0.0f,1.0f)]
+	public float offAlpha;
+	[Range(0.0f,1.0f)]
+	public float onAlpha;
+
+	[Header("Audio Objects")]
+	public GameObject hitPrefab;
+	public GameObject hitReflectPrefab;
+	public AudioClip reflectOnSound;
+	public AudioClip reflectOffSound;
+
 	public override void Enable()
 	{
 		abilityEnabled = true;

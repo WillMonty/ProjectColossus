@@ -7,6 +7,11 @@ public class FistsAbility : ColossusAbility {
 	public GameObject leftFist;
 	public GameObject rightFist;
 
+	[Header("Balancing")]
+	public float chargeUpTime;
+	public float launchForce;
+	public float returnLagTime;
+
 	public override void Enable ()
 	{
 		abilityEnabled = true;
@@ -28,5 +33,30 @@ public class FistsAbility : ColossusAbility {
 
 		leftFist.SetActive(false);
 		rightFist.SetActive(false);
+	}
+
+	void Update () 
+	{
+		if(leftFist.activeSelf)
+		{
+			CheckActivating(leftFist, leftControllerTracked);
+		}
+
+		if(rightFist.activeSelf)
+		{
+			CheckActivating(rightFist, rightControllerTracked);
+		}
+	}
+
+	void CheckActivating(GameObject targetFist, SteamVR_TrackedController targetController)
+	{
+		if(targetController.triggerPressed)
+		{
+			targetFist.GetComponent<Fist>().playerActive = true;	
+		}
+		else
+		{
+			targetFist.GetComponent<Fist>().playerActive = false;	
+		}
 	}
 }
