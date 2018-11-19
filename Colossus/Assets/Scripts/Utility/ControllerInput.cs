@@ -14,6 +14,9 @@ public class Controller
     public bool connected = false;
     public bool connectedPrev = false;
 
+    const float STICK_SENSITIVITY = .01f;
+    const float TRIGGER_SENSITIVITY = .01f;
+
     #region Inputs
     
     /// <summary>
@@ -215,7 +218,10 @@ public class Controller
     {
         get
         {
-            return state.Triggers.Right;
+            if(state.Triggers.Right > TRIGGER_SENSITIVITY)
+                return state.Triggers.Right;
+
+            return 0;
         }
     }
 
@@ -226,7 +232,26 @@ public class Controller
     {
         get
         {
-            return statePrev.Triggers.Right;
+            if (statePrev.Triggers.Right > TRIGGER_SENSITIVITY)
+                return statePrev.Triggers.Right;
+
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// State of the right trigger being pressed
+    /// </summary>
+    public int RightTriggerPressed
+    {
+        get
+        {
+            if (RightTrigger > 0 && RightTriggerPrev > 0)
+                return 0;
+            if (RightTrigger > 0)
+                return 1;
+
+            return 0;
         }
     }
 
@@ -237,7 +262,10 @@ public class Controller
     {
         get
         {
-            return state.Triggers.Left;
+            if(state.Triggers.Left > TRIGGER_SENSITIVITY)
+                return state.Triggers.Left;
+
+            return 0;
         }
     }
 
@@ -248,7 +276,54 @@ public class Controller
     {
         get
         {
-            return statePrev.Triggers.Left;
+            if (statePrev.Triggers.Left > TRIGGER_SENSITIVITY)
+                return statePrev.Triggers.Left;
+
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// State of the left trigger being pressed
+    /// </summary>
+    public int LeftTriggerPressed
+    {
+        get
+        {
+            if (LeftTrigger > 0 && LeftTriggerPrev > 0)
+                return 1;
+            if (LeftTrigger > 0)
+                return 2;
+
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// If the right stick is currently being used
+    /// </summary>
+    private bool RightStickActive
+    {
+        get
+        {
+            if (Mathf.Sqrt(Mathf.Pow(state.ThumbSticks.Right.X, 2) + Mathf.Pow(state.ThumbSticks.Right.Y, 2)) > STICK_SENSITIVITY)
+                return true;
+
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// If in the previous frame the right stick is being used
+    /// </summary>
+    private bool RightStickPrevActive
+    {
+        get
+        {
+            if (Mathf.Sqrt(Mathf.Pow(statePrev.ThumbSticks.Right.X, 2) + Mathf.Pow(statePrev.ThumbSticks.Right.Y, 2)) > STICK_SENSITIVITY)
+                return true;
+
+            return false;
         }
     }
 
@@ -259,7 +334,10 @@ public class Controller
     {
         get
         {
-            return state.ThumbSticks.Right.X;
+            if(RightStickActive)
+                return state.ThumbSticks.Right.X;
+
+            return 0;
         }
     }
 
@@ -270,11 +348,13 @@ public class Controller
     {
         get
         {
-            return statePrev.ThumbSticks.Right.X;
+            if(RightStickPrevActive)
+                return statePrev.ThumbSticks.Right.X;
+
+            return 0;
         }
     }
     
-
     /// <summary>
     /// Right Stick Y-axis State
     /// </summary>
@@ -282,7 +362,10 @@ public class Controller
     {
         get
         {
-            return state.ThumbSticks.Right.Y;
+            if(RightStickActive)
+                return state.ThumbSticks.Right.Y;
+
+            return 0;
         }
     }
 
@@ -293,7 +376,38 @@ public class Controller
     {
         get
         {
-            return statePrev.ThumbSticks.Right.Y;
+            if(RightStickPrevActive)
+                return statePrev.ThumbSticks.Right.Y;
+
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// If the left stick is currently being used
+    /// </summary>
+    private bool LeftStickActive
+    {
+        get
+        {
+            if (Mathf.Sqrt(Mathf.Pow(state.ThumbSticks.Left.X, 2) + Mathf.Pow(state.ThumbSticks.Left.Y, 2)) > STICK_SENSITIVITY)
+                return true;
+
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// If in the previous frame the left stick is being used
+    /// </summary>
+    private bool LeftStickPrevActive
+    {
+        get
+        {
+            if (Mathf.Sqrt(Mathf.Pow(statePrev.ThumbSticks.Left.X, 2) + Mathf.Pow(statePrev.ThumbSticks.Left.Y, 2)) > STICK_SENSITIVITY)
+                return true;
+
+            return false;
         }
     }
 
@@ -304,7 +418,10 @@ public class Controller
     {
         get
         {
-            return state.ThumbSticks.Left.X;
+            if (LeftStickActive)
+                return state.ThumbSticks.Left.X;
+
+            return 0;
         }
     }
 
@@ -315,7 +432,10 @@ public class Controller
     {
         get
         {
-            return statePrev.ThumbSticks.Left.X;
+            if(LeftStickPrevActive)
+                return statePrev.ThumbSticks.Left.X;
+
+            return 0;
         }
     }
     
@@ -326,7 +446,10 @@ public class Controller
     {
         get
         {
-            return state.ThumbSticks.Left.Y;
+            if(LeftStickActive)
+                return state.ThumbSticks.Left.Y;
+
+            return 0;
         }
     }
 
@@ -337,11 +460,13 @@ public class Controller
     {
         get
         {
-            return statePrev.ThumbSticks.Left.Y;
+            if(LeftStickPrevActive)
+                return statePrev.ThumbSticks.Left.Y;
+
+            return 0;
         }
     }
-
-
+    
     /// <summary>
     /// Left Stick Up State
     /// </summary>
@@ -349,9 +474,9 @@ public class Controller
     {
         get
         {
-            if (state.ThumbSticks.Left.Y >= .1 && statePrev.ThumbSticks.Left.Y < .1)
+            if (state.ThumbSticks.Left.Y >= STICK_SENSITIVITY && statePrev.ThumbSticks.Left.Y < STICK_SENSITIVITY)
                 return 1;
-            if (state.ThumbSticks.Left.Y >= .1)
+            if (state.ThumbSticks.Left.Y >= STICK_SENSITIVITY)
                 return 2;
 
             return 0;
@@ -365,9 +490,9 @@ public class Controller
     {
         get
         {
-            if (state.ThumbSticks.Left.Y <= -.1 && statePrev.ThumbSticks.Left.Y > -.1)
+            if (state.ThumbSticks.Left.Y <= -1 * STICK_SENSITIVITY && statePrev.ThumbSticks.Left.Y > -1 * STICK_SENSITIVITY)
                 return 1;
-            if (state.ThumbSticks.Left.Y <= -.1)
+            if (state.ThumbSticks.Left.Y <= -1 * STICK_SENSITIVITY)
                 return 2;
 
             return 0;
@@ -381,9 +506,9 @@ public class Controller
     {
         get
         {
-            if (state.ThumbSticks.Left.X >= .1 && statePrev.ThumbSticks.Left.X < .1)
+            if (state.ThumbSticks.Left.X >= STICK_SENSITIVITY && statePrev.ThumbSticks.Left.X < STICK_SENSITIVITY)
                 return 1;
-            if (state.ThumbSticks.Left.X >= .1)
+            if (state.ThumbSticks.Left.X >= STICK_SENSITIVITY)
                 return 2;
 
             return 0;
@@ -397,65 +522,65 @@ public class Controller
     {
         get
         {
-            if (state.ThumbSticks.Left.X <= -.1 && statePrev.ThumbSticks.Left.X > -.1)
+            if (state.ThumbSticks.Left.X <= -1 * STICK_SENSITIVITY && statePrev.ThumbSticks.Left.X > -1 * STICK_SENSITIVITY)
                 return 1;
-            if (state.ThumbSticks.Left.X <= -.1)
+            if (state.ThumbSticks.Left.X <= -1 * STICK_SENSITIVITY)
                 return 2;
 
             return 0;
         }
     }
     
+    /// <summary>
+    /// State of pressing up on the DPad or left stick
+    /// </summary>
     public int Up
     {
         get
         {
-            if (state.ThumbSticks.Left.Y >= .1 && statePrev.ThumbSticks.Left.Y < .1)
-                return 1; 
-
-            if (state.DPad.Up == ButtonState.Pressed && statePrev.DPad.Up == ButtonState.Released)
+            if (LeftStickUp == 1 || DPadUp == 1)
                 return 1; 
 
             return 0;
         }
     }
 
+    /// <summary>
+    /// State of pressing down on the DPad or left stick
+    /// </summary>
     public int Down
     {
         get
         {
-            if (state.ThumbSticks.Left.Y <= -.1 && statePrev.ThumbSticks.Left.Y > -.1)
+            if (LeftStickDown == 1 || DPadDown == 1)
                 return 1;
-
-            if (state.DPad.Down == ButtonState.Pressed && statePrev.DPad.Down == ButtonState.Released)
-                return 1;
-
+            
             return 0;
         }
     }
 
+    /// <summary>
+    /// State of pressing right on the DPad or left stick
+    /// </summary>
     public int Right
     {
         get
         {
-            if (state.ThumbSticks.Left.X >= .1 && statePrev.ThumbSticks.Left.X < .1)
-                return 1;
-
-            if (state.DPad.Right == ButtonState.Pressed && statePrev.DPad.Right == ButtonState.Released)
+            if (LeftStickRight == 1 || DPadRight == 1)
                 return 1;
 
             return 0;
         }
     }
 
+    /// <summary>
+    /// State of pressing left on the DPad or left stick
+    /// </summary>
     public int Left
     {
         get
         {
-            if (state.ThumbSticks.Left.X <= -.1 && statePrev.ThumbSticks.Left.X > -.1)
-                return 1;
-
-            if (state.DPad.Left == ButtonState.Pressed && statePrev.DPad.Left == ButtonState.Released)
+            if (LeftStickLeft == 1 || DPadLeft == 1)
                 return 1;
 
             return 0;

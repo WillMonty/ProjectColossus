@@ -23,12 +23,6 @@ public class PlayerInput : MonoBehaviour
             if (playerIndexSet)
             {
                 return ControllerInput.controllers[playerIndex].A;
-                /*
-                if (state.Buttons.A == ButtonState.Pressed && prevState.Buttons.A == ButtonState.Released)
-                    return 1; //Pressed 
-                else if (state.Buttons.A == ButtonState.Pressed && prevState.Buttons.A == ButtonState.Pressed)
-                    return 2; //Held   
-                */
             }
 
             return 0;
@@ -43,102 +37,13 @@ public class PlayerInput : MonoBehaviour
         {
             if (playerIndexSet)
             {
-                if (ControllerInput.controllers[playerIndex].LeftTrigger > 0 
-                    && ControllerInput.controllers[playerIndex].LeftTriggerPrev == 0)
-                    return 1; //Pressed 
-                else if (ControllerInput.controllers[playerIndex].LeftTrigger > 0)
-                    return 2; //Held      
-                /*
-                if (state.Triggers.Left > 0 && prevState.Triggers.Left == 0)
-                    return 1; //Pressed 
-                else if (state.Triggers.Left > 0)
-                    return 2; //Held       
-                */
+                return ControllerInput.controllers[playerIndex].LeftTriggerPressed;
             }
 
             return 0;
         }
     }
-
-    //Up DPad State
-    public int Up
-    {
-        get
-        {
-            if(playerIndexSet)
-            {
-                return ControllerInput.controllers[playerIndex].DPadUp;
-                /*
-                if (state.DPad.Up == ButtonState.Pressed && prevState.DPad.Up == ButtonState.Released)
-                    return 1; //Pressed
-                else if (state.DPad.Up == ButtonState.Pressed)
-                    return 2; //Held
-                */
-            }
-
-            return 0;
-        }
-    }
-
-    //Down DPad State
-    public int Down
-    {
-        get
-        {
-            if (playerIndexSet)
-            {
-                return ControllerInput.controllers[playerIndex].DPadDown;
-                /*
-                if (state.DPad.Down == ButtonState.Pressed && prevState.DPad.Down == ButtonState.Released)
-                    return 1; //Pressed
-                else if (state.DPad.Down == ButtonState.Pressed)
-                    return 2; //Held
-                    */
-            }
-
-            return 0;
-        }
-    }
-
-    //Right DPad State
-    public int Right
-    {
-        get
-        {
-            if (playerIndexSet)
-            {
-                return ControllerInput.controllers[playerIndex].DPadRight;
-                /*
-                if (state.DPad.Right == ButtonState.Pressed && prevState.DPad.Right == ButtonState.Released)
-                    return 1; //Pressed
-                else if (state.DPad.Right == ButtonState.Pressed)
-                    return 2; //Held
-                    */
-            }
-
-            return 0;
-        }
-    }
-
-    //Left DPad State
-    public int Left
-    {
-        get
-        {
-            if (playerIndexSet)
-            {
-                return ControllerInput.controllers[playerIndex].DPadLeft;
-                /*
-                if (state.DPad.Left == ButtonState.Pressed && prevState.DPad.Left == ButtonState.Released)
-                    return 1; //Pressed
-                else if (state.DPad.Left == ButtonState.Pressed)
-                    return 2; //Held
-                    */
-            }
-
-            return 0;
-        }
-    }
+    
 
 
     // Use this for initialization
