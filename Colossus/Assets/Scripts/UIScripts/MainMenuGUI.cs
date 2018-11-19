@@ -29,12 +29,6 @@ public class MainMenuGUI : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (GameManagerScript.instance.currentGameState == GameState.MainMenu
-            || GameManagerScript.instance.currentGameState == GameState.Instructions)
-        {
-            ControllerInput.UpdateControllers();
-        }
-
         InputManagement();
         InstructionsManagement();
     }
@@ -129,9 +123,10 @@ public class MainMenuGUI : MonoBehaviour {
     {
         if(GameManagerScript.instance.currentGameState == GameState.MainMenu)
         {
+            Debug.Log(ControllerInput.controllers[0].Up.ToString());
+
             //player 1
-            if ((ControllerInput.controllers[0].Down == 1
-                || ControllerInput.controllers[0].LeftStickDown == 1))
+            if (ControllerInput.controllers[0].Down == 1)
             {
                 int prevButton = selectedButton;
 
@@ -140,9 +135,7 @@ public class MainMenuGUI : MonoBehaviour {
                 buttons[selectedButton].transform.GetChild(0).GetComponent<Text>().color = highlightedColor;
                 buttons[prevButton].transform.GetChild(0).GetComponent<Text>().color = normalColor;
             }
-
-            else if ((ControllerInput.controllers[0].Up == 1
-                    || ControllerInput.controllers[0].LeftStickUp == 1))
+            else if (ControllerInput.controllers[0].Up == 1)
             {
                 int prevButton = selectedButton;
 
@@ -159,8 +152,7 @@ public class MainMenuGUI : MonoBehaviour {
 
 
             //player 2
-            if ((ControllerInput.controllers[1].Down == 1
-                || ControllerInput.controllers[1].LeftStickDown == 1))
+            if (ControllerInput.controllers[1].Down == 1)
             {
                 int prevButton = selectedButton;
 
@@ -169,8 +161,7 @@ public class MainMenuGUI : MonoBehaviour {
                 buttons[selectedButton].transform.GetChild(0).GetComponent<Text>().color = highlightedColor;
                 buttons[prevButton].transform.GetChild(0).GetComponent<Text>().color = normalColor;
             }
-            else if ((ControllerInput.controllers[1].Up == 1
-                    || ControllerInput.controllers[1].LeftStickUp == 1))
+            else if (ControllerInput.controllers[1].Up == 1)
             {
                 int prevButton = selectedButton;
 

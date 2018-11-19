@@ -67,7 +67,7 @@ public class PlayerInput : MonoBehaviour
         {
             if(playerIndexSet)
             {
-                return ControllerInput.controllers[playerIndex].Up;
+                return ControllerInput.controllers[playerIndex].DPadUp;
                 /*
                 if (state.DPad.Up == ButtonState.Pressed && prevState.DPad.Up == ButtonState.Released)
                     return 1; //Pressed
@@ -87,7 +87,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (playerIndexSet)
             {
-                return ControllerInput.controllers[playerIndex].Down;
+                return ControllerInput.controllers[playerIndex].DPadDown;
                 /*
                 if (state.DPad.Down == ButtonState.Pressed && prevState.DPad.Down == ButtonState.Released)
                     return 1; //Pressed
@@ -107,7 +107,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (playerIndexSet)
             {
-                return ControllerInput.controllers[playerIndex].Right;
+                return ControllerInput.controllers[playerIndex].DPadRight;
                 /*
                 if (state.DPad.Right == ButtonState.Pressed && prevState.DPad.Right == ButtonState.Released)
                     return 1; //Pressed
@@ -127,7 +127,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (playerIndexSet)
             {
-                return ControllerInput.controllers[playerIndex].Left;
+                return ControllerInput.controllers[playerIndex].DPadLeft;
                 /*
                 if (state.DPad.Left == ButtonState.Pressed && prevState.DPad.Left == ButtonState.Released)
                     return 1; //Pressed

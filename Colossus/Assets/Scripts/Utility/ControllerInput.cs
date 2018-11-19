@@ -19,7 +19,7 @@ public class Controller
     /// <summary>
     /// Up DPad State
     /// </summary>
-    public int Up
+    public int DPadUp
     {
         get
         {
@@ -35,7 +35,7 @@ public class Controller
     /// <summary>
     /// Down DPad State
     /// </summary>
-    public int Down
+    public int DPadDown
     {
         get
         {
@@ -51,7 +51,7 @@ public class Controller
     /// <summary>
     /// Right DPad State
     /// </summary>
-    public int Right
+    public int DPadRight
     {
         get
         {
@@ -67,7 +67,7 @@ public class Controller
     /// <summary>
     /// Left DPad State
     /// </summary>
-    public int Left
+    public int DPadLeft
     {
         get
         {
@@ -401,6 +401,62 @@ public class Controller
                 return 1;
             if (state.ThumbSticks.Left.X <= -.1)
                 return 2;
+
+            return 0;
+        }
+    }
+    
+    public int Up
+    {
+        get
+        {
+            if (state.ThumbSticks.Left.Y >= .1 && statePrev.ThumbSticks.Left.Y < .1)
+                return 1; 
+
+            if (state.DPad.Up == ButtonState.Pressed && statePrev.DPad.Up == ButtonState.Released)
+                return 1; 
+
+            return 0;
+        }
+    }
+
+    public int Down
+    {
+        get
+        {
+            if (state.ThumbSticks.Left.Y <= -.1 && statePrev.ThumbSticks.Left.Y > -.1)
+                return 1;
+
+            if (state.DPad.Down == ButtonState.Pressed && statePrev.DPad.Down == ButtonState.Released)
+                return 1;
+
+            return 0;
+        }
+    }
+
+    public int Right
+    {
+        get
+        {
+            if (state.ThumbSticks.Left.X >= .1 && statePrev.ThumbSticks.Left.X < .1)
+                return 1;
+
+            if (state.DPad.Right == ButtonState.Pressed && statePrev.DPad.Right == ButtonState.Released)
+                return 1;
+
+            return 0;
+        }
+    }
+
+    public int Left
+    {
+        get
+        {
+            if (state.ThumbSticks.Left.X <= -.1 && statePrev.ThumbSticks.Left.X > -.1)
+                return 1;
+
+            if (state.DPad.Left == ButtonState.Pressed && statePrev.DPad.Left == ButtonState.Released)
+                return 1;
 
             return 0;
         }
