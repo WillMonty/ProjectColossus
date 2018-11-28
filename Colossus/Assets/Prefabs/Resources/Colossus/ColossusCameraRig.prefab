@@ -11524,9 +11524,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftFist: {fileID: 1000131344819812}
   rightFist: {fileID: 1526715591333572}
+  damageFactor: 1.25
   chargeUpTime: 0.5
   launchForce: 750000
   returnLagTime: 2
+  returnTime: 4
 --- !u!114 &114595771847476744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11785,11 +11787,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityControl: {fileID: 114537930392521232}
+  isLeftFist: 0
   fistRocketPrefab: {fileID: 1026894233165960, guid: 903ed628173ff494981a9f4010731774,
     type: 2}
   playerActive: 0
   fistState: 0
-  currCharge: 0
 --- !u!114 &114689169110115734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11860,7 +11862,8 @@ MonoBehaviour:
   - {fileID: 114378761543110090}
   headCollider: {fileID: 0}
   rigSteamVR: {fileID: 1514098913028502}
-  rig2DFallback: {fileID: 0}
+  rig2DFallback: {fileID: 1487693689635962, guid: 9b0e1e7a81a77e54b8d33c154cfd8641,
+    type: 2}
   audioListener: {fileID: 4984231329449930}
   allowToggleTo2D: 1
 --- !u!114 &114713303554117322
@@ -12175,11 +12178,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityControl: {fileID: 114537930392521232}
+  isLeftFist: 1
   fistRocketPrefab: {fileID: 1211215462566200, guid: 609fdee4b49d77741a7e9eea6cb27ecf,
     type: 2}
   playerActive: 0
   fistState: 0
-  currCharge: 0
 --- !u!114 &114965652380048496
 MonoBehaviour:
   m_ObjectHideFlags: 1

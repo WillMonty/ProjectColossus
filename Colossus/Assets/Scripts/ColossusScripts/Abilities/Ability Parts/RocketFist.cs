@@ -2,15 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketFist : MonoBehaviour {
+public class RocketFist : MonoBehaviour, IDamage {
 
-	// Use this for initialization
-	void Start () {
-		
+	public FistsAbility abilityControl;
+	private int ownerNumber;
+
+	public float Damage
+	{
+		get { return GetComponent<Rigidbody>().velocity.magnitude * abilityControl.damageFactor; }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public int Owner
+	{
+		get { return ownerNumber; }
+		set { ownerNumber = value; }
+	}
+
+	void OnCollisionEnter(Collision collision)
+	{
+		GetComponent<Rigidbody>().useGravity = true;
 	}
 }

@@ -8,9 +8,11 @@ public class FistsAbility : ColossusAbility {
 	public GameObject rightFist;
 
 	[Header("Balancing")]
+	public float damageFactor;
 	public float chargeUpTime;
 	public float launchForce;
 	public float returnLagTime;
+	public float returnTime;
 
 	public override void Enable ()
 	{
@@ -52,7 +54,7 @@ public class FistsAbility : ColossusAbility {
 	{
 		if(targetController.triggerPressed)
 		{
-			targetFist.GetComponent<Fist>().playerActive = true;	
+			targetFist.GetComponent<Fist>().playerActive = true;
 		}
 		else
 		{
