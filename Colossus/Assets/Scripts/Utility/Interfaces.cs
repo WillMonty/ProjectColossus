@@ -15,6 +15,8 @@ public interface IWeapon
     float ReloadTime { get; }
     bool Reloading { get; }
     bool Shooting { get; }
+    void ResetStats();
+
 }
 
 //Generic Interface for player projectiles

@@ -322,7 +322,9 @@ public class GameManagerScript : MonoBehaviour
 
 		//Activate soldier, deactivate deathcam
 		soldierClone.gameObject.SetActive(true);
-		soldierClone.Alive = true;
+        soldierClone.WeaponData.ResetStats();
+        soldierClone.Alive = true;
+       
 
 		SetDeathCam();
 		//Set soldier position to random spawnpoint

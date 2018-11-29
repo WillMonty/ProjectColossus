@@ -73,7 +73,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Barrel
-    second: {fileID: 2100000, guid: 57db6b7750b08934aa0369b3e2999f68, type: 2}
+    second: {fileID: 2100000, guid: 74b576d229de4954b98a92a50760b685, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

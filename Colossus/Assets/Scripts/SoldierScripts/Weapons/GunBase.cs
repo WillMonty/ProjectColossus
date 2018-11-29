@@ -211,6 +211,13 @@ public class GunBase : MonoBehaviour, IWeapon
         StartCoroutine("ReloadingBoolReset");
     }
 
+    public void ResetStats()
+    {
+        reloading = false;
+        justShot = false;
+        bulletsInMag = magSize;
+    }
+
     /// <summary>
     /// Used to reset the reloading variable variable.
     /// Used with Couritines to prevent players from shooting during reloading
