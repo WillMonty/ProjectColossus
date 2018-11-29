@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public enum Weapons
 {
     AssaultRifle,
@@ -38,7 +36,9 @@ public class GunBase : MonoBehaviour, IWeapon
         get { return bulletsInMag; }
     }
 
-    // Specific balencing shooting variables
+    /// <summary>
+    /// Specific balancing shooting variables
+    /// </summary>
     protected float fireDelay;
 
     protected int magSize;
@@ -52,6 +52,15 @@ public class GunBase : MonoBehaviour, IWeapon
     public float ReloadTime
     {
         get { return reloadTime; }
+    }
+
+    /// <summary>
+    /// Used to prevent double reloading glitch
+    /// </summary>
+    protected int currentReloadNum = 0;
+    public int CurrentReloadNum
+    {
+        get { return currentReloadNum; }
     }
 
     // Variables to keep shooting from breaking and balanced
@@ -136,12 +145,13 @@ public class GunBase : MonoBehaviour, IWeapon
 
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     protected virtual void FixedUpdate ()
     {
         if (GameManagerScript.instance.currentGameState == GameState.InGame)
         {
-
             // Check for shooting
             if (rightTrigger > 0 && justShot == false && !reloading)
             {
@@ -154,17 +164,13 @@ public class GunBase : MonoBehaviour, IWeapon
                 {
                     Reload();
                 }
-
             }
             //Check for reloading
             else if (!reloading && ((reloadButton && bulletsInMag != magSize)) && justShot == false)
             {
                 Reload();
             }
-
-
         }
-
     }
    
     protected virtual void Shoot()
@@ -207,6 +213,7 @@ public class GunBase : MonoBehaviour, IWeapon
         reloading = true;
 
         bulletsInMag = 0;
+
         
         StartCoroutine("ReloadingBoolReset");
     }
@@ -220,6 +227,9 @@ public class GunBase : MonoBehaviour, IWeapon
         yield return new WaitForSeconds(reloadTime);
         bulletsInMag = magSize;
         reloading = false;
+
+        currentReloadNum += 1;
+        currentReloadNum %= 3;
     }
 
 }

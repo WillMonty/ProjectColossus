@@ -39,6 +39,7 @@ public class SoldierUINew : MonoBehaviour {
     float s1ReloadDuration;
     float s1ReloadTime;
     bool s1Reloading;
+    int s1CurrentReloadNum = 0;
 
     public Text s2CurrentMag;
     public Text s2MagMax;
@@ -49,6 +50,7 @@ public class SoldierUINew : MonoBehaviour {
     float s2ReloadDuration;
     float s2ReloadTime;
     bool s2Reloading;
+    int s2CurrentReloadNum = 0;
 
     float damageAlphaTimerMax;
 
@@ -78,7 +80,7 @@ public class SoldierUINew : MonoBehaviour {
     /// <summary>
     /// Update is called once per frame
     /// </summary>
-    void Update ()
+    void FixedUpdate ()
     {
         if (isActive)
         {
@@ -182,7 +184,7 @@ public class SoldierUINew : MonoBehaviour {
     /// </summary>
     void UpdateReloading()
     {
-        if (soldier1.GetComponent<PlayerData>().WeaponData.Reloading && !s1Reloading)
+        if (soldier1.GetComponent<PlayerData>().WeaponData.Reloading && !s1Reloading && s1CurrentReloadNum == soldier1.GetComponent<PlayerData>().WeaponData.CurrentReloadNum)
         {
             s1ReloadDuration = soldier1.GetComponent<PlayerData>().WeaponData.ReloadTime;
             s1ReloadTime = 0;
@@ -194,7 +196,7 @@ public class SoldierUINew : MonoBehaviour {
             s1ReloadReticle.GetComponent<Image>().fillAmount = 0;
         }
 
-        if (soldier2.GetComponent<PlayerData>().WeaponData.Reloading && !s2Reloading)
+        if (soldier2.GetComponent<PlayerData>().WeaponData.Reloading && !s2Reloading && s2CurrentReloadNum == soldier2.GetComponent<PlayerData>().WeaponData.CurrentReloadNum)
         {
             s2ReloadDuration = soldier2.GetComponent<PlayerData>().WeaponData.ReloadTime;
             s2ReloadTime = 0;
@@ -213,6 +215,9 @@ public class SoldierUINew : MonoBehaviour {
                 s1ReloadTime = s1ReloadDuration;
                 
                 s1Reloading = false;
+
+                s1CurrentReloadNum += 1;
+                s1CurrentReloadNum %= 3;
             }
             
 			s1ReloadTime += Time.deltaTime;
@@ -232,6 +237,9 @@ public class SoldierUINew : MonoBehaviour {
                 s2ReloadTime = s2ReloadDuration;
 
                 s2Reloading = false;
+
+                s2CurrentReloadNum += 1;
+                s2CurrentReloadNum %= 3;
             }
 
 			s2ReloadTime += Time.deltaTime;
@@ -247,7 +255,7 @@ public class SoldierUINew : MonoBehaviour {
 
 
     /// <summary>
-    /// updates the healthbars for both players if they take damage
+    /// Updates the healthbars for both players if they take damage
     /// </summary>
     void UpdateHealthbar()
     {
@@ -272,7 +280,7 @@ public class SoldierUINew : MonoBehaviour {
 
 
     /// <summary>
-    /// updates the ability for the soldiers
+    /// Updates the ability for the soldiers
     /// </summary>
     void UpdateAbilitybar()
     {
@@ -448,10 +456,9 @@ public class SoldierUINew : MonoBehaviour {
                 break;
         }
     }
-
-
+    
     /// <summary>
-    /// updates the magazine for both players
+    /// Updates the magazine for both players
     /// </summary>
     void UpdateCurrentMag()
     {
@@ -460,7 +467,9 @@ public class SoldierUINew : MonoBehaviour {
         s2CurrentMag.text = soldier2.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
     }
 
-
+    /// <summary>
+    /// Updates the UI displaying the magazine maximum
+    /// </summary>
     void UpdateMagMax()
     {
         s1MagMax.text = "/" + soldier1.GetComponent<PlayerData>().WeaponData.MagSize;
@@ -471,10 +480,9 @@ public class SoldierUINew : MonoBehaviour {
 
         s2CurrentMag.text = soldier2.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
     }
-
-
+    
     /// <summary>
-    /// indicates that the player has taken damage
+    /// Indicates that the player has taken damage
     /// </summary>
     /// <param name="playerNum"></param>
     void PlayerDamaged(int playerNum)
@@ -504,8 +512,7 @@ public class SoldierUINew : MonoBehaviour {
                 break;
         }
     }
-
-
+    
     /// <summary>
     /// updates the damage indicator
     /// </summary>
