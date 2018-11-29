@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using XInputDotNetPure;
 
 
 public class SoldierSelectMenuScript : MonoBehaviour {
@@ -49,15 +48,12 @@ public class SoldierSelectMenuScript : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
-		if(GameManagerScript.instance.currentGameState == GameState.CharacterSelect)
+		if (GameManagerScript.instance.currentGameState == GameState.CharacterSelect)
         {
-            ControllerInput.UpdateControllers();
-            
-
             //player 1
-            if(ControllerInput.controllers[0].Down == 1 && !p1Ready)
+            if (ControllerInput.controllers[0].Down == 1 && !p1Ready)
             {
                 int prevButton = p1SelectedButton;
 
@@ -66,7 +62,8 @@ public class SoldierSelectMenuScript : MonoBehaviour {
                 p1Buttons[p1SelectedButton].GetComponent<Image>().color = highlightedColor;
                 p1Buttons[prevButton].GetComponent<Image>().color = normalColor;
             }
-            else if(ControllerInput.controllers[0].Up == 1 && !p1Ready)
+
+            else if (ControllerInput.controllers[0].Up == 1 && !p1Ready)
             {
                 int prevButton = p1SelectedButton;
 
@@ -75,9 +72,16 @@ public class SoldierSelectMenuScript : MonoBehaviour {
                 p1Buttons[p1SelectedButton].GetComponent<Image>().color = highlightedColor;
                 p1Buttons[prevButton].GetComponent<Image>().color = normalColor;
             }
-            else if(ControllerInput.controllers[0].A == 1)
+
+            if (ControllerInput.controllers[0].A == 1)
             {
                 p1Buttons[p1SelectedButton].GetComponent<Button>().onClick.Invoke();
+            }
+
+            if (ControllerInput.controllers[0].B == 1)
+            {
+                if(p1Ready)
+                    p1Buttons[p1SelectedButton].GetComponent<Button>().onClick.Invoke();
             }
 
 
@@ -100,9 +104,15 @@ public class SoldierSelectMenuScript : MonoBehaviour {
                 p2Buttons[p2SelectedButton].GetComponent<Image>().color = highlightedColor;
                 p2Buttons[prevButton].GetComponent<Image>().color = normalColor;
             }
-            else if (ControllerInput.controllers[1].A == 1)
+
+            if (ControllerInput.controllers[1].A == 1)
             {
                 p2Buttons[p2SelectedButton].GetComponent<Button>().onClick.Invoke();
+            }
+            if (ControllerInput.controllers[1].B == 1)
+            {
+                if(p2Ready)
+                    p2Buttons[p2SelectedButton].GetComponent<Button>().onClick.Invoke();
             }
 
             StartGame();

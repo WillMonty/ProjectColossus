@@ -2,27 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AbilityState { None, Active, Cooldown };
+
 public class Stealth : MonoBehaviour {
-
-
+    
     public Material stealthMat;
     public List<GameObject> models;
     List<Material> modelMats;
 
-    const float COOL_DOWN = 7f;
+    public const float COOL_DOWN = 7f;
+    public float cooldown = COOL_DOWN;
     const float DURATION = 10f;
 
-    float distortion=0;
+    float distortion = 0;
     bool ready = true;
     bool active = false;
-
     
+    public AbilityState state;
+
     // Use this for initialization
-    void Start () {
-
-
-       
+    void Start ()
+    {
         modelMats = new List<Material>();
+
+        state = AbilityState.None;
 	}
 	
 	// Update is called once per frame
@@ -45,8 +48,6 @@ public class Stealth : MonoBehaviour {
                 distortion = 0;
             stealthMat.SetFloat("_Distortion", distortion);
         }
-
-      
     }
 
     void Activate()
@@ -99,14 +100,18 @@ public class Stealth : MonoBehaviour {
 
     IEnumerator StartCD()
     {
-        
+        state = AbilityState.Cooldown;
+
         yield return new WaitForSeconds(COOL_DOWN);
         ready = true;
 
+        state = AbilityState.None;
     }
 
     IEnumerator StartDuration()
     {
+        state = AbilityState.Active;
+
         yield return new WaitForSeconds(DURATION);
 
         foreach (GameObject obj in models)

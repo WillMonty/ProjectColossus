@@ -13,22 +13,20 @@ public class PlayerMovement : MonoBehaviour {
 
     public float MoveSpeed
     {
-        get {
+        get
+        {
             targetVelocity.y = 0f;
             return targetVelocity.magnitude;
         }
     }
+
     public float lookSensitivityX = .001f;
     public float lookSensitivityY = .001f;
 
     float xAxisClamp;
 
     int playerIndex;
-
-
-    //GamePadState state;
-    //GamePadState prevState;
-
+    
     // Movement Behavior Variables
     public float verticalVelocity;
     public float VerticalVelocity
@@ -127,6 +125,10 @@ public class PlayerMovement : MonoBehaviour {
     {
         // Rotate the player
         // Look axis
+
+        rotX = ControllerInput.controllers[playerIndex].RightStickX * lookSensitivityX;
+
+        /*
         if (ControllerInput.controllers[playerIndex].RightStickX > .1
             || ControllerInput.controllers[playerIndex].RightStickX < -.1)
         {
@@ -135,8 +137,11 @@ public class PlayerMovement : MonoBehaviour {
         else
         {
             rotX = 0;
-        }
+        }*/
 
+        rotY = -ControllerInput.controllers[playerIndex].RightStickY * lookSensitivityY;
+
+        /*
         if (ControllerInput.controllers[playerIndex].RightStickY > .1
             || ControllerInput.controllers[playerIndex].RightStickY < -.1)
         {
@@ -145,7 +150,7 @@ public class PlayerMovement : MonoBehaviour {
         else
         {
             rotY = 0;
-        }
+        }*/
 
         turnDir = 0;
         if (rotX > 0)
@@ -192,6 +197,12 @@ public class PlayerMovement : MonoBehaviour {
     {
         //Calculate the velocity we want to move in
         targetVelocity = Vector3.zero;
+
+        targetVelocity += transform.forward * ControllerInput.controllers[playerIndex].LeftStickY * speed;
+
+        targetVelocity += transform.right * ControllerInput.controllers[playerIndex].LeftStickX * speed;
+
+        /*
         if (ControllerInput.controllers[playerIndex].LeftStickY > .2 
             || ControllerInput.controllers[playerIndex].LeftStickY < -.2)
         {
@@ -204,8 +215,8 @@ public class PlayerMovement : MonoBehaviour {
         {
             targetVelocity += transform.right * ControllerInput.controllers[playerIndex].LeftStickX * speed;
         }
+        */
 
-        
 
         //Get current body velocity and calculate required velocity to achive the change
         velocity = body.velocity;
@@ -260,6 +271,7 @@ public class PlayerMovement : MonoBehaviour {
             body.AddForce(new Vector3(0, 2.5f, 0), ForceMode.VelocityChange);
         }
     }
+
     public bool CheckGrounded()
     {
         Debug.DrawLine(transform.position, transform.position + downDist * -Vector3.up);
@@ -299,13 +311,6 @@ public class PlayerMovement : MonoBehaviour {
         if (Physics.Raycast(raySpawn, -Vector3.up, downDist))
             return true;
         
-
-
-
         return false;
-
     }
-
-
-
 }

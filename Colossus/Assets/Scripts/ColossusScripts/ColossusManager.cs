@@ -106,14 +106,6 @@ public class ColossusManager : MonoBehaviour, IHealth {
 			headSource.Stop();
 			alarmSource.Stop();
 		}
-
-/*		//IK arm fix?
-		if(!fixedIK && leftController.GetComponent<SteamVR_TrackedController>().menuPressed)
-		{
-			fixedIK = true;
-			Debug.Log("Trying IK");
-			ikColossus.GetIKSolver().Initiate(ikColossus.GetIKSolver().GetRoot());
-		}*/
     }
     #endregion
 

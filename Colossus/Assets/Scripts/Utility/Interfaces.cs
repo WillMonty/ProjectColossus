@@ -14,6 +14,7 @@ public interface IWeapon
     bool ReloadButton { set; }
     float ReloadTime { get; }
     bool Reloading { get; }
+    int CurrentReloadNum { get; }
     bool Shooting { get; }
     void ResetStats();
 

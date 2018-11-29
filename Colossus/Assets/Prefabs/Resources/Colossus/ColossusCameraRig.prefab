@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 54209583560091420}
   - component: {fileID: 65741307275992282}
   - component: {fileID: 65096892428653550}
+  - component: {fileID: 114963461295248926}
+  - component: {fileID: 82038260803052170}
   m_Layer: 0
   m_Name: LeftFist
   m_TagString: colossusplayer
@@ -1311,6 +1313,8 @@ GameObject:
   - component: {fileID: 54642848945372552}
   - component: {fileID: 65956055059266610}
   - component: {fileID: 65055914708200656}
+  - component: {fileID: 114663046987993268}
+  - component: {fileID: 82959866441844934}
   m_Layer: 0
   m_Name: RightFist
   m_TagString: colossusplayer
@@ -1833,7 +1837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1668978260952000
 GameObject:
   m_ObjectHideFlags: 1
@@ -10216,6 +10220,86 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1920385148186726}
   m_Enabled: 1
+--- !u!82 &82038260803052170
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000131344819812}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 0.3
+  MaxDistance: 1.82
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &82183994772883782
 AudioSource:
   m_ObjectHideFlags: 1
@@ -10462,6 +10546,86 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1771497892384648}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!82 &82959866441844934
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526715591333572}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -10986,17 +11150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c74e35e430dae438fbe62b3faa9451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityControl: {fileID: 114933389583714560}
   playerActive: 0
-  reflectTime: 2
-  lagBeforeCharge: 0.5
   sliderReflect: {fileID: 114105831601711122}
-  offAlpha: 1
-  onAlpha: 0.5
-  hitPrefab: {fileID: 1924571714969746, guid: 2df6a1043e1e145478db2bb73a2df00f, type: 2}
-  hitReflectPrefab: {fileID: 1924571714969746, guid: d10380736965f0c41b7fcec80b3dee9d,
-    type: 2}
-  reflectOnSound: {fileID: 8300000, guid: d24d8901f4d52ed45b9d39db19dc1808, type: 3}
-  reflectOffSound: {fileID: 8300000, guid: 00ed6cfe80f80a54286c0787c32f5d0c, type: 3}
 --- !u!114 &114253453029352184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11340,17 +11496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c74e35e430dae438fbe62b3faa9451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityControl: {fileID: 114933389583714560}
   playerActive: 0
-  reflectTime: 2
-  lagBeforeCharge: 0.5
   sliderReflect: {fileID: 114474962937974458}
-  offAlpha: 1
-  onAlpha: 0.5
-  hitPrefab: {fileID: 1924571714969746, guid: 2df6a1043e1e145478db2bb73a2df00f, type: 2}
-  hitReflectPrefab: {fileID: 1924571714969746, guid: d10380736965f0c41b7fcec80b3dee9d,
-    type: 2}
-  reflectOnSound: {fileID: 8300000, guid: d24d8901f4d52ed45b9d39db19dc1808, type: 3}
-  reflectOffSound: {fileID: 8300000, guid: 00ed6cfe80f80a54286c0787c32f5d0c, type: 3}
 --- !u!114 &114537201061048098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11376,6 +11524,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftFist: {fileID: 1000131344819812}
   rightFist: {fileID: 1526715591333572}
+  damageFactor: 1.25
+  chargeUpTime: 0.5
+  launchForce: 750000
+  returnLagTime: 2
+  returnTime: 4
 --- !u!114 &114595771847476744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11622,6 +11775,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHand: {fileID: 1220459855256942}
   rightHand: {fileID: 1984975909158400}
+--- !u!114 &114663046987993268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526715591333572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee93540dd841e164485e491129fc7dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityControl: {fileID: 114537930392521232}
+  isLeftFist: 0
+  fistRocketPrefab: {fileID: 1026894233165960, guid: 903ed628173ff494981a9f4010731774,
+    type: 2}
+  playerActive: 0
+  fistState: 0
 --- !u!114 &114689169110115734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11692,7 +11862,8 @@ MonoBehaviour:
   - {fileID: 114378761543110090}
   headCollider: {fileID: 0}
   rigSteamVR: {fileID: 1514098913028502}
-  rig2DFallback: {fileID: 0}
+  rig2DFallback: {fileID: 1487693689635962, guid: 9b0e1e7a81a77e54b8d33c154cfd8641,
+    type: 2}
   audioListener: {fileID: 4984231329449930}
   allowToggleTo2D: 1
 --- !u!114 &114713303554117322
@@ -11986,6 +12157,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftShield: {fileID: 1646473073346752}
   rightShield: {fileID: 1354764489143360}
+  reflectTime: 2
+  lagBeforeCharge: 0.5
+  offAlpha: 1
+  onAlpha: 0.4
+  hitPrefab: {fileID: 1924571714969746, guid: 2df6a1043e1e145478db2bb73a2df00f, type: 2}
+  hitReflectPrefab: {fileID: 1924571714969746, guid: d10380736965f0c41b7fcec80b3dee9d,
+    type: 2}
+  reflectOnSound: {fileID: 8300000, guid: d24d8901f4d52ed45b9d39db19dc1808, type: 3}
+  reflectOffSound: {fileID: 8300000, guid: 00ed6cfe80f80a54286c0787c32f5d0c, type: 3}
+--- !u!114 &114963461295248926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000131344819812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee93540dd841e164485e491129fc7dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityControl: {fileID: 114537930392521232}
+  isLeftFist: 1
+  fistRocketPrefab: {fileID: 1211215462566200, guid: 609fdee4b49d77741a7e9eea6cb27ecf,
+    type: 2}
+  playerActive: 0
+  fistState: 0
 --- !u!114 &114965652380048496
 MonoBehaviour:
   m_ObjectHideFlags: 1

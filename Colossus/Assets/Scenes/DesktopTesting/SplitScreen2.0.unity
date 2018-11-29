@@ -473,6 +473,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1637461782150572, guid: c0d17c44f02b5b74f8ace3fffc043d27, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0d17c44f02b5b74f8ace3fffc043d27, type: 2}
   m_IsPrefabParent: 0
@@ -509,7 +513,7 @@ MonoBehaviour:
   leftHandColossus: 0
   rightHandColossus: 0
   headColossus: 0
-  soldier1: 0
+  soldier1: 2
   soldier2: 0
 --- !u!114 &588380222
 MonoBehaviour:

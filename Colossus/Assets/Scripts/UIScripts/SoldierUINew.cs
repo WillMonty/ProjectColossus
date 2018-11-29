@@ -20,11 +20,15 @@ public class SoldierUINew : MonoBehaviour {
 
     public float maxFuel;
 
-    public float s1CurrentFuel;
-    public Image s1Fuelbar;
+    float s1Ability;
+    float s1AbilityMax;
+    bool s1Active;
+    public Image s1AbilityBar;
 
-    public float s2CurrentFuel;
-    public Image s2Fuelbar;
+    float s2Ability;
+    float s2AbilityMax;
+    bool s2Active;
+    public Image s2AbilityBar;
 
     public Text s1CurrentMag;
     public Text s1MagMax;
@@ -35,6 +39,7 @@ public class SoldierUINew : MonoBehaviour {
     float s1ReloadDuration;
     float s1ReloadTime;
     bool s1Reloading;
+    int s1CurrentReloadNum = 0;
 
     public Text s2CurrentMag;
     public Text s2MagMax;
@@ -45,6 +50,7 @@ public class SoldierUINew : MonoBehaviour {
     float s2ReloadDuration;
     float s2ReloadTime;
     bool s2Reloading;
+    int s2CurrentReloadNum = 0;
 
     float damageAlphaTimerMax;
 
@@ -65,13 +71,16 @@ public class SoldierUINew : MonoBehaviour {
         damageAlphaTimerMax = 1.1f;
 
         s1DamageInd.color = new Color(1f, 1f, 1f, 0f);
+
+        s1Active = false;
+        s2Active = false;
     }
 
 
     /// <summary>
     /// Update is called once per frame
     /// </summary>
-    void Update ()
+    void FixedUpdate ()
     {
         if (isActive)
         {
@@ -123,19 +132,48 @@ public class SoldierUINew : MonoBehaviour {
             s1Reloading = false;
             s2Reloading = false;
 
-
-            if (soldier1.soldierClass == SoldierClass.Assault)
+            switch(soldier1.soldierClass)
             {
-                maxFuel = soldier1.GetComponent<JetPack>().MaxFuel;
-                s1CurrentFuel = soldier1.GetComponent<JetPack>().JetPackFuel;
-                s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
+                case SoldierClass.Assault:
+                    s1Ability = soldier1.GetComponent<JetPack>().JetPackFuel;
+                    s1AbilityMax = soldier1.GetComponent<JetPack>().MaxFuel;
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+
+                    break;
+                case SoldierClass.Grenadier:
+                    s1Ability = soldier1.GetComponent<WallShield>().cooldown;
+                    s1AbilityMax = soldier1.GetComponent<WallShield>().cooldown;
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+
+                    break;
+                case SoldierClass.Skulker:
+                    s1Ability = soldier1.GetComponent<Stealth>().cooldown;
+                    s1AbilityMax = soldier1.GetComponent<Stealth>().cooldown;
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+
+                    break;
             }
 
-            if (soldier2.soldierClass == SoldierClass.Assault)
+            switch (soldier2.soldierClass)
             {
-                maxFuel = soldier2.GetComponent<JetPack>().MaxFuel;
-                s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
-                s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
+                case SoldierClass.Assault:
+                    s2Ability = soldier2.GetComponent<JetPack>().JetPackFuel;
+                    s2AbilityMax = soldier2.GetComponent<JetPack>().MaxFuel;
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+
+                    break;
+                case SoldierClass.Grenadier:
+                    s2Ability = soldier2.GetComponent<WallShield>().cooldown;
+                    s2AbilityMax = soldier2.GetComponent<WallShield>().cooldown;
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+
+                    break;
+                case SoldierClass.Skulker:
+                    s2Ability = soldier2.GetComponent<Stealth>().cooldown;
+                    s2AbilityMax = soldier2.GetComponent<Stealth>().cooldown;
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+
+                    break;
             }
         }
     }
@@ -146,7 +184,7 @@ public class SoldierUINew : MonoBehaviour {
     /// </summary>
     void UpdateReloading()
     {
-        if (soldier1.GetComponent<PlayerData>().WeaponData.Reloading && !s1Reloading)
+        if (soldier1.GetComponent<PlayerData>().WeaponData.Reloading && !s1Reloading && s1CurrentReloadNum == soldier1.GetComponent<PlayerData>().WeaponData.CurrentReloadNum)
         {
             s1ReloadDuration = soldier1.GetComponent<PlayerData>().WeaponData.ReloadTime;
             s1ReloadTime = 0;
@@ -158,7 +196,7 @@ public class SoldierUINew : MonoBehaviour {
             s1ReloadReticle.GetComponent<Image>().fillAmount = 0;
         }
 
-        if (soldier2.GetComponent<PlayerData>().WeaponData.Reloading && !s2Reloading)
+        if (soldier2.GetComponent<PlayerData>().WeaponData.Reloading && !s2Reloading && s2CurrentReloadNum == soldier2.GetComponent<PlayerData>().WeaponData.CurrentReloadNum)
         {
             s2ReloadDuration = soldier2.GetComponent<PlayerData>().WeaponData.ReloadTime;
             s2ReloadTime = 0;
@@ -177,6 +215,9 @@ public class SoldierUINew : MonoBehaviour {
                 s1ReloadTime = s1ReloadDuration;
                 
                 s1Reloading = false;
+
+                s1CurrentReloadNum += 1;
+                s1CurrentReloadNum %= 3;
             }
             
 			s1ReloadTime += Time.deltaTime;
@@ -196,6 +237,9 @@ public class SoldierUINew : MonoBehaviour {
                 s2ReloadTime = s2ReloadDuration;
 
                 s2Reloading = false;
+
+                s2CurrentReloadNum += 1;
+                s2CurrentReloadNum %= 3;
             }
 
 			s2ReloadTime += Time.deltaTime;
@@ -211,7 +255,7 @@ public class SoldierUINew : MonoBehaviour {
 
 
     /// <summary>
-    /// updates the healthbars for both players if they take damage
+    /// Updates the healthbars for both players if they take damage
     /// </summary>
     void UpdateHealthbar()
     {
@@ -236,28 +280,185 @@ public class SoldierUINew : MonoBehaviour {
 
 
     /// <summary>
-    /// updates the ability for the soldiers
+    /// Updates the ability for the soldiers
     /// </summary>
     void UpdateAbilitybar()
     {
-        if(soldier1.soldierClass == SoldierClass.Assault && s1CurrentFuel != soldier1.GetComponent<JetPack>().JetPackFuel)
+        switch (soldier1.soldierClass)
         {
-            s1CurrentFuel = soldier1.GetComponent<JetPack>().JetPackFuel;
+            case SoldierClass.Assault:
 
-            s1Fuelbar.fillAmount = s1CurrentFuel / maxFuel;
+                if(s1Ability != soldier1.GetComponent<JetPack>().JetPackFuel)
+                {
+                    s1Ability = soldier1.GetComponent<JetPack>().JetPackFuel;
+
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+                }
+
+                break;
+
+            case SoldierClass.Grenadier:
+
+                if(soldier1.GetComponent<WallShield>().state == AbilityState.Cooldown && !s1Active)
+                {
+                    s1Ability = 0;
+
+                    s1Active = true;
+                }
+
+                if(soldier1.GetComponent<WallShield>().state == AbilityState.Cooldown && s1Active)
+                {
+                    if(s1Ability == s1AbilityMax)
+                    {
+                        s1Active = false;
+
+                        break;
+                    }
+
+                    s1Ability += Time.deltaTime;
+
+                    if(s1Ability > s1AbilityMax)
+                    {
+                        s1Ability = s1AbilityMax;
+                    }
+
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+                }
+
+                if(soldier1.GetComponent<WallShield>().state == AbilityState.None)
+                {
+                    s1Ability = s1AbilityMax;
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+                }
+
+                break;
+
+            case SoldierClass.Skulker:
+
+                if (soldier1.GetComponent<Stealth>().state == AbilityState.Cooldown && !s1Active)
+                {
+                    s1Ability = 0;
+
+                    s1Active = true;
+                }
+
+                if (soldier1.GetComponent<Stealth>().state == AbilityState.Cooldown && s1Active)
+                {
+                    if (s1Ability == s1AbilityMax)
+                    {
+                        s1Active = false;
+
+                        break;
+                    }
+
+                    s1Ability += Time.deltaTime;
+
+                    if (s1Ability > s1AbilityMax)
+                    {
+                        s1Ability = s1AbilityMax;
+                    }
+
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+                }
+
+                if (soldier1.GetComponent<Stealth>().state == AbilityState.None)
+                {
+                    s1Ability = s1AbilityMax;
+                    s1AbilityBar.fillAmount = s1Ability / s1AbilityMax;
+                }
+
+                break;
         }
 
-        if (soldier2.soldierClass == SoldierClass.Assault && s2CurrentFuel != soldier2.GetComponent<JetPack>().JetPackFuel)
+        switch (soldier2.soldierClass)
         {
-            s2CurrentFuel = soldier2.GetComponent<JetPack>().JetPackFuel;
+            case SoldierClass.Assault:
 
-            s2Fuelbar.fillAmount = s2CurrentFuel / maxFuel;
+                if(s2Ability != soldier2.GetComponent<JetPack>().JetPackFuel)
+                {
+                    s2Ability = soldier2.GetComponent<JetPack>().JetPackFuel;
+
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+                }
+
+                break;
+
+            case SoldierClass.Grenadier:
+                
+                if (soldier2.GetComponent<WallShield>().state == AbilityState.Cooldown && !s2Active)
+                {
+                    s2Ability = 0;
+
+                    s2Active = true;
+                }
+
+                if (soldier2.GetComponent<WallShield>().state == AbilityState.Cooldown && s2Active)
+                {
+                    if (s2Ability == s2AbilityMax)
+                    {
+                        s2Active = false;
+
+                        break;
+                    }
+
+                    s2Ability += Time.deltaTime;
+
+                    if (s2Ability > s2AbilityMax)
+                    {
+                        s2Ability = s2AbilityMax;
+                    }
+
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+                }
+
+                if (soldier2.GetComponent<WallShield>().state == AbilityState.None)
+                {
+                    s2Ability = s2AbilityMax;
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+                }
+                
+                break;
+
+            case SoldierClass.Skulker:
+
+                if (soldier2.GetComponent<Stealth>().state == AbilityState.Cooldown && !s2Active)
+                {
+                    s2Ability = 0;
+
+                    s2Active = true;
+                }
+
+                if (soldier2.GetComponent<Stealth>().state == AbilityState.Cooldown && s2Active)
+                {
+                    if (s2Ability == s2AbilityMax)
+                    {
+                        s2Active = false;
+
+                        break;
+                    }
+
+                    s2Ability += Time.deltaTime;
+
+                    if (s2Ability > s2AbilityMax)
+                    {
+                        s2Ability = s2AbilityMax;
+                    }
+
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+                }
+
+                if (soldier2.GetComponent<Stealth>().state == AbilityState.None)
+                {
+                    s2Ability = s2AbilityMax;
+                    s2AbilityBar.fillAmount = s2Ability / s2AbilityMax;
+                }
+
+                break;
         }
     }
-
-
+    
     /// <summary>
-    /// updates the magazine for both players
+    /// Updates the magazine for both players
     /// </summary>
     void UpdateCurrentMag()
     {
@@ -266,7 +467,9 @@ public class SoldierUINew : MonoBehaviour {
         s2CurrentMag.text = soldier2.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
     }
 
-
+    /// <summary>
+    /// Updates the UI displaying the magazine maximum
+    /// </summary>
     void UpdateMagMax()
     {
         s1MagMax.text = "/" + soldier1.GetComponent<PlayerData>().WeaponData.MagSize;
@@ -277,10 +480,9 @@ public class SoldierUINew : MonoBehaviour {
 
         s2CurrentMag.text = soldier2.GetComponent<PlayerData>().WeaponData.BulletsInMag.ToString();
     }
-
-
+    
     /// <summary>
-    /// indicates that the player has taken damage
+    /// Indicates that the player has taken damage
     /// </summary>
     /// <param name="playerNum"></param>
     void PlayerDamaged(int playerNum)
@@ -310,8 +512,7 @@ public class SoldierUINew : MonoBehaviour {
                 break;
         }
     }
-
-
+    
     /// <summary>
     /// updates the damage indicator
     /// </summary>
