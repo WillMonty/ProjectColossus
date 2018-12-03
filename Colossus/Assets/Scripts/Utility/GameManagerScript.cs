@@ -30,7 +30,7 @@ public class GameManagerScript : MonoBehaviour
     public PlayerData soldier1 = null;
     public PlayerData soldier2 = null;
 
-    [Header("UI and Pausing")]
+	[Header("Soldier UI and Pausing")]
 	public GameObject soldierUICanvas;
     public GameObject soldierSelectMenu;
     public GameObject pauseMenu;
@@ -49,14 +49,8 @@ public class GameManagerScript : MonoBehaviour
     };
     public Color normalColor;
     public Color highlightedColor;
-
-    //Player Inputs
-    GamePadState state1;
-    GamePadState prevState1;
-    GamePadState state2;
-    GamePadState prevState2;
     
-    //Soldier properties
+    //Soldier spawning properties
     private GameObject[] spawnPoints;
     GameObject deathCam1;
     GameObject deathCam2;
@@ -72,6 +66,7 @@ public class GameManagerScript : MonoBehaviour
 		DontDestroyOnLoad(this);
 
 		//Set up resistance objects
+		if(onlyVR) return;
 		spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
 		soldierUICanvas = GameObject.Find("/ResistanceContainer/Soldier UI");
 		soldierCountdownUI = GameObject.Find("/ResistanceContainer/Soldier UI/CountdownBackground");
@@ -126,8 +121,6 @@ public class GameManagerScript : MonoBehaviour
 
 			EnvironmentManagerScript.instance.GamePiecesSwitch();
 		}
-
-		//colossus.ToggleColossus();
     }
     #endregion
 
@@ -282,8 +275,7 @@ public class GameManagerScript : MonoBehaviour
                 classPrefab = Resources.Load<GameObject>("Soldier/Classes/Skulker");
                 break;
         }
-
-
+				
         if (pNum == 1)
             spawnPos = GameObject.Find("InitialSpawn1").transform.position;
         else

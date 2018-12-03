@@ -58,6 +58,17 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  throwableSpawnTime: 2
+  commonSpawnablePrefabs:
+  - {fileID: 1434484791173810, guid: f8ec98fed57ffbc42914c789f1eeece3, type: 2}
+  - {fileID: 1337659906223482, guid: a9d71ffd75f0bf84b8d24f4fb6a179a8, type: 2}
+  uncommonSpawnablePrefabs:
+  - {fileID: 0}
+  - {fileID: 0}
+  rareSpawnablePrefabs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   maxRubbishCount: 50
   sourceAnnouncer: {fileID: 0}
   announcerClips:

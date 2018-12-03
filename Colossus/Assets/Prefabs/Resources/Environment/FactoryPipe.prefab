@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4200528330450510}
   m_Layer: 0
-  m_Name: Pipe
+  m_Name: FactoryPipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
