@@ -15,6 +15,12 @@ public class EnvironmentManagerScript : MonoBehaviour {
 	[Header("Game Pieces")]
 	public List<GameObject> gamePieces = new List<GameObject>(); //Pieces of the scene only shown/used InGame
 
+	[Header("Throwable Spawning")]
+	public float throwableSpawnTime;
+	public List<GameObject> commonSpawnablePrefabs;
+	public List<GameObject> uncommonSpawnablePrefabs;
+	public List<GameObject> rareSpawnablePrefabs;
+
 	[Header("Trash")]
 	public uint maxRubbishCount;
 	static uint maxCount;

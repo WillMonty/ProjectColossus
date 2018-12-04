@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4105899357829196}
   - component: {fileID: 108305808309056128}
   m_Layer: 0
-  m_Name: Light
+  m_Name: CeilingLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
