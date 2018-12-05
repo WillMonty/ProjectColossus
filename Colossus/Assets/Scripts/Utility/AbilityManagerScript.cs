@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Add new abilities and classes here
-public enum ColossusHandAbilities {Fist, Hand, Shield}; //Fist is default when no other abilities are chosen in the menu
 public enum ColossusHeadAbilities {None, Laser};
+public enum ColossusHandAbilities {None, Fist, Hand, Shield};
 public enum SoldierClass {Assault, Grenadier, Skulker};
 
 public class AbilityManagerScript : MonoBehaviour {
@@ -13,9 +13,9 @@ public class AbilityManagerScript : MonoBehaviour {
 	public static AbilityManagerScript instance = null;
 
 	[Header("Colossus Abilities")]
+	public ColossusHeadAbilities headColossus;
 	public ColossusHandAbilities leftHandColossus;
 	public ColossusHandAbilities rightHandColossus;
-	public ColossusHeadAbilities headColossus;
 
 	[Header("Soldier Classes")]
 	public SoldierClass soldier1;
@@ -41,10 +41,22 @@ public class AbilityManagerScript : MonoBehaviour {
 				Destroy(gameObject);
 		}	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void SetColossusAbility(ColossusHeadAbilities selected)
+	{
+		headColossus = selected;
+	}
+
+	public void SetColossusAbility(ColossusHandAbilities selected, bool isLeft)
+	{
+		if(isLeft)
+		{
+			leftHandColossus = selected;	
+		}
+		else
+		{
+			rightHandColossus = selected;
+		}
 	}
 
     public void SetSoldierClass(int soldierNum, SoldierClass newClass)

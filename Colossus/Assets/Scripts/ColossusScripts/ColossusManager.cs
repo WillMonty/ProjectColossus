@@ -112,7 +112,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
     #region Helper Methods
 	void GetChosenAbilities()
 	{
-		//Get head abilities
+		//Get head ability
 		switch(AbilityManagerScript.instance.headColossus)
 		{
 			case(ColossusHeadAbilities.Laser):
