@@ -11,6 +11,8 @@ public class MainMenuGUI : MonoBehaviour {
     // Holds a reference to the instructions screen canvas
     public GameObject instructionScreen;
 	public GameObject characterSelectScreen;
+	public GameObject colossusInitialScreen;
+	public GameObject colossusAbilityScreen;
     public List<GameObject> instructionPages;
     int instructionsPage;
 
@@ -41,6 +43,8 @@ public class MainMenuGUI : MonoBehaviour {
 		GameManagerScript.instance.currentGameState = GameState.CharacterSelect;
 
 		characterSelectScreen.SetActive(true);
+		colossusAbilityScreen.SetActive(true);
+		colossusInitialScreen.SetActive(false);
 		gameObject.SetActive(false);
 	}
 
@@ -123,8 +127,6 @@ public class MainMenuGUI : MonoBehaviour {
     {
         if(GameManagerScript.instance.currentGameState == GameState.MainMenu)
         {
-            Debug.Log(ControllerInput.controllers[0].Up.ToString());
-
             //player 1
             if (ControllerInput.controllers[0].Down == 1)
             {

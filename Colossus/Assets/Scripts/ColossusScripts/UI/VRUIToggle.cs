@@ -1,27 +1,31 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 //Based on this guide: https://unity3d.college/2017/06/17/steamvr-laser-pointer-menus/
+/// <summary>
+/// Basic VRUI Toggle. Uses Toggle Component solely for Toggle Groups and proper enable handling
+/// </summary>
 public class VRUIToggle : MonoBehaviour
 {
-	//Holds which type of ability this toggle will represent
-	public enum ToggleTypes {Head, LeftHand, RightHand};
-	public ToggleTypes toggleType;
+	[Header("Toggle Colors")]
 	public Color onColor;
 	public Color offColor;
 	public Color pressColor;
 
-	[HideInInspector]
-	public ColossusHeadAbilities headAbility;
-	[HideInInspector] 
-	public ColossusHandAbilities leftHandAbility;
-	[HideInInspector] 
-	public ColossusHandAbilities rightHandAbility;
+	[Header("Hover Effects")]
+	public float hoverScaling;
+	public float hoverZOut;
+	protected Vector3 originalScale;
+	protected Vector3 endScale;
+	protected Vector3 originalPosition;
+	protected Vector3 endPosition;
+	protected float lerpTime = 0.2f;
+	protected float currlerpTime;
+	protected bool hovering;
 
-	private BoxCollider boxCollider;
-	private RectTransform rectTransform;
-	private Image image;
-	private Toggle toggle;
+	protected BoxCollider boxCollider;
+	protected RectTransform rectTransform;
+	protected Image image;
+	protected Toggle toggle;
 
 	private void OnEnable()
 	{
@@ -33,11 +37,15 @@ public class VRUIToggle : MonoBehaviour
 		Validate();
 	}
 
-	private void Validate()
+	protected virtual void Validate()
 	{
 		image = GetComponent<Image>();
-		toggle = GetComponent<Toggle>();
 		rectTransform = GetComponent<RectTransform>();
+
+		originalScale = rectTransform.localScale;
+		endScale = new Vector3(originalScale.x + hoverScaling, originalScale.y + hoverScaling, originalScale.z + hoverScaling);
+		originalPosition = rectTransform.localPosition;
+		endPosition = new Vector3(originalPosition.x, originalPosition.y, originalPosition.z - hoverZOut);
 
 		boxCollider = GetComponent<BoxCollider>();
 		if (boxCollider == null)
@@ -45,10 +53,38 @@ public class VRUIToggle : MonoBehaviour
 			boxCollider = gameObject.AddComponent<BoxCollider>();
 		}
 
+
+		toggle = GetComponent<Toggle>();
+		if(toggle == null)
+		{
+			toggle = gameObject.AddComponent<Toggle>();
+		}
+
 		boxCollider.size = GetComponent<RectTransform>().sizeDelta;
 	}
 
-	public void ToggleChanged(bool enabled)
+	protected virtual void Update()
+	{
+		HoverEffects();
+	}
+
+	protected virtual void HoverEffects()
+	{
+		float lerpFrac = currlerpTime/lerpTime;
+		if(hovering && lerpFrac < 1.0f)
+		{
+			currlerpTime += Time.deltaTime;
+		}
+		if(!hovering && lerpFrac > 0.0f)
+			currlerpTime -= Time.deltaTime;
+
+		rectTransform.localScale = Vector3.Lerp(originalScale, endScale, lerpFrac);
+		rectTransform.localPosition = Vector3.Lerp(originalPosition, endPosition, lerpFrac);
+	}
+
+
+	//Attach this to the Toggle On Value Changed event handler. Use Dynamic Bool
+	public virtual void ToggleChanged(bool enabled)
 	{
 		if(!enabled)
 		{
@@ -60,30 +96,10 @@ public class VRUIToggle : MonoBehaviour
 	public virtual void ToggleClicked()
 	{
 		toggle.isOn = !toggle.isOn;
-		if(toggle.isOn)
-		{
-			//Set ability associated with this toggle
-			AbilityManagerScript abilitiesInstance = AbilityManagerScript.instance;
-			switch(toggleType)
-			{
-				case(ToggleTypes.Head):
-					abilitiesInstance.SetColossusAbility(headAbility);
-					break;
-				case(ToggleTypes.LeftHand):
-					abilitiesInstance.SetColossusAbility(leftHandAbility, true);
-					break;
-				case(ToggleTypes.RightHand):
-					abilitiesInstance.SetColossusAbility(rightHandAbility, false);
-					break;
-			}
-		}
-
 		image.color = pressColor;
-
-		//Enable appropriate colossus body part??
 	}
 
-	public void ToggleRelease()
+	public virtual void ToggleRelease()
 	{
 		if(toggle.isOn)
 			image.color = onColor;
@@ -91,41 +107,16 @@ public class VRUIToggle : MonoBehaviour
 			image.color = offColor;
 	}
 
-	public void ToggleHover(bool isIn)
+	public virtual void ToggleHover(bool isIn)
 	{
 		if(isIn)
 		{
-			
+			hovering = true;
 		}
 		else
 		{
+			hovering = false;
 			ToggleRelease();
-		}
-	}
-}
-
-[CanEditMultipleObjects]
-[CustomEditor(typeof(VRUIToggle))]
-public class VRUIToggle_Editor : Editor
-{
-	public override void OnInspectorGUI()
-	{
-		DrawDefaultInspector();
-
-		VRUIToggle script = (VRUIToggle)target;
-
-		//Draw appropriate ability enum
-		switch(script.toggleType)
-		{
-			case(VRUIToggle.ToggleTypes.Head):
-				script.headAbility = (ColossusHeadAbilities)EditorGUILayout.EnumPopup("Head Ability:", script.headAbility);
-				break;
-			case(VRUIToggle.ToggleTypes.LeftHand):
-				script.leftHandAbility = (ColossusHandAbilities)EditorGUILayout.EnumPopup("Left Hand Ability:", script.leftHandAbility);
-				break;
-			case(VRUIToggle.ToggleTypes.RightHand):
-				script.rightHandAbility = (ColossusHandAbilities)EditorGUILayout.EnumPopup("Right Hand Ability:", script.rightHandAbility);
-				break;
 		}
 	}
 }

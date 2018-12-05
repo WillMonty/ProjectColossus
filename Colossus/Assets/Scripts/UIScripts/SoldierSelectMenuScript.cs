@@ -29,7 +29,6 @@ public class SoldierSelectMenuScript : MonoBehaviour {
     
     public bool p1Ready = false;
     public bool p2Ready = false;
-    public bool colReady = true; //implement this later
     
     // Use this for initialization
     void Start ()
@@ -115,7 +114,7 @@ public class SoldierSelectMenuScript : MonoBehaviour {
                     p2Buttons[p2SelectedButton].GetComponent<Button>().onClick.Invoke();
             }
 
-            StartGame();
+            CheckReady();
         }
 	}
 
@@ -163,21 +162,21 @@ public class SoldierSelectMenuScript : MonoBehaviour {
         }
     }
 
-    void StartGame()
+    void CheckReady()
     {
         if(    ( p1Ready || !ControllerInput.controllers[0].connected) 
             && ( p2Ready || !ControllerInput.controllers[1].connected)
-            && ( ControllerInput.controllers[0].connected || ControllerInput.controllers[1].connected)
-            && colReady )
+            && ( ControllerInput.controllers[0].connected || ControllerInput.controllers[1].connected))
         {
             AbilityManagerScript.instance.SetSoldierClass(1, p1SelectedClass);
             AbilityManagerScript.instance.SetSoldierClass(2, p2SelectedClass);
 
-            SoldierSelectUI.SetActive(false);
-
-			// Change the current GameState
-			GameManagerScript.instance.currentGameState = GameState.Pregame;
-			SceneManager.LoadScene(1);
+			//Tell the game manager soldiers are ready
+			GameManagerScript.instance.readySoldiers = true;
         }
+		else
+		{
+			GameManagerScript.instance.readySoldiers = false;
+		}
     }
 }

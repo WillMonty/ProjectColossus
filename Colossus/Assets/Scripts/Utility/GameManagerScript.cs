@@ -8,7 +8,9 @@ using XInputDotNetPure;
 
 
 // GameState Enum
-public enum GameState { MainMenu, Instructions, CharacterSelect, Countdown, InGame, Paused, Pregame, ResistanceWin, ResistanceLose };
+public enum GameState { MainMenu, Instructions, CharacterSelect, 
+						Pregame, Countdown, InGame, Paused, 
+						ResistanceWin, ResistanceLose };
 
 
 public class GameManagerScript : MonoBehaviour
@@ -29,6 +31,12 @@ public class GameManagerScript : MonoBehaviour
     public ColossusManager colossus = null;
     public PlayerData soldier1 = null;
     public PlayerData soldier2 = null;
+
+	//Character selection status
+	[HideInInspector]
+	public bool readyColossus;
+	[HideInInspector]
+	public bool readySoldiers;
 
 	[Header("Soldier UI and Pausing")]
 	public GameObject soldierUICanvas;
@@ -55,6 +63,7 @@ public class GameManagerScript : MonoBehaviour
     GameObject deathCam1;
     GameObject deathCam2;
 
+	//Countdown
     float gameCountdownTimer;
     float gameCountdownTimerDefault = 3;
 
@@ -88,7 +97,7 @@ public class GameManagerScript : MonoBehaviour
         currentPauseOwner = PauseOwner.None;
 
         #region Singleton Design Pattern
-        // Check for an instance, if it does exist, than set to this
+        // Check for an instance, if it doesn't exist, than set to this
         if (instance == null)
         {
             instance = this;
@@ -124,18 +133,14 @@ public class GameManagerScript : MonoBehaviour
     }
     #endregion
 
-    // Update is called once per frame
     void FixedUpdate ()
     {
-        OOOOOOOF();
+        InGameDebug();
         
         ControllerInput.UpdateControllers();
-        
-        if (currentGameState == GameState.Paused)
-        {
-            CheckInputs();
-            Pause();
-        }
+
+		if(currentGameState == GameState.CharacterSelect)
+			CheckDoneSelecting();
 
 		if(currentGameState == GameState.Countdown)
         	Countdown();
@@ -145,11 +150,26 @@ public class GameManagerScript : MonoBehaviour
             CheckWinCondition();
             CheckInputs();
         }
+
+		if (currentGameState == GameState.Paused)
+		{
+			CheckInputs();
+			Pause();
+		}
     }
 
 	#region State Handling
 
-    //called from character select menu
+	void CheckDoneSelecting()
+	{
+		if(readySoldiers && readyColossus)
+		{
+			currentGameState = GameState.Pregame;
+			SceneManager.LoadScene(1);
+		}
+	}
+
+    //Called when the colossus is ready in position
     public void StartCountdown()
     {
 		SoldierSetup();
@@ -226,24 +246,6 @@ public class GameManagerScript : MonoBehaviour
         // Last thing: Load the main menu
         SceneManager.LoadScene(0);
     }
-
-	/// <summary>
-	/// Emergency Restart for the game
-	/// </summary>
-	void OOOOOOOF()
-	{
-		//Input based debug
-		if(Input.GetKeyDown(KeyCode.Slash))
-		{
-			colossus.DamageObject(999999f);
-		}
-
-		if (Input.GetKeyDown(KeyCode.BackQuote))
-		{
-			currentGameState = GameState.MainMenu;
-			SceneManager.LoadScene(0);
-		}
-	}
 
 	#endregion
 
@@ -475,4 +477,22 @@ public class GameManagerScript : MonoBehaviour
 	}
 
 	#endregion  
+
+	/// <summary>
+	/// Functionality to debug the game while it's running.
+	/// </summary>
+	void InGameDebug()
+	{
+		//Input based debug
+		if(Input.GetKeyDown(KeyCode.Slash))
+		{
+			colossus.DamageObject(999999f);
+		}
+
+		if (Input.GetKeyDown(KeyCode.BackQuote))
+		{
+			currentGameState = GameState.MainMenu;
+			SceneManager.LoadScene(0);
+		}
+	}
 }

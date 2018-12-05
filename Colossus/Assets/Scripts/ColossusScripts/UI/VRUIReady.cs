@@ -1,17 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class VRUIReady : VRUIToggle {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-
-	public void ToggleClicked()
+	public override void ToggleChanged(bool enabled)
 	{
-		//Yo dipshit make VRToggle abstract then make VRToggleAbility and VRToggleReady stem from that.
-		Debug.Log("yo");
+		Text readyText = transform.GetChild(0).GetComponent<Text>();
+		if(enabled)
+		{
+			GameManagerScript.instance.readyColossus = true;
+			readyText.color = Color.black;
+		}
+		else
+		{
+			GameManagerScript.instance.readyColossus = false;
+			readyText.color = Color.white;
+			image.color = offColor;
+		}
 	}
 }
