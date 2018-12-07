@@ -46,12 +46,14 @@ public class SoldierSelectMenuScript : MonoBehaviour {
     {
 		if (GameManagerScript.instance.currentGameState == GameState.CharacterSelect)
         {
-            if (p1Buttons[p1SelectedButton].GetComponent<Image>().color != highlightedColor)
+            if (p1Buttons[p1SelectedButton].GetComponent<Image>().color != highlightedColor
+                && p1Buttons[p1SelectedButton].GetComponent<Image>().color != readyColor)
             {
                 p1Buttons[p1SelectedButton].GetComponent<Image>().color = highlightedColor;
             }
 
-            if(p2Buttons[p2SelectedButton].GetComponent<Image>().color != highlightedColor)
+            if(p2Buttons[p2SelectedButton].GetComponent<Image>().color != highlightedColor
+                && p2Buttons[p2SelectedButton].GetComponent<Image>().color != readyColor)
             {
                 p2Buttons[p2SelectedButton].GetComponent<Image>().color = highlightedColor;
             }
