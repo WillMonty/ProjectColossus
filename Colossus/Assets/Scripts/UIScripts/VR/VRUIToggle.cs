@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 //Based on this guide: https://unity3d.college/2017/06/17/steamvr-laser-pointer-menus/
 /// <summary>
 /// Basic VRUI Toggle. Uses Toggle Component solely for Toggle Groups and proper enable handling
 /// </summary>
+[CanEditMultipleObjects]
 public class VRUIToggle : MonoBehaviour
 {
 	[Header("Toggle Colors")]
@@ -13,7 +15,7 @@ public class VRUIToggle : MonoBehaviour
 
 	[Header("Hover Effects")]
 	public float hoverScaling;
-	public float hoverZOut;
+	public float hoverOutDistance;
 	protected Vector3 originalScale;
 	protected Vector3 endScale;
 	protected Vector3 originalPosition;
@@ -45,7 +47,7 @@ public class VRUIToggle : MonoBehaviour
 		originalScale = rectTransform.localScale;
 		endScale = new Vector3(originalScale.x + hoverScaling, originalScale.y + hoverScaling, originalScale.z + hoverScaling);
 		originalPosition = rectTransform.localPosition;
-		endPosition = new Vector3(originalPosition.x, originalPosition.y, originalPosition.z - hoverZOut);
+		endPosition = new Vector3(originalPosition.x, originalPosition.y, originalPosition.z - hoverOutDistance);
 
 		boxCollider = GetComponent<BoxCollider>();
 		if (boxCollider == null)

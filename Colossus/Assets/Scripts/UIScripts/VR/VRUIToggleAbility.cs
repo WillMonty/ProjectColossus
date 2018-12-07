@@ -4,8 +4,10 @@ using UnityEditor;
 
 public class VRUIToggleAbility : VRUIToggle {
 
+
 	//Holds which type of ability this toggle will represent
 	public enum AbilityTypes {Head, LeftHand, RightHand};
+	[Header("Ability Info")]
 	public AbilityTypes abilityType;
 
 	[HideInInspector]
@@ -14,6 +16,8 @@ public class VRUIToggleAbility : VRUIToggle {
 	public ColossusHandAbilities leftHandAbility;
 	[HideInInspector] 
 	public ColossusHandAbilities rightHandAbility;
+
+	public string nameForInstruction;
 
 	public override void ToggleChanged(bool enabled)
 	{
@@ -33,6 +37,9 @@ public class VRUIToggleAbility : VRUIToggle {
 					abilitiesInstance.SetColossusAbility(rightHandAbility, false);
 					break;
 			}
+
+			if(VRUIInstructionCanvas.instance != null)
+				VRUIInstructionCanvas.instance.AbilitySelect(nameForInstruction);
 		}
 		else
 		{

@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 114206982980044266}
   - component: {fileID: 114731616070275240}
   m_Layer: 14
-  m_Name: Colossus Wall Canvas
+  m_Name: ColossusWallCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
