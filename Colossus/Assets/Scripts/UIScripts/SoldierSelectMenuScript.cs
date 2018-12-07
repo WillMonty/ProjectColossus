@@ -14,9 +14,8 @@ public class SoldierSelectMenuScript : MonoBehaviour {
     public Color highlightedColor;
     public Color readyColor;
 
-    
-    public SoldierClass p1SelectedClass = SoldierClass.Assault;
-    public SoldierClass p2SelectedClass = SoldierClass.Assault;
+    private SoldierClass p1SelectedClass = SoldierClass.Assault;
+    private SoldierClass p2SelectedClass = SoldierClass.Assault;
 
     public GameObject p1ClassName;
     public GameObject p2ClassName;
@@ -24,26 +23,22 @@ public class SoldierSelectMenuScript : MonoBehaviour {
     public GameObject[] p1Buttons;
     public GameObject[] p2Buttons;
 
-    public int p1SelectedButton = 0;
-    public int p2SelectedButton = 0;
+    private int p1SelectedButton = 0;
+    private int p2SelectedButton = 0;
+
+    public GameObject WaitingPanel;
     
-    public bool p1Ready = false;
-    public bool p2Ready = false;
-    
+    private bool p1Ready = false;
+    private bool p2Ready = false;
+    private bool soldiersReady = false;
+
+    public GameObject p1DisabledScreen;
+    public GameObject p2DisabledScreen;
+
     // Use this for initialization
     void Start ()
     {
-        if(ControllerInput.controllersSet)
-        {
-            if (ControllerInput.controllers[0].connected)
-            {
-                p1Buttons[p1SelectedButton].GetComponent<Image>().color = highlightedColor;
-            }
-            if (ControllerInput.controllers[1].connected)
-            {
-                p2Buttons[p2SelectedButton].GetComponent<Image>().color = highlightedColor;
-            }
-        }
+
     }
 	
 	// Update is called once per frame
@@ -51,6 +46,16 @@ public class SoldierSelectMenuScript : MonoBehaviour {
     {
 		if (GameManagerScript.instance.currentGameState == GameState.CharacterSelect)
         {
+            if (p1Buttons[p1SelectedButton].GetComponent<Image>().color != highlightedColor)
+            {
+                p1Buttons[p1SelectedButton].GetComponent<Image>().color = highlightedColor;
+            }
+
+            if(p2Buttons[p2SelectedButton].GetComponent<Image>().color != highlightedColor)
+            {
+                p2Buttons[p2SelectedButton].GetComponent<Image>().color = highlightedColor;
+            }
+
             //player 1
             if (ControllerInput.controllers[0].Down == 1 && !p1Ready)
             {
@@ -114,7 +119,11 @@ public class SoldierSelectMenuScript : MonoBehaviour {
                     p2Buttons[p2SelectedButton].GetComponent<Button>().onClick.Invoke();
             }
 
+            EnablePlayerDisabledScreens();
+
             CheckReady();
+            EnableWaitingPanel();
+            CheckChangeState();
         }
 	}
 
@@ -147,17 +156,21 @@ public class SoldierSelectMenuScript : MonoBehaviour {
         {
             case 1:
                 p1Ready = !p1Ready;
+
                 if(p1Ready)
                     p1Buttons[p1SelectedButton].GetComponent<Image>().color = readyColor;
                 else
                     p1Buttons[p1SelectedButton].GetComponent<Image>().color = highlightedColor;
+
                 break;
             case 2:
                 p2Ready = !p2Ready;
+
                 if (p2Ready)
                     p2Buttons[p2SelectedButton].GetComponent<Image>().color = readyColor;
                 else
                     p2Buttons[p2SelectedButton].GetComponent<Image>().color = highlightedColor;
+
                 break;
         }
     }
@@ -167,16 +180,45 @@ public class SoldierSelectMenuScript : MonoBehaviour {
         if(    ( p1Ready || !ControllerInput.controllers[0].connected) 
             && ( p2Ready || !ControllerInput.controllers[1].connected)
             && ( ControllerInput.controllers[0].connected || ControllerInput.controllers[1].connected))
+            soldiersReady = true;
+		else
+            soldiersReady = false;
+    }
+
+    void CheckChangeState()
+    {
+        if(soldiersReady)
         {
             AbilityManagerScript.instance.SetSoldierClass(1, p1SelectedClass);
             AbilityManagerScript.instance.SetSoldierClass(2, p2SelectedClass);
 
-			//Tell the game manager soldiers are ready
-			GameManagerScript.instance.readySoldiers = true;
+            //Tell the game manager soldiers are ready
+            GameManagerScript.instance.readySoldiers = true;
         }
-		else
-		{
-			GameManagerScript.instance.readySoldiers = false;
-		}
+        else
+        {
+            GameManagerScript.instance.readySoldiers = false;
+        }
+    }
+
+    void EnableWaitingPanel()
+    {
+        if(WaitingPanel.activeSelf != soldiersReady)
+        {
+            WaitingPanel.SetActive(soldiersReady);
+        }
+    }
+
+    void EnablePlayerDisabledScreens()
+    {
+        if(p1DisabledScreen.activeSelf == ControllerInput.controllers[0].connected)
+        {
+            p1DisabledScreen.SetActive(!ControllerInput.controllers[0].connected);
+        }
+
+        if (p2DisabledScreen.activeSelf == ControllerInput.controllers[1].connected)
+        {
+            p2DisabledScreen.SetActive(!ControllerInput.controllers[1].connected);
+        }
     }
 }
