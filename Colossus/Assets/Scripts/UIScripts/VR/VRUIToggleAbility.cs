@@ -17,8 +17,6 @@ public class VRUIToggleAbility : VRUIToggle {
 	[HideInInspector] 
 	public ColossusHandAbilities rightHandAbility;
 
-	public string nameForInstruction;
-
 	public override void ToggleChanged(bool enabled)
 	{
 		if(enabled)
@@ -29,17 +27,17 @@ public class VRUIToggleAbility : VRUIToggle {
 			{
 				case(AbilityTypes.Head):
 					abilitiesInstance.SetColossusAbility(headAbility);
+					VRUIInstructionCanvas.instance.AbilitySelect(headAbility.ToString());
 					break;
 				case(AbilityTypes.LeftHand):
 					abilitiesInstance.SetColossusAbility(leftHandAbility, true);
+					VRUIInstructionCanvas.instance.AbilitySelect(leftHandAbility.ToString());
 					break;
 				case(AbilityTypes.RightHand):
 					abilitiesInstance.SetColossusAbility(rightHandAbility, false);
+					VRUIInstructionCanvas.instance.AbilitySelect(rightHandAbility.ToString());
 					break;
 			}
-
-			if(VRUIInstructionCanvas.instance != null)
-				VRUIInstructionCanvas.instance.AbilitySelect(nameForInstruction);
 		}
 		else
 		{
