@@ -20,6 +20,6 @@ public class RocketFist : MonoBehaviour, IDamage {
 
 	void OnCollisionEnter(Collision collision)
 	{
-		GetComponent<Rigidbody>().useGravity = true;
+		GetComponent<AudioSource>().Stop();
 	}
 }

@@ -16,14 +16,17 @@ public class Fist : MonoBehaviour {
 	bool prevPlayerActive;
 
 	//Fist status
-	public enum FistStates {Ready, Charging, Shooting, Returning};
+	public enum FistStates {Ready, Charging, Charged, Shooting, Returning};
 	public FistStates fistState;
 	float currCharge;
 	float currReturnLag;
 	float currReturn;
 
-
+	[Header("Audio")]
 	AudioSource source;
+	public AudioClip launchSound;
+	public AudioClip chargeSound;
+	public AudioClip chargeLoop;
 
 	void Awake()
 	{
@@ -60,9 +63,17 @@ public class Fist : MonoBehaviour {
 
 			if(!playerActive && fistState == FistStates.Charging)
 			{
+				source.Stop();
 				fistState = FistStates.Ready;
 				currCharge = 0;
-				//Play charge down sound
+			}
+
+			if(!playerActive && fistState == FistStates.Charged)
+			{
+				source.Stop();
+
+				Shoot();
+				currCharge = 0;
 			}
 
 			prevPlayerActive = playerActive;
@@ -96,6 +107,9 @@ public class Fist : MonoBehaviour {
 			spawnedFistRocket.GetComponent<Rigidbody>().AddForce(transform.right.normalized * abilityControl.launchForce);
 
 		//Play shoot sound
+		source.clip = launchSound;
+		source.loop = false;
+		source.Play();
 	}
 
 	//Toggle original fist on and off
@@ -108,18 +122,19 @@ public class Fist : MonoBehaviour {
 
 		GetComponent<MeshRenderer>().enabled = status;
 
-		foreach(MeshRenderer childMesh in transform.GetComponentsInChildren<MeshRenderer>())
-		{
-			childMesh.enabled = status;
-		}
+		//Turn off fingers
+		transform.GetChild(0).gameObject.SetActive(status);
 	}
 
 	void UpdateCharge()
 	{
 		if(currCharge >= abilityControl.chargeUpTime)
 		{
-			Shoot();
-			currCharge = 0;
+			fistState = FistStates.Charged;
+
+			source.clip = chargeLoop;
+			source.loop = true;
+			source.Play();
 		}
 		else
 		{
@@ -127,7 +142,8 @@ public class Fist : MonoBehaviour {
 
 			if(!source.isPlaying)
 			{
-				//Play charge up sound
+				source.clip = chargeSound;
+				source.Play();
 			}	
 		}
 	}
@@ -163,6 +179,7 @@ public class Fist : MonoBehaviour {
 
 			spawnedFistRocket.transform.position = Vector3.Lerp(initReturnPos, transform.position, fracReturn);
 			Vector3 destinationRot;
+			//Set it and forget it
 			if(isLeftFist)
 				destinationRot = new Vector3(0.0f, 90f, 0f);
 			else

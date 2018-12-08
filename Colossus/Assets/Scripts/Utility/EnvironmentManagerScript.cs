@@ -13,6 +13,7 @@ public class EnvironmentManagerScript : MonoBehaviour {
 	public GameObject resistanceContainer;
 
 	[Header("Game Pieces")]
+	public bool hidePieces; //Stop game pieces from activating (for debugging)
 	public List<GameObject> gamePieces = new List<GameObject>(); //Pieces of the scene only shown/used InGame
 
 	[Header("Throwable Spawning")]
@@ -63,6 +64,9 @@ public class EnvironmentManagerScript : MonoBehaviour {
 	/// </summary>
 	public void GamePiecesSwitch()
 	{
+		if(hidePieces)
+			return;
+		
 		for(int i = 0; i < gamePieces.Count; i++)
 		{
 			if(gamePieces[i] != null)
