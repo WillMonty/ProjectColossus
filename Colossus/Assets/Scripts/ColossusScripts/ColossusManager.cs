@@ -147,10 +147,9 @@ public class ColossusManager : MonoBehaviour, IHealth {
     public void DamageObject(float damage)
     {
         health -= damage;
-		float healthPct = (STARTING_HEALTH - health)/STARTING_HEALTH;
+		float healthPct = health/STARTING_HEALTH;
 		armHealthbar.value = healthPct;
 		headHealthbar.value = healthPct;
-
 		if(healthPct < 0.1f)
 		{
 			EnvironmentManagerScript.instance.PlayAnnouncer("ColossusCriticalHealth");

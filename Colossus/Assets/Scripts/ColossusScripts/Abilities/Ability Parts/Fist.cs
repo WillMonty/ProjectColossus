@@ -106,8 +106,8 @@ public class Fist : MonoBehaviour {
 		sliderFill.color = Color.red;
 
 		//Play shoot sound
-		source.clip = launchSound;
 		source.loop = false;
+		source.clip = launchSound;
 		source.Play();
 	}
 
@@ -146,8 +146,10 @@ public class Fist : MonoBehaviour {
 			currReturnLag = 0;
 			initReturnPos = spawnedFistRocket.transform.position;
 			initReturnRot = spawnedFistRocket.transform.eulerAngles;
-
 			destinationRot = transform.rotation.eulerAngles;
+
+			//Make fist do no more damage
+			spawnedFistRocket.GetComponent<RocketFist>().damageOff = true;
 			fistState = FistStates.Returning;
 		}
 		else

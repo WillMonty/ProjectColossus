@@ -6,10 +6,16 @@ public class RocketFist : MonoBehaviour, IDamage {
 
 	public FistsAbility abilityControl;
 	private int ownerNumber;
+	public bool damageOff;
 
 	public float Damage
 	{
-		get { return GetComponent<Rigidbody>().velocity.magnitude * abilityControl.damageFactor; }
+		get { 
+			if(!damageOff)
+				return GetComponent<Rigidbody>().velocity.magnitude * abilityControl.damageFactor; 
+			else
+				return 0;
+		}
 	}
 
 	public int Owner
