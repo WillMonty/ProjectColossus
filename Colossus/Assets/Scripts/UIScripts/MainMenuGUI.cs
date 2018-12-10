@@ -23,11 +23,7 @@ public class MainMenuGUI : MonoBehaviour {
     public GameObject[] buttons;
 
     #endregion
-
-    private void Start()
-    {
-        buttons[selectedButton].transform.GetChild(0).GetComponent<Text>().color = highlightedColor;
-    }
+    
 
     void FixedUpdate()
     {
@@ -127,11 +123,18 @@ public class MainMenuGUI : MonoBehaviour {
     {
         if(GameManagerScript.instance.currentGameState == GameState.MainMenu)
         {
+
+            if (buttons[selectedButton].transform.GetChild(0).GetComponent<Text>().color != highlightedColor)
+            {
+                buttons[selectedButton].transform.GetChild(0).GetComponent<Text>().color = highlightedColor;
+            }
+
+
             //player 1
             if (ControllerInput.controllers[0].Down == 1)
             {
                 int prevButton = selectedButton;
-
+                
                 selectedButton = (selectedButton + 1) % buttons.Length;
 
                 buttons[selectedButton].transform.GetChild(0).GetComponent<Text>().color = highlightedColor;
