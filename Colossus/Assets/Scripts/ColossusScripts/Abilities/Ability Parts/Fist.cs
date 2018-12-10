@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Fist : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class Fist : MonoBehaviour {
 	GameObject spawnedFistRocket;
 	Vector3 initReturnPos;
 	Vector3 initReturnRot;
+	Vector3 destinationRot;
 	
 	public bool playerActive; //Is the player trying to shoot the fist?
 	bool prevPlayerActive;
@@ -22,8 +24,13 @@ public class Fist : MonoBehaviour {
 	float currReturnLag;
 	float currReturn;
 
-	[Header("Audio")]
+	//Fist UI
+	[Header("UI")]
+	public Slider slider;
+	public Image sliderFill;
+
 	AudioSource source;
+	[Header("Audio")]
 	public AudioClip launchSound;
 	public AudioClip chargeSound;
 	public AudioClip chargeLoop;
@@ -39,9 +46,6 @@ public class Fist : MonoBehaviour {
 
 		if(abilityControl == null)
 			return;
-		
-		currCharge = 0;
-		currReturnLag = abilityControl.returnLagTime;
 	}
 	
 	// Update is called once per frame
@@ -55,40 +59,31 @@ public class Fist : MonoBehaviour {
 		if(fistState == FistStates.Returning)
 			UpdateReturn();
 
-
 		//Check trigger pull
 		if(prevPlayerActive != playerActive)
 		{
-			if(playerActive) TryShoot();
+			//Pulled when ready to charge
+			if(playerActive && fistState == FistStates.Ready)
+			{
+				sliderFill.color = Color.red;
+				fistState = FistStates.Charging;
+			}
 
+			//Released while charging
 			if(!playerActive && fistState == FistStates.Charging)
 			{
 				source.Stop();
 				fistState = FistStates.Ready;
-				currCharge = 0;
 			}
 
+			//Release when charged
 			if(!playerActive && fistState == FistStates.Charged)
 			{
 				source.Stop();
-
 				Shoot();
-				currCharge = 0;
 			}
 
 			prevPlayerActive = playerActive;
-		}
-	}
-
-	void TryShoot()
-	{
-		if(fistState == FistStates.Ready)
-		{
-			fistState = FistStates.Charging;
-		}
-		else
-		{
-			//Play not ready sound
 		}
 	}
 
@@ -106,35 +101,28 @@ public class Fist : MonoBehaviour {
 		else
 			spawnedFistRocket.GetComponent<Rigidbody>().AddForce(transform.right.normalized * abilityControl.launchForce);
 
+		currCharge = 0;
+		slider.value = 0;
+		sliderFill.color = Color.red;
+
 		//Play shoot sound
 		source.clip = launchSound;
 		source.loop = false;
 		source.Play();
 	}
 
-	//Toggle original fist on and off
-	void ToggleFist(bool status)
-	{
-		foreach(BoxCollider c in GetComponents<BoxCollider>())
-		{
-			c.enabled = status;
-		}
-
-		GetComponent<MeshRenderer>().enabled = status;
-
-		//Turn off fingers
-		transform.GetChild(0).gameObject.SetActive(status);
-	}
-
 	void UpdateCharge()
 	{
+		float chargePct = currCharge / abilityControl.chargeUpTime;
 		if(currCharge >= abilityControl.chargeUpTime)
 		{
-			fistState = FistStates.Charged;
+			sliderFill.color = Color.green;
 
 			source.clip = chargeLoop;
 			source.loop = true;
 			source.Play();
+
+			fistState = FistStates.Charged;
 		}
 		else
 		{
@@ -143,9 +131,12 @@ public class Fist : MonoBehaviour {
 			if(!source.isPlaying)
 			{
 				source.clip = chargeSound;
+				source.time = Mathf.Clamp(source.clip.length * chargePct, 0.0f, 1.0f);
 				source.Play();
 			}	
 		}
+
+		slider.value = chargePct;
 	}
 
 	void UpdateLagTime()
@@ -155,6 +146,8 @@ public class Fist : MonoBehaviour {
 			currReturnLag = 0;
 			initReturnPos = spawnedFistRocket.transform.position;
 			initReturnRot = spawnedFistRocket.transform.eulerAngles;
+
+			destinationRot = transform.rotation.eulerAngles;
 			fistState = FistStates.Returning;
 		}
 		else
@@ -178,13 +171,24 @@ public class Fist : MonoBehaviour {
 			float fracReturn = currReturn/abilityControl.returnTime;
 
 			spawnedFistRocket.transform.position = Vector3.Lerp(initReturnPos, transform.position, fracReturn);
-			Vector3 destinationRot;
-			//Set it and forget it
-			if(isLeftFist)
-				destinationRot = new Vector3(0.0f, 90f, 0f);
-			else
-				destinationRot = new Vector3(0.0f, -90f, 0f);
 			spawnedFistRocket.transform.rotation = Quaternion.Euler(Vector3.Lerp(initReturnRot, destinationRot, fracReturn));
 		}
+	}
+
+	//Toggle original fist on and off
+	void ToggleFist(bool status)
+	{
+		foreach(BoxCollider c in GetComponents<BoxCollider>())
+		{
+			c.enabled = status;
+		}
+
+		GetComponent<MeshRenderer>().enabled = status;
+
+		//Turn off fingers
+		transform.GetChild(0).gameObject.SetActive(status);
+
+		//Turn off slider
+		slider.gameObject.SetActive(status);
 	}
 }
