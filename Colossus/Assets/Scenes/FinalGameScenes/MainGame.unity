@@ -414,7 +414,7 @@ Prefab:
     - target: {fileID: 114851049906826984, guid: fdd7556324937854b84c444cbafc7063,
         type: 2}
       propertyPath: currentGameState
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114035787991922386, guid: fdd7556324937854b84c444cbafc7063,
         type: 2}
@@ -4069,6 +4069,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1914129575996492, guid: b447eadbb414da6448f6f547191c95f4, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b447eadbb414da6448f6f547191c95f4, type: 2}
   m_IsPrefabParent: 0
@@ -5755,6 +5759,11 @@ MonoBehaviour:
   fistRocketPrefab: {fileID: 0}
   playerActive: 0
   fistState: 0
+  slider: {fileID: 0}
+  sliderFill: {fileID: 0}
+  launchSound: {fileID: 0}
+  chargeSound: {fileID: 0}
+  chargeLoop: {fileID: 0}
 --- !u!1 &1944131550
 GameObject:
   m_ObjectHideFlags: 0

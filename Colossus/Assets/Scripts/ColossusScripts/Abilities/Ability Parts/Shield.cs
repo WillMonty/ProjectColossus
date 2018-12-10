@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class Shield : MonoBehaviour {
 
 	public ShieldsAbility abilityControl;
+	public GameObject spinModel;
+	public Material mat;
 
 	public bool playerActive; //Is the player trying to activate the reflect?
 	bool prevPlayerActive;
 	bool reflecting; //Reflecting currently on
 
-	Material mat;
-
-	public Slider sliderReflect;
-
 	float currReflect;
 	float currChargeLag;
+
+	public Slider sliderReflect;
 
 	AudioSource source;
 
@@ -28,7 +28,6 @@ public class Shield : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		currReflect = abilityControl.reflectTime;
-		mat = gameObject.GetComponent<Renderer>().material;
 		source = gameObject.GetComponent<AudioSource>();
 	}
 	
@@ -54,12 +53,10 @@ public class Shield : MonoBehaviour {
 			return;
 		}
 
+		reflecting = true;
 		currChargeLag = 0.0f;
 
-		//Set material alpha
-		mat.color = new Color(1.0f, 1.0f, 1.0f, abilityControl.onAlpha);
-
-		reflecting = true;
+		mat.color = abilityControl.onColor;
 
 		source.Stop();
 		source.clip = abilityControl.reflectOnSound;
@@ -68,8 +65,8 @@ public class Shield : MonoBehaviour {
 
 	void TurnOff()
 	{
-		mat.color = new Color(1.0f, 1.0f, 1.0f, abilityControl.offAlpha);
 		reflecting = false;
+		mat.color = abilityControl.offColor;
 
 		if(!source.isPlaying)
 		{
@@ -98,13 +95,9 @@ public class Shield : MonoBehaviour {
 		{
 			//Make sure it doesn't immediately start charging
 			if(currChargeLag >= abilityControl.lagBeforeCharge)
-			{
 				currReflect += Time.deltaTime;		
-			}
 			else
-			{
 				currChargeLag += Time.deltaTime;
-			}
 		}
 			
 		if(currReflect > abilityControl.reflectTime) currReflect = abilityControl.reflectTime;

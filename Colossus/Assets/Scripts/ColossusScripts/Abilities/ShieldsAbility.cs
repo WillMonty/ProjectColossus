@@ -12,11 +12,8 @@ public class ShieldsAbility : ColossusAbility {
 	public float lagBeforeCharge;
 
 	[Header("Material Settings")]
-
-	[Range(0.0f,1.0f)]
-	public float offAlpha;
-	[Range(0.0f,1.0f)]
-	public float onAlpha;
+	public Color onColor;
+	public Color offColor;
 
 	[Header("Audio Objects")]
 	public GameObject hitPrefab;
