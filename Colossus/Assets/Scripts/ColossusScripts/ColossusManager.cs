@@ -3,49 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ColossusManager : MonoBehaviour {
+public class ColossusManager : MonoBehaviour, IHealth {
 
     #region Robot Attributes
-    //Debug variable to allow the game to start with the game running
-    public bool debugColossus;
-
     const float STARTING_HEALTH = 1500.0f;
-    private bool playerInBot; //Is the player currently in the colossus and ready to play?
-    private float health;
-	private bool gameEnded;
+    float health;
+	public float outOfBoundsDamage;
+
+	//Abilities being used
+	List<ColossusAbility> chosenAbilities;
 
     // Components needed for the toggling of the colossus
-    [Header("Colossus Components")]
-    public GameObject leftController;
-    public GameObject rightController;
+	[Header("Colossus Components")]
     public GameObject headset;
-    public GameObject pregameIndicator; //Gameobjects showing the player where to go to start the game
-	public GameObject resultsCanvas;
-    Laser laser;
+	public GameObject body;
+	public RootMotion.FinalIK.VRIK ikColossus;
 
-	//Objects dealing with the environment
-    [Header("Map")]
-    public GameObject map;
-    public float lowerMapAmount;
-    public GameObject resistanceContainer;
-
-
-    //Audio
     [Header("Audio")]
+	public bool noSound;
     public AudioSource headSource;
+	public AudioSource alarmSource;
     public AudioClip hopInSound;
     public AudioClip damageSound;
-	public AudioClip deathSound;	
+	public AudioClip deathSound;
 
     [Header("UI")]
+	public ColossusCanvas wallCanvas;
     public Slider armHealthbar;
     public Slider headHealthbar;
 
     [Header("Colossus Positioning")]
-    public GameObject leftIndicator;
-    public GameObject rightIndicator;
-    public Material inPositionMat;
-    public Material outPositionMat;
+	public GameObject positionIndicator; //Gameobject tracking the colossus body position
+
+	bool fixedIK;
 
     #endregion
 
@@ -62,20 +52,25 @@ public class ColossusManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        health = STARTING_HEALTH;
+		//Set up abilities
+		chosenAbilities = new List<ColossusAbility>();
+		GetChosenAbilities();
 
-        laser = gameObject.GetComponent<Laser>();
+		health = STARTING_HEALTH;
+
         StartCoroutine(LateStart(0.2f));
-
     }
 
     IEnumerator LateStart(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+
         //Sets the instance after the game manager has actually initialized
         GameManagerScript.instance.colossus = this;
 
-		if (debugColossus) ToggleColossus(); //If in debug mode let the VR player start immediately in the colossus
+		RefreshTrackedControllers();
+
+		body.SetActive(true); //Enable ik late
     }
 
     #endregion
@@ -84,121 +79,192 @@ public class ColossusManager : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (!playerInBot) CheckHopIn(); //Check if the player is jumping in the bot
-
-		if(GameManagerScript.instance.currentGameState == GameState.ResistanceWin)
+		GameState currentGameState = GameManagerScript.instance.currentGameState;
+		if(currentGameState == GameState.Pregame)
 		{
-			resultsCanvas.SetActive(true);
-			resultsCanvas.transform.GetChild(2).gameObject.SetActive(true);
-			KillColossus();
+			CheckHopIn(); //Check if the player is jumping in the bot to start the game		
 		}
 
-		if(GameManagerScript.instance.currentGameState == GameState.ResistanceLose)
+		if (currentGameState == GameState.InGame)
 		{
-			resultsCanvas.SetActive(true);
-			resultsCanvas.transform.GetChild(1).gameObject.SetActive(true);
-			KillColossus();
+			CheckInBounds();
+		}
+
+		if(currentGameState == GameState.ResistanceWin)
+		{
+			wallCanvas.SetCanvas("Lose");
+		}
+
+		if(currentGameState == GameState.ResistanceLose)
+		{
+			wallCanvas.SetCanvas("Win");
+		}
+
+		//Stop colossus audio if desired
+		if(noSound)
+		{
+			headSource.Stop();
+			alarmSource.Stop();
 		}
     }
     #endregion
 
     #region Helper Methods
+	void GetChosenAbilities()
+	{
+		//Get head ability
+		switch(AbilityManagerScript.instance.headColossus)
+		{
+			case(ColossusHeadAbilities.Laser):
+				chosenAbilities.Add(this.GetComponent<HeadLaserAbility>());
+				break;
+		}
+
+		//Arm abilities
+		ColossusHandAbilities leftHand = AbilityManagerScript.instance.leftHandColossus;
+		ColossusHandAbilities rightHand = AbilityManagerScript.instance.rightHandColossus;
+
+		//Fists
+		if(leftHand == ColossusHandAbilities.Fist || rightHand == ColossusHandAbilities.Fist)
+		{
+			chosenAbilities.Add(this.GetComponent<FistsAbility>());	
+		}
+
+		//Hands
+		if(leftHand == ColossusHandAbilities.Hand || rightHand == ColossusHandAbilities.Hand)
+		{
+			chosenAbilities.Add(this.GetComponent<HandsAbility>());	
+		}
+
+		//Shield
+		if(leftHand == ColossusHandAbilities.Shield || rightHand == ColossusHandAbilities.Shield)
+		{
+			chosenAbilities.Add(this.GetComponent<ShieldsAbility>());	
+		}
+	}
+
     // Damage helper method
-    public void Damage(float damageFloat)
+    public void DamageObject(float damage)
     {
-        health -= damageFloat;
-        armHealthbar.value = (STARTING_HEALTH - health)/STARTING_HEALTH;
-        headHealthbar.value = (STARTING_HEALTH - health) / STARTING_HEALTH;
+        health -= damage;
+		float healthPct = health/STARTING_HEALTH;
+		armHealthbar.value = healthPct;
+		headHealthbar.value = healthPct;
+		if(healthPct < 0.1f)
+		{
+			EnvironmentManagerScript.instance.PlayAnnouncer("ColossusCriticalHealth");
+		}
 
     }
 
     /// <summary>
     /// Helper method to check if the player is "hopping into" the colossus
     /// </summary>
-    private void CheckHopIn()
+    void CheckHopIn()
     {
-        //Check if the headset is in the collider
-		bool headsetIn = pregameIndicator.GetComponent<ColossusPositionTrigger>().HeadsetInTrigger;
-        if(headsetIn)
+        //Check if the colossus is in the pillar trigger
+		if(positionIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger)
         {
-            //Make the indicators green
-            leftIndicator.GetComponent<MeshRenderer>().material = inPositionMat;
-            rightIndicator.GetComponent<MeshRenderer>().material = inPositionMat;
+			wallCanvas.SetCanvas("Inbounds");
 
             //Check if either trigger is pressed to hop in
-            bool leftTriggerPressed = leftController.GetComponent<SteamVR_TrackedController>().triggerPressed;
-            bool rightTriggerPressed = rightController.GetComponent<SteamVR_TrackedController>().triggerPressed;
+			bool leftTriggerPressed = ColossusAbility.leftControllerTracked.triggerPressed;
+			bool rightTriggerPressed = ColossusAbility.rightControllerTracked.triggerPressed;
 
-            if (leftTriggerPressed || rightTriggerPressed) ToggleColossus();
+            if (leftTriggerPressed || rightTriggerPressed)
+			{
+				wallCanvas.Clear();
+				ToggleColossus();	
+			}
         }
         else
         {
-            //Make the indicators red
-            leftIndicator.GetComponent<MeshRenderer>().material = outPositionMat;
-            rightIndicator.GetComponent<MeshRenderer>().material = outPositionMat;
+			wallCanvas.SetCanvas("Outbounds");
         }
     }
+
+	/// <summary>
+	/// Checks to see if the player is off the pillar or not during the game
+	/// </summary>
+	void CheckInBounds()
+	{
+		//Don't bother with bounds if debugging
+		if(positionIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger || GameManagerScript.instance.forceStartGame)
+		{
+			alarmSource.Stop();
+		}
+		else
+		{
+			DamageObject(outOfBoundsDamage);
+			if(!alarmSource.isPlaying)
+			{
+				if(GameManagerScript.instance.forceStartGame) //Don't play the sound when debugging
+					return;
+				alarmSource.Play();
+			}
+		}
+	}
+
+	public void RefreshTrackedControllers()
+	{
+		ColossusAbility.leftControllerTracked = GetComponent<SteamVR_ControllerManager>().left.GetComponent<SteamVR_TrackedController>();
+		ColossusAbility.rightControllerTracked = GetComponent<SteamVR_ControllerManager>().right.GetComponent<SteamVR_TrackedController>();
+	}
 
     /// <summary>
     /// Method to toggle the player into the colossus
     /// </summary>
     public void ToggleColossus()
     {
-        //Turn off indicators
-        leftIndicator.SetActive(false);
-        rightIndicator.SetActive(false);
+		positionIndicator.transform.GetChild(0).gameObject.SetActive(false); //Turn off green position cube
 
-		//Turn off base dummy hand prefab
-		leftController.transform.GetChild(1).gameObject.SetActive(false);
-		rightController.transform.GetChild(1).gameObject.SetActive(false);
+		//Turn off starter hands
+		this.GetComponent<HandsAbility>().Disable();
 
-        //Enable regular hands
-		leftController.transform.GetChild(0).gameObject.SetActive(true);
-		rightController.transform.GetChild(0).gameObject.SetActive(true);
-
-        //Enable Colossus
-		playerInBot = true;
-        laser.enabled = true;
+        //Enable Colossus abilities
+		for(int i = 0; i < chosenAbilities.Count; i++)
+		{
+			chosenAbilities[i].Enable();
+		}
+			
 		armHealthbar.gameObject.SetActive(true);
         headHealthbar.gameObject.SetActive(true);
-		pregameIndicator.SetActive(false);
 
-        LowerMap();
+		//Drop the map to accomadate player height
+		EnvironmentManagerScript.instance.LowerMap(headset.transform.position.y);
 
-		GameManagerScript.instance.StartGame();
+		wallCanvas.Clear();
 
-        //Non-debug only
+        //Start game
 		if (!GameManagerScript.instance.forceStartGame)
         {
-            headSource.clip = hopInSound;
-            headSource.Play();
-        }
-    }
-
-    #endregion
-
-    void LowerMap()
-    {
-        float playerY = headset.transform.position.y - lowerMapAmount;
-        map.transform.position = new Vector3(map.transform.position.x, playerY, map.transform.position.z);
-
-		//Don't bother if there aren't resistance in the scene
-		if(resistanceContainer != null)
-        	resistanceContainer.transform.position = new Vector3(resistanceContainer.transform.position.x, playerY + resistanceContainer.transform.position.y, resistanceContainer.transform.position.z);
-    }
-
-	void KillColossus()
-	{
-		if(!gameEnded)
-		{
-            laser.StopLaser();
-            laser.enabled = false;
-
-			headSource.Stop();
-			headSource.clip = deathSound;
+			GameManagerScript.instance.StartCountdown();
+			headSource.clip = hopInSound;
 			headSource.Play();
+        }
+
+
+    }
+
+	public void KillColossus()
+	{
+		foreach(ColossusAbility ability in chosenAbilities)
+		{
+			ability.Disable();
 		}
 
-		gameEnded = true;
+		headSource.Stop();
+		headSource.clip = deathSound;
+		headSource.Play();
+		StartCoroutine(AnnounceDeath());
 	}
+
+	private IEnumerator AnnounceDeath()
+	{
+		yield return new WaitForSeconds(3f);
+
+		EnvironmentManagerScript.instance.PlayAnnouncer("ColossusDestroyed");
+	}
+
+	#endregion
 }

@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class ColossusPositionTrigger : MonoBehaviour {
 
-    bool headsetInTrigger;
+    bool colossusInTrigger;
 
     AudioSource source;
     [Header("Audio")]
     public AudioClip inBoundsSound;
     public AudioClip outBoundsSound;
 
-    public bool HeadsetInTrigger
+	public bool ColossusInTrigger
     {
         get
         {
-            return headsetInTrigger;
+            return colossusInTrigger;
         }
     }
 
@@ -23,30 +23,41 @@ public class ColossusPositionTrigger : MonoBehaviour {
     void Start () {
         source = gameObject.GetComponent<AudioSource>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        source.Stop();
-        source.clip = inBoundsSound;
-        source.Play();
+		if (other.name == "ColossusPosition")
+		{
+			colossusInTrigger = true;
+
+			//Don't play in/out sounds if the game is going
+			if(GameManagerScript.instance.currentGameState != GameState.InGame)
+			{
+				if(GameManagerScript.instance.forceStartGame) //Stops first frame sound firing when debugging
+					return;
+				
+				source.Stop();
+				source.clip = inBoundsSound;
+				source.Play();			
+			}
+		}
     }
 
-    private void OnTriggerStay(Collider other)
+    void OnTriggerExit(Collider other)
     {
-        if (other.name == "Camera (eye)") headsetInTrigger = true;
-    }
+		if (other.name == "ColossusPosition")
+		{
+			colossusInTrigger = false;
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.name == "Camera (eye)") headsetInTrigger = false;
+			if(GameManagerScript.instance.currentGameState != GameState.InGame)
+			{
+				if(GameManagerScript.instance.forceStartGame)
+					return;
 
-        source.Stop();
-        source.clip = outBoundsSound;
-        source.Play();
+				source.Stop();
+				source.clip = outBoundsSound;
+				source.Play();			
+			}
+		}
     }
 }

@@ -9,12 +9,16 @@ TagManager:
   - healthorb
   - fuelorb
   - resistancebullet
-  - resistanceplayer
   - colossusplayer
   - spawnpoint
   - throwable
-  - colossusarms
-  - colossushead
+  - PauseMenuUI
+  - explosion
+  - soldier1
+  - soldier2
+  - colossusshield
+  - s1spawn
+  - s2spawn
   layers:
   - Default
   - TransparentFX
@@ -25,13 +29,13 @@ TagManager:
   - 
   - 
   - bullet
-  - player1
+  - soldier1
+  - soldier2
   - VR
-  - player2
   - gun1
   - gun2
-  - 
-  - 
+  - ColossusUI
+  - ragdoll
   - 
   - 
   - 

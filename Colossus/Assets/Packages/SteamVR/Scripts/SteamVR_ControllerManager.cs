@@ -270,7 +270,6 @@ public class SteamVR_ControllerManager : MonoBehaviour
 			}
 		}
 
-		// Reset the rest.
 		while (objectIndex < objects.Length)
 		{
 			SetTrackedDeviceIndex(objectIndex++, OpenVR.k_unTrackedDeviceIndexInvalid);

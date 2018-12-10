@@ -147,10 +147,10 @@ QualitySettings:
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   - serializedVersion: 2
-    name: Fantastic
-    pixelLightCount: 12
+    name: Ultra
+    pixelLightCount: 15
     shadows: 2
-    shadowResolution: 2
+    shadowResolution: 3
     shadowProjection: 1
     shadowCascades: 4
     shadowDistance: 300
@@ -161,10 +161,10 @@ QualitySettings:
     blendWeights: 4
     textureQuality: 0
     anisotropicTextures: 2
-    antiAliasing: 2
+    antiAliasing: 0
     softParticles: 1
     softVegetation: 1
-    realtimeReflectionProbes: 1
+    realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 1
     vSyncCount: 0
     lodBias: 2
@@ -177,7 +177,7 @@ QualitySettings:
   m_PerPlatformDefaultQuality:
     Android: 0
     BlackBerry: 0
-    Standalone: 0
+    Standalone: 5
     WP8: 0
     Web: 0
     WebGL: 0
