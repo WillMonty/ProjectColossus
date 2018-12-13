@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 //Based on this guide: https://unity3d.college/2017/06/17/steamvr-laser-pointer-menus/
 /// <summary>
 /// Basic VRUI Toggle. Uses Toggle Component solely for Toggle Groups and proper enable handling
 /// </summary>
+#if UNITY_EDITOR
 [CanEditMultipleObjects]
+#endif
 public class VRUIToggle : MonoBehaviour
 {
 	[Header("Toggle Colors")]

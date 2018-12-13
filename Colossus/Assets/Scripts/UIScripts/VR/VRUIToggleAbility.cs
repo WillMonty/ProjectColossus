@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class VRUIToggleAbility : VRUIToggle {
 
@@ -48,6 +50,7 @@ public class VRUIToggleAbility : VRUIToggle {
 	}
 }
 
+#if UNITY_EDITOR
 [CanEditMultipleObjects]
 [CustomEditor(typeof(VRUIToggleAbility))]
 public class VRUIToggleAbility_Editor : Editor
@@ -73,3 +76,4 @@ public class VRUIToggleAbility_Editor : Editor
 		}
 	}
 }
+#endif

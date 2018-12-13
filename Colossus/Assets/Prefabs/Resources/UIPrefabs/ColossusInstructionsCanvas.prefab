@@ -402,9 +402,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pull the trigger on either controller to launch one of your fists at the
-    soldiers. The fist will come back after a short time. You can also punch a soldier
-    away if they get too close.
+  m_Text: Hold the trigger down on either controller to charge your fist and then
+    release the trigger when full to launch a rocket fist. The fist will come back
+    after a short time. You can also punch a soldier away if they get too close to
+    you.
 --- !u!114 &114470337880011962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -439,7 +440,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: Use the shield to block and reflect projectiles back at the soldiers. Pull
     the trigger with your shield hand to start reflecting. Let go of the trigger to
-    stop and allow the reflecting ability to charge back up.
+    stop and allow the ability to charge back up.
 --- !u!114 &114641370917345086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -452,7 +453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.88235295}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -479,7 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.88235295}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -575,11 +576,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 49
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 45
+    m_MaxSize: 74
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -654,7 +655,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Hit soldiers by throwing items at them.
 
-    Pull and hold a trigger while touching an object to grab it. Release the trigger
+    Hold down the trigger while touching an object to grab it. Release the trigger
     while moving your arm to throw.'
 --- !u!222 &222141481384015334
 CanvasRenderer:
@@ -844,18 +845,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1314353439765540}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -2.309}
-  m_LocalScale: {x: 0.001623723, y: 0.0016237226, z: 0.0016237226}
+  m_LocalRotation: {x: -0.00000007165881, y: 0.92387956, z: -0.38268343, w: -0.00000017299969}
+  m_LocalPosition: {x: 0, y: 0, z: -33.6}
+  m_LocalScale: {x: 0.02830308, y: 0.02830308, z: 0.02830308}
   m_Children:
   - {fileID: 224687313735076252}
   - {fileID: 224322392487236682}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 180.00002, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -1.286, y: 0.943}
+  m_AnchoredPosition: {x: 0.327, y: 9.25}
   m_SizeDelta: {x: 951.2, y: 709}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224413486680811596
@@ -1005,5 +1006,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 338.1, y: 52.17}
+  m_SizeDelta: {x: 605, y: 89.63}
   m_Pivot: {x: 0.5, y: 0.5}
