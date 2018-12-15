@@ -8,7 +8,7 @@ public class PlayerData : MonoBehaviour, IHealth
     // Player Manager
     const int STARTING_LIVES = 2;
     const float RESPAWN_TIME = 5.0f;
-    const float DAMAGING_OBJECT_MAGNITUDE = .02f;
+    const float DAMAGING_OBJECT_MAGNITUDE = .5f;
     const float MAX_HEALTH = 100;
     
 
@@ -253,9 +253,9 @@ public class PlayerData : MonoBehaviour, IHealth
         alive = true;
     }
 
-    void OnTriggerEnter(Collider col)
+	void OnCollisionEnter(Collision collision)
 	{
-		GameObject collisionObject = col.gameObject;
+		GameObject collisionObject = collision.gameObject;
 		// If a player is hit with an object the robot throws
 		if (collisionObject.tag == "throwable")
 		{
@@ -263,7 +263,6 @@ public class PlayerData : MonoBehaviour, IHealth
 			if (collisionObject.GetComponent<Rigidbody>().velocity.magnitude > DAMAGING_OBJECT_MAGNITUDE)
 			{
 				float movingObjectDamage = collisionObject.GetComponent<Rigidbody>().velocity.magnitude;
-
 				Damage(movingObjectDamage);
 			}
 			else if(collisionObject.GetComponent<Rigidbody>().isKinematic)

@@ -19,10 +19,27 @@ public class Lava : MonoBehaviour
 			other.gameObject.GetComponent<IHealth>().DamageObject(damagePerTick);
 			return;
 		}
-
-		//Destroy any other physics based 
-		if(other.gameObject.tag == "throwable" || other.gameObject.tag == "ragdoll")
+			
+		if(other.gameObject.tag == "ragdoll")
 			GameObject.Destroy(other.gameObject);
+
+		//Destroy throwables, but detach from Colossus if they are holding them
+		if(other.gameObject.tag == "throwable")
+		{
+			if(other.gameObject.transform.parent != null)
+			{
+				Valve.VR.InteractionSystem.Hand handHold = other.gameObject.transform.parent.gameObject.GetComponent<Valve.VR.InteractionSystem.Hand>();
+				if(handHold != null)
+				{
+					handHold.DetachObject(other.gameObject, true);
+					GameObject.Destroy(other.gameObject);
+				}	
+			}
+			else
+			{
+				GameObject.Destroy(other.gameObject);
+			}
+		}
     }
 
 	void OnTriggerStay(Collider other)

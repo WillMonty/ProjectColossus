@@ -74,6 +74,8 @@ public class GameManagerScript : MonoBehaviour
 	{
 		DontDestroyOnLoad(this);
 
+		FindSoldierObjects();
+
 		//Delegate for scene load
 		SceneManager.sceneLoaded += OnSceneLoaded;
 	}
@@ -165,17 +167,8 @@ public class GameManagerScript : MonoBehaviour
 
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
-		if(scene.name != "MainGame")
-			return;
-
-		//Set up resistance objects in the main game scene
-		if(onlyVR) return;
-		spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
-		soldierUICanvas = GameObject.Find("/ResistanceContainer/Soldier UI");
-		soldierCountdownUI = GameObject.Find("/ResistanceContainer/Soldier UI/CountdownBackground");
-		soldierCountdownTimer = GameObject.Find("/ResistanceContainer/Soldier UI/CountdownBackground/TimerBackground/Timer");
-		deathCam1 = GameObject.Find("/ResistanceContainer/DeathCams/DeathCam1");
-		deathCam2 = GameObject.Find("/ResistanceContainer/DeathCams/DeathCam2");
+		if(scene.name == "MainGame")
+			FindSoldierObjects();
 	}
 
     //Called when the colossus is ready in position
@@ -259,6 +252,18 @@ public class GameManagerScript : MonoBehaviour
 	#endregion
 
 	#region Soldier Handling
+	void FindSoldierObjects()
+	{
+		//Don't bother if VR testing
+		if(onlyVR) return;
+		spawnPoints = GameObject.FindGameObjectsWithTag("spawnpoint");
+		soldierUICanvas = GameObject.Find("/ResistanceContainer/Soldier UI");
+		soldierCountdownUI = GameObject.Find("/ResistanceContainer/Soldier UI/CountdownBackground");
+		soldierCountdownTimer = GameObject.Find("/ResistanceContainer/Soldier UI/CountdownBackground/TimerBackground/Timer");
+		deathCam1 = GameObject.Find("/ResistanceContainer/DeathCams/DeathCam1");
+		deathCam2 = GameObject.Find("/ResistanceContainer/DeathCams/DeathCam2");
+	}
+
 	void SoldierSetup()
 	{
 		CreateSoldier(1, AbilityManagerScript.instance.soldier1);
