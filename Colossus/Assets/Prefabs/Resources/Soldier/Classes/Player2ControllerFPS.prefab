@@ -77438,7 +77438,7 @@ Camera:
     m_Bits: 4294961151
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 1
+  m_TargetDisplay: 0
   m_TargetEye: 0
   m_HDR: 0
   m_AllowMSAA: 1
@@ -80790,10 +80790,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e0838c4d97dbb4ca9cbb741f77091b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
   playerNumber: 0
   soldierClass: 0
   eyes: {fileID: 0}
   gun: {fileID: 0}
+  model: {fileID: 0}
+  ragdoll: {fileID: 0}
 --- !u!114 &114330257799635738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81213,7 +81216,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 0}
+  rifleExternal: {fileID: 0}
+  rifleInternal: {fileID: 0}
   shootSound: {fileID: 0}
+  reloadSound: {fileID: 0}
 --- !u!114 &114959428591775112
 MonoBehaviour:
   m_ObjectHideFlags: 1
