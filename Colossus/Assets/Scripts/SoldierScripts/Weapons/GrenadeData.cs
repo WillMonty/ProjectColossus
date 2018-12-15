@@ -14,7 +14,7 @@ public class GrenadeData : MonoBehaviour,IDamage
     float count;
     bool isProj = true;
     Rigidbody body;
-    float damage = 20f;
+    float damage = 7f;
     int ownerNumber;
 
     public int Owner

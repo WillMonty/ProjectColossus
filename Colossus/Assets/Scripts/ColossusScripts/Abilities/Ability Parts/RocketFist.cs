@@ -27,5 +27,10 @@ public class RocketFist : MonoBehaviour, IDamage {
 	void OnCollisionEnter(Collision collision)
 	{
 		GetComponent<AudioSource>().Stop();
+
+		if(collision.gameObject.GetComponent<IHealth>() != null)
+		{
+			collision.gameObject.GetComponent<IHealth>().DamageObject(Damage);
+		}
 	}
 }
