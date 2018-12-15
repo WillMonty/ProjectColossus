@@ -50,7 +50,7 @@ public class SoldierUINew : MonoBehaviour {
     float s2ReloadDuration;
     float s2ReloadTime;
     bool s2Reloading;
-    int s2CurrentReloadNum = 0;
+    public int s2CurrentReloadNum = 0;
 
     float damageAlphaTimerMax;
 

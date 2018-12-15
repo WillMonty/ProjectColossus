@@ -615,7 +615,7 @@ MonoBehaviour:
   s1CurrentHealth: 0
   s1Healthbar: {fileID: 114653949635615710}
   s2CurrentHealth: 0
-  s2Healthbar: {fileID: 114384851786710070}
+  s2Healthbar: {fileID: 114057306120416046}
   maxFuel: 0
   s1AbilityBar: {fileID: 114413856914928456}
   s2AbilityBar: {fileID: 114384851786710070}
@@ -900,7 +900,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 82bd56c6a5ed14d45b4ec26a28606461, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 61cb9537be40b8d4fa96572f5ab776ca, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1047,7 +1047,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 61cb9537be40b8d4fa96572f5ab776ca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 82bd56c6a5ed14d45b4ec26a28606461, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
