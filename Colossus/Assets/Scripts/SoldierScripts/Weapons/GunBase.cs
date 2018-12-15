@@ -57,7 +57,7 @@ public class GunBase : MonoBehaviour, IWeapon
     /// <summary>
     /// Used to prevent double reloading glitch
     /// </summary>
-    protected int currentReloadNum = 0;
+    public int currentReloadNum = 0;
     public int CurrentReloadNum
     {
         get { return currentReloadNum; }
@@ -153,7 +153,7 @@ public class GunBase : MonoBehaviour, IWeapon
         if (GameManagerScript.instance.currentGameState == GameState.InGame)
         {
             // Check for shooting
-            if (rightTrigger > 0 && justShot == false && !reloading)
+            if ((rightTrigger > 0) && justShot == false && !reloading)
             {
                 if (bulletsInMag > 0)
                 {
@@ -166,7 +166,7 @@ public class GunBase : MonoBehaviour, IWeapon
                 }
             }
             //Check for reloading
-            else if (!reloading && ((reloadButton && bulletsInMag != magSize)) && justShot == false)
+            else if (!reloading && (((reloadButton) && bulletsInMag != magSize)) && justShot == false)
             {
                 Reload();
             }
