@@ -31,6 +31,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
 	public ColossusCanvas wallCanvas;
     public Slider armHealthbar;
     public Slider headHealthbar;
+	public GameObject lavaText;
 
     [Header("Colossus Positioning")]
 	public GameObject positionIndicator; //Gameobject tracking the colossus body position
@@ -192,6 +193,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
 		if(positionIndicator.GetComponent<ColossusPositionTrigger>().ColossusInTrigger || GameManagerScript.instance.forceStartGame)
 		{
 			alarmSource.Stop();
+			lavaText.SetActive(false);
 		}
 		else
 		{
@@ -202,6 +204,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
 					return;
 				alarmSource.Play();
 			}
+			lavaText.SetActive(true);
 		}
 	}
 
