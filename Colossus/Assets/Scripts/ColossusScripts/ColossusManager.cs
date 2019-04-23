@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class ColossusManager : MonoBehaviour, IHealth {
 
     #region Robot Attributes
-    const float STARTING_HEALTH = 1500.0f;
+	const float STARTING_HEALTH = 1500.0f;
     float health;
-	public float outOfBoundsDamage;
 
 	//Abilities being used
 	List<ColossusAbility> chosenAbilities;
@@ -35,6 +34,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
 
     [Header("Colossus Positioning")]
 	public GameObject positionIndicator; //Gameobject tracking the colossus body position
+	public float outOfBoundsDamage;
 
 	bool fixedIK;
 

@@ -71,4 +71,14 @@ public class AbilityManagerScript : MonoBehaviour {
                 break;
         }
     }
+
+	public void Reset()
+	{
+		soldier1 = SoldierClass.Assault;
+		soldier2 = SoldierClass.Assault;
+
+		headColossus = ColossusHeadAbilities.None;
+		leftHandColossus = ColossusHandAbilities.None;
+		rightHandColossus = ColossusHandAbilities.None;
+	}
 }

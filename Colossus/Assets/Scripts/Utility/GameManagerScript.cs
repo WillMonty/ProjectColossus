@@ -38,6 +38,10 @@ public class GameManagerScript : MonoBehaviour
 	[HideInInspector]
 	public bool readySoldiers;
 
+	[Header("Damage Visuals")]
+	public float damageFlashTime; //How long color flash upon taking damage lasts 
+	public Shader damageShader;
+
 	[Header("Soldier UI and Pausing")]
 	public GameObject soldierUICanvas;
     public GameObject soldierSelectMenu;
@@ -243,6 +247,9 @@ public class GameManagerScript : MonoBehaviour
     IEnumerator ReturnToMainMenu(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+
+		AbilityManagerScript.instance.Reset();
+
         GameManagerScript.instance.currentGameState = GameState.MainMenu;
 
         // Last thing: Load the main menu

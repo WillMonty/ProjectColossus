@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 114090747951565322}
   - component: {fileID: 114473077416392768}
   m_Layer: 14
-  m_Name: HeadUI
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17035,7 +17035,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -17686,6 +17686,7 @@ MonoBehaviour:
   health: 0
   hitPrefab: {fileID: 1924571714969746, guid: d149130b7347ddc47a02a62b1246d216, type: 2}
   damageMultiplier: 1
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114187350433271992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -18862,6 +18863,7 @@ MonoBehaviour:
   health: 500
   hitPrefab: {fileID: 1924571714969746, guid: d149130b7347ddc47a02a62b1246d216, type: 2}
   damageMultiplier: 1.25
+  damageColor: {r: 1, g: 0.88965523, b: 0, a: 1}
 --- !u!114 &114778622573916354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -18885,7 +18887,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae7b9bf6d28f2234097ccfee114fd2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outOfBoundsDamage: 0.6
   headset: {fileID: 1541039505096830}
   body: {fileID: 1659972043436820}
   ikColossus: {fileID: 114646247283838336}
@@ -18900,6 +18901,7 @@ MonoBehaviour:
   headHealthbar: {fileID: 114083269919350812}
   lavaText: {fileID: 1117895765504060}
   positionIndicator: {fileID: 0}
+  outOfBoundsDamage: 0.6
 --- !u!114 &114837421860877814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -18915,6 +18917,7 @@ MonoBehaviour:
   health: 500
   hitPrefab: {fileID: 1924571714969746, guid: d149130b7347ddc47a02a62b1246d216, type: 2}
   damageMultiplier: 1
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114845329418457236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19197,6 +19200,7 @@ MonoBehaviour:
   health: 500
   hitPrefab: {fileID: 1924571714969746, guid: d149130b7347ddc47a02a62b1246d216, type: 2}
   damageMultiplier: 1
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114975259905622718
 MonoBehaviour:
   m_ObjectHideFlags: 1

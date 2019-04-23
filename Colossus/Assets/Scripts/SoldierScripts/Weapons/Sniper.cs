@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sniper : GunBase {
 
     Ray shot;
-    float damage;
+    float damage = 75;
     Vector3 shotDist;
     RaycastHit shotData;
     public Material trailMat;
