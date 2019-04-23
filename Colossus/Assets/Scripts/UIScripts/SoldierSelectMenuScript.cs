@@ -14,8 +14,8 @@ public class SoldierSelectMenuScript : MonoBehaviour {
     public Color highlightedColor;
     public Color readyColor;
 
-    private SoldierClass p1SelectedClass = SoldierClass.Assault;
-    private SoldierClass p2SelectedClass = SoldierClass.Assault;
+    private SoldierClass p1SelectedClass;
+    private SoldierClass p2SelectedClass;
 
     public GameObject p1ClassName;
     public GameObject p2ClassName;
@@ -28,9 +28,9 @@ public class SoldierSelectMenuScript : MonoBehaviour {
 
     public GameObject WaitingPanel;
     
-    private bool p1Ready = false;
-    private bool p2Ready = false;
-    private bool soldiersReady = false;
+    private bool p1Ready;
+    private bool p2Ready;
+    private bool soldiersReady;
 
     public GameObject p1DisabledScreen;
     public GameObject p2DisabledScreen;
@@ -38,7 +38,7 @@ public class SoldierSelectMenuScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-
+		
     }
 	
 	// Update is called once per frame

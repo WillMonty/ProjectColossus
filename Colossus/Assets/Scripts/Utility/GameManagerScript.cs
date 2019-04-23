@@ -110,27 +110,9 @@ public class GameManagerScript : MonoBehaviour
         #endregion
         
         gameCountdownTimer = gameCountdownTimerDefault;
-
-        StartCoroutine(LateStart(0.3f));
     }
 
-	IEnumerator LateStart(float waitTime)
-	{
-		yield return new WaitForSeconds(waitTime);
-	
-		//Check for debug
-		if(forceStartGame)
-		{
-			if(colossus != null)
-				colossus.ToggleColossus();
 
-			if(!onlyVR) SoldierSetup();
-			
-			currentGameState = GameState.InGame;
-
-			EnvironmentManagerScript.instance.GamePiecesSwitch();
-		}
-    }
     #endregion
 
     void FixedUpdate ()
@@ -171,8 +153,32 @@ public class GameManagerScript : MonoBehaviour
 
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
+		if(scene.name == "MainMenu")
+		{
+			readyColossus = false;
+			readySoldiers = false;	
+		}
+
 		if(scene.name == "MainGame")
+		{
 			FindSoldierObjects();
+			if(forceStartGame)
+				StartCoroutine(ForceStartGame(0.3f));
+		}
+	}
+
+	IEnumerator ForceStartGame(float waitTime)
+	{
+		yield return new WaitForSeconds(waitTime);
+
+		if(colossus != null)
+			colossus.ToggleColossus();
+
+		if(!onlyVR) SoldierSetup();
+
+		currentGameState = GameState.InGame;
+
+		EnvironmentManagerScript.instance.GamePiecesSwitch();
 	}
 
     //Called when the colossus is ready in position

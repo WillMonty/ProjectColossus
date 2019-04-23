@@ -13,7 +13,7 @@ public class AbilityManagerScript : MonoBehaviour {
 	public static AbilityManagerScript instance = null;
 
 	[Header("Colossus Abilities")]
-	public ColossusHeadAbilities headColossus;
+	public ColossusHeadAbilities headColossus = ColossusHeadAbilities.Laser;
 	public ColossusHandAbilities leftHandColossus;
 	public ColossusHandAbilities rightHandColossus;
 
