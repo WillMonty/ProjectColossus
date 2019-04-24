@@ -9,7 +9,7 @@ public class PlayerData : MonoBehaviour, IHealth
     const int STARTING_LIVES = 2;
     const float RESPAWN_TIME = 5.0f;
     const float DAMAGING_OBJECT_MAGNITUDE = .5f;
-    const float MAX_HEALTH = 100;
+    float MAX_HEALTH = 100.0f;
     
 
     // Basic Player Management variables
@@ -77,7 +77,7 @@ public class PlayerData : MonoBehaviour, IHealth
         // Start initializes 3 lives at start, can be changed later
 
         lives = STARTING_LIVES;
-        health = 100.0f;
+		health = MAX_HEALTH;
 
 
         weaponData = gun.GetComponent<IWeapon>();
@@ -95,6 +95,14 @@ public class PlayerData : MonoBehaviour, IHealth
     IEnumerator LateStart(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+
+		//Factor health by game speed
+		if(GameManagerScript.instance.gameSpeedMod > 1.0f)
+		{
+			MAX_HEALTH = MAX_HEALTH - (MAX_HEALTH * 0.5f) * (GameManagerScript.instance.gameSpeedMod - 1);
+			health = MAX_HEALTH;	
+		}
+
         //Sets the instance after the game manager has actually initializes
         switch (playerNumber)
         {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ColossusManager : MonoBehaviour, IHealth {
 
     #region Robot Attributes
-	const float STARTING_HEALTH = 1500.0f;
+	float STARTING_HEALTH = 1500.0f;
     float health;
 
 	//Abilities being used
@@ -69,6 +69,12 @@ public class ColossusManager : MonoBehaviour, IHealth {
         //Sets the instance after the game manager has actually initialized
         GameManagerScript.instance.colossus = this;
 
+		//Factor health by game speed
+		if(GameManagerScript.instance.gameSpeedMod > 1.0f)
+		{
+			STARTING_HEALTH = STARTING_HEALTH - (STARTING_HEALTH * 0.5f) * (GameManagerScript.instance.gameSpeedMod - 1);
+			health = STARTING_HEALTH;	
+		}
 		RefreshTrackedControllers();
 
 		body.SetActive(true); //Enable ik late
@@ -234,7 +240,7 @@ public class ColossusManager : MonoBehaviour, IHealth {
         headHealthbar.gameObject.SetActive(true);
 
 		//Drop the map to accomadate player height
-		EnvironmentManagerScript.instance.LowerMap(headset.transform.position.y);
+		EnvironmentManagerScript.instance.MoveMap(headset.transform.position);
 
 		wallCanvas.Clear();
 

@@ -81220,6 +81220,7 @@ MonoBehaviour:
   rifleInternal: {fileID: 0}
   shootSound: {fileID: 0}
   reloadSound: {fileID: 0}
+  currentReloadNum: 0
 --- !u!114 &114959428591775112
 MonoBehaviour:
   m_ObjectHideFlags: 1

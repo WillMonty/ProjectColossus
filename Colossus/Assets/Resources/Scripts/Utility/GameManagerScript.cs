@@ -22,7 +22,10 @@ public class GameManagerScript : MonoBehaviour
 
 	[Header("Debug")]
 	public bool forceStartGame;
+	public bool autoCenterColossus; //When toggling the Colossus, sets the map position to be where the headset was at the time of toggle
 	public bool onlyVR;
+	[Range(1f, 2f)]
+	public float gameSpeedMod;
 
 	[Header("State")]
 	public GameState currentGameState;

@@ -6096,7 +6096,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.402
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6249,6 +6249,7 @@ MonoBehaviour:
   rifleInternal: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 1d8826491f479494d803e3c3572e0177, type: 3}
   reloadSound: {fileID: 8300000, guid: ae441152ed972734da977db79411433d, type: 3}
+  currentReloadNum: 0
   trailMat: {fileID: 2100000, guid: 57db6b7750b08934aa0369b3e2999f68, type: 2}
 --- !u!114 &114312693461263886
 MonoBehaviour:

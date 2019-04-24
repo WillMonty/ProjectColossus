@@ -9,6 +9,7 @@ public class GrenadeData : MonoBehaviour,IDamage
     public GameObject ring1;
     public GameObject ring2;
     public Material ringMat;
+	public GameObject hitPrefab;
 
     Material tempMat;
     float count;
@@ -88,17 +89,15 @@ public class GrenadeData : MonoBehaviour,IDamage
             ring1.GetComponent<MeshRenderer>().enabled = false;
             ring2.GetComponent<MeshRenderer>().enabled = false;
 
+			Instantiate(hitPrefab, this.transform.position, Quaternion.identity);
+
             for (int i = 0; i < 3; i++)
                 Destroy(transform.GetChild(0).gameObject);
            Destroy(body);
 
             Destroy(gameObject, 0.25f);
         }
-
-       
     }
-
-    
  
     IEnumerator Dim()
     {

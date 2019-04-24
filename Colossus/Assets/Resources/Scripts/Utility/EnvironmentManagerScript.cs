@@ -95,14 +95,27 @@ public class EnvironmentManagerScript : MonoBehaviour {
 	/// Lowers the map according to the head height of the VR player
 	/// </summary>
 	/// <param name="headHeight">VR player y position</param>
-	public void LowerMap(float headHeight)
+	public void MoveMap(Vector3 headsetPosition)
 	{
-		float playerY = headHeight - lowerMapAmount;
-		map.transform.position = new Vector3(map.transform.position.x, playerY, map.transform.position.z);
+		map.transform.position = new Vector3(map.transform.position.x, headsetPosition.y - lowerMapAmount, map.transform.position.z);
 
 		//Don't bother if there aren't resistance in the scene
 		if(resistanceContainer != null)
-			resistanceContainer.transform.position = new Vector3(resistanceContainer.transform.position.x, playerY + resistanceContainer.transform.position.y, resistanceContainer.transform.position.z);
+			resistanceContainer.transform.position = new Vector3(resistanceContainer.transform.position.x, 
+																(headsetPosition.y - lowerMapAmount) + resistanceContainer.transform.position.y, 
+																resistanceContainer.transform.position.z);
+
+		if(GameManagerScript.instance.autoCenterColossus)
+		{
+			float oldMapX = map.transform.position.x;
+			float oldMapZ = map.transform.position.z;
+			map.transform.position = new Vector3(headsetPosition.x, map.transform.position.y, headsetPosition.z);
+			float mapXDif = oldMapX - map.transform.position.x;
+			float mapZDif = oldMapZ - map.transform.position.z;
+
+			if(resistanceContainer != null)
+				resistanceContainer.transform.position = new Vector3(resistanceContainer.transform.position.x - mapXDif, resistanceContainer.transform.position.y, resistanceContainer.transform.position.x - mapZDif);
+		}
 	}
 
 	/// <summary>

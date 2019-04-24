@@ -291,6 +291,7 @@ MonoBehaviour:
   ring1: {fileID: 1758996538846184}
   ring2: {fileID: 1905830393566670}
   ringMat: {fileID: 2100000, guid: 2375e2bc4184ba54a803f1c2daef379d, type: 2}
+  hitPrefab: {fileID: 1924571714969746, guid: 67e8b8983366ea748984c1addd408fb9, type: 2}
 --- !u!135 &135636925423766438
 SphereCollider:
   m_ObjectHideFlags: 1
