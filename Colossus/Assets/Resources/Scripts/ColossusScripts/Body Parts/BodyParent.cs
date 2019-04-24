@@ -10,7 +10,10 @@ public class BodyParent : MonoBehaviour, IHealth {
 	public float damageMultiplier = 1f;
 	public Color damageColor = Color.red;
 
-	Shader originalShader;
+	Material originalMat;
+	Color originalColor;
+	[HideInInspector]
+	public Material flashMat;
 	bool flashing;
 	float currFlashTime;
 
@@ -19,6 +22,26 @@ public class BodyParent : MonoBehaviour, IHealth {
 		get
 		{
 			return health;
+		}
+	}
+
+	void Start()
+	{
+		originalMat = gameObject.GetComponent<Renderer>().material;
+		originalColor = gameObject.GetComponent<Renderer>().material.color;
+		flashMat = GameManagerScript.instance.flashMat;
+	}
+
+	void Update()
+	{
+		if(flashing)
+			currFlashTime += Time.deltaTime;
+			
+		if(currFlashTime >= GameManagerScript.instance.damageFlashTime)
+		{
+			SwapAppearance(gameObject, originalMat, originalColor);
+			flashing = false;
+			currFlashTime = 0;
 		}
 	}
 
@@ -34,7 +57,7 @@ public class BodyParent : MonoBehaviour, IHealth {
 		//Damage visual
 		if(GameManagerScript.instance.currentGameState == GameState.InGame)
 		{
-			SwapAppearance(gameObject, GameManagerScript.instance.damageShader, damageColor);
+			SwapAppearance(gameObject, flashMat, damageColor);
 			flashing = true;
 		}
 	}
@@ -52,28 +75,9 @@ public class BodyParent : MonoBehaviour, IHealth {
 		}
 	}
 
-	void Start()
+	public void SwapAppearance(GameObject targetObj, Material newMat, Color newColor)
 	{
-		originalShader = gameObject.GetComponent<Renderer>().material.shader;
-	}
-
-	void Update()
-	{
-		if(flashing)
-			currFlashTime += Time.deltaTime;
-			
-		if(currFlashTime >= GameManagerScript.instance.damageFlashTime)
-		{
-			SwapAppearance(gameObject, originalShader, Color.white);
-			flashing = false;
-			currFlashTime = 0;
-		}
-	}
-
-	public void SwapAppearance(GameObject targetObj, Shader newShader, Color newColor)
-	{
-		targetObj.GetComponent<Renderer>().material.shader = newShader;
+		targetObj.GetComponent<Renderer>().material = newMat;
 		targetObj.GetComponent<Renderer>().material.color = newColor;
-		targetObj.GetComponent<Renderer>().material.SetColor("_EmissionColor", newColor);
 	}
 }

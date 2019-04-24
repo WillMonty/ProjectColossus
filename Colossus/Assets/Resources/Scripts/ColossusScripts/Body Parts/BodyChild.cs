@@ -6,7 +6,8 @@ public class BodyChild : MonoBehaviour, IHealth {
 
 	public BodyParent parent;
 
-	Shader originalShader;
+	Material originalMat;
+	Color originalColor;
 	bool flashing;
 	float currFlashTime;
 
@@ -18,16 +19,34 @@ public class BodyChild : MonoBehaviour, IHealth {
 		}
 	}
 
+	void Start()
+	{
+		originalMat = gameObject.GetComponent<Renderer>().material;
+		originalColor = gameObject.GetComponent<Renderer>().material.color;
+	}
+
+	void Update()
+	{
+		if(flashing)
+			currFlashTime += Time.deltaTime;
+
+		if(currFlashTime >= GameManagerScript.instance.damageFlashTime)
+		{
+			parent.SwapAppearance(gameObject, originalMat, originalColor);
+			currFlashTime = 0;
+			flashing = false;
+		}
+	}
+
 	public void DamageObject(float dmg)
 	{
 		parent.DamageObject(dmg);
-		parent.SwapAppearance(gameObject, GameManagerScript.instance.damageShader, parent.damageColor);
 		flashing = true;
 
 		//Damage visual
 		if(GameManagerScript.instance.currentGameState == GameState.InGame)
 		{
-			parent.SwapAppearance(gameObject, GameManagerScript.instance.damageShader, parent.damageColor);
+			parent.SwapAppearance(gameObject, parent.flashMat, parent.damageColor);
 			flashing = true;
 		}
 	}
@@ -38,24 +57,6 @@ public class BodyChild : MonoBehaviour, IHealth {
 		{
 			parent.OnCollisionEnter(collision);
 		}
-			
-	}
 
-	void Start()
-	{
-		originalShader = gameObject.GetComponent<Renderer>().material.shader;
-	}
-
-	void Update()
-	{
-		if(flashing)
-			currFlashTime += Time.deltaTime;
-
-		if(currFlashTime >= GameManagerScript.instance.damageFlashTime)
-		{
-			parent.SwapAppearance(gameObject, originalShader, Color.white);
-			currFlashTime = 0;
-			flashing = false;
-		}
 	}
 }

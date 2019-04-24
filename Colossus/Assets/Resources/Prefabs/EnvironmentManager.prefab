@@ -54,6 +54,7 @@ MonoBehaviour:
   map: {fileID: 0}
   lowerMapAmount: 2.5
   resistanceContainer: {fileID: 0}
+  hidePieces: 0
   gamePieces:
   - {fileID: 0}
   - {fileID: 0}

@@ -52,9 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d97dd221a3ff9a4a820a821fcd5e037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headColossus: 0
   leftHandColossus: 0
   rightHandColossus: 0
-  headColossus: 0
   soldier1: 2
   soldier2: 0
 --- !u!114 &114851049906826984
@@ -74,6 +74,10 @@ MonoBehaviour:
   colossus: {fileID: 0}
   soldier1: {fileID: 0}
   soldier2: {fileID: 0}
+  readyColossus: 0
+  readySoldiers: 0
+  damageFlashTime: 0
+  flashMat: {fileID: 0}
   soldierUICanvas: {fileID: 0}
   soldierSelectMenu: {fileID: 0}
   pauseMenu: {fileID: 0}
@@ -82,7 +86,7 @@ MonoBehaviour:
   - {fileID: 0}
   pauseMenuSelectedButton: 0
   soldierCountdownUI: {fileID: 0}
-  soldierCoutdownTimer: {fileID: 0}
+  soldierCountdownTimer: {fileID: 0}
   currentPauseOwner: 3
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   highlightedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}

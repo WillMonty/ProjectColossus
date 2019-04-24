@@ -16,7 +16,7 @@ public enum GameState { MainMenu, Instructions, CharacterSelect,
 public class GameManagerScript : MonoBehaviour
 {
     
-    #region Attributes
+    #region Fields
     // Static instance of the GameManager which allows it to be accessed from any script
     public static GameManagerScript instance = null;
 
@@ -40,7 +40,7 @@ public class GameManagerScript : MonoBehaviour
 
 	[Header("Damage Visuals")]
 	public float damageFlashTime; //How long color flash upon taking damage lasts 
-	public Shader damageShader;
+	public Material flashMat;
 
 	[Header("Soldier UI and Pausing")]
 	public GameObject soldierUICanvas;
@@ -73,12 +73,10 @@ public class GameManagerScript : MonoBehaviour
 
     #endregion
 
-    #region Awake/Start
+    #region Scene Start
     void Awake ()
 	{
 		DontDestroyOnLoad(this);
-
-		FindSoldierObjects();
 
 		//Delegate for scene load
 		SceneManager.sceneLoaded += OnSceneLoaded;
@@ -96,7 +94,6 @@ public class GameManagerScript : MonoBehaviour
 
         currentPauseOwner = PauseOwner.None;
 
-        #region Singleton Design Pattern
         // Check for an instance, if it doesn't exist, than set to this
         if (instance == null)
         {
@@ -107,10 +104,39 @@ public class GameManagerScript : MonoBehaviour
 			if (FindObjectsOfType(GetType()).Length > 1)
 				Destroy(gameObject);
         }
-        #endregion
         
         gameCountdownTimer = gameCountdownTimerDefault;
+		flashMat = Resources.Load<Material>("Materials/Utility/DamageFlash");
     }
+
+	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+	{
+		if(scene.name == "MainMenu")
+		{
+			readyColossus = false;
+			readySoldiers = false;	
+		}
+
+		if(scene.name == "MainGame")
+		{
+			FindSoldierObjects();
+			if(forceStartGame)
+				StartCoroutine(ForceStartGame(0.3f));
+		}
+	}
+
+	IEnumerator ForceStartGame(float waitTime)
+	{
+		yield return new WaitForSeconds(waitTime);
+		if(colossus != null)
+			colossus.ToggleColossus();
+
+		if(!onlyVR) SoldierSetup();
+
+		currentGameState = GameState.InGame;
+
+		EnvironmentManagerScript.instance.GamePiecesSwitch();
+	}
 
 
     #endregion
@@ -149,36 +175,6 @@ public class GameManagerScript : MonoBehaviour
 			currentGameState = GameState.Pregame;
 			SceneManager.LoadScene(1);
 		}
-	}
-
-	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-	{
-		if(scene.name == "MainMenu")
-		{
-			readyColossus = false;
-			readySoldiers = false;	
-		}
-
-		if(scene.name == "MainGame")
-		{
-			FindSoldierObjects();
-			if(forceStartGame)
-				StartCoroutine(ForceStartGame(0.3f));
-		}
-	}
-
-	IEnumerator ForceStartGame(float waitTime)
-	{
-		yield return new WaitForSeconds(waitTime);
-
-		if(colossus != null)
-			colossus.ToggleColossus();
-
-		if(!onlyVR) SoldierSetup();
-
-		currentGameState = GameState.InGame;
-
-		EnvironmentManagerScript.instance.GamePiecesSwitch();
 	}
 
     //Called when the colossus is ready in position
@@ -295,13 +291,13 @@ public class GameManagerScript : MonoBehaviour
         switch (sClass)
         {
             case SoldierClass.Assault:
-                classPrefab = Resources.Load<GameObject>("Soldier/Classes/Assault");
+                classPrefab = Resources.Load<GameObject>("Prefabs/Soldier/Classes/Assault");
                 break;
             case SoldierClass.Grenadier:
-                classPrefab = Resources.Load<GameObject>("Soldier/Classes/Grenadier");
+                classPrefab = Resources.Load<GameObject>("Prefabs/Soldier/Classes/Grenadier");
                 break;
             case SoldierClass.Skulker:
-                classPrefab = Resources.Load<GameObject>("Soldier/Classes/Skulker");
+				classPrefab = Resources.Load<GameObject>("Prefabs/Soldier/Classes/Skulker");
                 break;
         }
 				
