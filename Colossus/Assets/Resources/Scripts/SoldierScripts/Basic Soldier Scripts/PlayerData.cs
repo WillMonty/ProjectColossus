@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class PlayerData : MonoBehaviour, IHealth
 {
     // Player Manager
-    const int STARTING_LIVES = 2;
+    const int STARTING_LIVES = 1;
     const float RESPAWN_TIME = 5.0f;
     const float DAMAGING_OBJECT_MAGNITUDE = .5f;
-    float MAX_HEALTH = 100.0f;
+    float MAX_HEALTH = 200.0f;
     
 
     // Basic Player Management variables

@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 783750eec4c41da428b7651515146d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityAverageFrames: 5
+  velocityAverageFrames: 15
   angularVelocityAverageFrames: 11
   estimateOnAwake: 0
 --- !u!114 &114380565717934296
