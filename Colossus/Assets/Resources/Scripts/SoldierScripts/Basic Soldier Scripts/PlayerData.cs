@@ -56,9 +56,10 @@ public class PlayerData : MonoBehaviour, IHealth
 
     public void DamageObject(float dmg)
     {
-        healthUI.value = health / MaxHealth;
+        
 
         health -= dmg;
+        healthUI.value = health / MaxHealth;
         if (health <= 0)
         {
             Death();
@@ -221,7 +222,9 @@ public class PlayerData : MonoBehaviour, IHealth
     /// <param name="damageFloat"></param>
     public void Damage(float damageFloat)
     {
+
         health -= damageFloat;
+        healthUI.value = health / MaxHealth;
         if (health <= 0)
         {
             Death();
@@ -274,14 +277,14 @@ public class PlayerData : MonoBehaviour, IHealth
 			if (collisionObject.GetComponent<Rigidbody>().velocity.magnitude > DAMAGING_OBJECT_MAGNITUDE)
 			{
 				float movingObjectDamage = collisionObject.GetComponent<Rigidbody>().velocity.magnitude;
-				Damage(movingObjectDamage);
+				DamageObject(movingObjectDamage);
 			}
 			else if(collisionObject.GetComponent<Rigidbody>().isKinematic)
 			{
 				float movingObjectDamage =collisionObject.GetComponent<Valve.VR.InteractionSystem.VelocityEstimator>().GetVelocityEstimate().magnitude;
 				if(movingObjectDamage<=0.0f)
 					movingObjectDamage=15f;
-				Damage(movingObjectDamage);
+				DamageObject(movingObjectDamage);
 			}
 		}
 	}

@@ -1063,8 +1063,8 @@ MonoBehaviour:
   headColossus: 0
   leftHandColossus: 0
   rightHandColossus: 0
-  soldier1: 0
-  soldier2: 0
+  soldier1: 1
+  soldier2: 1
 --- !u!114 &588380222
 MonoBehaviour:
   m_ObjectHideFlags: 0
