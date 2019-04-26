@@ -119,8 +119,7 @@ public class GameManagerScript : MonoBehaviour
 			readyColossus = false;
 			readySoldiers = false;	
 		}
-
-		if(scene.name == "MainGame")
+		else
 		{
 			FindSoldierObjects();
 			if(forceStartGame)
