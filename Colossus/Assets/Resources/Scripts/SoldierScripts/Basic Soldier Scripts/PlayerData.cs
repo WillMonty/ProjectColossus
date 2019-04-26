@@ -25,6 +25,7 @@ public class PlayerData : MonoBehaviour, IHealth
     public GameObject model;
     public GameObject ragdoll;
 
+    public Slider healthUI;
     IWeapon weaponData;
     public IWeapon WeaponData
     {
@@ -55,6 +56,8 @@ public class PlayerData : MonoBehaviour, IHealth
 
     public void DamageObject(float dmg)
     {
+        healthUI.value = health / MaxHealth;
+
         health -= dmg;
         if (health <= 0)
         {
